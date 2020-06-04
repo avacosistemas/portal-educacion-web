@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private toasterService: ToasterService,
               private spinner: NgxSpinnerService) {  }
   title = 'portal-educacion-web';
+  public isCollapsed = true;
 
   ngOnInit() {
     this.toasterService.show(ToasterEnum.success, 'Titulo', 'Bienvenido');

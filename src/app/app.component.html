@@ -1,50 +1,90 @@
 <ngx-spinner></ngx-spinner>
+<header class="header">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+            <div ngbDropdown class="d-inline-block">
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem>Action 1</button>
+              <button ngbDropdownItem>Another Action</button>
+              <button ngbDropdownItem>Something else is here</button>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</header>
 
-<div class="jumbotron">
-  <div class="container">
-    <ngb-alert type="success" [dismissible]="false">
-      Bootstrap is working!
-    </ngb-alert>
-
-    <h1>
-      <i class="fa fa-bath" aria-hidden="true"></i>
-      And so is Font Awesome!
-    </h1>
-  </div>
-</div>
-
-<div class="container">
-  <p>
-    A progress bar:
-    <ngb-progressbar showValue="true" type="success" [value]="65">
-    </ngb-progressbar>
-  </p>
-</div>
-
-<div class="container">
-  <ngb-tabset>
-    <ngb-tab title="Bacon">
-        <ng-template ngbTabContent>
-          <p class="mt-4">Content for tab 1.
-            <button type="button"
-                    class="btn btn-secondary"
-                    placement="bottom"
-                    ngbPopover="A popover in tab 1"
-                    popoverTitle="Bacon is good">
-              Click me
-            </button>
-          </p>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab title="Lettuce">
-        <ng-template ngbTabContent>
-          <p>Content for tab 2</p>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab title="Tomatoes">
-        <ng-template ngbTabContent>
-          <p>Content for tab 3</p>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
-</div>
+<body>
+  <div class="jumbotron">
+     <div class="container">
+       <ngb-alert type="success" [dismissible]="false">
+         Bootstrap is working!
+       </ngb-alert>
+   
+       <h1>
+         <i class="fa fa-bath" aria-hidden="true"></i>
+         And so is Font Awesome!
+       </h1>
+     </div>
+   </div>
+   
+   <div class="container">
+     <p>
+       A progress bar:
+       <ngb-progressbar showValue="true" type="success" [value]="65">
+       </ngb-progressbar>
+     </p>
+   </div>
+   
+   <div class="container">
+     <ngb-tabset>
+       <ngb-tab title="Bacon">
+           <ng-template ngbTabContent>
+             <p class="mt-4">Content for tab 1.
+               <button type="button"
+                       class="btn btn-secondary"
+                       placement="bottom"
+                       ngbPopover="A popover in tab 1"
+                       popoverTitle="Bacon is good">
+                 Click me
+               </button>
+             </p>
+           </ng-template>
+         </ngb-tab>
+         <ngb-tab title="Lettuce">
+           <ng-template ngbTabContent>
+             <p>Content for tab 2</p>
+           </ng-template>
+         </ngb-tab>
+         <ngb-tab title="Tomatoes">
+           <ng-template ngbTabContent>
+             <p>Content for tab 3</p>
+           </ng-template>
+         </ngb-tab>
+       </ngb-tabset>
+   </div>
+</body>
