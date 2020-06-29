@@ -1,0 +1,26 @@
+<div id="fh4co-work-section">
+	<div class="container animate-box" >
+		<div class="row text-center">
+			<div class="equipo-docente">
+				<b>NUESTRO EQUIPO DOCENTE</b>
+				<h6><i>Busca según tu nivel educativo</i></h6>
+			</div>
+		</div>
+		<div class="row pasosIndex-box-responsive-diplay" style="padding-bottom">
+
+			<div class="col-md-4 animate-box pasosIndex-box-responsive" *ngFor="let nivel of nivelesEducativos">
+				<a href="#" routerLink="/buscar" class="item-grid text-center">
+					<div class="image" style="background-image: url('{{nivel.image}}')"></div>
+					<div class="v-align">
+						<div class="v-align-middle cards">
+							<h3 class="title">{{nivel.nombre}}</h3>
+							<h4 class="title"><i>{{nivel.subtitulo}}</i></h4>
+							<!-- <h5 class="category">{{nivel.descripcion}}</h5> -->
+						</div>
+					</div>
+				</a>
+			</div>
+
+		</div>
+	</div>
+</div>

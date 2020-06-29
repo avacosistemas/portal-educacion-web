@@ -1,0 +1,82 @@
+<div class="container products">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="m-x-auto m-y-2 text-xs-center">
+				<h1>Búsqueda de profesores</h1>
+				<h4>Todos los cursos</h4>
+				<h6>4 resultados</h6>
+			</div>
+			<div class="container">
+				<div class="menu row">
+					<div class="product col-md-4 p-t-2">
+						<hr>
+						<h4>Ordenar</h4>
+						<div class="form-group">
+							<select class="form-control" id="exampleFormControlSelect1">
+								<option>Más relevantes</option>
+								<option>Menor precio</option>
+								<option>Mayor precio</option>
+							</select>
+						</div >
+						<h4>Filtros seleccionados</h4>
+						<div class="chip">
+							Educación Secundaria
+							<i class="fa fa-times" aria-hidden="true"></i>
+<!--							<i class="close fas fa-times"></i>-->
+						</div>
+						<div class="chip">
+							Arte
+							<i class="fa fa-times" aria-hidden="true"></i>
+<!--							<i class="close fas fa-times"></i>-->
+						</div>
+						<div class="chip">
+							Física
+							<i class="fa fa-times" aria-hidden="true"></i>
+<!--							<i class="close fas fa-times"></i>-->
+						</div>
+						<div class="chip">
+							Matemáticas
+							<i class="fa fa-times" aria-hidden="true"></i>
+<!--							<i class="close fas fa-times"></i>-->
+						</div>
+						<hr>
+						<h4>Filtros</h4>
+						<h6>Materias</h6>
+						<div class="filtros">
+							<ul>
+								<li><a href="#">Geografia</a></li>
+								<li><a href="#">Literatura</a></li>
+								<li><a href="#">Musica</a></li>
+								<li><a href="#">Quimica</a></li>
+								<li><a href="#">... más filtros</a></li>
+							</ul>
+						</div>
+<!--						<h2 class="pull-xs-right">$39</h2>-->
+<!--						<button class="btn btn-primary btn-lg">Suscribir</button>-->
+
+					</div>
+					<div class="col-md-8">
+						<div class="products row">
+							<div class="col-lg-6 product menu-category" *ngFor="let profesor of profesores">
+								<div class="card card-block m-t-2">
+<!--									<div class="menu-category-name">Accessories</div>-->
+									<div class="product-image m-y-1">
+										<img class="img-fluid" src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" />
+									</div>
+									<h5>{{profesor.nombre}}, {{profesor.apellido}}</h5>
+									<h6>{{profesor.materia}}</h6>
+									<div class="valor-curso">
+										Valor curso: $ <span>{{profesor.valor_curso}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/row-->
+		</div>
+		<!--/container-->
+	</div>
+</div>
+

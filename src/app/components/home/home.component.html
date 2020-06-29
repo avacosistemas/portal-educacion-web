@@ -1,0 +1,24 @@
+<ngb-carousel *ngIf="slides" [showNavigationArrows]="true" [showNavigationIndicators]="true" [interval]="6000">
+	<ng-template ngbSlide *ngFor="let slide of slides">
+		<div class="picsum-img-wrapper" style="background-image: url('{{slide.image}}')"></div>
+		<div class="carousel-caption" style="top: {{slide.top}}; left: {{slide.left}}">
+			<h3>{{slide.title}}</h3>
+			<p>{{slide.description}}</p>
+			<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0">
+				<p><a href="#"><button>{{slide.buttonLink}}</button></a></p>
+			</span>
+		</div>
+	</ng-template>
+</ngb-carousel>
+
+<app-nivel-educativo></app-nivel-educativo>
+
+<!--<app-profesor-buscar></app-profesor-buscar>-->
+
+<!-- <app-como-funciona></app-como-funciona> -->
+
+<app-sobre-nosotros></app-sobre-nosotros>
+
+<app-contacto></app-contacto>
+
+
