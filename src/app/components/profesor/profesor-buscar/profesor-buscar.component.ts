@@ -8,6 +8,9 @@ import { Profesor } from "../../../Entities/profesor";
 })
 export class ProfesorBuscarComponent implements OnInit {
 
+  nivel = 'Educación Primaria - Primer Ciclo';
+  materiaSeleccionada: string;
+
   profesores: Profesor[] = [
     {
       nombre: 'María Elena',
@@ -37,11 +40,19 @@ export class ProfesorBuscarComponent implements OnInit {
       picture: '/assets/profiles/scott-wankel.jpg',
       valor_curso: 32
     }
-  ]
+  ];
+
+  public get getProfesor(): Profesor[] {
+    return this.profesores.filter(f => f.materia === (this.materiaSeleccionada ? this.materiaSeleccionada : f.materia));
+  }
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  selecciono(valor: string) {
+    this.materiaSeleccionada = valor;
   }
 
 }

@@ -2,6 +2,19 @@
 
 .products {
 	margin-bottom: 30px;
+
+	.img-fluid {
+		width: 100%;
+	}
+
+	.profesor {
+		display: flex;
+		margin-top: 10px;
+		
+		button {
+			margin: auto;
+		}
+	}
 }
 .product {
 	margin-bottom: 20px;

@@ -3,8 +3,8 @@
 		<div class="col-lg-12">
 			<div class="m-x-auto m-y-2 text-xs-center">
 				<h1>Búsqueda de profesores</h1>
-				<h4>Todos los cursos</h4>
-				<h6>4 resultados</h6>
+				<div style="display: flex;"><h4>Nivel: </h4><h4 style="margin-left: 10px;"><i>{{nivel}}</i></h4></div>
+				<h6>{{getProfesor.length}} resultados</h6>
 			</div>
 			<div class="container">
 				<div class="menu row">
@@ -18,38 +18,32 @@
 								<option>Mayor precio</option>
 							</select>
 						</div >
-						<h4>Filtros seleccionados</h4>
-						<div class="chip">
-							Educación Secundaria
-							<i class="fa fa-times" aria-hidden="true"></i>
-<!--							<i class="close fas fa-times"></i>-->
-						</div>
-						<div class="chip">
-							Arte
-							<i class="fa fa-times" aria-hidden="true"></i>
-<!--							<i class="close fas fa-times"></i>-->
-						</div>
-						<div class="chip">
-							Física
-							<i class="fa fa-times" aria-hidden="true"></i>
-<!--							<i class="close fas fa-times"></i>-->
-						</div>
-						<div class="chip">
-							Matemáticas
-							<i class="fa fa-times" aria-hidden="true"></i>
-<!--							<i class="close fas fa-times"></i>-->
-						</div>
+						<h4>Filtros seleccionados</h4>						
+						<div class="form-group">
+							<select [(ngModel)]="nivel" class="form-control" id="exampleFormControlSelect2">
+								<option value="Educación Primaria - Primer Ciclo">Educación Primaria - Primer Ciclo</option>
+								<option value="Educación Primaria - Segundo Ciclo">Educación Primaria - Segundo Ciclo</option>
+								<option value="Educación Secundaria - Ciclo Básico">Educación Secundaria - Ciclo Básico</option>
+								<option value="Educación Secundaria - Ciclo Orientado">Educación Secundaria - Ciclo Orientado</option>
+								<option value="Educación Superior - Terciario o Universitario">Educación Superior - Terciario o Universitario</option>
+								<option value="Extracurricular - Otros intereses">Extracurricular - Otros intereses</option>
+							</select>
+						</div >
 						<hr>
-						<h4>Filtros</h4>
-						<h6>Materias</h6>
+						<h4>Materias</h4>
 						<div class="filtros">
-							<ul>
-								<li><a href="#">Geografia</a></li>
-								<li><a href="#">Literatura</a></li>
-								<li><a href="#">Musica</a></li>
-								<li><a href="#">Quimica</a></li>
-								<li><a href="#">... más filtros</a></li>
-							</ul>
+								<div class="custom-control custom-radio">
+									<input (click)="selecciono('Historia del arte')" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+									<label class="custom-control-label" for="customRadio1">Historia del arte</label>
+								</div>
+								<div class="custom-control custom-radio">
+									<input (click)="selecciono('Matemáticas')" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+									<label class="custom-control-label" for="customRadio2">Matemáticas</label>
+								</div>
+								<div class="custom-control custom-radio">
+									<input (click)="selecciono('Física')" type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+									<label class="custom-control-label" for="customRadio3">Física</label>
+								</div>
 						</div>
 <!--						<h2 class="pull-xs-right">$39</h2>-->
 <!--						<button class="btn btn-primary btn-lg">Suscribir</button>-->
@@ -57,13 +51,15 @@
 					</div>
 					<div class="col-md-8">
 						<div class="products row">
-							<div class="col-lg-6 product menu-category" *ngFor="let profesor of profesores">
+							<div class="col-lg-6 product menu-category" *ngFor="let profesor of getProfesor">
 								<div class="card card-block m-t-2">
 <!--									<div class="menu-category-name">Accessories</div>-->
-									<div class="product-image m-y-1">
+									<div class="product-image m-y-1" [routerLink]="'/perfil'">
 										<img class="img-fluid" src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" />
 									</div>
-									<h5>{{profesor.nombre}}, {{profesor.apellido}}</h5>
+									<div class="profesor">
+										<h5>{{profesor.nombre}}, {{profesor.apellido}}</h5> <button [routerLink]="'/perfil'" class="btn btn-success">Ver Perfil</button>
+									</div>
 									<h6>{{profesor.materia}}</h6>
 									<div class="valor-curso">
 										Valor curso: $ <span>{{profesor.valor_curso}}</span>
