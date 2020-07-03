@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Slide } from '../../Entities/slide';
+import { Slide } from '../../entities/slide';
 
 @Component({
 	selector: 'app-home',

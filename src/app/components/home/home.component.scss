@@ -6,9 +6,11 @@
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	outline: none;
 }
 
-
+.picsum-img-wrapper:focus { border: none; outline: none;}
+.picsum-img-wrapper:active { border: none; outline: none;}
 
 .carousel-caption {
 	// top: 15%;

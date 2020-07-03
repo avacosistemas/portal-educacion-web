@@ -1,26 +1,25 @@
 <div id="fh4co-work-section">
-	<div class="container animate-box" >
-		<div class="row text-center">
-			<div class="nosotros">
-				<b>Sobre nosotros</b>
-			</div>
+	<div class="container">
+		<div class="text-center">
+			<div class="header-section">Sobre nosotros</div>
+			<div class="sub-header-section">Somos apasionados por el aprendizaje</div>
 		</div>
-		<div class="row">
-            <div class="col-md-6">
-                <img [src]="image" alt="contacto" class="contacto-img">
-            </div>
-            <div class="col-md-6">
-                <div class="feature-left animate-box fadeInLeft animated" data-animate-effect="fadeInLeft" *ngFor="let nosotros of sobreNosotros">
-					<span class="icon">
-						<i class="fa fa-check"></i>
-					</span>
-					<div class="feature-copy">
-						<h3>{{nosotros.nombre}}</h3>
-						<p>{{nosotros.descripcion}}</p>
-					</div>
-				</div>
-            </div>
-
+		<div class="row text-center">
+			<div class="col-md-4">
+				<span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-us"></i><i class="fas fa-plus fa-stack-1x fa-inverse"></i></span>
+				<h4 class="my-3">Comunidad</h4>
+				<p class="text-muted">Impulsamos la conexión entre quien quiere enseñar con quien quiere aprender. Compartir conocimiento.</p>
+			</div>
+			<div class="col-md-4">
+				<span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-us"></i><i class="fas fa-laptop fa-stack-1x fa-inverse"></i></span>
+				<h4 class="my-3">Digital</h4>
+				<p class="text-muted">Sin translados, sin visitas, sin esperas, todo 100% digital.</p>
+			</div>
+			<div class="col-md-4">
+				<span class="fa-stack fa-4x"><i class="fas fa-circle fa-stack-2x text-us"></i><i class="fas fa-lock fa-stack-1x fa-inverse"></i></span>
+				<h4 class="my-3">Seguridad</h4>
+				<p class="text-muted">Aseguramos tu privacidad y te brindamos soporte de confianza.</p>
+			</div>
 		</div>
 	</div>
 </div>
