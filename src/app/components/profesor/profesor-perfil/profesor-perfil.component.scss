@@ -1,0 +1,20 @@
+.container.perfil { margin-top: 100px;}
+
+.profesor {
+    .img-fluid {
+		width: 100%;
+	}
+    .star {
+        font-size: 1.5rem;
+        color: #b0c4de;
+    }
+    .filled {
+        color: goldenrod;
+    }
+    .bad {
+        color: #deb0b0;
+    }
+    .filled.bad {
+        color: #ff1e1e;
+    }
+}

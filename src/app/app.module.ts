@@ -14,6 +14,11 @@ import { NivelEducativoComponent } from './components/nivel-educativo/nivel-educ
 import { ProfesorBuscarComponent } from './components/profesor/profesor-buscar/profesor-buscar.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
 import { ComoFuncionaComponent } from './components/como-funciona/como-funciona.component';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +29,8 @@ import { ComoFuncionaComponent } from './components/como-funciona/como-funciona.
     NivelEducativoComponent,
     ProfesorBuscarComponent,
     SobreNosotrosComponent,
-    ComoFuncionaComponent
+    ComoFuncionaComponent,
+    ProfesorPerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,10 @@ import { ComoFuncionaComponent } from './components/como-funciona/como-funciona.
     NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxPageScrollCoreModule,
+    NgxPageScrollModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

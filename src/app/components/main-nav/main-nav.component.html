@@ -18,7 +18,7 @@
 					<li><a href="#">Quiero enseñar</a></li>
 					<li><a href="#">Cómo funciona</a></li>
 					<li><a href="#">Sobre Nosotros</a></li>
-					<li><a href="#">Contacto</a></li>
+					<li><a pageScroll href="#contacto" [routerLink]="'/home'">Contacto</a></li>
 					<li><a href="#">
 						<span class="icon-lock" style="position: relative; top: 1px;">
 						</span> INGRESAR</a>
@@ -26,11 +26,23 @@
 				</ul>
 			</nav>
 		</div>
-		<a href="#" class="button-login-a"
+		<a (click)="ingresar()" *ngIf="!ingreso" class="button-login-a"
 		   style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;">
 			<div class="button-login"
 				 style="background: #001e56;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
 				<span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa 	fas fa-lock"></i> INGRESAR
+			</div>
+		</a>
+
+		<a *ngIf="ingreso" class="button-login-a" ngbDropdown
+		   style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;">
+			<div class="button-perfil" ngbDropdownToggle
+				 style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
+				<span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> MI PERFIL
+			</div>
+
+			<div ngbDropdownMenu>
+				<div ngbDropdownItem (click)="salir()" class="exit"><i class="fa fa-sign-out"></i> Salir</div>
 			</div>
 		</a>
 		<div class="custom-nav-list">
@@ -38,7 +50,7 @@
 			<a href="">Quiero enseñar</a>
 			<a href="#">Cómo funciona</a>
 			<a href="#">Sobre Nosotros</a>
-			<a href="#">Contacto</a>
+			<a pageScroll href="#contacto" [routerLink]="'/home'">Contacto</a>
 		</div>
 		<!-- Login Modal -->
 		<!--				<div id="id01" class="modal">

@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainNavComponent implements OnInit {
 
+  ingreso: boolean;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ingresar() {
+    this.ingreso = true;
+  }
+
+  salir() {
+    this.ingreso = false;
   }
 
 }
