@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Profesor } from 'src/app/Entities/profesor';
+import { Profesor } from 'src/app/entities/profesor';
 
 @Component({
   selector: 'app-profesor-perfil',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SobreNosotros } from 'src/app/Entities/sobreNosotros';
+import { SobreNosotros } from 'src/app/entities/sobreNosotros';
 
 @Component({
   selector: 'app-sobre-nosotros',

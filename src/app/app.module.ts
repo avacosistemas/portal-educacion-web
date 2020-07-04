@@ -14,6 +14,7 @@ import { NivelEducativoComponent } from './components/nivel-educativo/nivel-educ
 import { ProfesorBuscarComponent } from './components/profesor/profesor-buscar/profesor-buscar.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
 import { ComoFuncionaComponent } from './components/como-funciona/como-funciona.component';
+import { LoginComponent } from './components/login/login.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
@@ -30,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     ProfesorBuscarComponent,
     SobreNosotrosComponent,
     ComoFuncionaComponent,
+    LoginComponent,
     ProfesorPerfilComponent
   ],
   imports: [

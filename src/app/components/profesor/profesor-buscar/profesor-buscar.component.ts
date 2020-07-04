@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Profesor } from "../../../Entities/profesor";
+import { Profesor } from "../../../entities/profesor";
+import {NivelEducativo} from "../../../entities/nivelEducativo";
+import {NivelService} from "../../../services/nivel.service";
+import {ProfesorService} from "../../../services/profesor.service";
+import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
+import {Observable, Subject, merge} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-profesor-buscar',
@@ -8,51 +14,39 @@ import { Profesor } from "../../../Entities/profesor";
 })
 export class ProfesorBuscarComponent implements OnInit {
 
+  profesores: Profesor[];
+  nivelesEducativos: NivelEducativo[];
   nivel = 'Educación Primaria - Primer Ciclo';
   materiaSeleccionada: string;
 
-  profesores: Profesor[] = [
-    {
-      nombre: 'María Elena',
-      apellido: 'Sanchez',
-      materia: 'Historia del arte',
-      picture: '/assets/profiles/rico_93005.jpg',
-      valor_curso: 40
-    },
-    {
-      nombre: 'Javier',
-      apellido: 'Santamaria',
-      materia: 'Matemáticas',
-      picture: '/assets/profiles/David-Calle.jpg',
-      valor_curso: 38
-    },
-    {
-      nombre: 'Martín',
-      apellido: 'Serravalle',
-      materia: 'Matemáticas',
-      picture: '/assets/profiles/Price_Rich.jpg',
-      valor_curso: 39
-    },
-    {
-      nombre: 'Gastón',
-      apellido: 'Guerrido',
-      materia: 'Física',
-      picture: '/assets/profiles/scott-wankel.jpg',
-      valor_curso: 32
-    }
-  ];
-
-  public get getProfesor(): Profesor[] {
-    return this.profesores.filter(f => f.materia === (this.materiaSeleccionada ? this.materiaSeleccionada : f.materia));
-  }
-
-  constructor() { }
+  constructor(
+      protected ns: NivelService,
+      protected ps: ProfesorService
+  ) { }
 
   ngOnInit(): void {
+    this.loadData();
   }
 
   selecciono(valor: string) {
     this.materiaSeleccionada = valor;
   }
 
+  loadData() {
+    this.ns.getNiveles().subscribe(
+        data => {
+          this.nivelesEducativos = data;
+        }
+    );
+
+    this.ps.getProfesores().subscribe(
+        data => {
+          this.profesores = data;
+        }
+    );
+  }
+
+  get getProfesores(): Profesor[] {
+    return this.profesores.filter(f => f.materia === (this.materiaSeleccionada ? this.materiaSeleccionada : f.materia));
+  }
 }

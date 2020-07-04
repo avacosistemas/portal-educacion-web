@@ -4,7 +4,7 @@
 			<div class="m-x-auto m-y-2 text-xs-center">
 				<h1>Búsqueda de profesores</h1>
 				<div style="display: flex;"><h4>Nivel: </h4><h4 style="margin-left: 10px;"><i>{{nivel}}</i></h4></div>
-				<h6>{{getProfesor.length}} resultados</h6>
+				<h6>{{getProfesores.length}} resultados</h6>
 			</div>
 			<div class="container">
 				<div class="menu row">
@@ -18,7 +18,7 @@
 								<option>Mayor precio</option>
 							</select>
 						</div >
-						<h4>Filtros seleccionados</h4>						
+						<h4>Nivel</h4>
 						<div class="form-group">
 							<select [(ngModel)]="nivel" class="form-control" id="exampleFormControlSelect2">
 								<option value="Educación Primaria - Primer Ciclo">Educación Primaria - Primer Ciclo</option>
@@ -51,7 +51,7 @@
 					</div>
 					<div class="col-md-8">
 						<div class="products row">
-							<div class="col-lg-6 product menu-category" *ngFor="let profesor of getProfesor">
+							<div class="col-lg-6 product menu-category" *ngFor="let profesor of getProfesores">
 								<div class="card card-block m-t-2">
 <!--									<div class="menu-category-name">Accessories</div>-->
 									<div class="product-image m-y-1" [routerLink]="'/perfil'">

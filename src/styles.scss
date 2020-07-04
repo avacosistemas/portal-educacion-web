@@ -4,18 +4,6 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~ngx-toastr/toastr';
 
-@font-face {
-	font-family: 'icomoon';
-	src: url("/assets/fonts/icomoon/icomoon.eot?srf3rx");
-	src:
-		url("/assets/fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"),
-		url("/assets/fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"),
-		url("/assets/fonts/icomoon/icomoon.woff?srf3rx") format("woff"),
-		url("/assets/fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
-	font-weight: normal;
-	font-style: normal;
-}
-
 body {
 	font-family: 'Titillium Web', sans-serif;
 	font-weight: 400;
@@ -26,6 +14,13 @@ body {
 	height: 100%;
 	position: relative;
 }
+
+// ========= Para quitar el borde negro ==========
+// cuando se hace un click sobre la imagen del carrusel
+// o se hace foco en el div debajo, se dibuja un borde negro que piden quitar
+*:active {outline: none; border: none;}
+*:hover {outline: none; border: none;}
+*:focus {outline: none; border: none;}
 
 ::selection {
 	color: #fff;
@@ -45,6 +40,23 @@ h1, h2, h3, h4, h5, h6, figure {
 	font-family: 'Titillium Web', sans-serif;
 	font-weight: 400;
 	margin: 0 0 9px 0;
+}
+
+.header-section {
+	font-weight: bold;
+	color: #314861;
+	font-size: 2.2em;
+	line-height: 1em;
+	//padding-bottom: 65px;
+	//padding-top: 65px !important;
+	margin: 40px auto;
+
+}
+.sub-header-section	{
+	font-size: 1em;
+	font-weight: 400;
+	margin: -36px auto 40px;
+	font-style: italic;
 }
 
 // ============================ chips =================================
