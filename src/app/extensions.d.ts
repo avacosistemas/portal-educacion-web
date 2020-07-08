@@ -1,0 +1,4 @@
+
+interface String {
+	removeAccents() : string;
+}

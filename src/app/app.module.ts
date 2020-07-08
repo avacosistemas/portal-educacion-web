@@ -19,6 +19,8 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
 import { FormsModule } from '@angular/forms';
+import './extensions';
+import { AlumnoRegistroComponent } from './components/alumno/alumno-registro/alumno-registro.component';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     SobreNosotrosComponent,
     ComoFuncionaComponent,
     LoginComponent,
-    ProfesorPerfilComponent
+    ProfesorPerfilComponent,
+    AlumnoRegistroComponent
   ],
   imports: [
     BrowserModule,

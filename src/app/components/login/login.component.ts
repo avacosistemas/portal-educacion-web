@@ -16,17 +16,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.as.isLogged()) {
-      this.as.logout();
-      this.router.navigate(['/login']);
-    }
   }
-
-
 
   tryLogin()
   {
     this.as.login();
     this.router.navigate(['/']);
   }
+
 }

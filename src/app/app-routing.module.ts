@@ -4,13 +4,15 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfesorBuscarComponent } from './components/profesor/profesor-buscar/profesor-buscar.component';
 import { LoginComponent } from "./components/login/login.component";
 import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
+import {AlumnoRegistroComponent} from "./components/alumno/alumno-registro/alumno-registro.component";
 
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, pathMatch: 'full'},
   {path: 'login', component: LoginComponent, pathMatch: 'full'},
   {path: 'buscar', component: ProfesorBuscarComponent, pathMatch: 'full'},
-  {path: 'perfil', component: ProfesorPerfilComponent, pathMatch: 'full'},
+  {path: 'alumno/nuevo', component: AlumnoRegistroComponent, pathMatch: 'full'},
+  {path: 'perfil/:id', component: ProfesorPerfilComponent, pathMatch: 'full'},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: HomeComponent},
 ];
