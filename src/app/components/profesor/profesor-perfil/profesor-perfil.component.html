@@ -118,19 +118,19 @@
 				<ngb-datepicker #dp
 								(dateSelect)="onDateSelection($event)"
 								[displayMonths]="2"
-								[dayTemplate]="t"
+								[navigation]="'select'"
 								outsideDays="hidden">
 				</ngb-datepicker>
-				<ng-template #t let-date let-focused="focused">
+				<!-- <ng-template #t let-date let-focused="focused">
 					<span class="custom-day"
 						[class.focused]="focused"
-						[class.range]="isRange(date)"
+
 						[class.faded]="isHovered(date) || isInside(date)"
 						(mouseenter)="hoveredDate = date"
 						(mouseleave)="hoveredDate = null">
 						{{ date.day }}
 					</span>
-				</ng-template>
+				</ng-template> -->
 
 			</div>
 			<table class="table table-bordered table-striped table-hover table-sm" style="background-color: #ffffff">
@@ -176,6 +176,8 @@
 				</tbody>
 
 			</table>
+
+			<button class="btn btn-success" style="width: 100%;">Tomar Clase</button>
 		</div> <!-- /col -->
 
 

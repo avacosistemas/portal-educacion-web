@@ -31,3 +31,10 @@
 .ngb-dp-week {
 	background: white;
 }
+ngb-datepicker {
+	width: 100%;
+
+	::ng-deep .ngb-dp-month {
+		width: 100%;
+	}
+}
