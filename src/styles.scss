@@ -3,24 +3,34 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 @import '~ngx-toastr/toastr';
+@import "variables"; // bootstrap 5 - solo se usa para el form-select
+@import 'form_select'; // mismo estilo para los selects en distintos browsers (no existe en bootstrap 4)
+@import 'chat';
+
 
 body {
 	font-family: 'Titillium Web', sans-serif;
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 1.7;
-	color: #90979e;
-	background: #efefef;
+	color: #7a8188;
+	background: #e2e2e2;
 	height: 100%;
 	position: relative;
+}
+
+// ========= Placeholder color ==========
+
+::placeholder, :-moz-placeholder, :-ms-input-placeholder, ::-webkit-input-placeholder {
+	color: #bbc7cf !important;
 }
 
 // ========= Para quitar el borde negro ==========
 // cuando se hace un click sobre la imagen del carrusel
 // o se hace foco en el div debajo, se dibuja un borde negro que piden quitar
-*:active {outline: none; border: none;}
-*:hover {outline: none; border: none;}
-*:focus {outline: none; border: none;}
+//*:active {outline: none;}
+//*:hover {outline: none; border: none;}
+*:focus {outline: none;}
 
 ::selection {
 	color: #fff;
@@ -33,6 +43,7 @@ a {
 
 a:hover {
 	color: #85C03B;
+	text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6, figure {
@@ -58,6 +69,54 @@ h1, h2, h3, h4, h5, h6, figure {
 	margin: -36px auto 40px;
 	font-style: italic;
 }
+
+.ngb-dp-week {
+	background: white;
+}
+
+// ============================ Profile =================================
+
+.profile {
+	.avatar {
+		img {
+			float: left;
+			width: 150px;
+			border: 8px solid #ddd;
+			border-radius: 50%;
+			background-color: transparent;
+		}
+
+	}
+	.info {
+		margin-left: 170px;
+		h3, h4 { font-weight: 600;}
+	}
+	.rate {
+		display: block;
+		position: absolute;
+		top: 155px;
+		left: 45px;
+
+		.star {font-size: 1.2rem; color: #b0c4de;}
+		.filled {color: #6cae5c;}
+		.bad {color: #deb0b0;}
+		.filled.bad {color: #4188a6;}
+	}
+
+}
+
+// ============================ background patterns ==============================
+.back-pattern-001 {
+	background-image: url('/assets/images/background_tile_lab.png');
+	background-repeat: repeat;
+}
+
+// ============================ grid helpers =================================
+.myRow {border: 0px solid green}
+.myCol {border: 0px dashed red}
+.myContainer {border: 0px dashed blue}
+.myContent {border: 0px dashed #ffa714}
+
 
 // ============================ chips =================================
 .chip {
@@ -183,12 +242,12 @@ h1, h2, h3, h4, h5, h6, figure {
 	font-size: 14px;
 	color: rgb(167, 167, 167);
 }
-#fh4co-work-section .item-grid:hover, #fh4co-work-section .item-grid:focus {
-	text-decoration: none;
-	box-shadow: 0 14px 25px -2px rgba(0, 0, 0, 0.14);
-	top: -2px;
-	cursor: default;
-}
+//#fh4co-work-section .item-grid:hover, #fh4co-work-section .item-grid:focus {
+//	text-decoration: none;
+//	box-shadow: 0 14px 25px -2px rgba(0, 0, 0, 0.14);
+//	top: -2px;
+//	cursor: default;
+//}
 
 
 #fh5co-footer {
