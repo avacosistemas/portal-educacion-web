@@ -29,11 +29,7 @@ export class ProfesorBuscarComponent implements OnInit {
   }
 
   selecciono(valor: string) {
-    if (valor == 'Todas') {
-      this.materiaSeleccionada = '';
-    } else {
-      this.materiaSeleccionada = valor;
-    }
+    this.materiaSeleccionada = valor;
   }
 
   loadData() {

@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,9 +20,14 @@ import { LoginComponent } from './components/login/login.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
-import { FormsModule } from '@angular/forms';
 import './extensions';
 import { AlumnoRegistroComponent } from './components/alumno/alumno-registro/alumno-registro.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { TerminosComponent } from './components/legal/terminos/terminos.component';
+import { PolicyComponent } from './components/legal/policy/policy.component';
+import { AlumnoPerfilComponent } from './components/alumno/alumno-perfil/alumno-perfil.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { IntercepterService } from "./modules/fwk/core/service/intercepter/intercepter.service";
 
 
 @NgModule({
@@ -35,20 +42,31 @@ import { AlumnoRegistroComponent } from './components/alumno/alumno-registro/alu
     ComoFuncionaComponent,
     LoginComponent,
     ProfesorPerfilComponent,
-    AlumnoRegistroComponent
+    AlumnoRegistroComponent,
+    FaqComponent,
+    TerminosComponent,
+    PolicyComponent,
+    AlumnoPerfilComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     NgxPageScrollCoreModule,
     NgxPageScrollModule,
+    ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: IntercepterService,
+      multi: true
+    }],
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {}

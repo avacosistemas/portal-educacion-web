@@ -1,4 +1,4 @@
-<div class="container registro">
+<div class="container menutop-fix">
 
 	<div class="row justify-content-center">
 		<div class="col-lg-7 col-md-10 col-sm-12">
@@ -8,7 +8,9 @@
 					<h4 class="card-title mt-2">Registrarse</h4>
 				</header>
 				<article class="card-body">
-					<form autocomplete="off">
+
+					<!-- ==================== Form ===================== -->
+					<form class="was-validated" autocomplete="off" novalidate>
 						<div class="form-row">
 							<div class="col">
 								<label for="txtNombre">Nombre</label>
@@ -16,7 +18,10 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <i class="fas fa-user"></i> </span>
 									</div>
-									<input id="txtNombre" type="text" class="form-control" placeholder="John">
+									<input id="txtNombre" type="text" class="form-control" placeholder="John" required="required">
+									<div class="invalid-tooltip">
+										Debe completar el nombre
+									</div>
 								</div>
 							</div>
 

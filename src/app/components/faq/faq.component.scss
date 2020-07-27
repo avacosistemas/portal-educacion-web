@@ -1,0 +1,23 @@
+.faq {
+    ::ng-deep .btn {
+        color: transparent !important;
+    }
+    ::ng-deep .btn-link {
+        color: transparent !important;
+    }
+    ::ng-deep .btn-link:hover {
+        color: transparent !important;
+    }
+    // collapse toggle
+    ::ng-deep .collapse {
+        transition: max-height .55s, opacity .35s ease-in-out;
+        max-height: 0;
+        opacity: 0;
+        display: block !important;
+    
+        &.show {
+            max-height: 100rem;
+            opacity: 1;
+        }
+    }
+}

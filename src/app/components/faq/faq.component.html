@@ -1,0 +1,24 @@
+<div class="container py-3 faq menutop-fix">
+    <div class="row">
+        <div class="col">
+            <h2>Preguntas Frecuentes</h2>
+            <ngb-accordion #acc="ngbAccordion" [destroyOnHide]='false' [closeOthers]="true">
+                <ngb-panel *ngFor="let faq of this.faqs" id="toggle-{{faq.id}}">
+                    <ng-template ngbPanelTitle class="text-decoration-none">
+                        <i class="fas fa-plus-circle faq-sign"></i>
+                        <span class="faq-pregunta text-decoration-none">
+                  {{faq.pregunta}}
+                </span>
+                    </ng-template>
+
+                    <ng-template ngbPanelContent>
+                        <div class="respuesta" [innerHTML]="faq.respuesta">
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+
+            </ngb-accordion>
+
+        </div> <!--/col-->
+    </div> <!--/row-->
+</div> <!--container-->

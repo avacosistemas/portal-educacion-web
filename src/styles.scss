@@ -3,8 +3,8 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 @import '~ngx-toastr/toastr';
-@import "variables"; // bootstrap 5 - solo se usa para el form-select
-@import 'form_select'; // mismo estilo para los selects en distintos browsers (no existe en bootstrap 4)
+//@import "variables"; // bootstrap 5 - solo se usa para el form-select
+//@import 'form_select'; // mismo estilo para los selects en distintos browsers (no existe en bootstrap 4)
 @import 'chat';
 
 
@@ -17,9 +17,12 @@ body {
 	background: #e2e2e2;
 	height: 100%;
 	position: relative;
-	background-image: url('/assets/images/background.jpg');
+    :-webkit-autofill::first-line {
+        font-family: 'Titillium Web', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+    }
 }
-
 // ========= Placeholder color ==========
 
 ::placeholder, :-moz-placeholder, :-ms-input-placeholder, ::-webkit-input-placeholder {
@@ -54,6 +57,10 @@ h1, h2, h3, h4, h5, h6, figure {
 	margin: 0 0 9px 0;
 }
 
+input {
+    filter: none;
+}
+
 .header-section {
 	font-weight: bold;
 	color: #314861;
@@ -73,6 +80,58 @@ h1, h2, h3, h4, h5, h6, figure {
 
 .ngb-dp-week {
 	background: white;
+}
+
+.accordion {
+  .faq-sign {
+    font-size: 30px;
+    color: #6cae5c;
+  }
+
+  .faq-pregunta {
+    font-size: 20px;
+    vertical-align: super;
+    margin-left: 10px;
+    color: #616161;
+  }
+  .card {
+    .card-header {
+      .faq-pregunta, .faq-pregunta:hover, .faq-pregunta:active {
+        text-decoration: none !important;
+      }
+    }
+  }
+
+
+  .btn:hover, .btn-link:hover, .btn:active, .btn-link:active { text-decoration: none}
+  .btn:focus, .btn-link:focus { box-shadow: none}
+}
+
+.menutop-fix {
+    margin-top: 100px;
+}
+// ============================ Carousel =================================
+
+.carousel-item {
+	display: block !important;
+	opacity: 0;
+	transition: all 2s;
+}
+
+.carousel-item.active {
+	opacity: 1;
+	transition: all 2s;
+}
+
+// ============================ Legales  =================================
+.legales {
+  h3, h4 {
+    margin-top: 30px
+  }
+  a, a:hover, a:focus, a:visited {
+    color: #52a85b;
+    text-decoration: none;
+  }
 }
 
 // ============================ Profile =================================
@@ -112,7 +171,7 @@ h1, h2, h3, h4, h5, h6, figure {
 	background-repeat: repeat;
 }
 
-// ============================ grid helpers =================================
+// ============================ grid helpers (debug) =================================
 .myRow {border: 0px solid green}
 .myCol {border: 0px dashed red}
 .myContainer {border: 0px dashed blue}
@@ -252,12 +311,18 @@ h1, h2, h3, h4, h5, h6, figure {
 
 
 #fh5co-footer {
+  .tel {
+    font-size: 24px;
+    font-weight: 600;
+    padding-right:0 !important;
+    i { margin-right: 10px; }
+  }
 	margin-top: 30px;
 	padding: 2em 0 10px;
 	float: left;
 	width: 100%;
 	position: relative;
-	background: #021958;
+	background: #001e56;
 }
 @media screen and (max-width: 768px) {
 	#fh5co-footer {

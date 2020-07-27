@@ -37,8 +37,8 @@ export class MainNavComponent implements OnInit
 
 	checkRoute()
 	{
-		if (this.router.url.indexOf('/perfil') >= 0
-			|| window.location.pathname.indexOf('/perfil') >= 0
+		if (this.router.url.indexOf('/profesor') >= 0
+			|| window.location.pathname.indexOf('/profesor') >= 0
 			||this.router.url.indexOf('/buscar') >= 0
 			|| window.location.pathname.indexOf('/buscar') >= 0)
 		{

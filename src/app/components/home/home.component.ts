@@ -48,7 +48,8 @@ export class HomeComponent implements OnInit {
 			left: ''
 		},
 		{
-			image: '/assets/images/slider/63293.jpg',
+			image: '/assets/images/slider/3781245.jpg',
+			// image: '/assets/images/slider/63293.jpg',
 			title: 'Querés unirte a nuestro equipo',
 			description: 'Una nueva forma de enseñar, te abrimos las puertas a nuestra red de alumnos.',
 			buttonLink: 'Contactate',

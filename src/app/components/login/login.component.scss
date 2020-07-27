@@ -5,8 +5,8 @@
 	//background-size: cover;
 }
 .user_card {
-	height: 400px;
-	width: 350px;
+	height: 470px;
+	width: 380px;
 	margin-bottom: auto;
 	background: #1e4c61;
 	//background: #3b933d;
@@ -34,6 +34,8 @@
 .brand_logo {
 //	height: 150px;
 	width: 190px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 	//border-radius: 50%;
 	//border: 2px solid white;
 }
@@ -52,12 +54,36 @@
 .login_container {
 	padding: 0 2rem;
 }
-.input-group-text {
-	background: #3b933d !important;
-	color: white !important;
-	border: 0 !important;
-	border-radius: 0.25rem 0 0 0.25rem !important;
+
+.input-group {
+    input {
+        background: rgb(232, 240, 254) !important;
+                                                                                                                    }
+    .input-group-prepend {
+        .input-group-text {
+            min-width: 46px;
+            background: #3b933d !important;
+            color: white !important;
+            border: 0 !important;
+            border-radius: 0.25rem 0 0 0.25rem !important;
+        }
+    }
+
+    .input-group-append {
+        .input-group-text {
+            min-width: 46px;
+            background: rgb(232, 240, 254) !important;
+            color: #515151 !important;
+            //border: 1px !important;
+            //border-left: 0;
+            //border-color: rgb(206, 212, 218);
+            //border-radius: 0 0.25rem 0.25rem 0 !important;
+        }
+    }
 }
+
+
+
 .input_user,
 .input_pass:focus {
 	box-shadow: none !important;

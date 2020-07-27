@@ -1,4 +1,4 @@
-<div class="container products">
+<div class="container products menutop-fix">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="m-x-auto m-y-2 text-xs-center">
@@ -12,15 +12,27 @@
 						<hr>
 						<h4>Ordenar</h4>
 						<div class="form-group">
-							<select class="form-control" id="exampleFormControlSelect1">
-								<option>Más relevantes</option>
-								<option>Menor precio</option>
-								<option>Mayor precio</option>
-							</select>
+<!--							<select class="form-control custom-select" id="exampleFormControlSelect1">-->
+<!--								<option>Más relevantes</option>-->
+<!--								<option>Menor precio</option>-->
+<!--								<option>Mayor precio</option>-->
+<!--							</select>-->
+
+							<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic">
+								<label ngbButtonLabel class="btn-info active">
+									<input ngbButton type="radio" value="relevante"> Más relevantes
+								</label>
+								<label ngbButtonLabel class="btn-info">
+									<input ngbButton type="radio" value="menor"> Menor Precio
+								</label>
+								<label ngbButtonLabel class="btn-info">
+									<input ngbButton type="radio" value="mayor"> Mayor precio
+								</label>
+							</div>
 						</div >
 						<h4>Nivel</h4>
 						<div class="form-group">
-							<select [(ngModel)]="nivel" class="form-control" id="exampleFormControlSelect2">
+							<select [(ngModel)]="nivel" class="form-control custom-select" id="exampleFormControlSelect2">
 								<option value="Educación Primaria - Primer Ciclo">Educación Primaria - Primer Ciclo</option>
 								<option value="Educación Primaria - Segundo Ciclo">Educación Primaria - Segundo Ciclo</option>
 								<option value="Educación Secundaria - Ciclo Básico">Educación Secundaria - Ciclo Básico</option>
@@ -33,12 +45,8 @@
 						<h4>Materias</h4>
 						<div class="filtros">
 								<div class="custom-control custom-radio">
-									<input (click)="selecciono('Todas')" type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-									<label class="custom-control-label" for="customRadio4">Todas</label>
-								</div>
-								<div class="custom-control custom-radio">
-									<input (click)="selecciono('Historia')" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-									<label class="custom-control-label" for="customRadio1">Historia</label>
+									<input (click)="selecciono('Historia del arte')" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+									<label class="custom-control-label" for="customRadio1">Historia del arte</label>
 								</div>
 								<div class="custom-control custom-radio">
 									<input (click)="selecciono('Matemáticas')" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
@@ -58,7 +66,7 @@
 							<div class="col-lg-6 product menu-category" *ngFor="let profesor of getProfesores">
 								<div class="card card-block m-t-2">
 <!--									<div class="menu-category-name">Accessories</div>-->
-									<div class="product-image m-y-1" [routerLink]="['/perfil/', profesor.id]" >
+									<div class="product-image m-y-1" [routerLink]="['/profesor/', profesor.id]" >
 										<img class="img-fluid" src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" />
 									</div>
 									<div class="profesor">

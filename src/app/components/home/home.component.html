@@ -1,5 +1,5 @@
 <ngb-carousel *ngIf="slides" [showNavigationArrows]="true" [pauseOnHover]="true" [showNavigationIndicators]="true"
-			  [interval]="6000">
+			  [interval]="6000" class="carousel " data-ride="carousel">
 	<ng-template ngbSlide *ngFor="let slide of slides">
 		<div class="picsum-img-wrapper" style="background-image: url('{{slide.image}}')"></div>
 		<div class="carousel-caption" style="top: {{slide.top}}; left: {{slide.left}}">

@@ -1,65 +1,66 @@
-<div class="container perfil myContainer ">
-	<div class="row myRow">
-		<div class="col-md-6 profile">
-			<div class="avatar">
-				<img src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}"/>
-				<div class="rate">
-					<ngb-rating [(rate)]="profesor.valoracion">
-						<ng-template let-fill="fill" let-index="index">
-							<span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
-						</ng-template>
-					</ngb-rating>
-				</div>
-			</div>
-			<div class="info">
-				<h3>{{profesor.nombre}}, {{profesor.apellido}}</h3>
-				<h4>{{profesor.materia}}</h4>
+<div class="container menutop-fix myContainer ">
+    <div class="row myRow">
+        <div class="col-md-6 profile">
+            <div class="avatar">
+                <img src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}"/>
+                <div class="rate">
+                    <ngb-rating [(rate)]="profesor.valoracion">
+                        <ng-template let-fill="fill" let-index="index">
+                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                        </ng-template>
+                    </ngb-rating>
+                </div>
+            </div>
+            <div class="info">
+                <h3>{{profesor.nombre}}, {{profesor.apellido}}</h3>
+                <h4>{{profesor.materia}}</h4>
 
-<!--				<hr>-->
-				<span *ngIf="profesor.about">{{profesor.about}}</span>
-			</div>
-			<hr style="margin-top: 30px">
+                <!--				<hr>-->
+                <span *ngIf="profesor.about">{{profesor.about}}</span>
+            </div>
+            <hr style="margin-top: 30px">
 
-		</div>
-		<div class="col-md-6 myCol">
-			<h4>¿Qué clase quieres tomar con {{profesor.nombre}}?</h4>
-			<label for="cmbMateria">Materia </label>
-			<select id="cmbMateria" class="form-select">
-				<option value="HistoriaArgentina">Historia Argentina</option>
-				<option value="Historia1900">Historia Contemporanea Europea</option>
-				<option value="HistoriaPueblos">Historia de los pueblos originarios</option>
-			</select>
-			<br>
+        </div>
+        <div class="col-md-6 myCol">
+            <h4>¿Qué clase quieres tomar con {{profesor.nombre}}?</h4>
+            <label for="cmbMateria">Materia </label>
+            <select id="cmbMateria" class="form-control custom-select">
+                <option value="HistoriaArgentina">Historia Argentina</option>
+                <option value="Historia1900">Historia Contemporanea Europea</option>
+                <option value="HistoriaPueblos">Historia de los pueblos originarios</option>
+            </select>
+            <br>
+            <br>
 
-			<h4>¿Cúando?</h4>
+            <h4>¿Cúando?</h4>
 
-		</div>
-	</div>
-	<div class="row myRow">
-		<div class="col-md-6 myCol">
+        </div>
+    </div>
+    <div class="row myRow">
+        <div class="col-md-6 myCol">
 
 
-			<!-- ============== Chat ============== -->
-			<div class="small-chat-box">
-<!--				<div class="container myContent">-->
-<!--					<div class="chat-discussion">-->
+            <!-- ============== Chat ============== -->
+            <div class="small-chat-box">
+                <!--				<div class="container myContent">-->
+                <!--					<div class="chat-discussion">-->
 
-						<div class="chat-message left">
-							<i class="fas fa-user-circle avatar-user"></i>
-							<div class="message">
-								<a class="message-author" href="#"> Miguel Carbonaro </a>
-								<span class="message-date"> Lun Ene 26 2020 - 18:39:23 </span>
-								<span class="message-content">
+                <div class="chat-message left">
+                    <i class="fas fa-user-circle avatar-user"></i>
+                    <div class="message">
+                        <a class="message-author" href="#"> Miguel Carbonaro </a>
+                        <span class="message-date"> Lun Ene 26 2020 - 18:39:23 </span>
+                        <span class="message-content">
 									Buenas tardes, quería saber de contenido de la materia Historia contemporanea y puntualmente en que período esta enfocada la materia.
 								</span>
-							</div>
-						</div>
-						<div class="chat-message right">
-							<img class="message-avatar" src="{{profesor.picture}}" alt="">
-							<div class="message">
-								<a class="message-author" href="#"> {{profesor.nombre}} </a>
-								<span class="message-date">  Mar Ene 27 2020 - 11:12:36 </span>
-								<span class="message-content">
+                    </div>
+                </div>
+                <div class="chat-message right">
+                    <img class="message-avatar" src="{{profesor.picture}}" alt="">
+                    <div class="message">
+                        <a class="message-author" href="#"> {{profesor.nombre}} </a>
+                        <span class="message-date">  Mar Ene 27 2020 - 11:12:36 </span>
+                        <span class="message-content">
 
 							Historia contemporanea esta centrada en las 2 guerras mundiales, desdesde sus origenes, los hechos principales y la caida de Alemania.
 									<ul style="text-align: left">
@@ -69,119 +70,84 @@
 										<li>etc...</li>
 									</ul>
 							</span>
-							</div>
-						</div>
-						<div class="chat-message right">
-							<img class="message-avatar" src="{{profesor.picture}}" alt="">
-							<div class="message">
-								<a class="message-author" href="#"> {{profesor.nombre}} </a>
-								<span class="message-date">  Mar Ene 27 2020 - 11:15:42 </span>
-								<span class="message-content">
+                    </div>
+                </div>
+                <div class="chat-message right">
+                    <img class="message-avatar" src="{{profesor.picture}}" alt="">
+                    <div class="message">
+                        <a class="message-author" href="#"> {{profesor.nombre}} </a>
+                        <span class="message-date">  Mar Ene 27 2020 - 11:15:42 </span>
+                        <span class="message-content">
 							El contenido de la materia no desarrolla temas post guerra o las consecuencias.
 							</span>
-							</div>
-						</div>
-						<div class="chat-message left">
-							<i class="fas fa-user-circle avatar-user"></i>
-							<div class="message">
-								<a class="message-author" href="#"> Pablo Grossi </a>
-								<span class="message-date">  Mie Feb 20 2020 - 11:12:36 </span>
-								<span class="message-content">
+                    </div>
+                </div>
+                <div class="chat-message left">
+                    <i class="fas fa-user-circle avatar-user"></i>
+                    <div class="message">
+                        <a class="message-author" href="#"> Pablo Grossi </a>
+                        <span class="message-date">  Mie Feb 20 2020 - 11:12:36 </span>
+                        <span class="message-content">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. At est labore magni nisi odit quaerat quibusdam suscipit? Accusantium distinctio doloribus iste labore minima neque quis sapiente tempore voluptatem! Dolores, maiores?
 							</span>
-							</div>
-						</div>
-						<div class="chat-message right">
-							<img class="message-avatar" src="{{profesor.picture}}" alt="">
-							<div class="message">
-								<a class="message-author" href="#"> {{profesor.nombre}} </a>
-								<span class="message-date">  Jue Feb 25 2020 - 11:12:36 </span>
-								<span class="message-content">
+                    </div>
+                </div>
+                <div class="chat-message right">
+                    <img class="message-avatar" src="{{profesor.picture}}" alt="">
+                    <div class="message">
+                        <a class="message-author" href="#"> {{profesor.nombre}} </a>
+                        <span class="message-date">  Jue Feb 25 2020 - 11:12:36 </span>
+                        <span class="message-content">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eveniet ipsam molestiae odio veniam veritatis, vitae. Ab, aliquid architecto, autem ipsam, laboriosam nihil nobis porro quisquam ratione sequi soluta voluptatum!
 							</span>
-							</div>
-						</div>
+                    </div>
+                </div>
 
-<!--					</div>-->
-					<div class="form-group">
+                <!--					</div>-->
+                <div class="form-group">
 						<textarea class="form-control message-input" name="message"
-								  placeholder="Ingrese su consulta"></textarea>
-					</div>
-<!--				</div>-->
-			</div>
-			<!-- ============== End Chat ============== -->
+                                  placeholder="Ingrese su consulta"></textarea>
+                </div>
+                <!--				</div>-->
+            </div>
+            <!-- ============== End Chat ============== -->
 
-		</div> <!-- /Col -->
+        </div> <!-- /Col -->
 
-		<div class="col-md-6 ">
-			<div class="datepicker">
-				<ngb-datepicker #dp
-								(dateSelect)="onDateSelection($event)"
-								[displayMonths]="2"
-								[navigation]="'select'"
-								outsideDays="hidden">
-				</ngb-datepicker>
-				<!-- <ng-template #t let-date let-focused="focused">
-					<span class="custom-day"
-						[class.focused]="focused"
+        <div class="col-md-6 ">
+            <div class="datepicker">
+                <ngb-datepicker #dp
+                                (dateSelect)="onDateSelection($event)"
+                                [displayMonths]="2"
+                                [navigation]="'select'"
+                                outsideDays="hidden">
+                </ngb-datepicker>
+                <!-- <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day"
+                        [class.focused]="focused"
 
-						[class.faded]="isHovered(date) || isInside(date)"
-						(mouseenter)="hoveredDate = date"
-						(mouseleave)="hoveredDate = null">
-						{{ date.day }}
-					</span>
-				</ng-template> -->
+                        [class.faded]="isHovered(date) || isInside(date)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                        {{ date.day }}
+                    </span>
+                </ng-template> -->
 
-			</div>
-			<table class="table table-bordered table-striped table-hover table-sm" style="background-color: #ffffff">
-				<thead>
-				<tr>
-					<th>0</th>
-					<th>1</th>
-					<th>2</th>
-					<th>3</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-				</tr>
-				<tr>
-					<td>8</td>
-					<td>9</td>
-					<td>10</td>
-					<td>11</td>
-				</tr>
-				<tr>
-					<td>12</td>
-					<td>13</td>
-					<td>14</td>
-					<td>15</td>
-				</tr>
-				<tr>
-					<td>16</td>
-					<td>17</td>
-					<td>18</td>
-					<td>19</td>
-				</tr>
-				<tr>
-					<td>20</td>
-					<td>21</td>
-					<td>22</td>
-					<td>23</td>
-				</tr>
-				</tbody>
+            </div>
 
-			</table>
+            <label for="cmbHorario">Horarios </label>
+            <select id="cmbHorario" class="form-control custom-select">
+                <option *ngFor="let horario of horarios" value="val-{{horario}}">{{horario}}</option>
+            </select>
 
-			<button class="btn btn-success" style="width: 100%;">Tomar Clase</button>
-		</div> <!-- /col -->
+            <br>
+            <br>
+
+            <button class="btn btn-success" style="width: 100%;">Tomar Clase</button>
+        </div> <!-- /col -->
 
 
-	</div> <!-- /Row -->
+    </div> <!-- /Row -->
 
 
 </div> <!--/container-->
