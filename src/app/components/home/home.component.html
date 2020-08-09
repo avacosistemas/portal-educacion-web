@@ -1,15 +1,15 @@
 <ngb-carousel *ngIf="slides" [showNavigationArrows]="true" [pauseOnHover]="true" [showNavigationIndicators]="true"
 			  [interval]="6000" class="carousel " data-ride="carousel">
-	<ng-template ngbSlide *ngFor="let slide of slides">
-		<div class="picsum-img-wrapper" style="background-image: url('{{slide.image}}')"></div>
-		<div class="carousel-caption" style="top: {{slide.top}}; left: {{slide.left}}">
-			<h3>{{slide.title}}</h3>
-			<p>{{slide.description}}</p>
-			<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0">
-				<p><a href="#"><button>{{slide.buttonLink}}</button></a></p>
-			</span>
-		</div>
-	</ng-template>
+<!--	<ng-template ngbSlide *ngFor="let slide of slides">-->
+<!--		<div class="picsum-img-wrapper" style="background-image: url('{{slide.image}}')"></div>-->
+<!--		<div class="carousel-caption" style="top: {{slide.top}}; left: {{slide.left}}">-->
+<!--			<h3>{{slide.title}}</h3>-->
+<!--			<p>{{slide.description}}</p>-->
+<!--			<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0">-->
+<!--				<p><a href="#"><button>{{slide.buttonLink}}</button></a></p>-->
+<!--			</span>-->
+<!--		</div>-->
+<!--	</ng-template>-->
 	<ng-template ngbSlide>
 		<div class="picsum-img-wrapper" style="background-image: url('/assets/images/slider/63293.jpg')"></div>
 		<div class="carousel-caption" style="top: 20%;">

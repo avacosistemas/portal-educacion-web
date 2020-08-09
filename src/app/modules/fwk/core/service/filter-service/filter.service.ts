@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CONTROL_TYPE, NUMBER } from '../../model/dynamic-form/dynamic-field';
-import * as _moment from 'moment';
 
 const BOOLEAN = 'boolean';
 const STRING = 'string';

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsValidationService } from "../../../services/forms-validation.service";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { environment } from "../../../../environments/environment";
 
+
 @Component({
-  selector: 'app-alumno-registro',
-  templateUrl: './alumno-registro.component.html',
-  styleUrls: ['./alumno-registro.component.scss']
+  selector: 'app-profesor-registro',
+  templateUrl: './profesor-registro.component.html',
+  styleUrls: ['./profesor-registro.component.scss']
 })
-export class AlumnoRegistroComponent implements OnInit {
+export class ProfesorRegistroComponent implements OnInit {
 
   fg: FormGroup;
   rKey = environment.recaptchaKey;
@@ -17,54 +17,45 @@ export class AlumnoRegistroComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private fv: FormsValidationService,
-    private modalService: NgbModal
+
   ) { }
 
-
   ngOnInit(): void {
+
     this.fg = this.fb.group({
       nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      dni: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
-      usuario: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(40), this.fv.usuario()]],
-      pwd: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
-      pwd2: [null, [Validators.required]],
+      // email: [null, [Validators.required, Validators.email]],
+      // email: [null, [Validators.required, this.fv.email('^\\s*?(.+)@(.+?)\\s*$')]],
       email: [null, [Validators.required, this.fv.correo()]],
       email2: [null, [Validators.required]],
       telCel: [null, [Validators.required, Validators.minLength(10), this.fv.telefono()]],
       telFijo: [null, [Validators.minLength(10), this.fv.telefono()]],
-      terminos: [null, [Validators.required, this.fv.condiciones()]],
-
     });
   }
 
-  // ======================= Getters ==========================
+
+  // ===================== Getters =====================
   get nombre() { return this.fg.get('nombre'); }
   get apellido() { return this.fg.get('apellido'); }
-  get dni() { return this.fg.get('dni'); }
-  get usuario() { return this.fg.get('usuario'); }
-  get pwd() { return this.fg.get('pwd'); }
-  get pwd2() { return this.fg.get('pwd2'); }
   get email() { return this.fg.get('email'); }
   get email2() { return this.fg.get('email2'); }
   get telCel() { return this.fg.get('telCel'); }
   get telFijo() { return this.fg.get('telFijo'); }
-  get terminos() { return this.fg.get('terminos'); }
-
-  openXl(content) {
-    this.modalService.open(content, { size: 'xl', scrollable: true, centered: true });
-  }
 
   resolved(event) {
     console.log(event);
   }
 
   onSubmit() {
+
     if (this.fg.valid) {
       console.log('form submitted');
     } else {
-      console.error('El formulario contiene errores')
+      // validate all form fields
+      // this.validateAllFormFields(this.fg); //{7}
     }
   }
+
 
 }

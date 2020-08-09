@@ -11,6 +11,7 @@ export const environment = {
     production: false,
     hmr       : false,
     dummyServices: false,
+    recaptchaKey: '6Lf_RrsZAAAAAMy8Z7Vlc_cRQ1wM14JmDgtVnmVS',
 
     /** AUTHENTICATION */
     AUTHENTICATION_URL:  PREFIX_DOMAIN_API + '/ws-rest-authentication/auth',

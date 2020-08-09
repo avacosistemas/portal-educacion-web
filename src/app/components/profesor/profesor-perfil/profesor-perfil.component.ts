@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Profesor } from 'src/app/entities/profesor';
 import { ProfesorService } from "../../../services/profesor.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
@@ -24,7 +24,6 @@ export class ProfesorPerfilComponent implements OnInit {
   constructor(
     protected ps: ProfesorService,
     private route: ActivatedRoute,
-    private router: Router,
     protected rateConfig: NgbRatingConfig,
     protected calendar: NgbCalendar
   ) {

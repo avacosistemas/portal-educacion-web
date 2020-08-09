@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Injector } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { MessageService } from '../message/message.service';
 

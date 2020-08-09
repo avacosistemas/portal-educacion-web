@@ -9,6 +9,7 @@ import { FaqComponent } from "./components/faq/faq.component";
 import { PolicyComponent } from "./components/legal/policy/policy.component";
 import { TerminosComponent } from "./components/legal/terminos/terminos.component";
 import { AlumnoPerfilComponent } from "./components/alumno/alumno-perfil/alumno-perfil.component";
+import { ProfesorRegistroComponent } from "./components/profesor/profesor-registro/profesor-registro.component";
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'legales/terminos', component: TerminosComponent, pathMatch: 'full'},
   {path: 'alumno/nuevo', component: AlumnoRegistroComponent, pathMatch: 'full'},
   {path: 'alumno/:id', component: AlumnoPerfilComponent, pathMatch: 'full'},
+  {path: 'profesor/registro', component: ProfesorRegistroComponent, pathMatch: 'full'},
   {path: 'profesor/:id', component: ProfesorPerfilComponent, pathMatch: 'full'},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: HomeComponent},

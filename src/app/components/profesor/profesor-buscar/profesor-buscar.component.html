@@ -12,23 +12,23 @@
 						<hr>
 						<h4>Ordenar</h4>
 						<div class="form-group">
-<!--							<select class="form-control custom-select" id="exampleFormControlSelect1">-->
-<!--								<option>Más relevantes</option>-->
-<!--								<option>Menor precio</option>-->
-<!--								<option>Mayor precio</option>-->
-<!--							</select>-->
+							<select class="form-control custom-select" id="exampleFormControlSelect1">
+								<option class="active">Más relevantes</option>
+								<option>Menor precio</option>
+								<option>Mayor precio</option>
+							</select>
 
-							<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic">
-								<label ngbButtonLabel class="btn-info active">
-									<input ngbButton type="radio" value="relevante"> Más relevantes
-								</label>
-								<label ngbButtonLabel class="btn-info">
-									<input ngbButton type="radio" value="menor"> Menor Precio
-								</label>
-								<label ngbButtonLabel class="btn-info">
-									<input ngbButton type="radio" value="mayor"> Mayor precio
-								</label>
-							</div>
+<!--							<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic">-->
+<!--								<label ngbButtonLabel class="btn-info active">-->
+<!--									<input ngbButton type="radio" value="relevante"> Más relevantes-->
+<!--								</label>-->
+<!--								<label ngbButtonLabel class="btn-info">-->
+<!--									<input ngbButton type="radio" value="menor"> Menor Precio-->
+<!--								</label>-->
+<!--								<label ngbButtonLabel class="btn-info">-->
+<!--									<input ngbButton type="radio" value="mayor"> Mayor precio-->
+<!--								</label>-->
+<!--							</div>-->
 						</div >
 						<h4>Nivel</h4>
 						<div class="form-group">
@@ -70,7 +70,7 @@
 										<img class="img-fluid" src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" />
 									</div>
 									<div class="profesor">
-										<h5>{{profesor.nombre}}, {{profesor.apellido}}</h5> <button   [routerLink]="['/perfil', profesor.id]" class="btn btn-success">Ver Perfil</button>
+										<h5>{{profesor.nombre}}, {{profesor.apellido}}</h5> <button   [routerLink]="['/profesor', profesor.id]" class="btn btn-success">Ver Perfil</button>
 									</div>
 									<h6>{{profesor.materia}}</h6>
 									<div class="valor-curso">

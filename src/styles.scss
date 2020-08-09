@@ -24,6 +24,28 @@ body {
         font-size: 16px;
     }
 }
+
+// ========= Slider del home (input) ==========
+#ngb-typeahead-0 {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+
+// ========= Modal ==========
+.modal {
+    position: absolute;
+    top: 10px;
+    right: 100px;
+    bottom: 0;
+    left: 0;
+    height: 74vh;
+    z-index: 10040;
+    overflow: auto;
+    overflow-y: auto;
+}
+
 // ========= Placeholder color ==========
 
 ::placeholder, :-moz-placeholder, :-ms-input-placeholder, ::-webkit-input-placeholder {
@@ -83,6 +105,13 @@ input {
 	background: white;
 }
 
+
+.card-title small {
+    float: right;
+    //font-size: 12px !important;
+}
+
+
 .accordion {
   .faq-sign {
     font-size: 30px;
@@ -136,6 +165,75 @@ input {
 }
 
 // ============================ Profile =================================
+.img-raised {
+	// box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
+	box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.54), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+.perfil {
+	width: 100%;
+	// height: 100%;
+	display: flex;
+	align-content: center;
+	justify-content: flex-end;
+	position: absolute;	
+}
+.avatar-small {
+	width: 140px;
+	height: 140px;
+	overflow: hidden;
+	border: 4px solid #c8c8c8;
+	border-radius: 50%;
+	background-color: #1aa2a2;
+	display: flex;
+	position: absolute;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	top: -20px;
+	right: -20px;
+	// :hover {opacity: 1;}
+	transition: all .5s linear;
+
+    img {
+        width: 140px;
+		transition: all .5s linear;
+	}
+	img:hover {
+		transform: scale(1.3);
+	} 
+	&:hover {
+		.caption {
+			opacity: 1;
+		}
+	}
+
+    .caption {
+		opacity: 0;
+		font-size: 40px;
+		color: rgba(255, 255, 255, 0.7);
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		margin: auto;
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		align-items: center;
+		background-color: rgba(0,0,0,.44);
+		text-align: center;
+
+		p, span {
+			display: block;
+
+		}
+		span {
+			margin-top: -15px;
+			font-size: 16px;
+		}
+    }
+}
+
 
 .profile {
 	.avatar {
@@ -145,8 +243,9 @@ input {
 			border: 8px solid #ddd;
 			border-radius: 50%;
 			background-color: transparent;
+            position: relative;
+            display: inline-block;
 		}
-
 	}
 	.info {
 		margin-left: 170px;

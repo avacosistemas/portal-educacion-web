@@ -4,14 +4,11 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse,
-  HttpErrorResponse
 } from '@angular/common/http';
 
-import 'rxjs/add/operator/do';
+// import 'rxjs/add/operator/do';
 
 import { Router } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 

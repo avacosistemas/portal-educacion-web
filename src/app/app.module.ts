@@ -26,9 +26,13 @@ import { FaqComponent } from './components/faq/faq.component';
 import { TerminosComponent } from './components/legal/terminos/terminos.component';
 import { PolicyComponent } from './components/legal/policy/policy.component';
 import { AlumnoPerfilComponent } from './components/alumno/alumno-perfil/alumno-perfil.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { IntercepterService } from "./modules/fwk/core/service/intercepter/intercepter.service";
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { IntercepterService } from './modules/fwk/core/service/intercepter/intercepter.service';
+import { FwkModule } from './modules/fwk/core/fwk.module';
+import { ProfesorRegistroComponent } from './components/profesor/profesor-registro/profesor-registro.component';
+import { OnlyNumber } from "./directives/only-number.directive";
+import { TerminosDetalleComponent } from './components/legal/terminos/terminos-detalle/terminos-detalle.component';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { IntercepterService } from "./modules/fwk/core/service/intercepter/inter
     FaqComponent,
     TerminosComponent,
     PolicyComponent,
-    AlumnoPerfilComponent
+    AlumnoPerfilComponent,
+    ProfesorRegistroComponent,
+    OnlyNumber,
+    TerminosDetalleComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +66,12 @@ import { IntercepterService } from "./modules/fwk/core/service/intercepter/inter
     NgxPageScrollCoreModule,
     NgxPageScrollModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    // ============ Recapcha ============
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    // ============ Core ============
+    FwkModule
   ],
   providers: [
     {

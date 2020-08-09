@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { JwkInterceptor } from './service/security/jwk-interceptor';
 import { RestrictionKeysDirective } from './directive/restriction-keys.directive';
 import { SanitizeHtmlPipe } from './directive/sanitize-html.pipe';
+import { FieldErrorDisplayComponent } from './components/field-error-display/field-error-display.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -18,14 +19,16 @@ import { SanitizeHtmlPipe } from './directive/sanitize-html.pipe';
                     ],
   declarations: [
                  RestrictionKeysDirective,
-                 SanitizeHtmlPipe],
+                 SanitizeHtmlPipe,
+                 FieldErrorDisplayComponent],
   exports: [SanitizeHtmlPipe,
             CommonModule,
             BrowserModule,
             FormsModule,
             ReactiveFormsModule,
             HttpClientModule,
-            RouterModule],
+            RouterModule,
+            FieldErrorDisplayComponent],
   providers: [{
                 provide: HTTP_INTERCEPTORS,
                 useClass: JwkInterceptor,
