@@ -5,8 +5,9 @@
             <div class="card">
                 <div class="perfil">
                     <div class="avatar-small">
-                        <img src="{{alumno?.picture}}" alt="{{alumno.nombre}}, {{alumno.apellido}}" class="img-raised"/>
-                        <div class="caption">
+                        <img src="{{alumno?.picture}}" alt="{{alumno.nombre}}, {{alumno.apellido}}"
+                            class="img-raised" />
+                        <div class="caption" onclick="profilePictureFile.click()">
                             <p>
                                 <i class="fas fa-plus"></i>
                                 <br>
@@ -30,23 +31,17 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fas fa-user"></i> </span>
                                     </div>
-                                    <input id="txtNombre"
-                                           formControlName="nombre"
-                                           type="text"
-                                           class="form-control">
+                                    <input id="txtNombre" formControlName="nombre" type="text" class="form-control">
 
                                 </div>
-                                <app-field-error-display
-                                        [displayError]="nombre.touched && nombre.errors?.required"
-                                        errorMsg="* Debe completar el nombre">
+                                <app-field-error-display [displayError]="nombre.touched && nombre.errors?.required"
+                                    errorMsg="* Debe completar el nombre">
                                 </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="nombre.touched && nombre.errors?.minlength"
-                                        errorMsg="* El nombre debe tener al menos 2 letras">
+                                <app-field-error-display [displayError]="nombre.touched && nombre.errors?.minlength"
+                                    errorMsg="* El nombre debe tener al menos 2 letras">
                                 </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="nombre.touched && nombre.errors?.maxlength"
-                                        errorMsg="* El nombre no puede tener más de 100 letras">
+                                <app-field-error-display [displayError]="nombre.touched && nombre.errors?.maxlength"
+                                    errorMsg="* El nombre no puede tener más de 100 letras">
                                 </app-field-error-display>
                             </div>
 
@@ -56,27 +51,22 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="far fa-user"></i> </span>
                                     </div>
-                                    <input id="txtApellido"
-                                           formControlName="apellido"
-                                           type="text"
-                                           class="form-control">
+                                    <input id="txtApellido" formControlName="apellido" type="text" class="form-control">
                                 </div>
-                                <app-field-error-display
-                                        [displayError]="apellido.touched && apellido.errors?.required"
-                                        errorMsg="* Debe completar el apellido">
+                                <app-field-error-display [displayError]="apellido.touched && apellido.errors?.required"
+                                    errorMsg="* Debe completar el apellido">
                                 </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="apellido.touched && apellido.errors?.minlength"
-                                        errorMsg="* El apellido debe tener al menos 2 letras">
+                                <app-field-error-display [displayError]="apellido.touched && apellido.errors?.minlength"
+                                    errorMsg="* El apellido debe tener al menos 2 letras">
                                 </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="apellido.touched && apellido.errors?.maxlength"
-                                        errorMsg="* El apellido no puede tener más de 100 letras">
+                                <app-field-error-display [displayError]="apellido.touched && apellido.errors?.maxlength"
+                                    errorMsg="* El apellido no puede tener más de 100 letras">
                                 </app-field-error-display>
 
                             </div>
 
                         </div>
+
                         <div class="form-row">
                             <div class="col">
                                 <label for="txtUser">Nombre de Usuario</label>
@@ -84,11 +74,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fas fa-user-circle"></i> </span>
                                     </div>
-                                    <input id="txtUser"
-                                           formControlName="usuario"
-                                           type="text"
-                                           readonly
-                                           class="form-control">
+                                    <input id="txtUser" formControlName="usuario" type="text" readonly
+                                        class="form-control">
                                 </div>
 
                             </div>
@@ -98,25 +85,45 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fas fa-fingerprint"></i> </span>
                                     </div>
-                                    <input id="txtDni"
-                                           formControlName="dni"
-                                           OnlyNumber="true"
-                                           type="text"
-                                           class="form-control">
+                                    <input id="txtDni" formControlName="dni" OnlyNumber="true" type="text"
+                                        class="form-control">
                                 </div>
-                                <app-field-error-display
-                                        [displayError]="dni.touched && dni.errors?.required"
-                                        errorMsg="* Debe completar el DNI">
+                                <app-field-error-display [displayError]="dni.touched && dni.errors?.required"
+                                    errorMsg="* Debe completar el DNI">
                                 </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="dni.touched && dni.errors?.minlength"
-                                        errorMsg="* El DNI debe tener entre 7 y 8 dígitos">
+                                <app-field-error-display [displayError]="dni.touched && dni.errors?.minlength"
+                                    errorMsg="* El DNI debe tener entre 7 y 8 dígitos">
                                 </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="dni.touched && dni.errors?.maxlength"
-                                        errorMsg="* El DNI debe tener entre 7 y 8 dígitos">
+                                <app-field-error-display [displayError]="dni.touched && dni.errors?.maxlength"
+                                    errorMsg="* El DNI debe tener entre 7 y 8 dígitos">
                                 </app-field-error-display>
                             </div>
+                        </div>
+
+
+
+                        <!-- ================== Institucion ================== -->
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtInstitucion">Institución</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-university"></i> </span>
+                                    </div>
+                                    <input id="txtInstitucion"
+                                           formControlName="institucion"
+                                           class="form-control"
+                                           type="text"
+                                           readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================== Picture ================== -->
+                        <span>Foto de perfil</span>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="profilePictureFile" (change)="selectFile($event)">
+                            <label class="custom-file-label" id="lblProfilePictureFile" for="profilePictureFile">{{fileName}}</label>
                         </div>
 
                         <!-- ================== eMail ================== -->
@@ -127,18 +134,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fas fa-envelope"></i> </span>
                                     </div>
-                                    <input id="txtEmail"
-                                           formControlName="email"
-                                           type="email"
-                                           class="form-control">
+                                    <input id="txtEmail" formControlName="email" type="email" class="form-control">
                                 </div>
-                                <app-field-error-display
-                                        [displayError]="email.touched && email.errors?.required"
-                                        errorMsg="* Debe completar el email y este debe ser un correo valido">
+                                <app-field-error-display [displayError]="email.touched && email.errors?.required"
+                                    errorMsg="* Debe completar el email y este debe ser un correo valido">
                                 </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="email.touched && email.errors?.correo"
-                                        errorMsg="* No parece ser una dirección de mail">
+                                <app-field-error-display [displayError]="email.touched && email.errors?.correo"
+                                    errorMsg="* No parece ser una dirección de mail">
                                 </app-field-error-display>
                                 <small class="form-text text-muted">No comrpatiremos tu email con nadie.</small>
                             </div>
@@ -152,22 +154,16 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fas fa-mobile-alt"></i> </span>
                                     </div>
-                                    <input id="txtCellphone"
-                                           formControlName="telCel"
-                                           type="text"
-                                           class="form-control">
+                                    <input id="txtCellphone" formControlName="telCel" type="text" class="form-control">
                                 </div>
-                                <app-field-error-display
-                                        [displayError]="telCel.touched && telCel.errors?.required"
-                                        errorMsg="* Debe completar el número del teléfono celular">
+                                <app-field-error-display [displayError]="telCel.touched && telCel.errors?.required"
+                                    errorMsg="* Debe completar el número del teléfono celular">
                                 </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="telCel.touched && telCel.errors?.telefono"
-                                        errorMsg="* Solo debe ingresar números y/o los signos + - para indicar país y región">
+                                <app-field-error-display [displayError]="telCel.touched && telCel.errors?.telefono"
+                                    errorMsg="* Solo debe ingresar números y/o los signos + - para indicar país y región">
                                 </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="telCel.touched && telCel.errors?.minlength"
-                                        errorMsg="* El teléfono debe tener al menos 10 números">
+                                <app-field-error-display [displayError]="telCel.touched && telCel.errors?.minlength"
+                                    errorMsg="* El teléfono debe tener al menos 10 números">
                                 </app-field-error-display>
                             </div>
                             <div class="col">
@@ -176,18 +172,15 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fas fa-phone-alt"></i> </span>
                                     </div>
-                                    <input id="txtPhone"
-                                           formControlName="telFijo"
-                                           type="text"
-                                           class="form-control">
+                                    <input id="txtPhone" formControlName="telFijo" type="text" class="form-control">
                                 </div>
                                 <app-field-error-display
-                                        [displayError]="telFijo.touched && telFijo.value?.toString().length > 0 && telFijo.errors?.telefono"
-                                        errorMsg="* Solo debe ingresar números y/o los signos + - para indicar país y región">
+                                    [displayError]="telFijo.touched && telFijo.value?.toString().length > 0 && telFijo.errors?.telefono"
+                                    errorMsg="* Solo debe ingresar números y/o los signos + - para indicar país y región">
                                 </app-field-error-display>
                                 <app-field-error-display
-                                        [displayError]="telFijo.touched && telFijo.value?.toString().length > 0 && telFijo.errors?.minlength"
-                                        errorMsg="* El teléfono debe tener al menos 10 números">
+                                    [displayError]="telFijo.touched && telFijo.value?.toString().length > 0 && telFijo.errors?.minlength"
+                                    errorMsg="* El teléfono debe tener al menos 10 números">
                                 </app-field-error-display>
                             </div>
                         </div>
@@ -204,9 +197,14 @@
                         <!--							</label>-->
                         <!--						</div> -->
                         <!--	====================== Fin Genero ====================== -->
-                        <div class="form-group">
+                        <div class="form-row">
                             <!-- <button type="submit" class="btn btn-primary btn-block" (click)="onSubmit()"> Guardar cambios  </button> -->
-                            <button type="submit" class="btn btn-primary btn-block" [disabled]="fg.pristine || !fg.valid" (click)="onSubmit()"> Guardar cambios  </button>
+                            <div class="col">
+                                <button type="button" routerLink="/pwdchange" class="btn btn-secondary btn-block"> Cambiar contraseña </button>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-block" [disabled]="fg.pristine || !fg.valid" (click)="onSubmit()"> Guardar cambios </button>
+                            </div>
                         </div> <!-- form-group// -->
                     </form>
                 </article> <!-- card-body end .// -->

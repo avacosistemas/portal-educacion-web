@@ -16,10 +16,10 @@ import { NivelEducativoComponent } from './components/nivel-educativo/nivel-educ
 import { ProfesorBuscarComponent } from './components/profesor/profesor-buscar/profesor-buscar.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
 import { ComoFuncionaComponent } from './components/como-funciona/como-funciona.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
-import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
+import { ProfesorScheduleComponent } from './components/profesor/profesor-schedule/profesor-schedule.component';
 import './extensions';
 import { AlumnoRegistroComponent } from './components/alumno/alumno-registro/alumno-registro.component';
 import { FaqComponent } from './components/faq/faq.component';
@@ -33,6 +33,10 @@ import { ProfesorRegistroComponent } from './components/profesor/profesor-regist
 import { OnlyNumber } from "./directives/only-number.directive";
 import { TerminosDetalleComponent } from './components/legal/terminos/terminos-detalle/terminos-detalle.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
+import { AlumnoListComponent } from './components/alumno/alumno-list/alumno-list.component';
+import { PwdChangeComponent } from './components/auth/pwd-change/pwd-change.component';
+import { PwdResetComponent } from './components/auth/pwd-reset/pwd-reset.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     SobreNosotrosComponent,
     ComoFuncionaComponent,
     LoginComponent,
-    ProfesorPerfilComponent,
+    ProfesorScheduleComponent,
     AlumnoRegistroComponent,
     FaqComponent,
     TerminosComponent,
@@ -53,7 +57,11 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     AlumnoPerfilComponent,
     ProfesorRegistroComponent,
     OnlyNumber,
-    TerminosDetalleComponent
+    TerminosDetalleComponent,
+    ProfesorPerfilComponent,
+    AlumnoListComponent,
+    PwdChangeComponent,
+    PwdResetComponent
   ],
   imports: [
     BrowserModule,

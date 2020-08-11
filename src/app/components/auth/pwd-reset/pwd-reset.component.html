@@ -1,0 +1,52 @@
+<div class="container main-w" style="">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container">
+                    <img src="/assets/images/logo_web.svg" class="brand_logo" alt="Logo">
+                </div>
+            </div>
+
+            <div class="instrucciones">
+                <p>
+                    Ingrese su nombre de usuario o dirección de correo y le enviaremos un mail con
+                    las instrucciones para poder recuperar su contraseña.
+                </p>
+            </div>
+
+            <div class="d-flex justify-content-center form_container">
+                <form autocomplete="off" class="app-form" [formGroup]="fg" (ngSubmit)="sendMail($event)">
+
+
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                        <input type="text" formControlName="usuario" class="form-control input_user" placeholder="usuario@host.com">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div id="rdl" class="recaptcha-box">
+                            <re-captcha (resolved)="resolved($event)"
+                                        siteKey="{{rKey}}">
+                            </re-captcha>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+<!--                    <div class="d-flex justify-content-center mt-3 login_container">-->
+                        <div class="col">
+                        <button type="button" routerLink="/login" class="btn login_btn_secondary btn-block">Volver</button>
+                        </div>
+                        <div class="col">
+                        <button type="submit" name="button" class="btn login_btn btn-block">Enviar</button>
+                        </div>
+<!--                    </div>-->
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

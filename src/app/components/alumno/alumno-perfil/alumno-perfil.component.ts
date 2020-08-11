@@ -16,6 +16,8 @@ export class AlumnoPerfilComponent implements OnInit {
   alumno: Alumno;
   paramId: number;
 
+  fileName = 'Seleccionar Archivo';
+
   constructor(
     private fb: FormBuilder,
     private fv: FormsValidationService,
@@ -30,6 +32,7 @@ export class AlumnoPerfilComponent implements OnInit {
       apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       dni: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
       usuario: [null],
+      institucion: [null],
       email: [null, [Validators.required, this.fv.correo()]],
       telCel: [null, [Validators.required, Validators.minLength(10), this.fv.telefono()]],
       telFijo: [null, [Validators.minLength(10), this.fv.telefono()]],
@@ -41,6 +44,7 @@ export class AlumnoPerfilComponent implements OnInit {
   get apellido() { return this.fg.get('apellido'); }
   get dni() { return this.fg.get('dni'); }
   get usuario() { return this.fg.get('usuario'); }
+  get institucion() { return this.fg.get('institucion'); }
   get email() { return this.fg.get('email'); }
   get telCel() { return this.fg.get('telCel'); }
   get telFijo() { return this.fg.get('telFijo'); }
@@ -52,15 +56,16 @@ export class AlumnoPerfilComponent implements OnInit {
       data => {
         if (!data.picture) {
           data.picture = '/assets/icons/camara-fotografica.opt.svg';
-        }        
+        }
         this.alumno = data;
         this.nombre.setValue(data.nombre);
         this.apellido.setValue(data.apellido);
         this.dni.setValue(data.dni);
         this.usuario.setValue(data.usuario);
+        this.institucion.setValue(data.institucion);
         this.email.setValue(data.email);
-        this.telCel.setValue(data.mobile);
-        this.telFijo.setValue(data.phone);
+        this.telCel.setValue(data.telefonoMovil);
+        this.telFijo.setValue(data.telefonoFijo);
       }
     );
   }
@@ -70,6 +75,14 @@ export class AlumnoPerfilComponent implements OnInit {
       console.log('form submitted');
     } else {
       console.error('El formulario contiene errores')
+    }
+  }
+
+  selectFile(e) {
+    console.log(e);
+    if (e.target.files.length > 0) {
+      this.fileName = e.target.files[0].name;
+      this.fg.markAsTouched();
     }
   }
 

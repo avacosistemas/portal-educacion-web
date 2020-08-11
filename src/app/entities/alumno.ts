@@ -6,8 +6,8 @@ export interface Alumno {
   dni: number;
   password?: string;
   email: string;
-  mobile: string;
-  phone: string;
+  telefonoMovil: string;
+  telefonoFijo?: string;
   picture?: string;
-  institucion?: string;
+  institucion: string;
 }

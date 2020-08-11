@@ -50,7 +50,10 @@ export class MainNavComponent implements OnInit
 			document.body.classList.remove('back-pattern-001')
 		}
 
-		if (this.router.url.indexOf('/login') >= 0 || window.location.pathname.indexOf('/login') >= 0)
+		if (this.router.url.indexOf('/login') >= 0
+      || window.location.pathname.indexOf('/login') >= 0
+      || (this.router.url.indexOf('/pwdreset') >= 0
+      || window.location.pathname.indexOf('/pwdreset') >= 0) )
 		{
 			if (this.as.isLogged())
 				this.as.logout();

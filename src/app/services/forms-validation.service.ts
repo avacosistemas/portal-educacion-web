@@ -57,11 +57,49 @@ export class FormsValidationService
     };
   }
 
+
+
+
+  /**
+   * la clave debe contener al menos 1 número (0-9)
+   * la clave debe contener al menos 1 letra mayúscula
+   * la clave debe contener al menos 1 letra minúscula
+   * la clave debe contener al menos 1 valor no alfanumérico
+   * la clave debe tener entre 4 y 16 caracteres
+   */
+  claveSimple() : ValidatorFn
+  {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      if (!control.value) return null;
+      const regex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){6,16}$/gm;
+      const ret = regex.test(control.value);
+      return ret ? null : {clave: true };
+    };
+  }
+
+  /**
+   * la clave debe contener al menos 1 número (0-9)
+   * la clave debe contener al menos 1 letra mayúscula
+   * la clave debe contener al menos 1 letra minúscula
+   * la clave debe contener al menos 1 valor no alfanumérico
+   * la clave debe tener entre 4 y 16 caracteres
+   */
+  clave() : ValidatorFn
+  {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      if (!control.value) return null;
+      const regex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){6,16}$/gm;
+      const ret = regex.test(control.value);
+      return ret ? null : {clave: true };
+    };
+  }
+
   condiciones() : ValidatorFn
   {
     return (control: AbstractControl): {[key: string]: any} | null => {
       return control.value ? null : {condiciones: true };
     };
   }
+
 
 }

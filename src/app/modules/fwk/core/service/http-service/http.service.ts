@@ -166,7 +166,7 @@ export class HttpService extends BaseService {
     if (error.error.message) {
         this.notificationService.notifyError(error.error.message);
     } else {
-      this.notificationService.notifyError('Se produjo un error de respuesta del servidor');
+      this.notificationService.notifyError('Se produjo un error de answer del servidor');
     }
     observer.error(error);
   }

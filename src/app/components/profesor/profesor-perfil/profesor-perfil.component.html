@@ -1,153 +1,228 @@
-<div class="container menutop-fix myContainer ">
-    <div class="row myRow">
-        <div class="col-md-6 profile">
-            <div class="avatar">
-                <img src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}"/>
-                <div class="rate">
-                    <ngb-rating [(rate)]="profesor.valoracion">
-                        <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
-                        </ng-template>
-                    </ngb-rating>
-                </div>
-            </div>
-            <div class="info">
-                <h3>{{profesor.nombre}}, {{profesor.apellido}}</h3>
-                <h4>{{profesor.materia}}</h4>
+<div class="container menutop-fix">
 
-                <!--				<hr>-->
-                <span *ngIf="profesor.about">{{profesor.about}}</span>
-            </div>
-            <hr style="margin-top: 30px">
-
-        </div>
-        <div class="col-md-6 myCol">
-            <h4>¿Qué clase quieres tomar con {{profesor.nombre}}?</h4>
-            <label for="cmbMateria">Materia </label>
-            <select id="cmbMateria" class="form-control custom-select">
-                <option value="HistoriaArgentina">Historia Argentina</option>
-                <option value="Historia1900">Historia Contemporanea Europea</option>
-                <option value="HistoriaPueblos">Historia de los pueblos originarios</option>
-            </select>
-            <br>
-            <br>
-
-            <h4>¿Cúando?</h4>
-
-        </div>
-    </div>
-    <div class="row myRow">
-        <div class="col-md-6 myCol">
-
-
-            <!-- ============== Chat ============== -->
-            <div class="small-chat-box">
-                <!--				<div class="container myContent">-->
-                <!--					<div class="chat-discussion">-->
-
-                <div class="chat-message left">
-                    <i class="fas fa-user-circle avatar-user"></i>
-                    <div class="message">
-                        <a class="message-author" href="#"> Miguel Carbonaro </a>
-                        <span class="message-date"> Lun Ene 26 2020 - 18:39:23 </span>
-                        <span class="message-content">
-									Buenas tardes, quería saber de contenido de la materia Historia contemporanea y puntualmente en que período esta enfocada la materia.
-								</span>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card">
+                <div class="perfil">
+                    <div class="avatar-small img-raised">
+                        <img src="{{profesor?.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}"/>
+                        <div class="caption" onclick="profilePictureFile.click()">
+                            <p>
+                                <i class="fas fa-plus"></i>
+                                <br>
+                                <span>Agregar</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="chat-message right">
-                    <img class="message-avatar" src="{{profesor.picture}}" alt="">
-                    <div class="message">
-                        <a class="message-author" href="#"> {{profesor.nombre}} </a>
-                        <span class="message-date">  Mar Ene 27 2020 - 11:12:36 </span>
-                        <span class="message-content">
+                <header class="card-header ">
+                    <!--					<a href="" class="float-right btn btn-outline-primary mt-1">Log in</a>-->
+                    <h4 class="card-title mt-2" style="display: inline-block">Perfil de profesor</h4>
+                </header>
+                <article class="card-body ">
 
-							Historia contemporanea esta centrada en las 2 guerras mundiales, desdesde sus origenes, los hechos principales y la caida de Alemania.
-									<ul style="text-align: left">
-										<li>La batalla de inglaterra</li>
-										<li>La invación a la Unión Soviética</li>
-										<li>La Conferencia de Teherán</li>
-										<li>etc...</li>
-									</ul>
-							</span>
-                    </div>
-                </div>
-                <div class="chat-message right">
-                    <img class="message-avatar" src="{{profesor.picture}}" alt="">
-                    <div class="message">
-                        <a class="message-author" href="#"> {{profesor.nombre}} </a>
-                        <span class="message-date">  Mar Ene 27 2020 - 11:15:42 </span>
-                        <span class="message-content">
-							El contenido de la materia no desarrolla temas post guerra o las consecuencias.
-							</span>
-                    </div>
-                </div>
-                <div class="chat-message left">
-                    <i class="fas fa-user-circle avatar-user"></i>
-                    <div class="message">
-                        <a class="message-author" href="#"> Pablo Grossi </a>
-                        <span class="message-date">  Mie Feb 20 2020 - 11:12:36 </span>
-                        <span class="message-content">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. At est labore magni nisi odit quaerat quibusdam suscipit? Accusantium distinctio doloribus iste labore minima neque quis sapiente tempore voluptatem! Dolores, maiores?
-							</span>
-                    </div>
-                </div>
-                <div class="chat-message right">
-                    <img class="message-avatar" src="{{profesor.picture}}" alt="">
-                    <div class="message">
-                        <a class="message-author" href="#"> {{profesor.nombre}} </a>
-                        <span class="message-date">  Jue Feb 25 2020 - 11:12:36 </span>
-                        <span class="message-content">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eveniet ipsam molestiae odio veniam veritatis, vitae. Ab, aliquid architecto, autem ipsam, laboriosam nihil nobis porro quisquam ratione sequi soluta voluptatum!
-							</span>
-                    </div>
-                </div>
+                    <!-- ==================== Form ===================== -->
+                    <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fg">
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtNombre" class="control-label">Nombre</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                                    </div>
+                                    <input id="txtNombre" formControlName="nombre" type="text" class="form-control">
 
-                <!--					</div>-->
-                <div class="form-group">
-						<textarea class="form-control message-input" name="message"
-                                  placeholder="Ingrese su consulta"></textarea>
-                </div>
-                <!--				</div>-->
-            </div>
-            <!-- ============== End Chat ============== -->
+                                </div>
+                                <app-field-error-display [displayError]="nombre.touched && nombre.errors?.required"
+                                                         errorMsg="* Debe completar el nombre">
+                                </app-field-error-display>
+                                <app-field-error-display [displayError]="nombre.touched && nombre.errors?.minlength"
+                                                         errorMsg="* El nombre debe tener al menos 2 letras">
+                                </app-field-error-display>
+                                <app-field-error-display [displayError]="nombre.touched && nombre.errors?.maxlength"
+                                                         errorMsg="* El nombre no puede tener más de 100 letras">
+                                </app-field-error-display>
+                            </div>
 
-        </div> <!-- /Col -->
+                            <div class="col">
+                                <label for="txtApellido">Apellido</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="far fa-user"></i> </span>
+                                    </div>
+                                    <input id="txtApellido" formControlName="apellido" type="text" class="form-control">
+                                </div>
+                                <app-field-error-display [displayError]="apellido.touched && apellido.errors?.required"
+                                                         errorMsg="* Debe completar el apellido">
+                                </app-field-error-display>
+                                <app-field-error-display [displayError]="apellido.touched && apellido.errors?.minlength"
+                                                         errorMsg="* El apellido debe tener al menos 2 letras">
+                                </app-field-error-display>
+                                <app-field-error-display [displayError]="apellido.touched && apellido.errors?.maxlength"
+                                                         errorMsg="* El apellido no puede tener más de 100 letras">
+                                </app-field-error-display>
 
-        <div class="col-md-6 ">
-            <div class="datepicker">
-                <ngb-datepicker #dp
-                                (dateSelect)="onDateSelection($event)"
-                                [displayMonths]="2"
-                                [navigation]="'select'"
-                                outsideDays="hidden">
-                </ngb-datepicker>
-                <!-- <ng-template #t let-date let-focused="focused">
-                    <span class="custom-day"
-                        [class.focused]="focused"
+                            </div>
 
-                        [class.faded]="isHovered(date) || isInside(date)"
-                        (mouseenter)="hoveredDate = date"
-                        (mouseleave)="hoveredDate = null">
-                        {{ date.day }}
-                    </span>
-                </ng-template> -->
+                        </div>
 
-            </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtUser">Nombre de Usuario</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-user-circle"></i> </span>
+                                    </div>
+                                    <input id="txtUser" formControlName="usuario" type="text" readonly
+                                           class="form-control">
+                                </div>
 
-            <label for="cmbHorario">Horarios </label>
-            <select id="cmbHorario" class="form-control custom-select">
-                <option *ngFor="let horario of horarios" value="val-{{horario}}">{{horario}}</option>
-            </select>
-
-            <br>
-            <br>
-
-            <button class="btn btn-success" style="width: 100%;">Tomar Clase</button>
-        </div> <!-- /col -->
+                            </div>
+                            <div class="col">
+                                <label for="txtDni">DNI</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-fingerprint"></i> </span>
+                                    </div>
+                                    <input id="txtDni" formControlName="dni" OnlyNumber="true" type="text"
+                                           class="form-control">
+                                </div>
+                                <app-field-error-display [displayError]="dni.touched && dni.errors?.required"
+                                                         errorMsg="* Debe completar el DNI">
+                                </app-field-error-display>
+                                <app-field-error-display [displayError]="dni.touched && dni.errors?.minlength"
+                                                         errorMsg="* El DNI debe tener entre 7 y 8 dígitos">
+                                </app-field-error-display>
+                                <app-field-error-display [displayError]="dni.touched && dni.errors?.maxlength"
+                                                         errorMsg="* El DNI debe tener entre 7 y 8 dígitos">
+                                </app-field-error-display>
+                            </div>
+                        </div>
 
 
-    </div> <!-- /Row -->
+
+                        <!-- ================== Institucion ================== -->
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtInstitucion">Institución</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-university"></i> </span>
+                                    </div>
+                                    <input id="txtInstitucion"
+                                           formControlName="institucion"
+                                           class="form-control"
+                                           type="text"
+                                           readonly>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Calificación General</label>
+                                <div class="rate">
+                                    <ngb-rating [(rate)]="profesor.calificacion">
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================== Picture ================== -->
+                        <span>Foto de perfil</span>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="profilePictureFile" (change)="selectFile($event)">
+                            <label class="custom-file-label" id="lblProfilePictureFile" for="profilePictureFile">{{fileName}}</label>
+                        </div>
+
+                        <!-- ================== eMail ================== -->
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtEmail">eMail</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-envelope"></i> </span>
+                                    </div>
+                                    <input id="txtEmail" formControlName="email" type="email" class="form-control">
+                                </div>
+                                <app-field-error-display [displayError]="email.touched && email.errors?.required"
+                                                         errorMsg="* Debe completar el email y este debe ser un correo valido">
+                                </app-field-error-display>
+                                <app-field-error-display [displayError]="email.touched && email.errors?.correo"
+                                                         errorMsg="* No parece ser una dirección de mail">
+                                </app-field-error-display>
+                                <small class="form-text text-muted">No comrpatiremos tu email con nadie.</small>
+                            </div>
+                        </div>
+
+                        <!-- ================== Teléfonos ================== -->
+                        <div class="form-row my-3">
+                            <div class="col">
+                                <label for="txtCellphone">Número de Teléfono (Celular)</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-mobile-alt"></i> </span>
+                                    </div>
+                                    <input id="txtCellphone" formControlName="telCel" type="text" class="form-control">
+                                </div>
+                                <app-field-error-display [displayError]="telCel.touched && telCel.errors?.required"
+                                                         errorMsg="* Debe completar el número del teléfono celular">
+                                </app-field-error-display>
+                                <app-field-error-display [displayError]="telCel.touched && telCel.errors?.telefono"
+                                                         errorMsg="* Solo debe ingresar números y/o los signos + - para indicar país y región">
+                                </app-field-error-display>
+                                <app-field-error-display [displayError]="telCel.touched && telCel.errors?.minlength"
+                                                         errorMsg="* El teléfono debe tener al menos 10 números">
+                                </app-field-error-display>
+                            </div>
+                            <div class="col">
+                                <label for="txtPhone">Número de Teléfono (Fijo)</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-phone-alt"></i> </span>
+                                    </div>
+                                    <input id="txtPhone" formControlName="telFijo" type="text" class="form-control">
+                                </div>
+                                <app-field-error-display
+                                        [displayError]="telFijo.touched && telFijo.value?.toString().length > 0 && telFijo.errors?.telefono"
+                                        errorMsg="* Solo debe ingresar números y/o los signos + - para indicar país y región">
+                                </app-field-error-display>
+                                <app-field-error-display
+                                        [displayError]="telFijo.touched && telFijo.value?.toString().length > 0 && telFijo.errors?.minlength"
+                                        errorMsg="* El teléfono debe tener al menos 10 números">
+                                </app-field-error-display>
+                            </div>
+                        </div>
+
+                        <!--	====================== Genero ====================== -->
+                        <!--						<div class="form-group">-->
+                        <!--							<label class="form-check form-check-inline">-->
+                        <!--								<input class="form-check-input" type="radio" name="optGender" value="option1">-->
+                        <!--								<span class="form-check-label"> Hombre</span>-->
+                        <!--							</label>-->
+                        <!--							<label class="form-check form-check-inline">-->
+                        <!--								<input class="form-check-input" type="radio" name="optGender" value="option2">-->
+                        <!--								<span class="form-check-label"> Mujer</span>-->
+                        <!--							</label>-->
+                        <!--						</div> -->
+                        <!--	====================== Fin Genero ====================== -->
+                        <div class="form-row">
+                            <!-- <button type="submit" class="btn btn-primary btn-block" (click)="onSubmit()"> Guardar cambios  </button> -->
+                            <div class="col">
+                                <button type="button" routerLink="/pwdchange" class="btn btn-secondary btn-block"> Cambiar contraseña </button>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-block" [disabled]="fg.pristine || !fg.valid" (click)="onSubmit()"> Guardar cambios </button>
+                            </div>
+                        </div> <!-- form-group// -->
+                    </form>
+                </article> <!-- card-body end .// -->
+                <!--				<div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>-->
+
+            </div> <!-- End Card -->
 
 
-</div> <!--/container-->
+
+        </div> <!-- End Col -->
+    </div> <!-- End Row -->
+</div> <!-- End Container -->

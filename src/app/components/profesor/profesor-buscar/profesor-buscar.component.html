@@ -70,7 +70,8 @@
 										<img class="img-fluid" src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" />
 									</div>
 									<div class="profesor">
-										<h5>{{profesor.nombre}}, {{profesor.apellido}}</h5> <button   [routerLink]="['/profesor', profesor.id]" class="btn btn-success">Ver Perfil</button>
+										<h5>{{profesor.nombre}}, {{profesor.apellido}}</h5>
+                                        <button [routerLink]="['/profesor/agenda/', profesor.id]" class="btn btn-success">Ver clases</button>
 									</div>
 									<h6>{{profesor.materia}}</h6>
 									<div class="valor-curso">

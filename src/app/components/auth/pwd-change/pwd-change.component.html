@@ -1,0 +1,93 @@
+<div class="container menutop-fix">
+
+
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7 col-sm-12">
+            <div class="card">
+                <header class="card-header">
+                    <!--					<a href="" class="float-right btn btn-outline-primary mt-1">Log in</a>-->
+                    <h4 class="card-title mt-2">Cambiar contraseña</h4>
+                </header>
+                <article class="card-body">
+
+                    <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fg">
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtPwdOld">Contraseña Actual</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-door-closed"></i> </span>
+                                    </div>
+                                    <input id="txtPwdOld"
+                                           formControlName="pwdOld"
+                                           type="password"
+                                           class="form-control">
+                                </div>
+                                <app-field-error-display
+                                        [displayError]="pwdOld.touched && pwdOld.errors?.required"
+                                        errorMsg="* Debe ingresar su contraseña actual o temporal">
+                                </app-field-error-display>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtPwdNew">Contraseña nueva</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
+                                    </div>
+                                    <input id="txtPwdNew"
+                                           formControlName="pwdNew"
+                                           type="password"
+                                           class="form-control">
+                                </div>
+                                <app-field-error-display
+                                        [displayError]="pwdNew.touched && pwdNew.errors?.required"
+                                        errorMsg="* Debe ingresar una nueva contraseña">
+                                </app-field-error-display>
+                                <app-field-error-display
+                                        [displayError]="pwdNew.touched && pwdNew.errors?.minlength"
+                                        errorMsg="* La contraseña debe incluir al menos {{pwdNew.errors?.minlength?.requiredLength}} caracteres">
+                                </app-field-error-display>
+                                <app-field-error-display
+                                        [displayError]="pwdNew.touched && pwdNew.errors?.maxlength"
+                                        errorMsg="* La contraseña no debe superar los {{pwdNew.errors?.maxlength?.requiredLength}} caracteres">
+                                </app-field-error-display>
+
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col">
+                                <label for="txtPwdNew2">Repetir Contraseña</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-lock-open"></i> </span>
+                                    </div>
+                                    <input id="txtPwdNew2"
+                                           formControlName="pwdNew2"
+                                           type="password"
+                                           class="form-control">
+                                </div>
+                                <app-field-error-display
+                                        [displayError]="pwdNew2.touched && (pwdNew.value !== pwdNew2.value)"
+                                        errorMsg="* Debe repetir su dirección de eMail">
+                                </app-field-error-display>
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <!-- <button type="submit" class="btn btn-primary btn-block" (click)="onSubmit()"> Guardar cambios  </button> -->
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-block" [disabled]="fg.pristine || !fg.valid" (click)="onSubmit()"> Guardar </button>
+                            </div>
+                        </div> <!-- form-group// -->
+
+                    </form>
+                </article>
+            </div> <!-- End Card -->
+
+        </div> <!-- End Col -->
+    </div> <!-- End Row -->
+</div> <!-- End Container -->

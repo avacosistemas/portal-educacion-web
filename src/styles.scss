@@ -7,16 +7,21 @@
 //@import 'form_select'; // mismo estilo para los selects en distintos browsers (no existe en bootstrap 4)
 @import 'chat';
 
+html{
+    height: 100%;
+
+}
 
 body {
-	font-family: 'Titillium Web', sans-serif;
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 196px;
+    font-family: 'Titillium Web', sans-serif;
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 1.7;
 	color: #7a8188;
 	background: #e2e2e2;
-	height: 100%;
-	position: relative;
 	background-image: url('/assets/images/background.jpg');
     :-webkit-autofill::first-line {
         font-family: 'Titillium Web', sans-serif;
@@ -138,8 +143,9 @@ input {
 }
 
 .menutop-fix {
-    margin-top: 100px;
+    padding-top: 100px !important;
 }
+
 // ============================ Carousel =================================
 
 .carousel-item {
@@ -176,7 +182,7 @@ input {
 	display: flex;
 	align-content: center;
 	justify-content: flex-end;
-	position: absolute;	
+	position: absolute;
 }
 .avatar-small {
 	width: 140px;
@@ -201,7 +207,7 @@ input {
 	}
 	img:hover {
 		transform: scale(1.3);
-	} 
+	}
 	&:hover {
 		.caption {
 			opacity: 1;
@@ -234,6 +240,12 @@ input {
     }
 }
 
+.rate {
+    .star {font-size: 1.2rem; color: #b0c4de;}
+    .filled {color: #6cae5c;}
+    .bad {color: #deb0b0;}
+    .filled.bad {color: #4188a6;}
+}
 
 .profile {
 	.avatar {
@@ -256,11 +268,6 @@ input {
 		position: absolute;
 		top: 155px;
 		left: 45px;
-
-		.star {font-size: 1.2rem; color: #b0c4de;}
-		.filled {color: #6cae5c;}
-		.bad {color: #deb0b0;}
-		.filled.bad {color: #4188a6;}
 	}
 
 }
@@ -411,18 +418,20 @@ input {
 
 
 #fh5co-footer {
-  .tel {
-    font-size: 24px;
-    font-weight: 600;
-    padding-right:0 !important;
-    i { margin-right: 10px; }
-  }
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 	margin-top: 30px;
-	padding: 2em 0 10px;
-	float: left;
-	width: 100%;
-	position: relative;
+	padding: 2em 0 0;
+	//width: 100%;
 	background: #001e56;
+    .tel {
+        font-size: 24px;
+        font-weight: 600;
+        padding-right:0 !important;
+        i { margin-right: 10px; }
+    }
 }
 @media screen and (max-width: 768px) {
 	#fh5co-footer {

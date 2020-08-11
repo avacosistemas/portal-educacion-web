@@ -274,7 +274,6 @@
 
                         <div id="rdl" class="mb-3">
                             <re-captcha (resolved)="resolved($event)"
-                                        formControlName="recaptchaReactive"
                                         siteKey="{{rKey}}">
                             </re-captcha>
                         </div>
@@ -298,24 +297,24 @@
 					</form>
 				</article> <!-- card-body end .// -->
 <!--				<div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>-->
-
             </div> <!-- End Card -->
-
-            <ng-template #contentTerminos let-modal>
-                <div class="modal-header">
-                    <h4 class="modal-title">Términos y Condiciones</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <app-terminos-detalle></app-terminos-detalle>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-                </div>
-            </ng-template>
-
         </div> <!-- End Col -->
     </div> <!-- End Row -->
 </div> <!-- End Container -->
+
+
+<ng-template #contentTerminos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Términos y Condiciones</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-terminos-detalle></app-terminos-detalle>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+

@@ -1,80 +1,95 @@
 import { Component, OnInit } from '@angular/core';
-import { Profesor } from 'src/app/entities/profesor';
-import { ProfesorService } from "../../../services/profesor.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormsValidationService } from "../../../services/forms-validation.service";
 import { ActivatedRoute } from "@angular/router";
+import { Profesor } from "../../../entities/profesor";
+import { ProfesorService } from "../../../services/profesor.service";
 import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
-import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profesor-perfil',
   templateUrl: './profesor-perfil.component.html',
-  styleUrls: [ './profesor-perfil.component.scss' ]
+  styleUrls: ['./profesor-perfil.component.scss']
 })
 export class ProfesorPerfilComponent implements OnInit {
 
+  fg: FormGroup;
   profesor: Profesor;
-  profesorIdParam: number;
+  paramId: number;
 
-  horarios: string[] = [];
-
-  hoveredDate: NgbDate | null = null;
-  fromDate: NgbDate;
-  toDate: NgbDate | null = null;
+  fileName = 'Seleccionar Archivo';
 
   constructor(
-    protected ps: ProfesorService,
+    private fb: FormBuilder,
+    private fv: FormsValidationService,
     private route: ActivatedRoute,
     protected rateConfig: NgbRatingConfig,
-    protected calendar: NgbCalendar
+    private ps: ProfesorService,
   ) {
-
     rateConfig.max = 5;
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
 
   }
+
 
   ngOnInit(): void {
+    this.fg = this.fb.group({
+      nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      dni: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
+      usuario: [null],
+      institucion: [null],
+      email: [null, [Validators.required, this.fv.correo()]],
+      telCel: [null, [Validators.required, Validators.minLength(10), this.fv.telefono()]],
+      telFijo: [null, [Validators.minLength(10), this.fv.telefono()]],
+    });
     this.loadData();
   }
+  // ======================= Getters ==========================
+  get nombre() { return this.fg.get('nombre'); }
+  get apellido() { return this.fg.get('apellido'); }
+  get dni() { return this.fg.get('dni'); }
+  get usuario() { return this.fg.get('usuario'); }
+  get institucion() { return this.fg.get('institucion'); }
+  get email() { return this.fg.get('email'); }
+  get telCel() { return this.fg.get('telCel'); }
+  get telFijo() { return this.fg.get('telFijo'); }
 
-  loadData() {
-    this.profesorIdParam = Number(this.route.snapshot.paramMap.get('id'));
-    this.ps.getProfesor(this.profesorIdParam).subscribe(
+
+  loadData(){
+    this.paramId = Number(this.route.snapshot.paramMap.get('id'));
+    this.ps.getProfesor(this.paramId).subscribe(
       data => {
+        if (!data.picture) {
+          data.picture = '/assets/icons/camara-fotografica.opt.svg';
+        }
         this.profesor = data;
+        this.nombre.setValue(data.nombre);
+        this.apellido.setValue(data.apellido);
+        this.institucion.setValue(data.institucion);
+        this.usuario.setValue(data.usuario);
+        this.dni.setValue(data.dni);
+        this.email.setValue(data.email);
+        this.telCel.setValue(data.telefonoMovil);
+        this.telFijo.setValue(data.telefonoFijo);
       }
     );
   }
 
-
-  onDateSelection(date: NgbDate) {
-    if (!this.fromDate && !this.toDate) {
-      this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
-      this.toDate = date;
+  onSubmit() {
+    if (this.fg.valid) {
+      console.log('form submitted');
     } else {
-      this.toDate = null;
-      this.fromDate = date;
+      console.error('El formulario contiene errores')
     }
-
-    this.ps.getHorarios(this.fromDate, this.profesorIdParam).subscribe(
-      data => {
-        this.horarios = data;
-      }
-    )
-
   }
 
-  isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  selectFile(e) {
+    console.log(e);
+    if (e.target.files.length > 0) {
+      this.fileName = e.target.files[0].name;
+      this.fg.markAsTouched();
+    }
   }
 
-  isInside(date: NgbDate) {
-    return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
-  }
 
-  isRange(date: NgbDate) {
-    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
-  }
 }
