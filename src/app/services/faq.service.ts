@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Faq} from "../entities/faq";
 import {Observable, of} from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,15 @@ export class FaqService {
 
   _faqs: Faq[] = [];
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  public getPreguntas() : Observable<Faq[]>
+  public getPreguntas() : Observable<any> {
+    return this.http.get(environment.apiService + 'faqs/');
+  }
+
+  public getPreguntasMock() : Observable<Faq[]>
   {
       if (!(this._faqs.length > 0))
           this._setPreguntas();

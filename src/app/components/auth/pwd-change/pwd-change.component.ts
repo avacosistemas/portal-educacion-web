@@ -32,7 +32,7 @@ export class PwdChangeComponent implements OnInit {
     if (this.fg.valid) {
       console.log('form submitted');
     } else {
-      console.error('El formulario contiene errores')
+      console.error('El formulario contiene errores');
     }
   }
 }

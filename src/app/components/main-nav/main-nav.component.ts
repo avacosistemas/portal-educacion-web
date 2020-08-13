@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
+import {SeguridadService} from "../../services/seguridad.service";
 import {Router, NavigationEnd} from '@angular/router';
 
 
@@ -17,7 +17,7 @@ export class MainNavComponent implements OnInit
 	_isLogged = false;
 
 	constructor(
-		public as: AuthService,
+		public as: SeguridadService,
 		protected router: Router
 	)
 	{

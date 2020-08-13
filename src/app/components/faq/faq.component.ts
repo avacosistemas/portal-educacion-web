@@ -13,9 +13,7 @@ export class FaqComponent implements OnInit {
 
   constructor(
     protected fs: FaqService
-  ) {
-    this.loadData();
-  }
+  ) {}
 
   ngOnInit()
     :
@@ -26,11 +24,22 @@ export class FaqComponent implements OnInit {
 
 
   loadData() {
-    // this.faqs = this.fs.getPreguntas();
+    // this.faqs = this.fs.getPreguntasMock();
     this.fs.getPreguntas().subscribe(
       data => {
-        this.faqs = data;
-      });
+        if (data?.data) {
+          this.faqs = [];
+          data.data.forEach( q => {
+
+            this.faqs.push(
+              {id: q.id, answer: q.answer, question: q.question });
+          });
+        }
+      },
+      error => {
+        console.error(error);
+      }
+      );
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../../services/auth.service";
+import { SeguridadService } from "../../../services/seguridad.service";
 import { Router } from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit
   hidePass = true;
 
   constructor(
-    protected as: AuthService,
+    protected as: SeguridadService,
     protected router: Router,
     private fb: FormBuilder,
   )
