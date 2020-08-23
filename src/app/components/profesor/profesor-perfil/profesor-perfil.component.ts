@@ -27,6 +27,8 @@ export class ProfesorPerfilComponent implements OnInit {
     private ps: ProfesorService,
   ) {
     rateConfig.max = 5;
+    this.profesor = new Profesor();
+
 
   }
 
@@ -58,26 +60,47 @@ export class ProfesorPerfilComponent implements OnInit {
   loadData(){
     this.paramId = Number(this.route.snapshot.paramMap.get('id'));
     this.ps.getProfesor(this.paramId).subscribe(
-      data => {
-        if (!data.picture) {
-          data.picture = '/assets/icons/camara-fotografica.opt.svg';
+      (value:any) => {
+        if (!value.data.foto) {
+          value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
         }
-        this.profesor = data;
-        this.nombre.setValue(data.nombre);
-        this.apellido.setValue(data.apellido);
-        this.institucion.setValue(data.institucion);
-        this.usuario.setValue(data.usuario);
-        this.dni.setValue(data.dni);
-        this.email.setValue(data.email);
-        this.telCel.setValue(data.telefonoMovil);
-        this.telFijo.setValue(data.telefonoFijo);
+        this.profesor = value.data;
+        this.nombre.setValue(value.data.nombre);
+        this.apellido.setValue(value.data.apellido);
+        this.institucion.setValue(value.data.institucion);
+        this.usuario.setValue(value.data.username);
+        this.dni.setValue(value.data.numeroIdentificacion);
+        this.email.setValue(value.data.email);
+        this.telCel.setValue(value.data.telefonoMovil);
+        this.telFijo.setValue(value.data.telefonoFijo);
       }
     );
   }
 
   onSubmit() {
     if (this.fg.valid) {
-      console.log('form submitted');
+
+      this.profesor.nombre = this.nombre.value;
+      this.profesor.apellido = this.apellido.value;
+      this.profesor.institucion = this.institucion.value;
+      this.profesor.username = this.usuario.value;
+      this.profesor.dni = this.dni.value;
+      this.profesor.email = this.email.value;
+      this.profesor.telefonoMovil = this.telCel.value;
+      this.profesor.telefonoFijo = this.telFijo.value;
+
+      this.ps.setProfesor(this.profesor).subscribe(
+        value => {
+          if (value.status == 'OK') {
+            alert('Se guardó correctamente');
+          }
+        },
+        error => {
+          console.error(error);
+          alert('No se pudo guardar el perfil');
+        }
+      );
+
     } else {
       console.error('El formulario contiene errores')
     }

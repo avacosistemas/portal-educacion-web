@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {environment} from '../../environments/environment';
+import { Router } from "@angular/router";
+import { Usuario } from "../entities/usuario";
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +12,18 @@ export class SeguridadService
 {
 
   private _isLogged: boolean;
-  private tokenKey = 'teachTokenKey';
-  private userKey = 'teachUserkey';
+  private _tokenKey = 'teachTokenKey';
+  private _userKey = 'teachUserkey';
   private _token = '';
+  private _user: Usuario;
   jwt: JwtHelperService;
 
   constructor(
     private http: HttpClient,
+    private router: Router,
   )
   {
+    this._user = new Usuario();
     this._isLogged = false;
     this.jwt = new JwtHelperService();
   }
@@ -26,32 +31,53 @@ export class SeguridadService
   public login(user: string, pass: string)
   {
 
-    // TODO: falta la separación de ambientes
-    // Convendría usar una variable de ambiente para poder separar en entornos (dev, test, prod)
-    // Ej: uri = environment.apiEndpoint + 'auth/login';
-    // Sin embargo la url que pasaron es muy extraña.
-
-
-    const uri = environment.apiServiceAuth + 'auth';
-    // { "username": "agonzalez", "password": "beto" }
-    // { "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZ29uemFsZXoiLCJleHAiOjE1OTU4NTM2NjIsImlhdCI6MTU5NTI0ODg2Mn0.LG6iOZDPvziXUtsz47NlSVphWVWdrAaxzLh3KVSYSSrSyxeGSX1VxMJucq_4SZ2I1VBoKnk579DEh4nDjPpYZw" }
-
-    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    this.http.post(uri, {username: user, password: pass}, {headers: headers}).subscribe(
+    this.http.post(environment.apiServiceAuth + 'auth', {username: user, password: pass}).subscribe(
       (data: any) =>
       {
         if (data?.token)
         {
           if (!this.jwt.isTokenExpired(data.token))
           {
-            this.setToken(data.token);
-            this._isLogged = true;
+
+            this.http.get(environment.apiServiceAuth + 'cliente'
+              , {headers: {'Authorization': 'Bearer ' + data.token }}
+              ).subscribe(
+              (value: any) => {
+
+                this._user = {
+                  username: value.username,
+                  bloqueado: value.bloqueado,
+                  password: null,
+                  id: value.id,
+                  accountNoExpired: value.accountNoExpired,
+                  accountNonExpired: value.accountNonExpired,
+                  accountNonLocked: value.accountNonLocked,
+                  email: value.email,
+                  intentosFallidosLogin: value.intentosFallidosLogin,
+                  logged: value.logged,
+                  tipoCliente: value.tipoCliente || 'ALUMNO'
+                };
+
+                this._setUser(this._user);
+                this._setToken(data.token);
+                this._isLogged = true;
+
+              },
+              error => {
+                console.error(error);
+                this.router.navigate(['/login']);
+              }
+            );
           }
         }
       },
-      (ex) =>
+      (ex: any) =>
       {
         this._isLogged = false;
+        if (ex.error?.status && ex.error?.status === 'CHANGE_PASSWORD_REQUIRED')
+        {
+          this.router.navigate([ '/pwdchange' ]);
+        }
         console.error(ex);
       }
     );
@@ -61,7 +87,7 @@ export class SeguridadService
 
   public getToken()
   {
-    const tk = localStorage.getItem(this.tokenKey);
+    const tk = localStorage.getItem(this._tokenKey);
     if (tk)
     {
       this._token = tk;
@@ -69,13 +95,36 @@ export class SeguridadService
     return this._token;
   }
 
-  public setToken(token: string)
+  private _setToken(token: string)
   {
     if (token)
     {
       this._token = token;
-      localStorage.setItem(this.tokenKey, this._token);
+      localStorage.setItem(this._tokenKey, this._token);
     }
+  }
+
+
+  public getUser() : Usuario
+  {
+    if (!(this._user.id > 0)) {
+      this._loadUser();
+    }
+    return this._user;
+  }
+
+  private _loadUser()
+  {
+    const ur = localStorage.getItem(this._userKey);
+    if (ur)
+    {
+      this._user = JSON.parse(ur);
+    }
+  }
+
+  private _setUser(user: Usuario)
+  {
+    localStorage.setItem(this._userKey, JSON.stringify(this._user));
   }
 
   public passwordReset(user: string) {
@@ -83,17 +132,17 @@ export class SeguridadService
     return this.http.post(uri, user);
   }
 
-  public passwordUpdate(user: string, pwd: string, newPwd: string ) {
+  public passwordUpdate(pwd: string, newPwd: string ) {
     const uri = environment.apiServiceAuth + 'password/update/';
 
-    const data = {newPassword: newPwd, password: pwd, username: user};
+    const data = {newPassword: newPwd, password: pwd, username: this.getUser().username};
 
     return this.http.post(uri, data);
   }
 
   public logout()
   {
-    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this._tokenKey);
     this._token = null;
     this._isLogged = false;
   }
@@ -107,13 +156,10 @@ export class SeguridadService
         this.getToken();
         if (!this._token)
         {
-          this._isLogged = false;
+          return false;
         }
       }
-      else
-      {
-        this._isLogged = !this.jwt.isTokenExpired(this._token);
-      }
+      this._isLogged = !this.jwt.isTokenExpired(this._token);
     }
     return this._isLogged;
   }

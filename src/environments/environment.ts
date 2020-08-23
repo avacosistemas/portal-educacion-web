@@ -9,12 +9,13 @@ export const environment = {
 
     apiServiceAuth: PREFIX_DOMAIN_API + 'ws-rest-authentication-cliente/',
     apiService: PREFIX_DOMAIN_API + 'ws-rest-educacion/',
-    recaptchaKey: '6LdpJL0ZAAAAAO_vludMBF1k-27PZqUwcWe8atI4',
+    apiServiceCliente: PREFIX_DOMAIN_API + 'ws-rest-educacion-cliente/',
+    recaptchaKey: '6Ldqw74ZAAAAAPrTwwBfaQcsehEPggd0QpJMh6dd',
 
     localAuth: false,
     security: true,
     production: false,
-    hmr       : false,
+    hmr: false,
     dummyServices: false,
 
     /** AUTHENTICATION */
@@ -26,5 +27,6 @@ export const environment = {
     URL_LOGIN: '/auth/login',
 
     URL_LOGOUT_API: PREFIX_DOMAIN_API + 'user/logout',
+
 };
 

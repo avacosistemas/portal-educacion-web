@@ -4,7 +4,11 @@ export const PREFIX_DOMAIN_API =  'http://localhost:8080/';
 
 export const environment = {
   production: true,
-  recaptchaKey: '6LdpJL0ZAAAAAO_vludMBF1k-27PZqUwcWe8atI4',
+
+  apiServiceAuth: PREFIX_DOMAIN_API + 'ws-rest-authentication-cliente/',
+  apiService: PREFIX_DOMAIN_API + 'ws-rest-educacion/',
+  apiServiceCliente: PREFIX_DOMAIN_API + 'ws-rest-educacion-cliente/',
+  recaptchaKey: '6Ldqw74ZAAAAAPrTwwBfaQcsehEPggd0QpJMh6dd',
 
   localAuth: false,
   security: true,

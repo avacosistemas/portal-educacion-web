@@ -17,7 +17,10 @@
 .product {
 	margin-bottom: 20px;
 }
-.product-image { margin-bottom: 9px;}
+.product-image {
+    margin-bottom: 9px;
+    img { max-height: 300px; max-width: 300px;}
+}
 
 .card {
 	padding: 10px;

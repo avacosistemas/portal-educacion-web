@@ -1,0 +1,17 @@
+<div class="container menutop-fix">
+
+    <div class="row">
+        <div class="col-md-6 col-lg-3"></div>
+        <table class="tblprofile">
+            <tbody>
+                <tr><td class="icon"><i class="fas fa-university"></i></td><td class="lbl">Institución</td><td class="tddata">{{usuario.institucion}}</td></tr>
+                <tr><td class="icon"><i class="fas fa-fingerprint"></i></td><td class="lbl">DNI</td><td class="tddata">{{usuario.numeroIdentificacion}}</td></tr>
+                <tr><td class="icon"><i class="fas fa-envelope"></i></td><td class="lbl">eMail</td><td class="tddata">{{usuario.email}}</td></tr>
+                <tr><td class="icon"><i class="fas fa-mobile-alt"></i></td><td class="lbl">Teléfono Móvil</td><td class="tddata">{{usuario.telefonoMovil}}</td></tr>
+                <tr><td class="icon"><i class="fas fa-phone-alt"></i></td><td class="lbl">Teléfono Fijo</td><td class="tddata">{{usuario.telefonoFijo}}</td></tr>
+                <tr *ngIf="usuario.descripcion"><td></td><td class="lbl">Sobre mi:</td><td class="tddata">{{usuario.descripcion}}</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

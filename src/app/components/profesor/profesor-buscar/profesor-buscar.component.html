@@ -32,30 +32,52 @@
 						</div >
 						<h4>Nivel</h4>
 						<div class="form-group">
-							<select [(ngModel)]="nivel" class="form-control custom-select" id="exampleFormControlSelect2">
-								<option value="Educación Primaria - Primer Ciclo">Educación Primaria - Primer Ciclo</option>
-								<option value="Educación Primaria - Segundo Ciclo">Educación Primaria - Segundo Ciclo</option>
-								<option value="Educación Secundaria - Ciclo Básico">Educación Secundaria - Ciclo Básico</option>
-								<option value="Educación Secundaria - Ciclo Orientado">Educación Secundaria - Ciclo Orientado</option>
-								<option value="Educación Superior - Terciario o Universitario">Educación Superior - Terciario o Universitario</option>
-								<option value="Extracurricular - Otros intereses">Extracurricular - Otros intereses</option>
-							</select>
+
+
+							<select [(ngModel)]="selLevId"
+                                    class="form-control custom-select"
+                                    *ngIf="this.nivelesEducativos"
+                                    id="exampleFormControlSelect2">
+
+                                    <option *ngFor="let lev of this.nivelesEducativos" [ngValue]="lev.id">{{lev.descripcion}}</option>
+
+
+                            </select>
+<!--							<select [(ngModel)]="nivel" class="form-control custom-select" id="exampleFormControlSelect2">-->
+<!--								<option value="Educación Primaria - Primer Ciclo">Educación Primaria - Primer Ciclo</option>-->
+<!--								<option value="Educación Primaria - Segundo Ciclo">Educación Primaria - Segundo Ciclo</option>-->
+<!--								<option value="Educación Secundaria - Ciclo Básico">Educación Secundaria - Ciclo Básico</option>-->
+<!--								<option value="Educación Secundaria - Ciclo Orientado">Educación Secundaria - Ciclo Orientado</option>-->
+<!--								<option value="Educación Superior - Terciario o Universitario">Educación Superior - Terciario o Universitario</option>-->
+<!--								<option value="Extracurricular - Otros intereses">Extracurricular - Otros intereses</option>-->
+<!--							</select>-->
 						</div >
 						<hr>
 						<h4>Materias</h4>
 						<div class="filtros">
-								<div class="custom-control custom-radio">
-									<input (click)="selecciono('Historia del arte')" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-									<label class="custom-control-label" for="customRadio1">Historia del arte</label>
-								</div>
-								<div class="custom-control custom-radio">
-									<input (click)="selecciono('Matemáticas')" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-									<label class="custom-control-label" for="customRadio2">Matemáticas</label>
-								</div>
-								<div class="custom-control custom-radio">
-									<input (click)="selecciono('Física')" type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-									<label class="custom-control-label" for="customRadio3">Física</label>
-								</div>
+                            <div class="custom-control custom-radio" *ngFor="let materia of this.materias">
+                                <input type="radio"
+                                       id="mat{{materia.id}}"
+                                       name="customRadio"
+                                       class="custom-control-input"
+                                       [checked]="materia.id == selMatId"
+                                       (click)="selecciono(materia.nombre)" />
+                                <label for="mat{{materia.id}}"
+                                       class="custom-control-label">{{materia.nombre}}
+                                </label>
+                            </div>
+<!--								<div class="custom-control custom-radio">-->
+<!--									<input (click)="selecciono('Historia del arte')" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">-->
+<!--									<label class="custom-control-label" for="customRadio1">Historia del arte</label>-->
+<!--								</div>-->
+<!--								<div class="custom-control custom-radio">-->
+<!--									<input (click)="selecciono('Matemáticas')" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">-->
+<!--									<label class="custom-control-label" for="customRadio2">Matemáticas</label>-->
+<!--								</div>-->
+<!--								<div class="custom-control custom-radio">-->
+<!--									<input (click)="selecciono('Física')" type="radio" id="customRadio3" name="customRadio" class="custom-control-input">-->
+<!--									<label class="custom-control-label" for="customRadio3">Física</label>-->
+<!--								</div>-->
 						</div>
 <!--						<h2 class="pull-xs-right">$39</h2>-->
 <!--						<button class="btn btn-primary btn-lg">Suscribir</button>-->
@@ -67,7 +89,7 @@
 								<div class="card card-block m-t-2">
 <!--									<div class="menu-category-name">Accessories</div>-->
 									<div class="product-image m-y-1" [routerLink]="['/profesor/', profesor.id]" >
-										<img class="img-fluid" src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" />
+										<img class="img-fluid" src="{{profesor.foto}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" />
 									</div>
 									<div class="profesor">
 										<h5>{{profesor.nombre}}, {{profesor.apellido}}</h5>

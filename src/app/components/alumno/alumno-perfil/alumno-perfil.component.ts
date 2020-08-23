@@ -23,10 +23,14 @@ export class AlumnoPerfilComponent implements OnInit {
     private fv: FormsValidationService,
     private route: ActivatedRoute,
     private als: AlumnoService,
-  ) { }
+  ) {
+    this.alumno = new Alumno();
+  }
 
 
   ngOnInit(): void {
+    this.paramId = Number(this.route.snapshot.paramMap.get('id'));
+
     this.fg = this.fb.group({
       nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
@@ -51,28 +55,43 @@ export class AlumnoPerfilComponent implements OnInit {
 
 
   loadData(){
-    this.paramId = Number(this.route.snapshot.paramMap.get('id'));
     this.als.getAlumno(this.paramId).subscribe(
-      data => {
-        if (!data.picture) {
-          data.picture = '/assets/icons/camara-fotografica.opt.svg';
+      (value:any) => {
+        if (!value.data.foto) {
+          value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
         }
-        this.alumno = data;
-        this.nombre.setValue(data.nombre);
-        this.apellido.setValue(data.apellido);
-        this.dni.setValue(data.dni);
-        this.usuario.setValue(data.usuario);
-        this.institucion.setValue(data.institucion);
-        this.email.setValue(data.email);
-        this.telCel.setValue(data.telefonoMovil);
-        this.telFijo.setValue(data.telefonoFijo);
+        this.alumno = value.data;
+        this.nombre.setValue(value.data.nombre);
+        this.apellido.setValue(value.data.apellido);
+        this.dni.setValue(value.data.numeroIdentificacion);
+        this.usuario.setValue(value.data.username);
+        this.institucion.setValue(value.data.institucion);
+        this.email.setValue(value.data.email);
+        this.telCel.setValue(value.data.telefonoMovil);
+        this.telFijo.setValue(value.data.telefonoFijo);
       }
     );
   }
 
   onSubmit() {
     if (this.fg.valid) {
-      console.log('form submitted');
+      this.alumno.apellido = this.apellido.value;
+      this.alumno.nombre = this.nombre.value;
+      this.alumno.numeroIdentificacion = this.dni.value;
+      this.alumno.email = this.email.value;
+      this.alumno.telefonoMovil = this.telCel.value;
+      this.alumno.telefonoFijo = this.telFijo.value;
+      this.als.setAlumno(this.alumno).subscribe(
+        (value:any) => {
+          if (value.status == 'OK') {
+            alert('Se guardó el perfil')
+          }
+        },
+        error => {
+          console.error(error);
+          alert('No se pudo guardar el perfil');
+        }
+      );
     } else {
       console.error('El formulario contiene errores')
     }

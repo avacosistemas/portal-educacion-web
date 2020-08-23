@@ -6,6 +6,9 @@ import {ProfesorService} from "../../../services/profesor.service";
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 import {Observable, Subject, merge} from 'rxjs';
 import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
+import { MateriaService } from "../../../services/materia.service";
+import { Materia } from "../../../entities/materia";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-profesor-buscar',
@@ -14,18 +17,27 @@ import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 })
 export class ProfesorBuscarComponent implements OnInit {
 
-  profesores: Profesor[];
+  profesores: Profesor[] = [];
   nivelesEducativos: NivelEducativo[];
   nivel = 'Educación Primaria - Primer Ciclo';
   materiaSeleccionada: string;
+  selMatId: number = 0;
+  selLevId: number = 0;
+  materias: Materia[] = [];
+  idParam: number;
 
   constructor(
       protected ns: NivelService,
-      protected ps: ProfesorService
+      protected ms: MateriaService,
+      protected ps: ProfesorService,
+      private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.idParam = Number(this.route.snapshot.paramMap.get('id'));
+    this.selMatId = this.idParam || 0;
     this.loadData();
+
   }
 
   selecciono(valor: string) {
@@ -33,17 +45,60 @@ export class ProfesorBuscarComponent implements OnInit {
   }
 
   loadData() {
-    this.ns.getNiveles().subscribe(
-        data => {
-          this.nivelesEducativos = data;
-        }
-    );
 
     this.ps.getProfesores().subscribe(
-        data => {
-          this.profesores = data;
-        }
+      (value:any) => {
+
+        this.profesores = value.data;
+        this.profesores.forEach(p => {
+          if (!p.foto) {
+            p.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
+          }
+        })
+
+      }
     );
+
+    this.ms.getMaterias().subscribe(
+      (value: any) =>
+      {
+        value.data.forEach(materia =>
+        {
+
+          if (this.selMatId)
+          {
+            if (materia.id == this.selMatId)
+            {
+              this.selLevId = materia.idNivel;
+            }
+          }
+
+          this.selLevId = this.selLevId || 1;
+
+          this.materias.push(
+            {
+              id: materia.id,
+              descripcion: materia.descripcion,
+              idNivel: materia.idNivel,
+              nombre: materia.descripcion
+            }
+          );
+
+
+        });
+
+        this.ns.getNiveles().subscribe(
+          (data: any) =>
+          {
+            this.nivelesEducativos = data.data;
+          }
+        );
+
+      } // end next
+
+    ); // end susbscribe
+
+
   }
 
   get getProfesores(): Profesor[] {

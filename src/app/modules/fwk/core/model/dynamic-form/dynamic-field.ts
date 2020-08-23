@@ -74,11 +74,11 @@ export class DynamicField<T>{
   // Esto en los formularios normales es obligatorio
   labelKey?: string;
   /*
-     se utiliza para indicar al formulario cual es el campo id, 
-     si no se especifica, se toma el campo con nombre de atributo id
+     se utiliza para indicar al formulario cual es el campo id,
+     si no se especifica, se toma el campo con descripcion de atributo id
    */
   id?: boolean;
-   
+
   controlType: string;
   mappingQuerystring?: boolean;
   // Atributos opcionales

@@ -11,13 +11,14 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { SeguridadService } from "../../../../../services/seguridad.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwkInterceptor implements HttpInterceptor {
 
-  constructor(public auth: AuthService,
+  constructor(public auth: SeguridadService,
               private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

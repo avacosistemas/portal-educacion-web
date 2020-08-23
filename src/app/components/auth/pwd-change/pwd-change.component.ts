@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { SeguridadService } from "../../../services/seguridad.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-pwd-change',
@@ -12,6 +14,8 @@ export class PwdChangeComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private as: SeguridadService,
+    private router: Router,
 
   ) { }
 
@@ -29,8 +33,19 @@ export class PwdChangeComponent implements OnInit {
   get pwdNew2() { return this.fg.get('pwdNew2'); }
 
   onSubmit() {
+
     if (this.fg.valid) {
       console.log('form submitted');
+      this.as.passwordUpdate(this.pwdOld.value, this.pwdNew.value).subscribe(
+        value => {
+          this.as.login(this.as.getUser().username, this.pwdNew.value);
+          this.router.navigate(['/']);
+        },
+        error => {
+          alert('no se pudo cambiar la contraseña');
+        }
+      );
+
     } else {
       console.error('El formulario contiene errores');
     }

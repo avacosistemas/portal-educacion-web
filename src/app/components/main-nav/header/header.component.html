@@ -1,0 +1,78 @@
+<!--------------- START NAVBAR ---------------->
+<header>
+    <nav class="custom-navbar">
+        <!-- Navbar -->
+        <div class="custom-navbar-content">
+            <a href="#" routerLink="/"><img alt="logo" class="logo-img" src="/assets/propias/index.jpeg"></a>
+            <a href="#" routerLink="/"><img alt="logo-small" class="logo-small" style="display:none;"
+                                      src="/assets/propias/index.jpeg"></a>
+        </div>
+        <div id="navbar-movil" class="custom-nav-list-movil">
+            <input type="checkbox" name="nav-btn" id="nav-btn"
+                   onclick="document.getElementById('custom-nav-menu').style.display='block';"/>
+            <span></span>
+            <nav class="custom-nav-menu" id="custom-nav-menu" style="display:none;">
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#" routerLink="/buscar">Busco aprender</a></li>
+                    <li><a href="#" routerLink="/profesor/registro">Quiero enseñar</a></li>
+                    <li><a href="#">Cómo funciona</a></li>
+                    <li><a pageScroll href="#aboutus" [routerLink]="'/home'">Sobre Nosotros</a></li>
+                    <li><a pageScroll href="#contacto" [routerLink]="'/home'">Contacto</a></li>
+                    <li><a href="#" routerLink="/login">
+						<span class="icon-lock" style="position: relative; top: 1px;">
+						</span> INGRESAR</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!--		<a (click)="ingresar()" *ngIf="!ingreso" class="button-login-a"-->
+        <!--		   style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;">-->
+        <!--			<div class="button-login"-->
+        <!--				 style="background: #001e56;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">-->
+        <!--				<span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa 	fas fa-lock"></i> INGRESAR-->
+        <!--			</div>-->
+        <!--		</a>-->
+
+        <a *ngIf="this.as.isLogged()" class="button-login-a" ngbDropdown
+           style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;">
+            <div class="button-perfil" ngbDropdownToggle
+                 style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
+                <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> MI PERFIL
+            </div>
+
+            <div ngbDropdownMenu>
+                <div ngbDropdownItem routerLink="alumno/1"><i class="fa fa-sign-out"></i> Dato Personales</div>
+                <div ngbDropdownItem (click)="this.as.logout()" class="exit"><i class="fa fa-sign-out"></i> Salir</div>
+            </div>
+        </a>
+
+
+        <a href="#" class="button-login-a" *ngIf="!this.as.isLogged()" routerLink="/login"
+           style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;">
+            <div class="button-login"
+                 style="background: #001e56;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
+                <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa 	fas fa-lock"></i> INGRESAR
+            </div>
+        </a>
+        <div class="custom-nav-list">
+            <a href="#" routerLink="/buscar">Busco aprender</a>
+            <a href="#" routerLink="/profesor/registro">Quiero enseñar</a>
+            <a href="#">Cómo funciona</a>
+            <a pageScroll href="#aboutus" [routerLink]="'/home'">Sobre Nosotros</a>
+            <a pageScroll href="#contacto" [routerLink]="'/home'">Contacto</a>
+        </div>
+        <!-- Login Modal -->
+        <!--				<div id="id01" class="modal">
+                          <form class="modal-content animate" action="/action_page.php">
+                            <div class="imgcontainer">
+                              <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                            </div>
+                            <div class="container-popup">
+                                <iframe id="loginIframe" frameborder="0" width="300px" height="400px" src="http://localhost:4200/auth/login"></iframe>
+                            </div>
+                          </form>
+                        </div>-->
+    </nav>
+</header>
+<!--------------- END NAVBAR ---------------->

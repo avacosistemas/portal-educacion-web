@@ -258,30 +258,30 @@
 							</div>
 						</div>
 
-						<div class="form-row">
-							<div class="col">
-								<div class="form-group">
-									<label for="txtMensaje">Mensaje</label>
-									<textarea class="form-control"
-											  formControlName="mensaje"
-											  id="txtMensaje"
-											  rows="3">
-									</textarea>
-								</div>
-								<app-field-error-display
-										[displayError]="mensaje.touched && mensaje.errors?.required"
-										errorMsg="* Debe completar el mensaje">
-								</app-field-error-display>
-								<app-field-error-display
-										[displayError]="mensaje.touched && mensaje.errors?.minlength"
-										errorMsg="* El mensaje debe tener al menos {{mensaje.errors?.minlength?.requiredLength}} caracteres">
-								</app-field-error-display>
-								<app-field-error-display
-										[displayError]="mensaje.touched && mensaje.errors?.maxlength"
-										errorMsg="* El mensaje no puede tener más de {{mensaje.errors?.maxlength?.requiredLength}} letras">
-								</app-field-error-display>
-							</div>
-						</div>
+<!--						<div class="form-row">-->
+<!--							<div class="col">-->
+<!--								<div class="form-group">-->
+<!--									<label for="txtMensaje">Mensaje</label>-->
+<!--									<textarea class="form-control"-->
+<!--											  formControlName="mensaje"-->
+<!--											  id="txtMensaje"-->
+<!--											  rows="3">-->
+<!--									</textarea>-->
+<!--								</div>-->
+<!--								<app-field-error-display-->
+<!--										[displayError]="mensaje.touched && mensaje.errors?.required"-->
+<!--										errorMsg="* Debe completar el mensaje">-->
+<!--								</app-field-error-display>-->
+<!--								<app-field-error-display-->
+<!--										[displayError]="mensaje.touched && mensaje.errors?.minlength"-->
+<!--										errorMsg="* El mensaje debe tener al menos {{mensaje.errors?.minlength?.requiredLength}} caracteres">-->
+<!--								</app-field-error-display>-->
+<!--								<app-field-error-display-->
+<!--										[displayError]="mensaje.touched && mensaje.errors?.maxlength"-->
+<!--										errorMsg="* El mensaje no puede tener más de {{mensaje.errors?.maxlength?.requiredLength}} letras">-->
+<!--								</app-field-error-display>-->
+<!--							</div>-->
+<!--						</div>-->
 
                         <div class="form-check mb-3">
                             <input class="form-check-input"

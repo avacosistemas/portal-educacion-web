@@ -37,6 +37,14 @@ import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/p
 import { AlumnoListComponent } from './components/alumno/alumno-list/alumno-list.component';
 import { PwdChangeComponent } from './components/auth/pwd-change/pwd-change.component';
 import { PwdResetComponent } from './components/auth/pwd-reset/pwd-reset.component';
+import { FooterComponent } from './components/main-nav/footer/footer.component';
+import { HeaderComponent } from './components/main-nav/header/header.component';
+import { JwkInterceptor } from "./modules/fwk/core/service/security/jwk-interceptor";
+import { PreguntasComponent } from './components/preguntas/preguntas.component';
+import { UsuarioWelcomeComponent } from './components/usuario/usuario-welcome/usuario-welcome.component';
+import { UsuarioPerfilComponent } from './components/usuario/usuario-perfil/usuario-perfil.component';
+import { UsuarioPerfilEditComponent } from './components/usuario/usuario-perfil-edit/usuario-perfil-edit.component';
+import { UsuarioPerfilClasesComponent } from './components/usuario/usuario-perfil-clases/usuario-perfil-clases.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +69,15 @@ import { PwdResetComponent } from './components/auth/pwd-reset/pwd-reset.compone
     ProfesorPerfilComponent,
     AlumnoListComponent,
     PwdChangeComponent,
-    PwdResetComponent
+    PwdResetComponent,
+    FooterComponent,
+    HeaderComponent,
+    PreguntasComponent,
+    HeaderComponent,
+    UsuarioWelcomeComponent,
+    UsuarioPerfilComponent,
+    UsuarioPerfilEditComponent,
+    UsuarioPerfilClasesComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +102,13 @@ import { PwdResetComponent } from './components/auth/pwd-reset/pwd-reset.compone
       provide: HTTP_INTERCEPTORS,
       useClass: IntercepterService,
       multi: true
-    }],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwkInterceptor,
+      multi: true
+    }
+    ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from "../../../../environments/environment";
 import { AlumnoService } from "../../../services/alumno.service";
 import { Alumno } from "../../../entities/alumno";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-alumno-registro',
@@ -20,6 +21,7 @@ export class AlumnoRegistroComponent implements OnInit {
     private fb: FormBuilder,
     private fv: FormsValidationService,
     private als: AlumnoService,
+    protected router: Router,
     private modalService: NgbModal
   ) { }
 
@@ -37,7 +39,7 @@ export class AlumnoRegistroComponent implements OnInit {
       telCel: [null, [Validators.required, Validators.minLength(10), this.fv.telefono()]],
       telFijo: [null, [Validators.minLength(10), this.fv.telefono()]],
       terminos: [null, [Validators.required, this.fv.condiciones()]],
-      mensaje: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(255)]]
+      // mensaje: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(255)]]
     });
   }
 
@@ -53,7 +55,7 @@ export class AlumnoRegistroComponent implements OnInit {
   get telCel() { return this.fg.get('telCel'); }
   get telFijo() { return this.fg.get('telFijo'); }
   get terminos() { return this.fg.get('terminos'); }
-  get mensaje() { return this.fg.get('mensaje'); }
+  // get mensaje() { return this.fg.get('mensaje'); }
 
   openXl(content) {
     this.modalService.open(content, { size: 'xl', scrollable: true, centered: true });
@@ -69,21 +71,22 @@ export class AlumnoRegistroComponent implements OnInit {
 
       const alumno: Alumno = new Alumno();
       alumno.apellido = this.apellido.value;
-      alumno.dni = this.dni.value;
+      alumno.numeroIdentificacion = this.dni.value;
       alumno.email = this.email.value;
       // alumno.id = this.;
       alumno.institucion = 'Teach';
       alumno.nombre = this.nombre.value;
       alumno.password = this.pwd.value;
       // alumno.secondPassword = this.pwd.value;
-      alumno.picture = '';
+      alumno.foto = '';
       alumno.telefonoFijo = this.telFijo.value;
       alumno.telefonoMovil = this.telCel.value;
-      alumno.usuario = this.usuario.value;
+      alumno.username = this.usuario.value;
 
       this.als.setAlumnoNuevo(alumno).subscribe(
         data => {
           console.log(data);
+          this.router.navigate(['/']);
         },
         error => {
           console.error(error);

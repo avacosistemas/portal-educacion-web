@@ -20,10 +20,15 @@ export class NivelEducativoComponent implements OnInit {
   }
 
   loadData() {
-    this.ns.getNiveles().subscribe(
+    this.ns.getNivelesHardcode().subscribe(
         data => {
           this.nivelesEducativos = data;
-        }
+          // this.nivelesEducativos = data.data;
+        },
+      error => {
+        console.error(error);
+      }
+
     )
   }
 

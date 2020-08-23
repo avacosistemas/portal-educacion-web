@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {NivelEducativo} from "../entities/nivelEducativo";
 import {Observable, of} from 'rxjs';
 import {Materia} from "../entities/materia";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 @Injectable({
 	providedIn: 'root'
@@ -12,11 +14,18 @@ export class NivelService
 	_nivelEducativo: NivelEducativo[] = [];
 	_materiasNombre: string[] = [];
 
-	constructor()
+	constructor(
+	  private http: HttpClient
+  )
 	{
 	}
 
-	public getNiveles(): Observable<NivelEducativo[]>
+	public getNiveles() : Observable<NivelEducativo[]>
+  {
+	  return this.http.get<NivelEducativo[]>(environment.apiService + 'niveles/');
+  }
+
+	public getNivelesHardcode(): Observable<NivelEducativo[]>
 	{
 		if (!this._nivelEducativo || !(this._nivelEducativo.length > 0))
 		{
@@ -64,11 +73,11 @@ export class NivelService
 				subtitulo: 'Primer Ciclo',
 				descripcion: 'Acompañamos a tu hijo en sus primeros pasos de primaria.',
 				materias: [
-					{nombre: 'Castellano'},
-					{nombre: 'Matemática'},
-					{nombre: 'Ciencias Sociales'},
-					{nombre: 'Ciencias Naturales'},
-					{nombre: 'Educación Física'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Castellano'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Matemática'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Ciencias Sociales'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Ciencias Naturales'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Educación Física'},
 				]
 			},
 			{
@@ -78,14 +87,14 @@ export class NivelService
 				subtitulo: 'Segundo Ciclo',
 				descripcion: 'Cada vez más conocimientos iniciales con un temario extendido',
 				materias: [
-					{nombre: 'Castellano'},
-					{nombre: 'Matemática'},
-					{nombre: 'Ciencias Sociales'},
-					{nombre: 'Ciencias Naturales'},
-					{nombre: 'Educación Física'},
-					{nombre: 'Ingles'},
-					{nombre: 'Frances'},
-					{nombre: 'Plastica'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Castellano'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Matemática'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Ciencias Sociales'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Ciencias Naturales'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Educación Física'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Ingles'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Frances'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Plastica'},
 				]
 			},
 			{
@@ -95,13 +104,13 @@ export class NivelService
 				subtitulo: 'Ciclo Básico',
 				descripcion: 'Fortalecemos las bases de la educación secundaria básica.',
 				materias: [
-					{nombre: 'Literatura'},
-					{nombre: 'Matemática'},
-					{nombre: 'Geografía'},
-					{nombre: 'Biología'},
-					{nombre: 'Historia'},
-					{nombre: 'Ingles'},
-					{nombre: 'Arte'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Literatura'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Matemática'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Geografía'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Biología'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Historia'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Ingles'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Arte'},
 				]
 			},
 			{
@@ -111,15 +120,15 @@ export class NivelService
 				subtitulo: 'Ciclo Orientado',
 				descripcion: 'Acompañamos hacia el futuro de tu educación.',
 				materias: [
-					{nombre: 'Literatura'},
-					{nombre: 'Matemática'},
-					{nombre: 'Geografía'},
-					{nombre: 'Biología'},
-					{nombre: 'Historia'},
-					{nombre: 'Ingles'},
-					{nombre: 'Arte'},
-					{nombre: 'Física'},
-					{nombre: 'Química'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Literatura'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Matemática'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Geografía'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Biología'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Historia'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Ingles'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Arte'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Física'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Química'},
 				]
 			},
 			{
@@ -129,10 +138,10 @@ export class NivelService
 				subtitulo: 'Terciario o universitario',
 				descripcion: 'Acompañamos hacia el futuro de tu educación.',
 				materias: [
-					{nombre: 'Matemática'},
-					{nombre: 'Sociedad y Estado'},
-					{nombre: 'Ingles'},
-					{nombre: 'Física'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Matemática'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Sociedad y Estado'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Ingles'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Física'},
 				]
 			},
 			{
@@ -142,10 +151,10 @@ export class NivelService
 				subtitulo: 'Otros intereses',
 				descripcion: 'Acompañamos hacia el futuro de tu educación.',
 				materias: [
-					{nombre: 'Proyectual'},
-					{nombre: 'Dibujo 3D'},
-					{nombre: 'Diseño'},
-					{nombre: 'Electrónica'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Proyectual'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Dibujo 3D'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Diseño'},
+					{id: 1, idNivel: 1, descripcion: '', nombre: 'Electrónica'},
 				]
 			},
 

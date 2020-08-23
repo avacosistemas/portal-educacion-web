@@ -1,8 +1,8 @@
-<div class="container menutop-fix myContainer ">
+<div class="container menutop-fix myContainer">
     <div class="row myRow">
         <div class="col-md-6 profile">
             <div class="avatar">
-                <img src="{{profesor.picture}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" class="img-raised"/>
+                <img src="{{profesor.foto}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" class="img-raised"/>
                 <div class="rate">
                     <ngb-rating [(rate)]="profesor.calificacion">
                         <ng-template let-fill="fill" let-index="index">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="chat-message right">
-                    <img class="message-avatar" src="{{profesor.picture}}" alt="">
+                    <img class="message-avatar" src="{{profesor.foto}}" alt="">
                     <div class="message">
                         <a class="message-author" href="#"> {{profesor.nombre}} </a>
                         <span class="message-date">  Mar Ene 27 2020 - 11:12:36 </span>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="chat-message right">
-                    <img class="message-avatar" src="{{profesor.picture}}" alt="">
+                    <img class="message-avatar" src="{{profesor.foto}}" alt="">
                     <div class="message">
                         <a class="message-author" href="#"> {{profesor.nombre}} </a>
                         <span class="message-date">  Mar Ene 27 2020 - 11:15:42 </span>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="chat-message right">
-                    <img class="message-avatar" src="{{profesor.picture}}" alt="">
+                    <img class="message-avatar" src="{{profesor.foto}}" alt="">
                     <div class="message">
                         <a class="message-author" href="#"> {{profesor.nombre}} </a>
                         <span class="message-date">  Jue Feb 25 2020 - 11:12:36 </span>
@@ -105,8 +105,10 @@
 
                 <!--					</div>-->
                 <div class="form-group">
-						<textarea class="form-control message-input" name="message"
+						<textarea class="form-control message-input mb-3"
+                                  name="message"
                                   placeholder="Ingrese su consulta"></textarea>
+                    <button class="btn btn-block btn-secondary" (click)="enviarConsulta($event)">Enviar Consulta</button>
                 </div>
                 <!--				</div>-->
             </div>

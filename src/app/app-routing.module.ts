@@ -13,6 +13,9 @@ import { ProfesorRegistroComponent } from "./components/profesor/profesor-regist
 import { ProfesorPerfilComponent } from "./components/profesor/profesor-perfil/profesor-perfil.component";
 import { PwdResetComponent } from "./components/auth/pwd-reset/pwd-reset.component";
 import { PwdChangeComponent } from "./components/auth/pwd-change/pwd-change.component";
+import { UsuarioWelcomeComponent } from "./components/usuario/usuario-welcome/usuario-welcome.component";
+import { UsuarioPerfilComponent } from "./components/usuario/usuario-perfil/usuario-perfil.component";
+import { PreguntasComponent } from './components/preguntas/preguntas.component';
 
 
 const routes: Routes = [
@@ -21,6 +24,7 @@ const routes: Routes = [
   {path: 'pwdreset', component: PwdResetComponent, pathMatch: 'full'},
   {path: 'pwdchange', component: PwdChangeComponent, pathMatch: 'full'},
   {path: 'faq', component: FaqComponent, pathMatch: 'full'},
+  {path: 'buscar/:id', component: ProfesorBuscarComponent, pathMatch: 'full'},
   {path: 'buscar', component: ProfesorBuscarComponent, pathMatch: 'full'},
   {path: 'legales/politica', component: PolicyComponent, pathMatch: 'full'},
   {path: 'legales/terminos', component: TerminosComponent, pathMatch: 'full'},
@@ -29,6 +33,9 @@ const routes: Routes = [
   {path: 'profesor/registro', component: ProfesorRegistroComponent, pathMatch: 'full'},
   {path: 'profesor/agenda/:id', component: ProfesorScheduleComponent, pathMatch: 'full'},
   {path: 'profesor/:id', component: ProfesorPerfilComponent, pathMatch: 'full'},
+  {path: 'welcome/:id', component: UsuarioWelcomeComponent, pathMatch: 'full'},
+  {path: 'usuario/:id', component: UsuarioPerfilComponent, pathMatch: 'full'},
+  {path: 'preguntas', component: PreguntasComponent, pathMatch: 'full'},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: HomeComponent},
 ];

@@ -24,6 +24,8 @@
     "@fortawesome/fontawesome-free": "^5.13.1",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "bootstrap": "^4.4.0",
+    "jquery": "^3.5.1",
+    "jquery.fancytable": "^1.0.18",
     "ng-recaptcha": "^5.0.0",
     "ngx-page-scroll": "^7.0.1",
     "ngx-page-scroll-core": "^7.0.1",

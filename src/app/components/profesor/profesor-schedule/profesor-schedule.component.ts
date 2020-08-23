@@ -4,6 +4,9 @@ import { ProfesorService } from "../../../services/profesor.service";
 import { ActivatedRoute } from "@angular/router";
 import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { AlumnoService } from "../../../services/alumno.service";
+import { SeguridadService } from "../../../services/seguridad.service";
+import { Mensaje } from "../../../entities/mensaje";
 
 @Component({
   selector: 'app-profesor-schedule',
@@ -23,11 +26,14 @@ export class ProfesorScheduleComponent implements OnInit {
 
   constructor(
     protected ps: ProfesorService,
+    protected als: AlumnoService,
     private route: ActivatedRoute,
     protected rateConfig: NgbRatingConfig,
-    protected calendar: NgbCalendar
-  ) {
-
+    protected calendar: NgbCalendar,
+    protected as: SeguridadService
+  )
+  {
+    this.profesor = new Profesor();
     rateConfig.max = 5;
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
@@ -41,12 +47,29 @@ export class ProfesorScheduleComponent implements OnInit {
   loadData() {
     this.profesorIdParam = Number(this.route.snapshot.paramMap.get('id'));
     this.ps.getProfesor(this.profesorIdParam).subscribe(
-      data => {
-        this.profesor = data;
+      (value: any) => {
+
+        if (value.data?.foto == null) {
+          value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
+        }
+
+        this.profesor = value.data;
       }
     );
   }
 
+  enviarConsulta(event) {
+    event.preventDefault();
+    let msg: Mensaje = {
+      from: this.as.getUser().id,
+      to: this.profesorIdParam,
+      message: ''
+    };
+
+    // TODO hacer el servicio
+    this.als.sendMessage(msg);
+
+  }
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {

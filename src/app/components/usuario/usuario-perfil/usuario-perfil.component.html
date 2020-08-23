@@ -1,0 +1,57 @@
+<div class="container menutop-fix myContainer">
+    <div class="row myRow">
+        <div class="col-md-4 profile">
+            <div class="avatar">
+                <img src="{{usuario.foto}}" alt="{{usuario.nombre}}, {{usuario.apellido}}" class="img-raised"/>
+                <div class="rate" *ngIf="usuario.calificacion">
+                    <ngb-rating [(rate)]="usuario.calificacion">
+                        <ng-template let-fill="fill" let-index="index">
+                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                        </ng-template>
+                    </ngb-rating>
+                </div>
+            </div>
+            <div class="info">
+                <h3>Bienvenido!!!</h3>
+                <h4>{{usuario.nombre}}, {{usuario.apellido}}</h4>
+<!--                <h4>{{usuario.materia}}</h4>-->
+
+                <!--				<hr>-->
+                <span *ngIf="usuario.descripcion">{{usuario.descripcion}}</span>
+            </div>
+            <hr style="margin-top: 30px">
+            <div class="d-flex">
+                <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+                    <li ngbNavItem="navhome">
+                        <a ngbNavLink>Home</a>
+                        <ng-template ngbNavContent>
+                            <app-usuario-welcome></app-usuario-welcome>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem="navprofile">
+                        <a ngbNavLink>Perfil</a>
+                        <ng-template ngbNavContent>
+                            <app-usuario-perfil-edit></app-usuario-perfil-edit>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem="navmensajes">
+                        <a ngbNavLink>Clases</a>
+                        <ng-template ngbNavContent>
+                            <app-usuario-perfil-clases></app-usuario-perfil-clases>
+                        </ng-template>
+                    </li>
+                </ul>
+
+
+            </div>
+
+        </div>
+
+        <div class="col-md-8 myCol">
+            <div [ngbNavOutlet]="nav"></div>
+        </div>
+
+    </div>
+
+
+</div> <!--/container-->

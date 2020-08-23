@@ -1,10 +1,13 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
 import { Slide } from '../../entities/slide';
 import {NivelService} from "../../services/nivel.service";
-import {Observable} from "rxjs";
+import { Observable, of } from "rxjs";
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import '../../extensions'
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { MateriaService } from "../../services/materia.service";
+import { Materia } from "../../entities/materia";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -15,6 +18,7 @@ import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/n
 export class HomeComponent implements OnInit {
 	materia: string;
 	materias: string[] = [];
+	matModels: Materia[] = [];
 
 	// ================ Carousel variables ================
 	paused = false;
@@ -28,7 +32,7 @@ export class HomeComponent implements OnInit {
 			image: '/assets/images/slider/O6V1FT0.jpg',
 			title: 'Teach.com.ar',
 			description: 'Te acercamos herramientas que cambian la forma en la que estudiás',
-			top: '40%',
+			top: '33%',
 			left: ''
 		},
 		// {
@@ -36,7 +40,7 @@ export class HomeComponent implements OnInit {
 		// 	title: 'Buscás un profesor OnLine',
 		// 	description: 'Te acercamos a tu profesor particular de una forma fácil, rápida y segura.',
 		// 	buttonLink: 'Buscar',
-		// 	top: '40%',
+		// 	top: '33%',
 		// 	left: ''
 		// },
 		{
@@ -44,7 +48,7 @@ export class HomeComponent implements OnInit {
 			title: 'Quiero aprender más',
 			description: 'Ingresá a nuestra comunidad educativa para empezar a aprender sin límites.',
 			buttonLink: 'Registrate',
-			top: '40%',
+			top: '33%',
 			left: ''
 		},
 		{
@@ -53,23 +57,27 @@ export class HomeComponent implements OnInit {
 			title: 'Querés unirte a nuestro equipo',
 			description: 'Una nueva forma de enseñar, te abrimos las puertas a nuestra red de alumnos.',
 			buttonLink: 'Contactate',
-			top: '40%',
+			top: '33%',
 			left: ''
 		},
 	];
 
-	search = (text$: Observable<string>) =>
-		text$.pipe(
-			debounceTime(200),
-			distinctUntilChanged(),
-			map(term => term.length < 2 ? []
-				: this.materias.filter(v =>
-					v.toLowerCase().removeAccents().indexOf(term.toLowerCase().removeAccents()) > -1
-				).slice(0, 10))
-		);
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.materias.filter(v =>
+          v.toLowerCase().removeAccents().indexOf(term.toLowerCase().removeAccents()) > -1
+        ).slice(0, 10))
+    );
 
 
-	constructor(protected ns: NivelService)	{}
+  constructor(
+    protected ms: MateriaService,
+    protected ns: NivelService,
+    protected router: Router,
+  )	{}
 
 	ngOnInit(): void
 	{
@@ -77,12 +85,42 @@ export class HomeComponent implements OnInit {
 	}
 
 	public loadData() {
-		this.ns.getMaterias().subscribe(
-			data => {
-				this.materias = data;
-			}
+
+    this.ms.getMaterias().subscribe(
+      (data:any) => {
+
+        this.matModels = [];
+        this.materias = [];
+
+        data.data.forEach(m =>
+        {
+          if (!(this.materias.indexOf(m.descripcion) >= 0))
+          {
+            this.materias.push(m.descripcion)
+          }
+          this.matModels.push({
+            nombre: m.descripcion,
+            id: m.id,
+            idNivel: m.idNivel,
+            descripcion: m.descripcion
+          })
+        });
+
+      },
+      error => {
+			  console.error(error);
+      }
 		)
 	}
+
+  buscarMateria($event) {
+    $event.preventDefault();
+    this.matModels.forEach(m => {
+      if (m.nombre == this.materia ) {
+        this.router.navigate(['/buscar/' + m.id])
+      }
+    });
+  }
 
 	// onSlide(slideEvent: NgbSlideEvent) {
 	// 	if (this.unpauseOnArrow && slideEvent.paused &&
@@ -93,4 +131,5 @@ export class HomeComponent implements OnInit {
 	// 		this.togglePaused();
 	// 	}
 	// }
+
 }

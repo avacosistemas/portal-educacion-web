@@ -41,7 +41,11 @@ export class LoginComponent implements OnInit
 
     let success = this.as.login(this.fg.value.usuario, this.fg.value.clave);
 
-    this.router.navigate(['/']);
+    if (success)
+    {
+      let userId = this.as.getUser().id;
+      this.router.navigate([ '/usuario/' + userId]);
+    }
 
   }
 
