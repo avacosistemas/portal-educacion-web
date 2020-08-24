@@ -16,6 +16,7 @@ import { PwdChangeComponent } from "./components/auth/pwd-change/pwd-change.comp
 import { UsuarioWelcomeComponent } from "./components/usuario/usuario-welcome/usuario-welcome.component";
 import { UsuarioPerfilComponent } from "./components/usuario/usuario-perfil/usuario-perfil.component";
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
+import { ClaseDetalleComponent } from "./components/clase/clase-detalle/clase-detalle.component";
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'faq', component: FaqComponent, pathMatch: 'full'},
   {path: 'buscar/:id', component: ProfesorBuscarComponent, pathMatch: 'full'},
   {path: 'buscar', component: ProfesorBuscarComponent, pathMatch: 'full'},
+  {path: 'clase/detalle/:id', component: ClaseDetalleComponent, pathMatch: 'full'},
   {path: 'legales/politica', component: PolicyComponent, pathMatch: 'full'},
   {path: 'legales/terminos', component: TerminosComponent, pathMatch: 'full'},
   {path: 'alumno/nuevo', component: AlumnoRegistroComponent, pathMatch: 'full'},

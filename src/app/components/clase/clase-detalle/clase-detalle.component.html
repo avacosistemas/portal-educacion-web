@@ -1,0 +1,22 @@
+<div class="container menutop-fix">
+
+    <div class="row">
+        <div class="col-md-6 col-lg-3"></div>
+        <h1>{{clase.materiaNombre}}</h1>
+        <table class="tblprofile">
+            <tbody>
+            <tr><td class="icon"><i class="fas fa-book"></i></td><td class="lbl">Id</td><td class="tddata">{{clase.id}}</td></tr>
+            <tr><td class="icon"><i class="fas fa-graduation-cap"></i></td><td class="lbl">Profesor</td><td class="tddata">{{clase.profesorNombre}}</td></tr>
+            <tr><td class="icon"><i class="fas fa-university"></i></td><td class="lbl">Institución</td><td class="tddata">{{clase.nombreInstitucion}}</td></tr>
+            <tr><td class="icon"><i class="fas fa-book-open"></i></td><td class="lbl">Materia</td><td class="tddata">{{clase.materiaNombre}}</td></tr>
+            <tr><td class="icon"><i class="fas fa-calendar-alt"></i></td><td class="lbl">Día</td><td class="tddata">{{clase.dia}}</td></tr>
+            <tr><td class="icon"><i class="fas fa-clock"></i></td><td class="lbl">Hora</td><td class="tddata">{{clase.hora}}</td></tr>
+            <tr *ngIf="!isAlumno"><td class="icon"><i class="fas fa-chart-pie"></i></td><td class="lbl">Calificación</td><td class="tddata">{{clase.calificacion}}</td></tr>
+            <tr><td></td><td class="lbl">Estado</td><td class="tddata">{{clase.estado}}</td></tr>
+            </tbody>
+        </table>
+
+        <button class="btn btn-primary btn-block mt-4" type="button" (click)="goBack()">Volver</button>
+    </div>
+
+</div>

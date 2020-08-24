@@ -45,6 +45,7 @@ import { UsuarioWelcomeComponent } from './components/usuario/usuario-welcome/us
 import { UsuarioPerfilComponent } from './components/usuario/usuario-perfil/usuario-perfil.component';
 import { UsuarioPerfilEditComponent } from './components/usuario/usuario-perfil-edit/usuario-perfil-edit.component';
 import { UsuarioPerfilClasesComponent } from './components/usuario/usuario-perfil-clases/usuario-perfil-clases.component';
+import { ClaseDetalleComponent } from './components/clase/clase-detalle/clase-detalle.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { UsuarioPerfilClasesComponent } from './components/usuario/usuario-perfi
     UsuarioWelcomeComponent,
     UsuarioPerfilComponent,
     UsuarioPerfilEditComponent,
-    UsuarioPerfilClasesComponent
+    UsuarioPerfilClasesComponent,
+    ClaseDetalleComponent
   ],
   imports: [
     BrowserModule,

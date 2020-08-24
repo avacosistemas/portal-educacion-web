@@ -11,6 +11,7 @@ import { Mensaje } from "../entities/mensaje";
 export class AlumnoService {
 
   controller = environment.apiService + 'alumnos/';
+  controllerCliente = environment.apiServiceCliente + 'alumno/';
 
   constructor(private http: HttpClient) { }
 
@@ -62,6 +63,18 @@ export class AlumnoService {
     };
 
     return this.http.put(this.controller + alumno.id.toString(), user);
+  }
+
+
+
+
+  public getClases(idAlumno: number)
+  {
+    return this.http.get(this.controllerCliente + idAlumno.toString());
+  }
+  public getClase(idAlumno: number, idClase: number)
+  {
+    return this.http.get(this.controllerCliente + idAlumno.toString() + '/detalleclase/' + idClase.toString());
   }
 
 }

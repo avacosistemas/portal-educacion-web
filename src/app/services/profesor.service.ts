@@ -10,6 +10,8 @@ import { environment } from "../../environments/environment";
 })
 export class ProfesorService
 {
+  controller = environment.apiService + 'profesores/';
+  controllerCliente = environment.apiServiceCliente + 'profesor/';
 
   _aFechas: any[] = [];
 
@@ -20,18 +22,34 @@ export class ProfesorService
 
 
   public getProfesores(): Observable<Profesor[]> {
-    return this.http.get<Profesor[]>(environment.apiService + 'profesores');
+    return this.http.get<Profesor[]>(this.controller);
   }
 
   getProfesor(id: number): Observable<Profesor>
   {
-    return this.http.get<Profesor>(environment.apiService + 'profesores/' + id.toString());
+    return this.http.get<Profesor>(this.controller + id.toString());
   }
 
   setProfesor(profesor: any): Observable<any>
   {
-    return this.http.put(environment.apiService + 'profesores/' + profesor.id.toString(), profesor);
+    return this.http.put(this.controller + profesor.id.toString(), profesor);
   }
+
+  addProfesor(profesor: Profesor) : Observable<any>
+  {
+    return this.http.post(this.controller, profesor);
+  }
+
+  public getClases(idProfesor: number)
+  {
+    return this.http.get(this.controllerCliente + idProfesor.toString());
+  }
+
+  public getClase(idProfesor: number, idClase: number)
+  {
+    return this.http.get(this.controllerCliente + idProfesor.toString() + '/detalleclase/' + idClase.toString());
+  }
+
 
   randomInt(min, max)
   {
