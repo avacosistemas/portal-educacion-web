@@ -1,18 +1,6 @@
 <div class="card">
-    <div class="perfil">
-<!--        <div class="avatar-small img-raised">-->
-<!--            <img src="{{usuario?.foto}}" alt="{{usuario?.nombre}}, {{usuario?.apellido}}"/>-->
-<!--            <div class="caption" (click)="profilePictureFile.click()">-->
-<!--                <p>-->
-<!--                    <i class="fas fa-plus"></i>-->
-<!--                    <br>-->
-<!--                    <span>Agregar</span>-->
-<!--                </p>-->
-<!--            </div>-->
-<!--        </div>-->
-    </div>
     <header class="card-header ">
-        <h4 class="card-title mt-2" style="display: inline-block">Perfil del {{usuario.tipoCliente | lowercase}}</h4>
+        <h4>Mi Perfil</h4>
     </header>
     <article class="card-body ">
 
@@ -194,7 +182,7 @@
             <div class="form-row">
                 <!-- <button type="submit" class="btn btn-primary btn-block" (click)="onSubmit()"> Guardar cambios  </button> -->
                 <div class="col">
-                    <button type="button" routerLink="/pwdchange" class="btn btn-secondary btn-block"> Cambiar contraseña </button>
+                    <button type="button" (click)="cambiarPassword.emit()" class="btn btn-secondary btn-block"> Cambiar contraseña </button>
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary btn-block" [disabled]="fg.pristine || !fg.valid" (click)="onSubmit()"> Guardar cambios </button>

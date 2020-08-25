@@ -41,36 +41,22 @@ export class AlumnoService {
     // TODO send mensajes
   }
 
-  getAlumnos(): Observable<Alumno[]> {
+  public getAlumnos(): Observable<Alumno[]> {
     return this.http.get<Alumno[]>(this.controller);
   }
 
-  getAlumno(id: number): Observable<Alumno> {
+  public getAlumno(id: number): Observable<Alumno> {
     return this.http.get<Alumno>(this.controller + id.toString());
   }
 
-  getPerfil(id: number): Observable<Alumno> {
+  public getPerfil(id: number): Observable<Alumno> {
     return this.http.get<Alumno>(this.controllerCliente + 'miperfil/' + id.toString());
   }
 
-
-  public setAlumno(alumno: Alumno)
+  public setAlumno(alumno: any): Observable<any>
   {
-    const user = {
-      apellido: alumno.apellido,
-      numeroIdentificacion: alumno.numeroIdentificacion,
-      email: alumno.email,
-      nombre: alumno.nombre,
-      telefonoFijo: alumno.telefonoFijo,
-      telefonoMovil: alumno.telefonoMovil,
-      username: alumno.username,
-    };
-
-    return this.http.put(this.controller + alumno.id.toString(), user);
+    return this.http.put(this.controllerCliente +  'miperfil/' + alumno.id.toString(), alumno);
   }
-
-
-
 
   public getClases(idAlumno: number)
   {

@@ -3,6 +3,8 @@
         <div class="col-md-6 profile">
             <div class="avatar">
                 <img src="{{profesor.foto}}" alt="{{profesor.nombre}}, {{profesor.apellido}}" class="img-raised"/>
+            </div>
+            <div class="info">
                 <div class="rate">
                     <ngb-rating [(rate)]="profesor.calificacion">
                         <ng-template let-fill="fill" let-index="index">
@@ -10,8 +12,6 @@
                         </ng-template>
                     </ngb-rating>
                 </div>
-            </div>
-            <div class="info">
                 <h3>{{profesor.nombre}}, {{profesor.apellido}}</h3>
                 <h4>{{profesor.materia}}</h4>
 

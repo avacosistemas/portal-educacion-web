@@ -31,20 +31,20 @@ export class ProfesorService
     return this.http.get<Profesor>(this.controller + id.toString());
   }
 
-  getPerfil(id: number): Observable<Profesor> {
+  public getPerfil(id: number): Observable<Profesor> {
     return this.http.get<Profesor>(this.controllerCliente + 'miperfil/' + id.toString());
   }
 
-  setProfesor(profesor: any): Observable<any>
+  public setProfesor(profesor: any): Observable<any>
   {
-    return this.http.put(this.controller + profesor.id.toString(), profesor);
+    return this.http.put(this.controllerCliente +  'miperfil/' + profesor.id.toString(), profesor);
   }
 
-  setProfilePicture(fd: FormData) {
+  public setProfilePicture(fd: FormData) {
     return this.http.post(this.controller + 'uploadFotoPerfil/', fd);
   }
 
-  addProfesor(profesor: Profesor) : Observable<any>
+  addProfesor(profesor: Profesor): Observable<any>
   {
     return this.http.post(this.controller, profesor);
   }

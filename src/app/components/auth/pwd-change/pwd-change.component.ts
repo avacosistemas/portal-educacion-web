@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { SeguridadService } from "../../../services/seguridad.service";
 import { Router } from "@angular/router";
@@ -11,6 +11,8 @@ import { ToastrService } from "ngx-toastr";
 })
 export class PwdChangeComponent implements OnInit {
 
+  @Output() goBack = new EventEmitter();
+
   fg: FormGroup;
 
   constructor(
@@ -22,9 +24,9 @@ export class PwdChangeComponent implements OnInit {
 
   ngOnInit(): void {
     this.fg = this.fb.group({
-      pwdOld: [null,[Validators.required]],
-      pwdNew: [null,[Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      pwdNew2: [null,[Validators.required]],
+      pwdOld: [null, [Validators.required]],
+      pwdNew: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      pwdNew2: [null, [Validators.required]],
     });
   }
 
@@ -44,6 +46,7 @@ export class PwdChangeComponent implements OnInit {
             {
               if (status) {
                 const userId = this.as.getUser().id;
+                this.toastr.success('Contraseña cambiada correctamente');
                 this.router.navigate([ '/usuario/' + userId]);
               } else {
                 this.as.logout();

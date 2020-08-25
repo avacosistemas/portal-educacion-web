@@ -36,6 +36,7 @@ const routes: Routes = [
   {path: 'profesor/agenda/:id', component: ProfesorScheduleComponent, pathMatch: 'full'},
   {path: 'profesor/:id', component: ProfesorPerfilComponent, pathMatch: 'full'},
   {path: 'welcome/:id', component: UsuarioWelcomeComponent, pathMatch: 'full'},
+  {path: 'usuario/:id/:active', component: UsuarioPerfilComponent, pathMatch: 'full'},
   {path: 'usuario/:id', component: UsuarioPerfilComponent, pathMatch: 'full'},
   {path: 'preguntas', component: PreguntasComponent, pathMatch: 'full'},
   {path: '', redirectTo: 'home', pathMatch: 'full'},

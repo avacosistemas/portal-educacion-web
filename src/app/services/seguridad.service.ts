@@ -4,7 +4,6 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {environment} from '../../environments/environment';
 import { Router } from "@angular/router";
 import { Usuario } from "../entities/usuario";
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,6 @@ export class SeguridadService
   constructor(
     private http: HttpClient,
     private router: Router,
-    private toastr: ToastrService,
   )
   {
     this._user = new Usuario();
@@ -92,7 +90,6 @@ export class SeguridadService
           console.error(ex);
           onCompleteCallback(this._isLogged);
         }
-        this.toastr.error('Usario o Contraseña inválidos.');
         console.error(ex);
       }
     );

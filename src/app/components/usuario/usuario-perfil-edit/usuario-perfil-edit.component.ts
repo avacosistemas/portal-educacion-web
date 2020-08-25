@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Usuario } from "../../../entities/usuario";
 import { ActivatedRoute } from "@angular/router";
@@ -7,6 +7,7 @@ import { SeguridadService } from "../../../services/seguridad.service";
 import { AlumnoService } from "../../../services/alumno.service";
 import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { ProfesorService } from "../../../services/profesor.service";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-usuario-perfil-edit',
@@ -15,6 +16,7 @@ import { ProfesorService } from "../../../services/profesor.service";
 })
 export class UsuarioPerfilEditComponent implements OnInit {
 
+  @Output() cambiarPassword = new EventEmitter();
   fg: FormGroup;
   usuario: Usuario = new Usuario();
   paramId: number;
@@ -27,9 +29,10 @@ export class UsuarioPerfilEditComponent implements OnInit {
     private route: ActivatedRoute,
     private fv: FormsValidationService,
     public as: SeguridadService,
-    protected als: AlumnoService,
+    private alumnoService: AlumnoService,
     protected rateConfig: NgbRatingConfig,
-    protected ps: ProfesorService,
+    private toastr: ToastrService,
+    protected profesorService: ProfesorService,
   ) {
     rateConfig.max = 5;
 
@@ -75,7 +78,7 @@ export class UsuarioPerfilEditComponent implements OnInit {
     fd.append('id', this.paramId.toString());
     fd.append('fd', this.fotoPerfil, this.fotoPerfil.name);
     if (!this.isAlumno) {
-      this.ps.setProfilePicture(fd).subscribe(
+      this.profesorService.setProfilePicture(fd).subscribe(
         (value: any) => {
           console.log(value);
         }
@@ -85,14 +88,14 @@ export class UsuarioPerfilEditComponent implements OnInit {
 
 
   loadData() {
-    if (this.as.getUser().tipoCliente == 'PROFESOR') {
+    if (this.as.getUser().tipoCliente === 'PROFESOR') {
       // load profesor
-      this.ps.getPerfil(this.paramId).subscribe(
-        (value:any) => {
+      this.profesorService.getPerfil(this.paramId).subscribe(
+        (value: any) => {
           if (!value.data.foto) {
             value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
           }
-          this.usuario.tipoCliente = 'PROFESOR'
+          this.usuario.tipoCliente = 'PROFESOR';
           this.usuario.apellido = value.data.apellido;
           this.usuario.nombre = value.data.nombre;
           this.usuario.nombreApellido = value.data.nombreApellido;
@@ -104,6 +107,7 @@ export class UsuarioPerfilEditComponent implements OnInit {
           this.usuario.numeroIdentificacion = value.data.numeroIdentificacion;
           this.usuario.foto = value.data.foto;
           this.usuario.institucion = value.data.institucion;
+          this.usuario.id = value.data.id;
           // Propios del profesor
           this.usuario.calificacion = value.data.calificacion;
           this.usuario.descripcion = value.data.descripcion;
@@ -112,12 +116,12 @@ export class UsuarioPerfilEditComponent implements OnInit {
       );
     } else {
       // load alumno
-      this.als.getPerfil(this.paramId).subscribe(
-        (value:any) => {
+      this.alumnoService.getPerfil(this.paramId)
+      .subscribe((value: any) => {
           if (!value.data.foto) {
             value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
           }
-          this.usuario.tipoCliente = 'ALUMNO'
+          this.usuario.tipoCliente = 'ALUMNO';
           this.usuario.apellido = value.data.apellido;
           this.usuario.nombre = value.data.nombre;
           this.usuario.nombreApellido = value.data.nombreApellido;
@@ -129,6 +133,7 @@ export class UsuarioPerfilEditComponent implements OnInit {
           this.usuario.numeroIdentificacion = value.data.numeroIdentificacion;
           this.usuario.foto = value.data.foto;
           this.usuario.institucion = value.data.institucion;
+          this.usuario.id = value.data.id;
           this.setFormData();
         }
       );
@@ -162,20 +167,37 @@ export class UsuarioPerfilEditComponent implements OnInit {
       this.usuario.telefonoMovil = this.telCel.value;
       this.usuario.telefonoFijo = this.telFijo.value;
 
-      this.ps.setProfesor(this.usuario).subscribe(
-        value => {
-          if (value.status == 'OK') {
-            alert('Se guardó correctamente');
+      if (this.usuario.tipoCliente === 'ALUMNO') {
+        this.alumnoService.setAlumno(this.usuario).subscribe(
+          value => {
+            if (value.status === 'OK') {
+              this.toastr.success('Se guardó correctamente');
+            } else {
+              this.toastr.error(value.data);
+            }
+          },
+          error => {
+            this.toastr.error('No se pudo guardar el perfil');
           }
-        },
-        error => {
-          console.error(error);
-          alert('No se pudo guardar el perfil');
-        }
-      );
+        );
+      } else {
+        this.profesorService.setProfesor(this.usuario).subscribe(
+          value => {
+            if (value.status === 'OK') {
+              this.toastr.success('Se guardó correctamente');
+            } else {
+              this.toastr.error(value.data);
+            }
+          },
+          error => {
+            this.toastr.error('No se pudo guardar el perfil');
+          }
+        );
+      }
+
 
     } else {
-      console.error('El formulario contiene errores')
+      this.toastr.error('Por favor complete los datos requeridos.');
     }
   }
 

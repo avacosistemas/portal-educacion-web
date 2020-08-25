@@ -1,4 +1,4 @@
-<div class="container menutop-fix">
+<div class="container">
 
 
     <div class="row justify-content-center">
@@ -81,6 +81,7 @@
                             <!-- <button type="submit" class="btn btn-primary btn-block" (click)="onSubmit()"> Guardar cambios  </button> -->
                             <div class="col">
                                 <button type="submit" class="btn btn-primary btn-block" [disabled]="fg.pristine || !fg.valid" (click)="onSubmit()"> Guardar </button>
+                                <button class="btn btn-danger btn-block mt-4" type="button" (click)="goBack.emit()">Volver</button>
                             </div>
                         </div> <!-- form-group// -->
 

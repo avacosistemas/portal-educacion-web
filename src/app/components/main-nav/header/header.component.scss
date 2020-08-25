@@ -708,3 +708,11 @@ a:active {
     color: #f1f1f1;
     text-decoration: none;
 }
+.dropdown-item:hover, .dropdown-item:focus {
+    cursor: pointer;
+    background-color: darkgrey;
+}
+
+a i {
+    margin-right: 5%;
+}

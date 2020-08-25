@@ -89,13 +89,15 @@ export class AlumnoRegistroComponent implements OnInit {
           this.toastr.success('El registro fue exitoso, corroborar su cuenta de correo para finalizar los pasos de registro.');
           this.router.navigate(['/login']);
         },
-        e => {
-          // var message;
-          // e.error.errors.array.forEach(x => {
-          //   x
-          // });
-          // this.toastr.error(
-          console.error(e);
+        error => {
+          let msg;
+          if (error?.error?.errors) {
+            Object.keys(error.error.errors).forEach(o => {
+              msg += '\n' + error.error.errors[o];
+            });
+          }
+          this.toastr.error(msg);
+          console.error(error);
         }
       );
     } else {

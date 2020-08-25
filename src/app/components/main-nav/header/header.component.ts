@@ -8,11 +8,19 @@ import { SeguridadService } from "../../../services/seguridad.service";
 })
 export class HeaderComponent implements OnInit {
 
+  public userId = 0;
+
   constructor(
     public as: SeguridadService,
-  ) { }
+  ) {
+    if (this.as.getUser().id ) {
+      this.userId = this.as.getUser().id;
+    }
+
+  }
 
   ngOnInit(): void {
+
   }
 
 }

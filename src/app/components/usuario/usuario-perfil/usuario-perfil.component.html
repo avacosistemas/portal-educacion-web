@@ -3,6 +3,8 @@
         <div class="col-md-3 profile">
             <div class="avatar">
                 <img src="{{usuario.foto}}" alt="{{usuario.nombre}}, {{usuario.apellido}}" class="img-raised"/>
+            </div>
+            <div class="info">
                 <div class="rate" *ngIf="usuario.calificacion">
                     <ngb-rating [(rate)]="usuario.calificacion">
                         <ng-template let-fill="fill" let-index="index">
@@ -10,33 +12,31 @@
                         </ng-template>
                     </ngb-rating>
                 </div>
-            </div>
-            <div class="info">
                 <h3>Bienvenido!!!</h3>
                 <h4>{{usuario.nombre}}, {{usuario.apellido}}</h4>
-<!--                <h4>{{usuario.materia}}</h4>-->
-                <!--				<hr>-->
+                <span>{{isAlumno? 'Alumno' : 'Profesor'}}</span>
                 <span *ngIf="usuario.descripcion">{{usuario.descripcion}}</span>
+
             </div>
             <hr style="margin-top: 30px">
             <div class="d-flex">
                 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-<!--                    <li ngbNavItem="navhome">-->
-<!--                        <a ngbNavLink>Home</a>-->
-<!--                        <ng-template ngbNavContent>-->
-<!--                            <app-usuario-welcome></app-usuario-welcome>-->
-<!--                        </ng-template>-->
-<!--                    </li>-->
                     <li ngbNavItem="navprofile">
-                        <a ngbNavLink>Perfil</a>
+                        <a ngbNavLink><i class="fas fa-user-circle"></i> Mi Perfil</a>
                         <ng-template ngbNavContent>
-                            <app-usuario-perfil-edit></app-usuario-perfil-edit>
+                            <app-usuario-perfil-edit (cambiarPassword)="active='navpwd'"></app-usuario-perfil-edit>
                         </ng-template>
                     </li>
                     <li ngbNavItem="navclases">
-                        <a ngbNavLink>Clases</a>
+                        <a ngbNavLink><i class="fas fa-chalkboard-teacher"></i> Mis Clases</a>
                         <ng-template ngbNavContent>
                             <app-usuario-perfil-clases></app-usuario-perfil-clases>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem="navpwd">
+                        <a #chgPwd ngbNavLink style="display:none;"></a>
+                        <ng-template ngbNavContent>
+                            <app-pwd-change (goBack)="active='navprofile'"></app-pwd-change>
                         </ng-template>
                     </li>
                 </ul>

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from "../../../entities/usuario";
-import { Alumno } from "../../../entities/alumno";
 import { AlumnoService } from "../../../services/alumno.service";
 import { ProfesorService } from "../../../services/profesor.service";
 import { ActivatedRoute } from "@angular/router";
 import { SeguridadService } from "../../../services/seguridad.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Profesor } from "../../../entities/profesor";
 import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { FormsValidationService } from "../../../services/forms-validation.service";
 
@@ -22,6 +20,8 @@ export class UsuarioPerfilComponent implements OnInit {
   paramId: number;
   fileName = 'Seleccionar Archivo';
   active = 'navclases';
+  isAlumno = false;
+  cambiarPassword: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +38,9 @@ export class UsuarioPerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.paramId = Number(this.route.snapshot.paramMap.get('id'));
+    this.active = this.route.snapshot.paramMap.get('active') ? this.route.snapshot.paramMap.get('active') : 'navclases';
+
+    this.isAlumno = this.as.isAlumno();
     this.fg = this.fb.group({
       nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
@@ -71,10 +74,10 @@ export class UsuarioPerfilComponent implements OnInit {
 
 
   loadData() {
-    if (this.as.getUser().tipoCliente == 'PROFESOR') {
+    if (this.as.getUser().tipoCliente === 'PROFESOR') {
       // load profesor
       this.ps.getProfesor(this.paramId).subscribe(
-        (value:any) => {
+        (value: any) => {
           if (!value.data.foto) {
             value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
           }
@@ -89,14 +92,14 @@ export class UsuarioPerfilComponent implements OnInit {
           this.usuario.foto = value.data.foto;
           this.usuario.institucion = value.data.institucion;
           // Propios del profesor
-          this.usuario.calificacion = value.data.calificacion;
+          this.usuario.calificacion = value.data.calificacion || 5;
           this.usuario.descripcion = value.data.descripcion;
         }
       );
     } else {
       // load alumno
       this.als.getAlumno(this.paramId).subscribe(
-        (value:any) => {
+        (value: any) => {
           if (!value.data.foto) {
             value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
           }

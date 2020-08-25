@@ -211,11 +211,22 @@ input {
     //}
     li {
         width: 100%;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
     }
     li a {
         background-color: #aaafb2;
         color: white;
+        i {
+            font-size: 140%;
+            position: relative;
+            top: 3px;
+            width: 43px;
+        }
+    }
+
+    .nav-link.active {
+        color: #fff;
+        background-color: #545b62;
     }
 
 }
@@ -299,6 +310,8 @@ input {
 
 .profile {
 	.avatar {
+        display: flex;
+        align-content: center;
 		img {
 			float: left;
 			width: 150px;
@@ -308,20 +321,26 @@ input {
 			background-color: transparent;
             position: relative;
             display: inline-block;
+            margin: auto;
 		}
 	}
 	.info {
         //min-height: 160px;
 		//margin-left: 170px;
-        display: inline-block;
+        display: block;
         margin-top: 15px;
+        text-align: center;
 		h3, h4 { font-weight: 600;}
+        span {
+            display: block;
+        }
 	}
 	.rate {
 		display: block;
-		position: absolute;
-		top: 155px;
-		left: 45px;
+        margin: auto;
+		//position: absolute;
+		//top: 155px;
+		//left: 45px;
 	}
 
 }
