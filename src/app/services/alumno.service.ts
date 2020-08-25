@@ -49,6 +49,10 @@ export class AlumnoService {
     return this.http.get<Alumno>(this.controller + id.toString());
   }
 
+  getPerfil(id: number): Observable<Alumno> {
+    return this.http.get<Alumno>(this.controllerCliente + 'miperfil/' + id.toString());
+  }
+
 
   public setAlumno(alumno: Alumno)
   {
@@ -70,7 +74,7 @@ export class AlumnoService {
 
   public getClases(idAlumno: number)
   {
-    return this.http.get(this.controllerCliente + idAlumno.toString());
+    return this.http.get(this.controllerCliente + 'misclases/' + idAlumno.toString());
   }
   public getClase(idAlumno: number, idClase: number)
   {

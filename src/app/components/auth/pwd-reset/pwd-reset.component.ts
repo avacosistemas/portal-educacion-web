@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { Router } from "@angular/router";
 import { environment } from "../../../../environments/environment";
 import {SeguridadService} from '../../../services/seguridad.service';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-pwd-reset',
@@ -18,6 +19,7 @@ export class PwdResetComponent implements OnInit {
     private fb: FormBuilder,
     protected router: Router,
     protected as: SeguridadService,
+    private toastr: ToastrService,
   ) {
 
     this.fg = fb.group({
@@ -37,13 +39,20 @@ export class PwdResetComponent implements OnInit {
 
   sendMail(f)
   {
-    if (this.fg.invalid) return;
+    if (this.fg.invalid) {
+      this.toastr.error('Por favor complete los datos requeridos.');
+      return;
+    }
 
     this.as.passwordReset(this.usuario.value).subscribe(
-      data => {
-        this.router.navigate(['/login']);
+      (data: any) => {
+        if (data && data.status === 'OK') {
+          this.toastr.success('Se ha enviado un email con los pasos para recuperar su contraseña.');
+          this.router.navigate(['/login']);
+        }
       },
       error => {
+        this.toastr.error('Usuario no encontrado');
         console.error(error);
       });
 

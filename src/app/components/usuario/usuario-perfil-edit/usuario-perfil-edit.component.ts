@@ -19,6 +19,8 @@ export class UsuarioPerfilEditComponent implements OnInit {
   usuario: Usuario = new Usuario();
   paramId: number;
   fileName = 'Seleccionar Archivo';
+  isAlumno = false;
+  fotoPerfil: File = null;
 
   constructor(
     private fb: FormBuilder,
@@ -36,6 +38,7 @@ export class UsuarioPerfilEditComponent implements OnInit {
   ngOnInit(): void
   {
     this.paramId = Number(this.route.snapshot.paramMap.get('id'));
+    this.isAlumno = this.as.isAlumno();
     this.fg = this.fb.group({
       nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
@@ -62,8 +65,21 @@ export class UsuarioPerfilEditComponent implements OnInit {
   selectFile(e) {
     console.log(e);
     if (e.target.files.length > 0) {
-      this.fileName = e.target.files[0].name;
-      this.fg.markAsTouched();
+      this.fotoPerfil = <File>e.target.files[0];
+      // this.fg.markAsTouched();
+    }
+  }
+
+  uploadFile() {
+    const fd = new FormData();
+    fd.append('id', this.paramId.toString());
+    fd.append('fd', this.fotoPerfil, this.fotoPerfil.name);
+    if (!this.isAlumno) {
+      this.ps.setProfilePicture(fd).subscribe(
+        (value: any) => {
+          console.log(value);
+        }
+      );
     }
   }
 
@@ -71,7 +87,7 @@ export class UsuarioPerfilEditComponent implements OnInit {
   loadData() {
     if (this.as.getUser().tipoCliente == 'PROFESOR') {
       // load profesor
-      this.ps.getProfesor(this.paramId).subscribe(
+      this.ps.getPerfil(this.paramId).subscribe(
         (value:any) => {
           if (!value.data.foto) {
             value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
@@ -96,7 +112,7 @@ export class UsuarioPerfilEditComponent implements OnInit {
       );
     } else {
       // load alumno
-      this.als.getAlumno(this.paramId).subscribe(
+      this.als.getPerfil(this.paramId).subscribe(
         (value:any) => {
           if (!value.data.foto) {
             value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';

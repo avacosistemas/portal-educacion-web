@@ -21,7 +21,7 @@ export class UsuarioPerfilComponent implements OnInit {
   usuario: Usuario = new Usuario();
   paramId: number;
   fileName = 'Seleccionar Archivo';
-  active = 'navhome';
+  active = 'navclases';
 
   constructor(
     private fb: FormBuilder,

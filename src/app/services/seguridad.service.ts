@@ -4,6 +4,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {environment} from '../../environments/environment';
 import { Router } from "@angular/router";
 import { Usuario } from "../entities/usuario";
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class SeguridadService
   constructor(
     private http: HttpClient,
     private router: Router,
+    private toastr: ToastrService,
   )
   {
     this._user = new Usuario();
@@ -33,9 +35,9 @@ export class SeguridadService
     this.jwt = new JwtHelperService();
   }
 
-  public login(user: string, pass: string)
+  public login(user: string, pass: string, onCompleteCallback)
   {
-
+    // this._login(user, pass).subscribe(
     this.http.post(environment.apiServiceAuth + 'auth', {username: user, password: pass}).subscribe(
       (data: any) =>
       {
@@ -45,7 +47,7 @@ export class SeguridadService
           {
 
             this.http.get(environment.apiServiceAuth + 'cliente'
-              , {headers: {'Authorization': 'Bearer ' + data.token }}
+              , {headers: {Authorization: 'Bearer ' + data.token }}
               ).subscribe(
               (value: any) => {
 
@@ -63,15 +65,18 @@ export class SeguridadService
                   tipoCliente: value.tipoCliente || 'ALUMNO',
                 };
 
-                this._tipoUser = (this._user.tipoCliente == 'ALUMNO') ? 2 : 1;
+                this._tipoUser = (this._user.tipoCliente === 'ALUMNO') ? 2 : 1;
                 this._setUser(this._user);
                 this._setToken(data.token);
                 this._isLogged = true;
 
+                onCompleteCallback(this._isLogged);
+
               },
               error => {
                 console.error(error);
-                this.router.navigate(['/login']);
+                onCompleteCallback(this._isLogged);
+                // this.router.navigate(['/login']);
               }
             );
           }
@@ -83,12 +88,15 @@ export class SeguridadService
         if (ex.error?.status && ex.error?.status === 'CHANGE_PASSWORD_REQUIRED')
         {
           this.router.navigate([ '/pwdchange' ]);
+        } else {
+          console.error(ex);
+          onCompleteCallback(this._isLogged);
         }
+        this.toastr.error('Usario o Contraseña inválidos.');
         console.error(ex);
       }
     );
 
-    return this._isLogged;
   }
 
   public getToken()
@@ -111,7 +119,7 @@ export class SeguridadService
   }
 
 
-  public getUser() : Usuario
+  public getUser(): Usuario
   {
     if (!(this._user.id > 0)) {
       this._loadUser();
@@ -125,18 +133,19 @@ export class SeguridadService
     if (ur)
     {
       this._user = JSON.parse(ur);
-      this._tipoUser = (this._user.tipoCliente == 'ALUMNO') ? 2 : 1;
+      this._tipoUser = (this._user.tipoCliente === 'ALUMNO') ? 2 : 1;
     }
   }
 
   private _setUser(user: Usuario)
   {
-    localStorage.setItem(this._userKey, JSON.stringify(this._user));
+    localStorage.setItem(this._userKey, JSON.stringify(user));
   }
 
   public passwordReset(user: string) {
+    const u = {username: user};
     const uri = environment.apiServiceAuth + 'password/reset/';
-    return this.http.post(uri, user);
+    return this.http.post(uri, u);
   }
 
   public passwordUpdate(pwd: string, newPwd: string ) {
@@ -152,6 +161,7 @@ export class SeguridadService
     localStorage.removeItem(this._tokenKey);
     this._token = null;
     this._isLogged = false;
+    this.router.navigate(['/home']);
   }
 
   public isLogged(): boolean
@@ -173,19 +183,19 @@ export class SeguridadService
 
   public isAlumno()
   {
-    if (this._tipoUser == 0)
+    if (this._tipoUser === 0)
     {
       this._loadUser();
     }
-    return (this._tipoUser == 2);
+    return (this._tipoUser === 2);
   }
   public isProfesor()
   {
-    if (this._tipoUser == 0)
+    if (this._tipoUser === 0)
     {
       this._loadUser();
     }
-    return (this._tipoUser == 1);
+    return (this._tipoUser === 1);
   }
 
 

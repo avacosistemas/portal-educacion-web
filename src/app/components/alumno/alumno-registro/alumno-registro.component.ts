@@ -6,6 +6,7 @@ import { environment } from "../../../../environments/environment";
 import { AlumnoService } from "../../../services/alumno.service";
 import { Alumno } from "../../../entities/alumno";
 import { Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-alumno-registro',
@@ -22,7 +23,8 @@ export class AlumnoRegistroComponent implements OnInit {
     private fv: FormsValidationService,
     private als: AlumnoService,
     protected router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService,
   ) { }
 
 
@@ -31,7 +33,7 @@ export class AlumnoRegistroComponent implements OnInit {
       nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       dni: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
-      usuario: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(40), this.fv.usuario()]],
+      usuario: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
       pwd: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
       pwd2: [null, [Validators.required]],
       email: [null, [Validators.required, this.fv.correo()]],
@@ -67,8 +69,6 @@ export class AlumnoRegistroComponent implements OnInit {
 
   onSubmit() {
     if (this.fg.valid) {
-      console.log('The form is valid');
-
       const alumno: Alumno = new Alumno();
       alumno.apellido = this.apellido.value;
       alumno.numeroIdentificacion = this.dni.value;
@@ -86,14 +86,20 @@ export class AlumnoRegistroComponent implements OnInit {
       this.als.setAlumnoNuevo(alumno).subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['/']);
+          this.toastr.success('El registro fue exitoso, corroborar su cuenta de correo para finalizar los pasos de registro.');
+          this.router.navigate(['/login']);
         },
-        error => {
-          console.error(error);
+        e => {
+          // var message;
+          // e.error.errors.array.forEach(x => {
+          //   x
+          // });
+          // this.toastr.error(
+          console.error(e);
         }
       );
     } else {
-      console.error('The form is INVALID')
+      this.toastr.error('Por favor complete los datos requeridos.');
     }
   }
 

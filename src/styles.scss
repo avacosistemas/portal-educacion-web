@@ -30,6 +30,10 @@ body {
     }
 }
 
+.hidden {
+    display: none;
+}
+
 // ========= Slider del home (input) ==========
 #ngb-typeahead-0 {
     width: 100%;
@@ -60,6 +64,22 @@ body {
 .scrollbarHorizontal {
     overflow-x: scroll;
 }
+
+// ========= Placeholder color ==========
+table.table-clases {
+    thead {
+        th {
+            //background-color: #0e558c;
+            //color: white;
+            border: 0;
+        }
+    }
+}
+
+// ========= Estados de las clases ==========
+.pendiente { background-color: #efecbc; }
+.encurso { background-color: #e2c6a4;}
+.finalizado { background-color: #c7ecbf;}
 
 // ========= Placeholder color ==========
 
@@ -291,8 +311,10 @@ input {
 		}
 	}
 	.info {
-        min-height: 160px;
-		margin-left: 170px;
+        //min-height: 160px;
+		//margin-left: 170px;
+        display: inline-block;
+        margin-top: 15px;
 		h3, h4 { font-weight: 600;}
 	}
 	.rate {

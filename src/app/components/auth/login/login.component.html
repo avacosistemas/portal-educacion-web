@@ -3,7 +3,9 @@
         <div class="user_card">
             <div class="d-flex justify-content-center">
                 <div class="brand_logo_container">
-                    <img src="/assets/images/logo_web.svg" class="brand_logo" alt="Logo">
+                    <a href="#" id="bottle" onclick="document.location='#';return false;" >
+                        <img src="/assets/images/logo_web.svg" class="brand_logo" alt="Logo">
+                    </a>
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">
@@ -12,7 +14,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-user"></i></span>
                         </div>
-                        <input type="text" formControlName="usuario" class="form-control input_user" placeholder="">
+                        <input type="text" formControlName="usuario" class="form-control input_user" placeholder="Usuario">
                     </div>
 
                     <div class="input-group mb-2">
@@ -22,7 +24,8 @@
                         <input [attr.type]="hidePass ? 'password' : 'text'"
                                formControlName="clave"
                                class="form-control input_pass"
-                               style="border-right: 0;">
+                               style="border-right: 0;"
+                               placeholder="Contraseña">
                         <div class="input-group-append">
                             <span class="input-group-text" id="basic-addon2" (click)="hidePass = !hidePass">
                                 <i [ngClass]="{'fas':true,'fa-eye':hidePass, 'fa-eye-slash': !hidePass}"

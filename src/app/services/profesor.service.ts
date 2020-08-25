@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
+import { Alumno } from "../entities/alumno";
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +31,17 @@ export class ProfesorService
     return this.http.get<Profesor>(this.controller + id.toString());
   }
 
+  getPerfil(id: number): Observable<Profesor> {
+    return this.http.get<Profesor>(this.controllerCliente + 'miperfil/' + id.toString());
+  }
+
   setProfesor(profesor: any): Observable<any>
   {
     return this.http.put(this.controller + profesor.id.toString(), profesor);
+  }
+
+  setProfilePicture(fd: FormData) {
+    return this.http.post(this.controller + 'uploadFotoPerfil/', fd);
   }
 
   addProfesor(profesor: Profesor) : Observable<any>
@@ -42,7 +51,7 @@ export class ProfesorService
 
   public getClases(idProfesor: number)
   {
-    return this.http.get(this.controllerCliente + idProfesor.toString());
+    return this.http.get(this.controllerCliente + 'misclases/' + idProfesor.toString());
   }
 
   public getClase(idProfesor: number, idClase: number)

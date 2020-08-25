@@ -1,8 +1,8 @@
 <div class="card">
-<!--    <div class="perfil">-->
+    <div class="perfil">
 <!--        <div class="avatar-small img-raised">-->
 <!--            <img src="{{usuario?.foto}}" alt="{{usuario?.nombre}}, {{usuario?.apellido}}"/>-->
-<!--            <div class="caption" onclick="profilePictureFile.click()">-->
+<!--            <div class="caption" (click)="profilePictureFile.click()">-->
 <!--                <p>-->
 <!--                    <i class="fas fa-plus"></i>-->
 <!--                    <br>-->
@@ -10,7 +10,7 @@
 <!--                </p>-->
 <!--            </div>-->
 <!--        </div>-->
-<!--    </div>-->
+    </div>
     <header class="card-header ">
         <h4 class="card-title mt-2" style="display: inline-block">Perfil del {{usuario.tipoCliente | lowercase}}</h4>
     </header>
@@ -124,10 +124,12 @@
             </div>
 
             <!-- ================== Picture ================== -->
+            <div class="form-row hidden">
             <span>Foto de perfil</span>
             <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input" id="profilePictureFile" (change)="selectFile($event)">
+                <input type="file" class="custom-file-input" #profilePictureFile (change)="selectFile($event)">
                 <label class="custom-file-label" id="lblProfilePictureFile" for="profilePictureFile">{{fileName}}</label>
+            </div>
             </div>
 
             <!-- ================== eMail ================== -->

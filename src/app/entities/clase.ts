@@ -1,15 +1,15 @@
 export class Clase {
   id: number;
   calificacion: number;
-  idInstitucion: number;
-  nombreInstitucion: string;
-  materiaId: number;
-  materiaNombre: string;
+  institucionId?: number;
+  institucion: string;
+  materiaId?: number;
+  materia: string;
   dia: string;
   hora: string;
   estado: string;
 
   profesorId?: number;
-  profesorNombre?: string;
+  profesor?: string;
 
 }

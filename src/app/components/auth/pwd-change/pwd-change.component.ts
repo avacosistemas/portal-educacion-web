@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { SeguridadService } from "../../../services/seguridad.service";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-pwd-change',
@@ -15,8 +16,8 @@ export class PwdChangeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private as: SeguridadService,
+    private toastr: ToastrService,
     private router: Router,
-
   ) { }
 
   ngOnInit(): void {
@@ -35,19 +36,34 @@ export class PwdChangeComponent implements OnInit {
   onSubmit() {
 
     if (this.fg.valid) {
-      console.log('form submitted');
       this.as.passwordUpdate(this.pwdOld.value, this.pwdNew.value).subscribe(
         value => {
-          this.as.login(this.as.getUser().username, this.pwdNew.value);
+          this.as.login(this.as.getUser().username, this.pwdNew.value,
+
+            (status) =>
+            {
+              if (status) {
+                const userId = this.as.getUser().id;
+                this.router.navigate([ '/usuario/' + userId]);
+              } else {
+                this.as.logout();
+              }
+            }
+          );
+
           this.router.navigate(['/']);
+
         },
         error => {
-          alert('no se pudo cambiar la contraseña');
+          let msg = 'No se pudo cambiar la contraseña';
+          if (error?.error?.message)
+            msg += '\n' + error.error.message;
+          this.toastr.error(msg);
         }
       );
 
     } else {
-      console.error('El formulario contiene errores');
+      this.toastr.error('Por favor complete los datos requeridos.');
     }
   }
 }

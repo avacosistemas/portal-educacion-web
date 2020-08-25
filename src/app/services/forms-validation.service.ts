@@ -40,14 +40,14 @@ export class FormsValidationService
   telefono() : ValidatorFn
   {
     return (control: AbstractControl): {[key: string]: any} | null => {
-      if (!control.value) return null;
+      if(!control.value) return null;
       const regex = /^\+?\d+(-\d+| \d+)*$/;
       const ret = regex.test(control.value);
       return ret ? null : {telefono: true };
     };
   }
 
-  usuario() : ValidatorFn
+  usuario(): ValidatorFn
   {
     return (control: AbstractControl): {[key: string]: any} | null => {
       if (!control.value) return null;

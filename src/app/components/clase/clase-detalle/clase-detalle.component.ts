@@ -42,15 +42,15 @@ export class ClaseDetalleComponent implements OnInit {
         (value: any) => {
           this.clase = {
             profesorId: value.data.profesorId,
-            profesorNombre: value.data.profesorNombre,
+            profesor: value.data.profesorNombre,
             estado: value.data.estado,
             calificacion: value.data.calificacion,
             hora: value.data.hora,
             dia: value.data.dia,
-            materiaNombre: value.data.materiaNombre,
-            nombreInstitucion: value.data.nombreInstitucion,
+            materia: value.data.materiaNombre,
+            institucion: value.data.nombreInstitucion,
             id: value.data.id,
-            idInstitucion: value.data.idInstitucion,
+            institucionId: value.data.idInstitucion,
             materiaId: value.data.materiaId
           }
         }
@@ -60,15 +60,15 @@ export class ClaseDetalleComponent implements OnInit {
         (value: any) => {
           this.clase = {
             profesorId: value.data.profesorId,
-            profesorNombre: value.data.profesorNombre,
+            profesor: value.data.profesorNombre,
             estado: value.data.estado,
             calificacion: value.data.calificacion,
             hora: value.data.hora,
             dia: value.data.dia,
-            materiaNombre: value.data.materiaNombre,
-            nombreInstitucion: value.data.nombreInstitucion,
+            materia: value.data.materiaNombre,
+            institucion: value.data.nombreInstitucion,
             id: value.data.id,
-            idInstitucion: value.data.idInstitucion,
+            institucionId: value.data.idInstitucion,
             materiaId: value.data.materiaId
           }
         }
@@ -80,15 +80,15 @@ export class ClaseDetalleComponent implements OnInit {
   _mock() {
     this.clase = {
       profesorId: 1,
-      profesorNombre: 'Claudio Kereques',
+      profesor: 'Claudio Kereques',
       estado: 'Pendiente',
       calificacion: 3.5,
       hora: '11:45',
       dia: '20/08/2020',
-      materiaNombre: 'Matemáticas',
-      nombreInstitucion: 'Teach',
+      materia: 'Matemáticas',
+      institucion: 'Teach',
       id: 1,
-      idInstitucion: 1,
+      institucionId: 1,
       materiaId: 1
     };
   }

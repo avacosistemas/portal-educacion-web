@@ -39,8 +39,11 @@ export class MainNavComponent implements OnInit
 	{
 		if ( (this.router.url.indexOf('/profesor') >= 0 && this.router.url.indexOf('/profesor/registro') < 0 )
 			|| ( window.location.pathname.indexOf('/profesor') >= 0 && window.location.pathname.indexOf('/profesor/registro') <0 )
-			||this.router.url.indexOf('/buscar') >= 0
-			|| window.location.pathname.indexOf('/buscar') >= 0)
+			|| ( window.location.pathname.indexOf('/alumno') >= 0 && window.location.pathname.indexOf('/alumno/registro') <0 )
+			|| this.router.url.indexOf('/buscar') >= 0
+			|| window.location.pathname.indexOf('/buscar') >= 0
+			|| this.router.url.indexOf('/usuario') >= 0
+			|| window.location.pathname.indexOf('/usuario') >= 0)
 		{
 
         document.body.classList.add('back-pattern-001');

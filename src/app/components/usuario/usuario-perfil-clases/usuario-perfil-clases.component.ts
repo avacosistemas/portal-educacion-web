@@ -5,6 +5,7 @@ import { Clase } from "../../../entities/clase";
 import { AlumnoService } from "../../../services/alumno.service";
 import { ProfesorService } from "../../../services/profesor.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ClaseEstados } from "../../../entities/clase-estado";
 declare var $;
 
 @Component({
@@ -17,6 +18,7 @@ export class UsuarioPerfilClasesComponent implements OnInit, AfterViewInit {
   paramId: number
   clases: Clase[] = [];
   isAlumno: boolean = false;
+  estados = new ClaseEstados();
 
   constructor(
     private route: ActivatedRoute,
@@ -34,16 +36,17 @@ export class UsuarioPerfilClasesComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() :void
   {
-    $('#tableMisClases').fancyTable({
-      pagination: true,
-      perPage: 5
-    });
+    // $('#tableMisClases').fancyTable({
+    //   pagination: true,
+    //   inputPlaceholder: "Buscar...",
+    //   perPage: 5
+    // });
   }
 
   loadData()
   {
-    this._Mock();
-    return;
+    // this._Mock();
+    // return;
 
     if (this.isAlumno)
     {
@@ -56,20 +59,16 @@ export class UsuarioPerfilClasesComponent implements OnInit, AfterViewInit {
               this.clases.push({
                 id: i.id,
                 calificacion: i.calificacion,
-                idInstitucion: i.idInstitucion,
-                nombreInstitucion: i.nombreInstitucion,
-                materiaId: i.materiaId,
-                materiaNombre: i.materiaNombre,
+                institucion: i.institucion,
+                materia: i.materia,
                 dia: i.dia,
                 hora: i.hora,
                 estado: i.estado,
-
-                profesorId: i.profesorId,
-                profesorNombre: i.profesorNombre,
+                profesor: i.profesor,
               });
             }
           );
-
+          this._setGrilla();
         }
       );
 
@@ -83,19 +82,30 @@ export class UsuarioPerfilClasesComponent implements OnInit, AfterViewInit {
               this.clases.push({
                 id: i.id,
                 calificacion: i.calificacion,
-                idInstitucion: i.idInstitucion,
-                nombreInstitucion: i.nombreInstitucion,
-                materiaId: i.materiaId,
-                materiaNombre: i.materiaNombre,
+                institucion: i.institucion,
+                materia: i.materia,
                 dia: i.dia,
                 hora: i.hora,
                 estado: i.estado
               });
             }
           );
+          this._setGrilla();
         }
       );
     }
+  }
+
+  _setGrilla() {
+    setTimeout(() =>
+      {
+        $('#tableMisClases').fancyTable({
+          pagination: true,
+          inputPlaceholder: "Buscar...",
+          perPage: 5
+        });
+      },
+      500);
   }
 
 
@@ -104,27 +114,27 @@ export class UsuarioPerfilClasesComponent implements OnInit, AfterViewInit {
     this.clases.push({
       id: 1,
       calificacion: 3.5,
-      idInstitucion: 1,
-      nombreInstitucion: 'Teach',
+      institucionId: 1,
+      institucion: 'Teach',
       materiaId: 1,
-      materiaNombre: 'Historia',
+      materia: 'Historia',
       dia: '22/08/2020',
       hora: '14:30',
       estado: 'OK',
-      profesorNombre: 'Juan Camera',
+      profesor: 'Juan Camera',
       profesorId: 1,
     });
     this.clases.push({
       id: 2,
       calificacion: 2.7,
-      idInstitucion: 1,
-      nombreInstitucion: 'Teach',
+      institucionId: 1,
+      institucion: 'Teach',
       materiaId: 1,
-      materiaNombre: 'Matemáticas',
+      materia: 'Matemáticas',
       dia: '20/08/2020',
       hora: '11:45',
       estado: 'Pendiente',
-      profesorNombre: 'Hector López',
+      profesor: 'Hector López',
       profesorId: 2,
     });
 
