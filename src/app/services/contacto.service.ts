@@ -13,7 +13,7 @@ export class ContactoService {
   { }
 
   public sendContact(contact: any): Observable<any> {
-    return this.http.post(environment.apiService + 'contact-us/send', contact);
+    return this.http.post(environment.apiService + 'contact-us/send/', contact);
   }
 
 }
