@@ -50,7 +50,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { RaitingGridComponent } from './components/usuario/usuario-perfil-clases/raiting-grid/raiting-grid.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +83,7 @@ import { RaitingGridComponent } from './components/usuario/usuario-perfil-clases
     UsuarioPerfilEditComponent,
     UsuarioPerfilClasesComponent,
     ClaseDetalleComponent,
-    RaitingGridComponent
+    RaitingGridComponent,
   ],
   imports: [
     BrowserModule,

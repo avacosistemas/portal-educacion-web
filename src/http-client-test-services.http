@@ -1,0 +1,30 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Preguntas a Victor
+POST {{host}}{{apiServiceCliente}}/alumno/preguntar/2
+Accept: {{accept}}
+Cache-Control: {{cache}}
+Content-Type: {{content}}
+Authorization: {{token}}
+
+{"idProfesor":2,"pregunta":"dime con quien andas y te diré quien eres?"}
+
+###

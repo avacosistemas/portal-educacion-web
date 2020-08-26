@@ -22,7 +22,8 @@ export class PwdChangeComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     this.fg = this.fb.group({
       pwdOld: [null, [Validators.required]],
       pwdNew: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],

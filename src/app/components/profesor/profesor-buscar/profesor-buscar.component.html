@@ -12,7 +12,10 @@
 						<hr>
 						<h4>Ordenar</h4>
 						<div class="form-group">
-							<select [(ngModel)]="orderId" class="form-control custom-select" id="exampleFormControlSelect1">
+							<select [(ngModel)]="orderId"
+									class="form-control custom-select"
+									id="exampleFormControlSelect1"
+									(change)="onChangeOrdenar()">
 								<option value="RELEVANTE" class="active">Más relevantes</option>
 								<option value="MENOR_PRECIO">Menor precio</option>
 								<option value="MAYOR_PRECIO">Mayor precio</option>
@@ -23,7 +26,7 @@
 							<select [(ngModel)]="selLevId"
                                     class="form-control custom-select"
 									*ngIf="this.nivelesEducativos"
-									(change)="onChangeNivel(selLevId)">
+									(change)="onChangeNivel()">
                                     <option *ngFor="let lev of this.nivelesEducativos" [ngValue]="lev.id">{{lev.descripcion}}</option>
                             </select>
 						</div >

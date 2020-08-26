@@ -73,6 +73,11 @@ table.table-clases {
     }
 }
 
+.ng2-smart-action-custom-custom > a >  i {
+    color: #d7d7d7;
+    text-decoration: none;
+}
+
 // ========= Estados de las clases ==========
 .encurso { color: #c18908;}
 .pendiente { color: #f52525;}
@@ -171,6 +176,13 @@ input {
 
 .menutop-fix {
     padding-top: 100px !important;
+}
+.dropdown-menu {
+    i {
+        color: #404040;
+        width: 27px;
+        vertical-align: middle;
+    }
 }
 
 // ============================ Carousel =================================
@@ -520,7 +532,7 @@ input {
 	margin-top: 30px;
 	padding: 2em 0 0;
 	//width: 100%;
-	background: #001e56;
+	background: #0b1458;
     .tel {
         font-size: 24px;
         font-weight: 600;

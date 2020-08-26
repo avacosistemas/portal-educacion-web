@@ -12,8 +12,14 @@ export class CatalogoService {
   )
   { }
 
-  public getCatalogoDocente(queryString: object): Observable<any> {
-    return this.http.post(environment.apiService + 'catalogoDocente', queryString);
+  public getCatalogoDocente(queryString: FiltrosCatalogo): Observable<any> {
+    return this.http.get(`${environment.apiService}catalogoDocente?orden=${queryString.orden}&idMateria=${queryString.idMateria}&idNivel=${queryString.idNivel}`);
   }
 
+}
+
+export class FiltrosCatalogo {
+  orden: string;
+  idMateria: number;
+  idNivel: number;
 }

@@ -59,6 +59,16 @@ export class ProfesorService
     return this.http.get(this.controllerCliente + idProfesor.toString() + '/detalleclase/' + idClase.toString());
   }
 
+  public getPreguntas(id: number): Observable<any> {
+    return this.http.get<any>(this.controllerCliente + 'preguntas/' + id.toString());
+  }
+
+  public sendRespuesta(id: number, respuesta: string)
+  {
+    const body = {respuesta: respuesta, idPreguntaRespuesta: id};
+    return this.http.put(this.controllerCliente + 'responder/' + id.toString(), body);
+  }
+
 
   randomInt(min, max)
   {

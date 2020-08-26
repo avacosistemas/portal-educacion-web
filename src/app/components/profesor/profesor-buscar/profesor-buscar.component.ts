@@ -42,6 +42,11 @@ export class ProfesorBuscarComponent implements OnInit {
 
   selecciono(valor: string) {
     this.materiaSeleccionada = valor;
+    this.consultarCatalogo();
+  }
+
+  onChangeOrdenar() {
+    this.consultarCatalogo();
   }
 
   loadData() {
@@ -81,21 +86,24 @@ export class ProfesorBuscarComponent implements OnInit {
               nombre: materia.descripcion
             }
           );
-
-          this.catalogoService.getCatalogoDocente({orden: this.orderId, idMateria: this.selMatId, idNivel: this.selLevId})
-          .subscribe(d => {
-            console.log(d);
-          });
         });
+        this.consultarCatalogo();
       } // end next
     ); // end susbscribe
+  }
+
+  consultarCatalogo() {
+    this.catalogoService.getCatalogoDocente({orden: this.orderId, idMateria: this.selMatId, idNivel: this.selLevId})
+    .subscribe(d => {
+      console.log(d);
+    });
   }
 
   get getProfesores(): Profesor[] {
     return this.profesores.filter(f => f.materia === (this.materiaSeleccionada ? this.materiaSeleccionada : f.materia));
   }
 
-  onChangeNivel(ev) {
+  onChangeNivel() {
     this.nivelSeleccionado = this.nivelesEducativos.find(f => f.id === this.selLevId).descripcion;
     this.getMateriasPorNiveles();
   }

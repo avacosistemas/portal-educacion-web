@@ -20,8 +20,8 @@ export class PwdResetComponent implements OnInit {
     protected router: Router,
     protected as: SeguridadService,
     private toastr: ToastrService,
-  ) {
-
+  )
+  {
     this.fg = fb.group({
       usuario: new FormControl('',[Validators.required]),
     });

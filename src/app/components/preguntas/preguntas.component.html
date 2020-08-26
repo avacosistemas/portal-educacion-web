@@ -1,1 +1,45 @@
-<ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+<div class="container menutop-fix">
+    <div class="row">
+        <div class="col">
+
+            <div class="card">
+                <header class="card-header ">
+                    <h4>Preguntas de alumnos</h4>
+                </header>
+
+                <article class="card-body ">
+
+                    <ng2-smart-table [settings]="settings" [source]="preguntas" (custom)="onCustomAction($event)"></ng2-smart-table>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #contentRespuesta let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Pregunta</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <h4>{{pregunta}}</h4>
+
+        <!-- ==================== Form ===================== -->
+        <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fg">
+            <div class="form-row">
+                <div class="col">
+                    <label for="txtRespuestaId"></label>
+                    <textarea formControlName="txtRespuesta" ngbAutofocus id="txtRespuestaId" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="Responder($event); modal.close('Close click')">Responder</button>
+    </div>
+</ng-template>
