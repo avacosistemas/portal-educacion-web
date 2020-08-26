@@ -4,16 +4,15 @@
 
         <div class="card">
             <header class="card-header ">
-                <h4>Mis clases</h4>
+                <h4>Mis calificaciones</h4>
             </header>
 
             <article class="card-body ">
-                    <ng2-smart-table [settings]="settings" [source]="clases" (custom)="onCustomAction($event)"></ng2-smart-table>
+                    <ng2-smart-table [settings]="settings" [source]="calificaciones">
+                    </ng2-smart-table>
             </article> <!-- End card Body -->
         </div> <!-- End Card -->
 
     </div> <!-- End Row -->
 
 </div> <!-- End container -->
-
-
