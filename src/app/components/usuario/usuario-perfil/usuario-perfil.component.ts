@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Usuario } from "../../../entities/usuario";
-import { AlumnoService } from "../../../services/alumno.service";
-import { ProfesorService } from "../../../services/profesor.service";
-import { ActivatedRoute } from "@angular/router";
-import { SeguridadService } from "../../../services/seguridad.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
-import { FormsValidationService } from "../../../services/forms-validation.service";
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Usuario } from '../../../entities/usuario';
+import { AlumnoService } from '../../../services/alumno.service';
+import { ProfesorService } from '../../../services/profesor.service';
+import { ActivatedRoute } from '@angular/router';
+import { SeguridadService } from '../../../services/seguridad.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { FormsValidationService } from '../../../services/forms-validation.service';
+import { HeaderService } from 'src/app/services/header.service';
 
 @Component({
   selector: 'app-usuario-perfil',
@@ -31,14 +32,18 @@ export class UsuarioPerfilComponent implements OnInit {
     protected als: AlumnoService,
     protected rateConfig: NgbRatingConfig,
     protected ps: ProfesorService,
+    private headerService: HeaderService
   ) {
     rateConfig.max = 5;
 
   }
 
   ngOnInit(): void {
+    this.headerService.getMenuSelected().subscribe(ms => {
+      this.active = ms;
+    });
+
     this.paramId = Number(this.route.snapshot.paramMap.get('id'));
-    this.active = this.route.snapshot.paramMap.get('active') ? this.route.snapshot.paramMap.get('active') : 'navclases';
 
     this.isAlumno = this.as.isAlumno();
     this.fg = this.fb.group({

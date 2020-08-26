@@ -11,8 +11,11 @@
 		<div class="carousel-caption" style="top: {{slide.top}}; left: {{slide.left}}">
 			<h3>{{slide.title}}</h3>
 			<p>{{slide.description}}</p>
-			<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0">
-				<p><a href="#"><button>{{slide.buttonLink}}</button></a></p>
+			<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0 && slide.inPage">
+				<p><a pageScroll [href]="slide.href"><button>{{slide.buttonLink}}</button></a></p>
+			</span>
+			<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0 && !slide.inPage">
+				<p><a [routerLink]="slide.href"><button>{{slide.buttonLink}}</button></a></p>
 			</span>
 		</div>
 	</ng-template>

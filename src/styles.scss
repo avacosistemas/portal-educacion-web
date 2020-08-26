@@ -3,13 +3,10 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 @import '~ngx-toastr/toastr';
-//@import "variables"; // bootstrap 5 - solo se usa para el form-select
-//@import 'form_select'; // mismo estilo para los selects en distintos browsers (no existe en bootstrap 4)
 @import 'chat';
 
 html{
     height: 100%;
-
 }
 
 body {
@@ -77,9 +74,9 @@ table.table-clases {
 }
 
 // ========= Estados de las clases ==========
-.pendiente { background-color: #efecbc; }
-.encurso { background-color: #e2c6a4;}
-.finalizado { background-color: #c7ecbf;}
+.encurso { color: #c18908;}
+.pendiente { color: #f52525;}
+.finalizado { color: #238e0c;}
 
 // ========= Placeholder color ==========
 
@@ -584,5 +581,13 @@ input {
 .fh5co-copyright span {
 	display: block;
 }
+.boton-effect:hover{
+    opacity: 0.8;
+}
 
+.boton-effect:active {
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
 

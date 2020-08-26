@@ -27,7 +27,14 @@ export class PwdChangeComponent implements OnInit {
       pwdOld: [null, [Validators.required]],
       pwdNew: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       pwdNew2: [null, [Validators.required]],
-    });
+    }, {validator: this.checkPasswords });
+  }
+
+  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+    const pass = group.controls.pwdNew.value;
+    const confirmPass = group.controls.pwdNew2.value;
+
+    return pass === confirmPass ? null : { notSame: true };
   }
 
   // ======================= Getters ==========================

@@ -1,11 +1,12 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SeguridadService } from "../../../services/seguridad.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Clase } from "../../../entities/clase";
 import { AlumnoService } from "../../../services/alumno.service";
 import { ProfesorService } from "../../../services/profesor.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ClaseEstados } from "../../../entities/clase-estado";
+import { RaitingGridComponent } from './raiting-grid/raiting-grid.component';
 declare var $;
 
 @Component({
@@ -13,46 +14,37 @@ declare var $;
   templateUrl: './usuario-perfil-clases.component.html',
   styleUrls: ['./usuario-perfil-clases.component.scss']
 })
-export class UsuarioPerfilClasesComponent implements OnInit, AfterViewInit {
+export class UsuarioPerfilClasesComponent implements OnInit {
 
-  paramId: number
+  paramId: number;
   clases: Clase[] = [];
-  isAlumno: boolean = false;
+  isAlumno = false;
   estados = new ClaseEstados();
+  settings: any;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     protected as: SeguridadService,
     protected als: AlumnoService,
     protected ps: ProfesorService,
-    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void
   {
+    this._setGrilla();
     this.paramId = Number(this.route.snapshot.paramMap.get('id'));
     this.isAlumno = this.as.isAlumno();
     this.loadData();
   }
-  ngAfterViewInit() :void
-  {
-    // $('#tableMisClases').fancyTable({
-    //   pagination: true,
-    //   inputPlaceholder: "Buscar...",
-    //   perPage: 5
-    // });
-  }
 
   loadData()
   {
-    // this._Mock();
-    // return;
-
     if (this.isAlumno)
     {
       // get Alumno
       this.als.getClases(this.paramId).subscribe(
-        (value:any) => {
+        (value: any) => {
           this.clases = [];
           value.data.forEach( i =>
             {
@@ -68,14 +60,13 @@ export class UsuarioPerfilClasesComponent implements OnInit, AfterViewInit {
               });
             }
           );
-          this._setGrilla();
         }
       );
 
     } else {
       // get profesor
       this.ps.getClases(this.paramId).subscribe(
-        (value:any) => {
+        (value: any) => {
           this.clases = [];
           value.data.forEach( i =>
             {
@@ -86,58 +77,114 @@ export class UsuarioPerfilClasesComponent implements OnInit, AfterViewInit {
                 materia: i.materia,
                 dia: i.dia,
                 hora: i.hora,
-                estado: i.estado
+                estado: `<span class="${this.returnClassEstado(i.estado)}">
+                            ${i.estado}
+                         </span>`,
               });
             }
           );
-          this._setGrilla();
         }
       );
     }
   }
 
-  _setGrilla() {
-    setTimeout(() =>
-      {
-        $('#tableMisClases').fancyTable({
-          pagination: true,
-          inputPlaceholder: "Buscar...",
-          perPage: 5
-        });
-      },
-      500);
+  returnClassEstado(estado: string) {
+    switch (estado) {
+      case 'Pendiente':
+        return 'pendiente';
+      case 'Finalizado':
+        return 'finalizado';
+      case 'En Curso':
+        return 'encurso';
+      default:
+        break;
+    }
   }
 
+  _setGrilla() {
+    this.settings = {
+      actions: {
+        custom: [
+          {
+            name: 'detail',
+            title: '<a class="btn btn-primary" href="#"><i class="fas fa-eye"></i></a>',
+          }
+        ],
+        add: false,
+        edit: false,
+        delete: false,
+        columnTitle: '',
+        position: 'right'
+      },
+      attr: {
+        class: 'datagrid',
+      },
+      columns: {
+        institucion: {
+          title: 'Institución',
+          filter: true,
+          editable: false
+        },
+        profesion: {
+          title: 'Profesión',
+          filter: true,
+          editable: false
+        },
+        materia: {
+          title: 'Materia',
+          filter: true,
+          editable: false
+        },
+        dia: {
+          title: 'Día',
+          editable: false
+        },
+        hora: {
+          title: 'Hora',
+          filter: true,
+          editable: false
+        },
+        calificacion: {
+          title: 'Calificación',
+          filter: false,
+          editable: false,
+          type: 'custom',
+          renderComponent: RaitingGridComponent,
+          valuePrepareFunction: (value, row, cell) => {
+            return this.clases;
+          },
+        },
+        estado: {
+          title: 'Estado',
+          type: 'html',
+          filter: {
+            type: 'list',
+              config: {
+                selectText: 'Seleccionar',
+                  list: [
+                    { value: 'Pendiente', title: 'Pendiente' },
+                    { value: 'En Curso', title: 'En Curso' },
+                    { value: 'Finalizado', title: 'Finalizado' },
+                  ]
+                }
+              },
+          editable: false
+        },
+        accion: {
+          editable: false,
+          type: 'html',
+          filter: false
+        }
+      }
+    };
+  }
 
-  _Mock() {
-
-    this.clases.push({
-      id: 1,
-      calificacion: 3.5,
-      institucionId: 1,
-      institucion: 'Teach',
-      materiaId: 1,
-      materia: 'Historia',
-      dia: '22/08/2020',
-      hora: '14:30',
-      estado: 'OK',
-      profesor: 'Juan Camera',
-      profesorId: 1,
-    });
-    this.clases.push({
-      id: 2,
-      calificacion: 2.7,
-      institucionId: 1,
-      institucion: 'Teach',
-      materiaId: 1,
-      materia: 'Matemáticas',
-      dia: '20/08/2020',
-      hora: '11:45',
-      estado: 'Pendiente',
-      profesor: 'Hector López',
-      profesorId: 2,
-    });
-
+  onCustomAction(event) {
+    switch ( event.action) {
+      case 'detail':
+        this.router.navigate([`/clase/detalle/${event.data.id}`]);
+        break;
+    }
   }
 
 }

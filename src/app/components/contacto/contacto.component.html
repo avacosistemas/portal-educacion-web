@@ -10,26 +10,82 @@
                 <img [src]="image" alt="contacto" class="contacto-img">
             </div>
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="nom">Nombre:</label>
-                    <input type="text" placeholder="Nombre" class="form-control" id="nom">
+              <form autocomplete="off" class="app-form" [formGroup]="fg" (ngSubmit)="sendQuestion()">
+                <div class="form-row">
+                  <div class="col">
+                      <div class="form-group">
+                        <label for="nom">Nombre:</label>
+                        <input formControlName="name" type="text" placeholder="Nombre" class="form-control" id="nom">
+                      </div>
+                      <app-field-error-display
+                        [displayError]="nombre.touched && nombre.errors?.required"
+                        errorMsg="* Debe completar el nombre">
+                      </app-field-error-display>
+                      <app-field-error-display
+                        [displayError]="nombre.touched && nombre.errors?.minlength"
+                        errorMsg="* El nombre debe tener al menos 2 letras">
+                      </app-field-error-display>
+                      <app-field-error-display
+                        [displayError]="nombre.touched && nombre.errors?.maxlength"
+                        errorMsg="* El nombre no puede tener más de 100 letras">
+                      </app-field-error-display>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="tel">Teléfono:</label>
-                    <input type="text" placeholder="Telefono. Ej.: 11 1234-5678" class="form-control" id="tel">
+
+                  <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                          <label for="tel">Teléfono:</label>
+                          <input formControlName="telephone" type="text" placeholder="Telefono. Ej.: 11 1234-5678" class="form-control" id="tel">
+                        </div>
+                        <app-field-error-display
+                                [displayError]="telefono.touched && telefono.errors?.required"
+                                errorMsg="* Debe completar el número del teléfono">
+                        </app-field-error-display>
+                        <app-field-error-display
+                                [displayError]="telefono.touched && telefono.errors?.telefono"
+                                errorMsg="* Solo debe ingresar números y/o los signos + - para indicar país y región">
+                        </app-field-error-display>
+                        <app-field-error-display
+                                [displayError]="telefono.touched && telefono.errors?.minlength"
+                                errorMsg="* El teléfono debe tener al menos 10 números">
+                        </app-field-error-display>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="eml">Email:</label>
-                    <input type="email" placeholder="Correo Electronico" class="form-control" id="eml">
+
+                  <div class="form-row">
+                    <div class="col">
+                    <div class="form-group">
+                      <label for="eml">Email:</label>
+                      <input formControlName="email" type="email" placeholder="Correo Electronico" class="form-control" id="eml">
+                    </div>
+                    <app-field-error-display
+                            [displayError]="email.touched && email.errors?.required"
+                            errorMsg="* Debe completar el email y este debe ser un correo valido">
+                    </app-field-error-display>
+                    <app-field-error-display
+                            [displayError]="email.touched && email.errors?.correo"
+                            errorMsg="* No parece ser una dirección de mail">
+                    </app-field-error-display>
                   </div>
-                  <div class="form-group">
-                    <label for="con">Consulta:</label>
-                    <textarea class="form-control" placeholder="Escribi tu consulta..." id="con" rows="3"></textarea>
                 </div>
 
-                  <button type="submit" class="btn btn-success" style="width: 100%;">Enviar consulta</button>
-            </div>
+                  <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                          <label for="con">Consulta:</label>
+                          <textarea formControlName="message" class="form-control" placeholder="Escribi tu consulta..." id="con" rows="3"></textarea>
+                      </div>
+                      <app-field-error-display
+                              [displayError]="consulta.touched && consulta.errors?.required"
+                              errorMsg="* Debe completar la consulta">
+                      </app-field-error-display>
+                    </div>
+                  </div>
 
+                <button type="submit" class="btn btn-success" style="width: 100%;">Enviar consulta</button>
+              </form>
+              </div>
 		</div>
 	</div>
 </div>

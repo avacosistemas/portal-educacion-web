@@ -10,27 +10,63 @@
             </div>
             <div class="d-flex justify-content-center form_container">
                 <form autocomplete="off" class="app-form" [formGroup]="fg" (ngSubmit)="tryLogin($event)">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                <input type="text" formControlName="usuario" class="form-control input_user" placeholder="Usuario">
+                            </div>
+                            <app-field-error-display
+                                    [displayError]="usuario.touched && usuario.errors?.required"
+                                    errorMsg="* Debe completar el usuario">
+                            </app-field-error-display>
+                            <app-field-error-display
+                                    [displayError]="usuario.touched && usuario.errors?.minlength"
+                                    errorMsg="* El usuario debe tener al menos 4 letras">
+                            </app-field-error-display>
+                            <app-field-error-display
+                                    [displayError]="usuario.touched && usuario.errors?.maxlength"
+                                    errorMsg="* El usuario no puede tener más de 40 letras">
+                            </app-field-error-display>
+                            <app-field-error-display
+                                    [displayError]="usuario.touched && usuario.errors?.usuario"
+                                    errorMsg="* El usuario debe ser una combinación de letras y numeros. Puede contener guiones y no debe comenzar con un número">
+                            </app-field-error-display>
                         </div>
-                        <input type="text" formControlName="usuario" class="form-control input_user" placeholder="Usuario">
                     </div>
 
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-key"></i></span>
-                        </div>
-                        <input [attr.type]="hidePass ? 'password' : 'text'"
-                               formControlName="clave"
-                               class="form-control input_pass"
-                               style="border-right: 0;"
-                               placeholder="Contraseña">
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2" (click)="hidePass = !hidePass">
-                                <i [ngClass]="{'fas':true,'fa-eye':hidePass, 'fa-eye-slash': !hidePass}"
-                                   style="color: #495057"></i>
-                            </span>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-key"></i></span>
+                                </div>
+                                <input [attr.type]="hidePass ? 'password' : 'text'"
+                                    formControlName="clave"
+                                    class="form-control input_pass"
+                                    style="border-right: 0;"
+                                    placeholder="Contraseña">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2" (click)="hidePass = !hidePass">
+                                        <i [ngClass]="{'fas':true,'fa-eye':hidePass, 'fa-eye-slash': !hidePass}"
+                                        style="color: #495057"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <app-field-error-display
+                                    [displayError]="clave.touched && clave.errors?.required"
+                                    errorMsg="* Debe completar la contraseña">
+                            </app-field-error-display>
+                            <app-field-error-display
+                                    [displayError]="clave.touched && clave.errors?.minlength"
+                                    errorMsg="* El clave debe tener al menos 4 letras">
+                            </app-field-error-display>
+                            <app-field-error-display
+                                    [displayError]="clave.touched && clave.errors?.maxlength"
+                                    errorMsg="* La clave no puede tener más de 40 letras">
+                            </app-field-error-display>
                         </div>
                     </div>
                     <div class="form-group">
@@ -40,7 +76,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-3 login_container">
-                        <button type="submit" name="button" class="btn login_btn">Ingresar</button>
+                        <button type="submit" name="button" class="btn login_btn boton-effect">Ingresar</button>
                     </div>
                 </form>
             </div>

@@ -61,6 +61,7 @@ export class SeguridadService
                   intentosFallidosLogin: value.intentosFallidosLogin,
                   logged: value.logged,
                   tipoCliente: value.tipoCliente || 'ALUMNO',
+                  nombreApellido: value.nombreApellido
                 };
 
                 this._tipoUser = (this._user.tipoCliente === 'ALUMNO') ? 2 : 1;

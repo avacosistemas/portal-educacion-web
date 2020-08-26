@@ -46,6 +46,10 @@ import { UsuarioPerfilComponent } from './components/usuario/usuario-perfil/usua
 import { UsuarioPerfilEditComponent } from './components/usuario/usuario-perfil-edit/usuario-perfil-edit.component';
 import { UsuarioPerfilClasesComponent } from './components/usuario/usuario-perfil-clases/usuario-perfil-clases.component';
 import { ClaseDetalleComponent } from './components/clase/clase-detalle/clase-detalle.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { RaitingGridComponent } from './components/usuario/usuario-perfil-clases/raiting-grid/raiting-grid.component';
+
+
 
 @NgModule({
   declarations: [
@@ -79,7 +83,8 @@ import { ClaseDetalleComponent } from './components/clase/clase-detalle/clase-de
     UsuarioPerfilComponent,
     UsuarioPerfilEditComponent,
     UsuarioPerfilClasesComponent,
-    ClaseDetalleComponent
+    ClaseDetalleComponent,
+    RaitingGridComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +102,8 @@ import { ClaseDetalleComponent } from './components/clase/clase-detalle/clase-de
     RecaptchaModule,
     RecaptchaFormsModule,
     // ============ Core ============
-    FwkModule
+    FwkModule,
+    Ng2SmartTableModule
   ],
   providers: [
     {

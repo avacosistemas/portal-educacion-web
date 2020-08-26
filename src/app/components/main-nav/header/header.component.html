@@ -28,15 +28,15 @@
         </div>
 
         <a *ngIf="this.as.isLogged()" class="button-login-a" ngbDropdown
-           style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;">
+           style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;cursor: pointer;">
             <div class="button-perfil" ngbDropdownToggle
                  style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
-                <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> MI PERFIL
+                <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
             </div>
 
             <div ngbDropdownMenu>
-                <div ngbDropdownItem routerLink="usuario/{{userId}}/navprofile"><i class="fas fa-user-circle"></i> Datos Personales</div>
-                <div ngbDropdownItem routerLink="usuario/{{userId}}"><i class="fas fa-chalkboard-teacher"></i> Mis Clases</div>
+                <div ngbDropdownItem (click)="menuSelected('navprofile')"><i class="fas fa-user-circle"></i> Datos Personales</div>
+                <div ngbDropdownItem (click)="menuSelected('navclases')"><i class="fas fa-chalkboard-teacher"></i> Mis Clases</div>
                 <div ngbDropdownItem (click)="this.as.logout()" class="exit"><i class="fas fa-sign-out-alt"></i> Salir</div>
             </div>
         </a>

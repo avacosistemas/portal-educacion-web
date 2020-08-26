@@ -1,29 +1,26 @@
 import {Injectable} from '@angular/core';
-import {NivelEducativo} from "../entities/nivelEducativo";
+import {NivelEducativo} from '../entities/nivelEducativo';
 import {Observable, of} from 'rxjs';
-import {Materia} from "../entities/materia";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "../../environments/environment";
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { Materia } from '../entities/materia';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class NivelService
 {
-
 	_nivelEducativo: NivelEducativo[] = [];
 	_materiasNombre: string[] = [];
 
 	constructor(
 	  private http: HttpClient
-  )
-	{
-	}
+	) {}
 
-	public getNiveles() : Observable<NivelEducativo[]>
-  {
-	  return this.http.get<NivelEducativo[]>(environment.apiService + 'niveles/');
-  }
+	public getNiveles(): Observable<NivelEducativo[]>
+	{
+		return this.http.get<NivelEducativo[]>(environment.apiService + 'niveles/');
+	}
 
 	public getNivelesHardcode(): Observable<NivelEducativo[]>
 	{

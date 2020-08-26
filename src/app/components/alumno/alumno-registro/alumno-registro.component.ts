@@ -90,7 +90,7 @@ export class AlumnoRegistroComponent implements OnInit {
           this.router.navigate(['/login']);
         },
         error => {
-          let msg;
+          let msg = '';
           if (error?.error?.errors) {
             Object.keys(error.error.errors).forEach(o => {
               msg += '\n' + error.error.errors[o];
