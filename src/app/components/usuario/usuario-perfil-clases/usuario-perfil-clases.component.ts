@@ -77,9 +77,8 @@ export class UsuarioPerfilClasesComponent implements OnInit {
                 materia: i.materia,
                 dia: i.dia,
                 hora: i.hora,
-                estado: `<span class="${this.returnClassEstado(i.estado)}">
-                            ${i.estado}
-                         </span>`,
+                estado: i.estado,
+                estadoHtml: `<div class="btn ${this.returnClassEstado(i.estado)}"><i class="fas fa"></i></div>`,
               });
             }
           );
@@ -91,11 +90,11 @@ export class UsuarioPerfilClasesComponent implements OnInit {
   returnClassEstado(estado: string) {
     switch (estado) {
       case 'Pendiente':
-        return 'pendiente';
+        return 'btn-danger pendiente';
       case 'Finalizado':
-        return 'finalizado';
+        return 'btn-success finalizado';
       case 'En Curso':
-        return 'encurso';
+        return 'btn-warning encurso';
       default:
         break;
     }
@@ -107,7 +106,11 @@ export class UsuarioPerfilClasesComponent implements OnInit {
         custom: [
           {
             name: 'detail',
-            title: '<a class="btn btn-primary" href="#"><i class="fas fa-eye"></i></a>',
+            title: '<a class="btn btn-primary primary-button detalle" href="#"><i class="fas fa-eye"></i></a>',
+          },
+          {
+            name: 'ingresar',
+            title: '<a class="btn btn-primary ingresar" href="#"><i class="fas fa-arrow-circle-right"></i></a>',
           }
         ],
         add: false,
@@ -115,6 +118,13 @@ export class UsuarioPerfilClasesComponent implements OnInit {
         delete: false,
         columnTitle: '',
         position: 'right'
+      },
+      rowClassFunction: (row) => {
+        if (row.data.estado !== 'En Curso'){
+            return 'hide-action';
+        } else {
+            return '';
+        }
       },
       attr: {
         class: 'datagrid',
@@ -137,12 +147,14 @@ export class UsuarioPerfilClasesComponent implements OnInit {
         },
         dia: {
           title: 'Día',
-          editable: false
+          editable: false,
+          width: '10%'
         },
         hora: {
           title: 'Hora',
           filter: true,
-          editable: false
+          editable: false,
+          width: '7%'
         },
         calificacion: {
           title: 'Calificación',
@@ -154,13 +166,13 @@ export class UsuarioPerfilClasesComponent implements OnInit {
             return this.clases;
           },
         },
-        estado: {
+        estadoHtml: {
           title: 'Estado',
           type: 'html',
           filter: {
             type: 'list',
               config: {
-                selectText: 'Seleccionar',
+                selectText: '',
                   list: [
                     { value: 'Pendiente', title: 'Pendiente' },
                     { value: 'En Curso', title: 'En Curso' },

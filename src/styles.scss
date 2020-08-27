@@ -79,9 +79,27 @@ table.table-clases {
 }
 
 // ========= Estados de las clases ==========
-.encurso { color: #c18908;}
-.pendiente { color: #f52525;}
-.finalizado { color: #238e0c;}
+.encurso { 
+	margin-left: 20%;
+
+	i::before {
+		content: "\f110";
+	}
+}
+.pendiente { 
+	margin-left: 20%;
+
+	i::before {
+		content: "\f071";
+	}
+}
+.finalizado { 
+	margin-left: 20%;
+
+	i::before {
+		content: "\f058";
+	}
+}
 
 // ========= Placeholder color ==========
 
@@ -235,7 +253,7 @@ input {
 
     .nav-link.active {
         color: #fff;
-        background-color: #545b62;
+        background-color: #29712b;
     }
 
 }
@@ -603,3 +621,23 @@ input {
     left: 2px;
 }
 
+.perfil-header {
+    background-color: #001e56 !important;
+
+    h4 {
+        color: white !important;
+        font-weight: 600 !important;
+    }
+}
+
+:host ::ng-deep ng2-smart-table { 
+    ::ng-deep thead {
+        background-color: #ddd !important;
+	}
+	::ng-deep .ng2-smart-title {
+		text-align: center;
+	}
+}
+.card-body-table {
+    padding: 0.25rem !important;
+}

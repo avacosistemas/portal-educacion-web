@@ -1,0 +1,23 @@
+:host ::ng-deep ng2-smart-table { 
+    .hide-action td.ng2-smart-actions a {
+        display: none;
+    }
+    table {
+        border: 1px solid lightgrey;
+    }
+    table tr td, table tr th {
+        padding: .5em 0.2em !important;
+    }
+}
+:host ::ng-deep ng2-smart-table { 
+    ::ng-deep thead {
+        background-color: #ddd !important;
+	}
+	::ng-deep .ng2-smart-title {
+        text-align: center;
+        
+        a {
+            color: #001e56;
+        }
+	}
+}

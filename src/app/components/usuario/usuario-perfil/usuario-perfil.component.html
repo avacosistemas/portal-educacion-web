@@ -42,7 +42,7 @@
                     <li ngbNavItem="navpwd">
                         <a #chgPwd ngbNavLink style="display:none;"></a>
                         <ng-template ngbNavContent>
-                            <app-pwd-change (goBack)="active='navprofile'"></app-pwd-change>
+                            <app-pwd-change [perfil]="true" (goBack)="active='navprofile'"></app-pwd-change>
                         </ng-template>
                     </li>
                 </ul>
