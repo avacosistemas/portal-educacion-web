@@ -1,11 +1,24 @@
-export interface Profesor
+export class Profesor
 {
 	id: number;
 	nombre: string;
 	apellido: string;
-	materia: string;
-	picture: string;
+	nombreApellido?: string;
+  username: string;
+  tipoIdentificacion?: string;
+  numeroIdentificacion?: string;
+	dni?: number;
+  email: string;
+	materia?: string;
+  foto?: string;
+  institucion: string;
 	valor_curso: number;
-	valoracion: number;
-	about?: string;
+  calificacion: number;
+  descripcion?: string;
+  telefonoMovil: string;
+  telefonoFijo?: string;
+
+  constructor() {
+    this.tipoIdentificacion = 'DNI';
+  }
 }
