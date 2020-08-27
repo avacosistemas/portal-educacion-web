@@ -63,6 +63,10 @@
 	.right {
 		text-align: right;
 		clear: both;
+        i.avatar-user {
+            float: right;
+            font-size: 48px;
+        }
 		img {
 			float: right;
 			//margin-right: 10px;

@@ -1,22 +1,155 @@
 <div class="container menutop-fix">
 
     <div class="row">
-        <div class="col-md-6 col-lg-3"></div>
-        <h1>{{clase.materia}}</h1>
-        <table class="tblprofile">
-            <tbody>
-            <tr><td class="icon"><i class="fas fa-book"></i></td><td class="lbl">Id</td><td class="tddata">{{clase.id}}</td></tr>
-            <tr><td class="icon"><i class="fas fa-graduation-cap"></i></td><td class="lbl">Profesor</td><td class="tddata">{{clase.profesor}}</td></tr>
-            <tr><td class="icon"><i class="fas fa-university"></i></td><td class="lbl">Institución</td><td class="tddata">{{clase.institucion}}</td></tr>
-            <tr><td class="icon"><i class="fas fa-book-open"></i></td><td class="lbl">Materia</td><td class="tddata">{{clase.materia}}</td></tr>
-            <tr><td class="icon"><i class="fas fa-calendar-alt"></i></td><td class="lbl">Día</td><td class="tddata">{{clase.dia}}</td></tr>
-            <tr><td class="icon"><i class="fas fa-clock"></i></td><td class="lbl">Hora</td><td class="tddata">{{clase.hora}}</td></tr>
-            <tr *ngIf="!isAlumno"><td class="icon"><i class="fas fa-chart-pie"></i></td><td class="lbl">Calificación</td><td class="tddata">{{clase.calificacion}}</td></tr>
-            <tr><td></td><td class="lbl">Estado</td><td class="tddata">{{clase.estado}}</td></tr>
-            </tbody>
-        </table>
 
-        <button class="btn btn-primary btn-block mt-4" type="button" (click)="goBack()">Volver</button>
-    </div>
+        <div class="col">
 
-</div>
+            <div class="card">
+                <header class="card-header perfil-header">
+                    <h4>Clase: {{clase.materia}}</h4>
+                </header>
+                <article class="card-body">
+
+                    <form>
+                        <div class="form-row">
+                            <div class="col-sm-4 col-md-3">
+                                <label for="txtId" class="control-label">Id</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-id-card-alt"></i> </span>
+                                    </div>
+                                    <input id="txtId" type="text" class="form-control" value="{{clase.id}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 col-md-9">
+                                <label for="txtMateria" class="control-label">Materia</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-book"></i> </span>
+                                    </div>
+                                    <input id="txtMateria" type="text" value="{{clase.materia}}" readonly class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtInstitucion" class="control-label">Institución</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-book"></i> </span>
+                                    </div>
+                                    <input id="txtInstitucion" value="{{clase.institucion}}" type="text" readonly class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtDia" class="control-label">Día</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-book"></i> </span>
+                                    </div>
+                                    <input id="txtDia" value="{{clase.dia}}" type="text" readonly class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="txtHora" class="control-label">Hora</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-book"></i> </span>
+                                    </div>
+                                    <input id="txtHora" value="{{clase.hora}}" type="text" readonly class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="txtEstado" class="control-label">Estado</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fas fa-book"></i> </span>
+                                    </div>
+                                    <input id="txtEstado" value="{{clase.estado}}" type="text" readonly class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <label>Calificación</label>
+                                <div class="rate">
+                                    <ngb-rating [(rate)]="clase.calificacion">
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+<!--                    <table class="tblprofile">-->
+<!--                        <tbody>-->
+<!--                        <tr><td class="icon"><i class="fas fa-id-card-alt"></i></td><td class="lbl">Id</td><td class="tddata">{{clase.id}}</td></tr>-->
+<!--                        <tr *ngIf="isAlumno"><td class="icon"><i class="fas fa-graduation-cap"></i></td><td class="lbl">Profesor</td><td class="tddata">{{clase.profesor}}</td></tr>-->
+<!--                        <tr><td class="icon"><i class="fas fa-university"></i></td><td class="lbl">Institución</td><td class="tddata">{{clase.institucion}}</td></tr>-->
+<!--                        <tr><td class="icon"><i class="fas fa-book"></i></td><td class="lbl">Materia</td><td class="tddata">{{clase.materia}}</td></tr>-->
+<!--                        <tr><td class="icon"><i class="fas fa-calendar-alt"></i></td><td class="lbl">Día</td><td class="tddata">{{clase.dia}}</td></tr>-->
+<!--                        <tr><td class="icon"><i class="fas fa-clock"></i></td><td class="lbl">Hora</td><td class="tddata">{{clase.hora}}</td></tr>-->
+<!--                        <tr *ngIf="!isAlumno">-->
+<!--                            <td class="icon"><i class="fas fa-chart-pie"></i></td>-->
+<!--                            <td class="lbl">Calificación</td>-->
+<!--                            <td class="tddata">-->
+<!--                                <div class="rate">-->
+<!--                                <ngb-rating [(rate)]="clase.calificacion">-->
+<!--                                    <ng-template let-fill="fill" let-index="index">-->
+<!--                                        <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>-->
+<!--                                    </ng-template>-->
+<!--                                </ngb-rating>-->
+<!--                                </div>-->
+
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr><td class="icon"><i class="fas fa-battery-half"></i></td><td class="lbl">Estado</td><td class="tddata">{{clase.estado}}</td></tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+
+                    <button class="btn btn-primary btn-block mt-4" type="button" (click)="menuSelected('navclases')">Volver</button>
+
+                </article> <!-- End card body -->
+
+            </div> <!-- End card -->
+
+        </div> <!-- End col -->
+
+    </div> <!-- End row -->
+
+
+    <div class="row" *ngIf="anotaciones.chat.length > 0">
+    <!-- Chat -->
+        <div class="col">
+            <div class="small-chat-box">
+
+                <div *ngFor="let msg of anotaciones.chat" class="chat-message {{msg.align}}">
+                    <i class="{{msg.avatar}} avatar-user"></i>
+                    <div class="message">
+                        <a class="message-author" href="#"> {{msg.fromName}} </a>
+                        <span class="message-date"> {{msg.fechaHora}} </span>
+                        <span class="message-content">
+                            {{msg.message}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- ==================== Form ===================== -->
+            <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fg">
+                <label for="txtRespuestaId"></label>
+                <textarea formControlName="txtRespuesta" id="txtRespuestaId" class="form-control" rows="3"></textarea>
+                <button class="btn btn-secondary btn-block mt-4" (click)="enviarRespuesta($event)">Agregar respuesta</button>
+            </form>
+
+        </div> <!-- End col -->
+
+    </div> <!-- End row -->
+
+</div> <!-- End container -->

@@ -40,6 +40,8 @@ export class MainNavComponent implements OnInit
 		if ( (this.router.url.indexOf('/profesor') >= 0 && this.router.url.indexOf('/profesor/registro') < 0 )
 			|| ( window.location.pathname.indexOf('/profesor') >= 0 && window.location.pathname.indexOf('/profesor/registro') <0 )
 			|| ( window.location.pathname.indexOf('/alumno') >= 0 && window.location.pathname.indexOf('/alumno/registro') <0 )
+			|| this.router.url.indexOf('/clase') >= 0
+			|| window.location.pathname.indexOf('/clase') >= 0
 			|| this.router.url.indexOf('/buscar') >= 0
 			|| window.location.pathname.indexOf('/buscar') >= 0
 			|| this.router.url.indexOf('/preguntas') >= 0

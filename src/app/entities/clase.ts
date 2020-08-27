@@ -1,6 +1,6 @@
 export class Clase {
   id: number;
-  calificacion: number;
+  calificacion?: number;
   institucionId?: number;
   institucion: string;
   materiaId?: number;

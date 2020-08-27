@@ -1,0 +1,15 @@
+GET {{host}}{{apiServiceCliente}}/profesor/2/detalleclase/1001
+Accept: {{accept}}
+Cache-Control: {{cache}}
+Content-Type: {{content}}
+Authorization: {{token}}
+
+###
+
+GET {{host}}{{apiServiceCliente}}/profesor/2/anotaciones/1001
+Accept: {{accept}}
+Cache-Control: {{cache}}
+Content-Type: {{content}}
+Authorization: {{token}}
+
+###

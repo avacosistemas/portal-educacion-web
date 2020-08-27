@@ -62,6 +62,11 @@ export class ProfesorService
     return this.http.get(this.controllerCliente + idProfesor.toString() + '/detalleclase/' + idClase.toString());
   }
 
+  public getAnotaciones(idProfesor: number, idClase: number)
+  {
+    return this.http.get(this.controllerCliente + idProfesor.toString() + '/anotaciones/' + idClase.toString());
+  }
+
   public getPreguntas(id: number): Observable<any> {
     return this.http.get<any>(this.controllerCliente + 'preguntas/' + id.toString());
   }
@@ -72,6 +77,10 @@ export class ProfesorService
     return this.http.put(this.controllerCliente + 'responder/' + id.toString(), body);
   }
 
+  public sendAnotacion(idProfesor: number, idClase: number, mensaje: string) {
+    const body = {comentario: mensaje};
+    return this.http.post(this.controllerCliente + idProfesor.toString() + '/anotaciones/' + idClase.toString(), body );
+  }
 
   randomInt(min, max)
   {

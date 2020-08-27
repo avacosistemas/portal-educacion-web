@@ -61,8 +61,8 @@ export class ProfesorScheduleComponent implements OnInit {
   enviarConsulta(event) {
     event.preventDefault();
     let msg: Mensaje = {
-      from: this.as.getUser().id,
-      to: this.profesorIdParam,
+      fromId: this.as.getUser().id,
+      toId: this.profesorIdParam,
       message: ''
     };
 
