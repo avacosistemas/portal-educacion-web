@@ -5,6 +5,7 @@ import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Alumno } from "../entities/alumno";
+import { Calificaciones } from '../entities/calificaciones';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,9 @@ export class ProfesorService
     protected http: HttpClient
   ) { }
 
-
+  getCalificaciones(id: number) {
+    return this.http.get<Calificaciones>(this.controllerCliente + 'calificaciones/' + id.toString());
+  }
 
   public getProfesores(): Observable<Profesor[]> {
     return this.http.get<Profesor[]>(this.controller);

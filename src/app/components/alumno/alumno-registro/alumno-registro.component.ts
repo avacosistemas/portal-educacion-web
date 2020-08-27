@@ -30,8 +30,8 @@ export class AlumnoRegistroComponent implements OnInit {
 
   ngOnInit(): void {
     this.fg = this.fb.group({
-      nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100), Validators.pattern('^[a-zA-Z ]*$')]],
+      apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100), Validators.pattern('^[a-zA-Z ]*$')]],
       dni: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
       usuario: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
       pwd: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],

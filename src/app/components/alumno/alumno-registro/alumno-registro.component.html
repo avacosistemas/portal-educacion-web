@@ -19,10 +19,10 @@
 										<span class="input-group-text"> <i class="fas fa-user"></i> </span>
 									</div>
 									<input id="txtNombre"
-                                           formControlName="nombre"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="John">
+                                                                                formControlName="nombre"
+                                                                                type="text"
+                                                                                class="form-control"
+                                                                                placeholder="John">
 
 								</div>
 								<app-field-error-display
@@ -36,7 +36,11 @@
 								<app-field-error-display
 									[displayError]="nombre.touched && nombre.errors?.maxlength"
 									errorMsg="* El nombre no puede tener más de 100 letras">
-								</app-field-error-display>
+                                                                </app-field-error-display>
+                                                                <app-field-error-display
+                                                                        [displayError]="nombre.touched && nombre.errors?.pattern"
+                                                                        errorMsg="* El nombre debe contener solo letras">
+                                                                </app-field-error-display>                                                                
 							</div>
 
 							<div class="col">
@@ -46,23 +50,27 @@
 										<span class="input-group-text"> <i class="far fa-user"></i> </span>
 									</div>
 									<input id="txtApellido"
-                                           formControlName="apellido"
-                                           type="text"
-                                           class="form-control"
-                                           placeholder="Doe">
+                                                                                formControlName="apellido"
+                                                                                type="text"
+                                                                                class="form-control"
+                                                                                placeholder="Doe">
 								</div>
-                                <app-field-error-display
-                                        [displayError]="apellido.touched && apellido.errors?.required"
-                                        errorMsg="* Debe completar el apellido">
-                                </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="apellido.touched && apellido.errors?.minlength"
-                                        errorMsg="* El apellido debe tener al menos 2 letras">
-                                </app-field-error-display>
-                                <app-field-error-display
-                                        [displayError]="apellido.touched && apellido.errors?.maxlength"
-                                        errorMsg="* El apellido no puede tener más de 100 letras">
-                                </app-field-error-display>
+                                                                <app-field-error-display
+                                                                        [displayError]="apellido.touched && apellido.errors?.required"
+                                                                        errorMsg="* Debe completar el apellido">
+                                                                </app-field-error-display>
+                                                                <app-field-error-display
+                                                                        [displayError]="apellido.touched && apellido.errors?.minlength"
+                                                                        errorMsg="* El apellido debe tener al menos 2 letras">
+                                                                </app-field-error-display>
+                                                                <app-field-error-display
+                                                                        [displayError]="apellido.touched && apellido.errors?.maxlength"
+                                                                        errorMsg="* El apellido no puede tener más de 100 letras">
+                                                                </app-field-error-display>
+                                                                <app-field-error-display
+                                                                        [displayError]="apellido.touched && apellido.errors?.pattern"
+                                                                        errorMsg="* El apellido debe contener solo letras">
+                                                                </app-field-error-display>
 
 							</div>
 						</div>

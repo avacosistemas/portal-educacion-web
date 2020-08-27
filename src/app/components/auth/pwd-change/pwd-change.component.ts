@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { SeguridadService } from "../../../services/seguridad.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -12,6 +12,7 @@ import { ToastrService } from "ngx-toastr";
 export class PwdChangeComponent implements OnInit {
 
   @Output() goBack = new EventEmitter();
+  @Input() perfil: boolean;
 
   fg: FormGroup;
 

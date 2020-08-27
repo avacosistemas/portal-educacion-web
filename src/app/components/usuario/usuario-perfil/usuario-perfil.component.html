@@ -33,10 +33,16 @@
                             <app-usuario-perfil-clases></app-usuario-perfil-clases>
                         </ng-template>
                     </li>
+                    <li ngbNavItem="navcalificaciones">
+                        <a ngbNavLink><i class="fas fa-award"></i> Mis Calificaciones</a>
+                        <ng-template ngbNavContent>
+                            <app-usuario-calificaciones></app-usuario-calificaciones>
+                        </ng-template>
+                    </li>
                     <li ngbNavItem="navpwd">
                         <a #chgPwd ngbNavLink style="display:none;"></a>
                         <ng-template ngbNavContent>
-                            <app-pwd-change (goBack)="active='navprofile'"></app-pwd-change>
+                            <app-pwd-change [perfil]="true" (goBack)="active='navprofile'"></app-pwd-change>
                         </ng-template>
                     </li>
                 </ul>

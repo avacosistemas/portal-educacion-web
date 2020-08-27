@@ -49,7 +49,7 @@ export class PreguntasComponent implements OnInit {
 
   loadData() {
     this.ps.getPreguntas(this.userId).subscribe(
-      (value:any) => {
+      (value: any) => {
         this.preguntas = value.data;
       },
       error => {
@@ -74,9 +74,17 @@ export class PreguntasComponent implements OnInit {
         columnTitle: '',
         position: 'right'
       },
+      rowClassFunction: (row) => {
+        if (row.data.respuesta){
+            return 'hide-action';
+        } else {
+            return '';
+        }
+      },
       columns: {
         fechaPregunta: {
-          title: 'Fecha / Hora'
+          title: 'Fecha / Hora',
+          width: '10%'
         },
         pregunta: {
           title: 'Pregunta'
@@ -97,22 +105,16 @@ export class PreguntasComponent implements OnInit {
   }
 
   openModal(question: Pregunta) {
-    if (question.respuesta) {
-      this.toastr.info('No se puede volver a responder una pregunta que ya tenía respuesta');
-    }
-    else
-    {
       this.qId = question.id;
       this.pregunta = question.pregunta;
       this.modalService.open(this.contentModal, {size: 'lg', scrollable: true, centered: true});
-    }
   }
 
 
   Responder(event)
   {
-    this.ps.sendRespuesta(this.qId,this.txtRespuesta.value).subscribe(
-      (value:any) => {
+    this.ps.sendRespuesta(this.qId, this.txtRespuesta.value).subscribe(
+      (value: any) => {
         if (value && value.status === 'OK')
         {
           this.toastr.success('La respuesta se guardó correctamente');
