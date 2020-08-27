@@ -3,6 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
+// export const PREFIX_DOMAIN_API =  'http://localhost:8080/';
 export const PREFIX_DOMAIN_API =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/';
 
 export const environment = {
