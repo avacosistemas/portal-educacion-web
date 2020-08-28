@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Calificaciones } from 'src/app/entities/calificaciones';
 
 @Component({
   selector: 'app-raiting-grid',
@@ -8,6 +9,5 @@ import { Component, OnInit, Input } from '@angular/core';
 export class RaitingGridComponent {
 
   @Input() value; // data from table
-  @Input() rowData;
-
+  @Input() rowData: Calificaciones;
 }

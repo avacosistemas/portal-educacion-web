@@ -641,3 +641,24 @@ input {
 .card-body-table {
     padding: 0.25rem !important;
 }
+.btn-floating-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 20;
+}
+
+.btn-floating {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+	border: 1px solid rgba(245, 245, 245, 0.075);
+	text-align: center;
+	font-size: 24px;
+
+	i {
+		color: white;
+    	padding: 8px;
+	}
+}

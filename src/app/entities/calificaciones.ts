@@ -6,4 +6,5 @@ export class Calificaciones {
     materiaId?: number;
     materia: string;
     fechaHora: string;
+    disabled: boolean; // Deshabilita calificacion en frontend
 }

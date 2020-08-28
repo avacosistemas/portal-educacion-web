@@ -17,7 +17,8 @@ export class PreguntasComponent implements OnInit {
 
   @ViewChild('contentRespuesta', { static: true }) contentModal: ElementRef;
 
-  userId = 0;  isAlumno = false;
+  userId = 0;
+  isAlumno = false;
   preguntas: Pregunta[];
   qId: number = 0;
   respuesta: string;
@@ -113,11 +114,12 @@ export class PreguntasComponent implements OnInit {
 
   Responder(event)
   {
-    this.ps.sendRespuesta(this.qId, this.txtRespuesta.value).subscribe(
+    this.ps.sendRespuesta(this.userId, this.qId, this.txtRespuesta.value).subscribe(
       (value: any) => {
         if (value && value.status === 'OK')
         {
           this.toastr.success('La respuesta se guardó correctamente');
+          this.loadData();
         } else if (value && value.status === 'ERROR') {
           this.toastr.error('No se pudo guardar la respuesta. \n' + value.data);
         }

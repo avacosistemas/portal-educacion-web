@@ -9,7 +9,7 @@ export const HTTP_METHODS = {
     get: 'GET'
 };
 
-export class WsDef{         
+export class WsDef{
     key: string;
     url: string;
     method?: string;

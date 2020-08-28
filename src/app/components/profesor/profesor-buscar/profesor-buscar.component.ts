@@ -7,6 +7,7 @@ import { MateriaService } from '../../../services/materia.service';
 import { Materia } from '../../../entities/materia';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogoService } from 'src/app/services/catalogo.service';
+import { CatalogoProfesor } from 'src/app/entities/catalogoProfesor';
 
 @Component({
   selector: 'app-profesor-buscar',
@@ -15,7 +16,7 @@ import { CatalogoService } from 'src/app/services/catalogo.service';
 })
 export class ProfesorBuscarComponent implements OnInit {
 
-  profesores: Profesor[] = [];
+  profesores: CatalogoProfesor[] = [];
   nivelesEducativos: NivelEducativo[] = [];
   materiaSeleccionada: string;
   selMatId: number;
@@ -40,8 +41,9 @@ export class ProfesorBuscarComponent implements OnInit {
 
   }
 
-  selecciono(valor: string) {
-    this.materiaSeleccionada = valor;
+  selecciono(valor: number) {
+    this.selMatId = valor;
+    this.materiaSeleccionada = this.materias.find(f => f.id === this.selMatId).descripcion;
     this.consultarCatalogo();
   }
 
@@ -50,19 +52,6 @@ export class ProfesorBuscarComponent implements OnInit {
   }
 
   loadData() {
-
-    this.ps.getProfesores().subscribe(
-      (value: any) => {
-
-        this.profesores = value.data;
-        this.profesores.forEach(p => {
-          if (!p.foto) {
-            p.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
-          }
-        });
-      }
-    );
-
     this.ns.getNiveles().subscribe((n: any) => {
       this.nivelesEducativos = n.data;
       this.nivelSeleccionado = this.nivelesEducativos.find(f => f.id === this.selLevId).descripcion;
@@ -76,6 +65,7 @@ export class ProfesorBuscarComponent implements OnInit {
       (value: any) =>
       {
         this.materias = [];
+        this.selMatId = null;
         value.data.forEach(materia =>
         {
           this.materias.push(
@@ -96,11 +86,17 @@ export class ProfesorBuscarComponent implements OnInit {
     this.catalogoService.getCatalogoDocente({orden: this.orderId, idMateria: this.selMatId, idNivel: this.selLevId})
     .subscribe(d => {
       console.log(d);
+      this.profesores = d;
+      this.profesores.forEach(p => {
+        if (!p.foto) {
+          p.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
+        }
+      });
     });
   }
 
-  get getProfesores(): Profesor[] {
-    return this.profesores.filter(f => f.materia === (this.materiaSeleccionada ? this.materiaSeleccionada : f.materia));
+  get getProfesores(): CatalogoProfesor[] {
+    return this.profesores;
   }
 
   onChangeNivel() {

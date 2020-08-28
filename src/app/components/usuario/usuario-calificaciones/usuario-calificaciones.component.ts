@@ -38,6 +38,9 @@ export class UsuarioCalificacionesComponent implements OnInit {
       // get Calificaciones
       this.ps.getCalificaciones(this.paramId).subscribe(
         (value: any) => {
+          value.data.forEach(c => {
+            c.disabled = true;
+          });
           this.calificaciones = value.data;
         }
       );

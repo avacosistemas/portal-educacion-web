@@ -23,6 +23,7 @@ export class UsuarioPerfilComponent implements OnInit {
   active = 'navclases';
   isAlumno = false;
   cambiarPassword: boolean;
+  idClase: number;
 
   constructor(
     private fb: FormBuilder,
@@ -121,10 +122,10 @@ export class UsuarioPerfilComponent implements OnInit {
         }
       );
     }
-
-
-
-
   }
 
+  goDetalleClase(id) {
+    this.active = 'navdetalleclase';
+    this.idClase = id;
+  }
 }

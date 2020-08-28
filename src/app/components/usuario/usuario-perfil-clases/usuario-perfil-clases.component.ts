@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SeguridadService } from "../../../services/seguridad.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Clase } from "../../../entities/clase";
@@ -16,6 +16,7 @@ declare var $;
 })
 export class UsuarioPerfilClasesComponent implements OnInit {
 
+  @Output() detalleClase = new EventEmitter();
   paramId: number;
   clases: Clase[] = [];
   isAlumno = false;
@@ -194,7 +195,8 @@ export class UsuarioPerfilClasesComponent implements OnInit {
   onCustomAction(event) {
     switch ( event.action) {
       case 'detail':
-        this.router.navigate([`/clase/detalle/${event.data.id}`]);
+        // this.router.navigate([`/clase/detalle/${event.data.id}`]);
+        this.detalleClase.emit(event.data.id);
         break;
     }
   }

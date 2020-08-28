@@ -8,7 +8,8 @@ export class Clase {
   dia: string;
   hora: string;
   estado: string;
-  estadoHtml?:string;
+  estadoHtml?: string;
+  idString?: string;
 
   profesorId?: number;
   profesor?: string;

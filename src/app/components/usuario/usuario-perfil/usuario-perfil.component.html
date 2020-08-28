@@ -30,7 +30,7 @@
                     <li ngbNavItem="navclases">
                         <a ngbNavLink><i class="fas fa-chalkboard-teacher"></i> Mis Clases</a>
                         <ng-template ngbNavContent>
-                            <app-usuario-perfil-clases></app-usuario-perfil-clases>
+                            <app-usuario-perfil-clases (detalleClase)="goDetalleClase($event)"></app-usuario-perfil-clases>
                         </ng-template>
                     </li>
                     <li ngbNavItem="navcalificaciones">
@@ -43,6 +43,12 @@
                         <a #chgPwd ngbNavLink style="display:none;"></a>
                         <ng-template ngbNavContent>
                             <app-pwd-change [perfil]="true" (goBack)="active='navprofile'"></app-pwd-change>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem="navdetalleclase">
+                        <a #claseDetalle ngbNavLink style="display:none;"></a>
+                        <ng-template ngbNavContent>
+                            <app-clase-detalle [idClase]="idClase" (goBack)="active='navclases'"></app-clase-detalle>
                         </ng-template>
                     </li>
                 </ul>

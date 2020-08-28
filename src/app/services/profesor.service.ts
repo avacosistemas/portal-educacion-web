@@ -71,10 +71,10 @@ export class ProfesorService
     return this.http.get<any>(this.controllerCliente + 'preguntas/' + id.toString());
   }
 
-  public sendRespuesta(id: number, respuesta: string)
+  public sendRespuesta(idProfesor: number, idPregunta: number, respuesta: string, )
   {
-    const body = {respuesta: respuesta, idPreguntaRespuesta: id};
-    return this.http.put(this.controllerCliente + 'responder/' + id.toString(), body);
+    const body = {respuesta: respuesta, idPreguntaRespuesta: idPregunta};
+    return this.http.put(this.controllerCliente + 'responder/' + idProfesor.toString(), body);
   }
 
   public sendAnotacion(idProfesor: number, idClase: number, mensaje: string) {
