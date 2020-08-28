@@ -13,3 +13,17 @@ Content-Type: {{content}}
 Authorization: {{token}}
 
 ###
+GET {{host}}{{apiServiceCliente}}/profesor/preguntas/2
+Accept: {{accept}}
+Cache-Control: {{cache}}
+Content-Type: {{content}}
+Authorization: {{token}}
+
+###
+GET {{host}}{{apiServiceCliente}}/profesor/2/alumnos/1001
+Accept: {{accept}}
+Cache-Control: {{cache}}
+Content-Type: {{content}}
+Authorization: {{token}}
+
+###

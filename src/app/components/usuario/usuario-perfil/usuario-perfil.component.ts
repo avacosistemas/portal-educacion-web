@@ -1,10 +1,9 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../../entities/usuario';
 import { AlumnoService } from '../../../services/alumno.service';
 import { ProfesorService } from '../../../services/profesor.service';
 import { ActivatedRoute } from '@angular/router';
 import { SeguridadService } from '../../../services/seguridad.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormsValidationService } from '../../../services/forms-validation.service';
 import { HeaderService } from 'src/app/services/header.service';
@@ -16,7 +15,6 @@ import { HeaderService } from 'src/app/services/header.service';
 })
 export class UsuarioPerfilComponent implements OnInit {
 
-  fg: FormGroup;
   usuario: Usuario = new Usuario();
   paramId: number;
   fileName = 'Seleccionar Archivo';
@@ -24,9 +22,9 @@ export class UsuarioPerfilComponent implements OnInit {
   isAlumno = false;
   cambiarPassword: boolean;
   idClase: number;
+  imgSrc: string;
 
   constructor(
-    private fb: FormBuilder,
     private route: ActivatedRoute,
     private fv: FormsValidationService,
     protected as: SeguridadService,
@@ -43,89 +41,56 @@ export class UsuarioPerfilComponent implements OnInit {
     this.headerService.getMenuSelected().subscribe(ms => {
       this.active = ms;
     });
-
     this.paramId = Number(this.route.snapshot.paramMap.get('id'));
-
     this.isAlumno = this.as.isAlumno();
-    this.fg = this.fb.group({
-      nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      dni: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
-      username: [null],
-      institucion: [null],
-      email: [null, [Validators.required, this.fv.correo()]],
-      telCel: [null, [Validators.required, Validators.minLength(10), this.fv.telefono()]],
-      telFijo: [null, [Validators.minLength(10), this.fv.telefono()]],
-    });
     this.loadData();
   }
 
-  // ======================= Getters ==========================
-  get nombre() { return this.fg.get('nombre'); }
-  get apellido() { return this.fg.get('apellido'); }
-  get dni() { return this.fg.get('dni'); }
-  get username() { return this.fg.get('username'); }
-  get institucion() { return this.fg.get('institucion'); }
-  get email() { return this.fg.get('email'); }
-  get telCel() { return this.fg.get('telCel'); }
-  get telFijo() { return this.fg.get('telFijo'); }
+  setNav(nav: string) {
+    this.active = nav;
+  }
 
   selectFile(e) {
-    console.log(e);
     if (e.target.files.length > 0) {
       this.fileName = e.target.files[0].name;
-      this.fg.markAsTouched();
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.usuario.foto = e.target.result;
+        this.imgSrc = this.usuario.foto;
+      };
+      reader.readAsDataURL(e.target.files[0]);
     }
   }
 
-
   loadData() {
-    if (this.as.getUser().tipoCliente === 'PROFESOR') {
+    if (this.isAlumno) {
       // load profesor
-      this.ps.getProfesor(this.paramId).subscribe(
+      this.ps.getPerfil(this.paramId).subscribe(
         (value: any) => {
-          if (!value.data.foto) {
-            value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
-          }
-          this.usuario.apellido = value.data.apellido;
-          this.usuario.nombre = value.data.nombre;
-          this.usuario.nombreApellido = value.data.nombreApellido;
-          this.usuario.username = value.data.username;
-          this.usuario.telefonoFijo = value.data.telefonoFijo;
-          this.usuario.telefonoMovil = value.data.telefonoMovil;
-          this.usuario.tipoIdentificacion = value.data.tipoIdentificacion;
-          this.usuario.numeroIdentificacion = value.data.numeroIdentificacion;
-          this.usuario.foto = value.data.foto;
-          this.usuario.institucion = value.data.institucion;
-          // Propios del profesor
-          this.usuario.calificacion = value.data.calificacion || 5;
-          this.usuario.descripcion = value.data.descripcion;
+          this.usuario = value.data;
+          this.imgSrc = this.getImageSource();
         }
       );
     } else {
       // load alumno
-      this.als.getAlumno(this.paramId).subscribe(
+      this.als.getPerfil(this.paramId).subscribe(
         (value: any) => {
-          if (!value.data.foto) {
-            value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
-          }
-          this.usuario.apellido = value.data.apellido;
-          this.usuario.nombre = value.data.nombre;
-          this.usuario.nombreApellido = value.data.nombreApellido;
-          this.usuario.username = value.data.username;
-          this.usuario.telefonoFijo = value.data.telefonoFijo;
-          this.usuario.telefonoMovil = value.data.telefonoMovil;
-          this.usuario.tipoIdentificacion = value.data.tipoIdentificacion;
-          this.usuario.numeroIdentificacion = value.data.numeroIdentificacion;
-          this.usuario.foto = value.data.foto;
-          this.usuario.institucion = value.data.institucion;
+          this.usuario = value.data;
+          this.imgSrc = this.getImageSource();
         }
       );
+
     }
   }
 
   goDetalleClase(id) {
     this.active = 'navdetalleclase';
     this.idClase = id;
+  }
+
+  getImageSource() {
+    if (this.usuario.nombreArchivo && this.usuario.foto) {
+      return `data:image/${this.usuario.nombreArchivo.substring(this.usuario.nombreArchivo.lastIndexOf('.') + 1)};base64,${this.usuario.foto}`;
+    }
   }
 }

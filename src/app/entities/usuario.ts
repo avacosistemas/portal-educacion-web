@@ -24,15 +24,9 @@ export class Usuario
   telefonoFijo?: string;
   foto?: string;
   institucion?: string;
+  nombreArchivo?: string;
 
   // Datos Profesor
   calificacion?: number;
   descripcion?: string;
-
-
-  constructor()
-	{
-	  this.id = 0;
-		this.logged = false;
-	}
 }

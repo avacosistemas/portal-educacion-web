@@ -1,19 +1,19 @@
 <div class="container">
             <div class="card">
                 <header class="card-header perfil-header">
-                    <h4>{{clase.idString}}</h4>
+                    <h4>{{clase?.idString}}</h4>
                 </header>
                 <article class="card-body row">
                     <div class="col-sm-6">
                         <form>
                             <div class="form-row">
                                 <div class="col">
-                                    <label for="txtInstitucion" class="control-label">Profesor</label>
+                                    <label for="txtProfesor" class="control-label">Profesor</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
-                                        <input id="txtInstitucion" value="{{userName}}" type="text" readonly class="form-control">
+                                        <input id="txtProfesor" value="{{userName}}" type="text" readonly class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -25,7 +25,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-university"></i></span>
                                         </div>
-                                        <input id="txtInstitucion" value="{{clase.institucion}}" type="text" readonly class="form-control">
+                                        <input id="txtInstitucion" value="{{clase?.institucion}}" type="text" readonly class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"> <i class="fas fa-book"></i> </span>
                                         </div>
-                                        <input id="txtMateria" type="text" value="{{clase.materia}}" readonly class="form-control">
+                                        <input id="txtMateria" type="text" value="{{clase?.materia}}" readonly class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"> <i class="fas fa-calendar"></i> </span>
                                         </div>
-                                        <input id="txtDia" value="{{clase.dia}} {{clase.hora}} Hs." type="text" readonly class="form-control">
+                                        <input id="txtDia" value="{{clase?.dia}} {{clase?.hora}} Hs." type="text" readonly class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -59,17 +59,17 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"> <i class="fas fa-battery-quarter"></i></span>
                                         </div>
-                                        <input id="txtEstado" value="{{clase.estado}}" type="text" readonly class="form-control">
+                                        <input id="txtEstado" value="{{clase?.estado}}" type="text" readonly class="form-control">
                                     </div>
                                 </div>
 
-                                <div class="col" *ngIf="clase.calificacion">
+                                <div class="col" *ngIf="clase?.calificacion">
                                     <label>Calificación</label>
                                     <div class="input-group mb-3 rate">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-chart-pie"></i></span>
                                         </div>
-                                        <ngb-rating [rate]="clase.calificacion" [readonly]="true" class="form-control">
+                                        <ngb-rating [rate]="clase?.calificacion" [readonly]="true" class="form-control">
                                             <ng-template let-fill="fill" let-index="index">
                                                 <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
                                             </ng-template>
@@ -80,22 +80,41 @@
                             </div>
                         </form>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <button class="btn btn-secondary btn-block mt-4" type="button" (click)="goBack.emit()">Ver alumnos</button>
+                            <div class="col" *ngIf="!isAlumno">
+                                <button class="btn btn-secondary btn-block mt-4" type="button" (click)="goBack.emit('navclasealumnos')">Ver alumnos</button>
                             </div>
-                            <div class="col-sm-6">
-                                <button class="btn btn-primary btn-block mt-4" type="button" (click)="goBack.emit()">Iniciar Clase</button>
+                            <div class="col">
+                                <button class="btn btn-primary btn-block mt-4" type="button" (click)="iniciarClase($event)">Iniciar Clase</button>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="isAlumno">
+                            <div class="col-sm-12">
+                                <!-- Form encuesta satisfacción -->
+                                <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fge">
+                                    <label class="mt-4">Calificación</label>
+                                    <div class="rate">
+                                        <ngb-rating [(rate)]="rate">
+                                            <ng-template let-fill="fill" let-index="index">
+                                                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                                            </ng-template>
+                                        </ngb-rating>
+                                    </div>
+                                    <label for="txtComentarioId">Comentario de la calificación</label>
+                                    <textarea formControlName="txtComentario" id="txtComentarioId" class="form-control" rows="3"></textarea>
+                                    <button class="btn btn-secondary btn-block mt-3" (click)="calificar($event)">Enviar calificación</button>
+                                    <!-- <button class="btn btn-secondary btn-block mt-4" (click)="enviarRespuesta($event)">Agregar respuesta</button> -->
+                                </form>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <button class="btn btn-danger btn-block mt-4" type="button" (click)="goBack.emit()">Volver</button>
+                                <button class="btn btn-danger btn-block mt-4" type="button" (click)="goBack.emit('navclases')">Volver</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div  class="col-sm-12" *ngIf="anotaciones.chat.length > 0">
-                            <!-- Chat -->
+                        <div  class="col-sm-12">
+                            <!-- ==================== Chat ===================== -->
                             <div class="small-chat-box">
 
                                 <div *ngFor="let msg of anotaciones.chat" class="chat-message {{msg.align}}">
@@ -109,7 +128,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- ==================== Form ===================== -->
+                            <!-- Form -->
                             <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fg">
                                 <label for="txtRespuestaId"></label>
                                 <textarea formControlName="txtRespuesta" id="txtRespuestaId" class="form-control" rows="3"></textarea>

@@ -2,8 +2,25 @@
     <div class="row myRow">
         <div class="col-md-3 profile">
             <div class="avatar">
-                <img src="{{usuario.foto}}" alt="{{usuario.nombre}}, {{usuario.apellido}}" class="img-raised"/>
+                <img [src]="imgSrc"
+                     onerror="this.src='/assets/icons/fa/fas-fa-user-circle-mod.svg'"
+                     alt="{{usuario?.nombre}}, {{usuario?.apellido}}"
+                     class="img-raised"/>
+                <div class="caption btn-floating-container" (click)="profilePictureFile.click()">
+                    <p>
+                        <a class="btn-floating btn-success"><i class="fas" [ngClass]="{ 'fa-plus': !usuario.foto, 'fa-pen': usuario.foto }"></i></a>
+                    </p>
+                </div>
             </div>
+            <!-- ================== Picture ================== -->
+            <div class="form-row" style="display:none;">
+                <span>Foto de perfil</span>
+                <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" #profilePictureFile (change)="selectFile($event)">
+                    <label class="custom-file-label" id="lblProfilePictureFile" for="profilePictureFile">{{fileName}}</label>
+                </div>
+            </div>
+            <!-- ================== Picture ================== -->
             <div class="info">
                 <div class="rate" *ngIf="usuario.calificacion">
                     <ngb-rating [(rate)]="usuario.calificacion">
@@ -13,7 +30,7 @@
                     </ngb-rating>
                 </div>
                 <h3>Bienvenido!!!</h3>
-                <h4>{{usuario.nombre}}, {{usuario.apellido}}</h4>
+                <h4>{{usuario.nombreApellido}}</h4>
                 <span>{{isAlumno? 'Alumno' : 'Profesor'}}</span>
                 <span *ngIf="usuario.descripcion">{{usuario.descripcion}}</span>
 
@@ -21,10 +38,10 @@
             <hr style="margin-top: 30px">
             <div class="d-flex">
                 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-                    <li ngbNavItem="navprofile">
+                    <li ngbNavItem="navprofile" *ngIf="usuario">
                         <a ngbNavLink><i class="fas fa-user-circle"></i> Mi Perfil</a>
                         <ng-template ngbNavContent>
-                            <app-usuario-perfil-edit (cambiarPassword)="active='navpwd'"></app-usuario-perfil-edit>
+                            <app-usuario-perfil-edit [usuario]="usuario" (cambiarPassword)="active='navpwd'"></app-usuario-perfil-edit>
                         </ng-template>
                     </li>
                     <li ngbNavItem="navclases">
@@ -48,7 +65,13 @@
                     <li ngbNavItem="navdetalleclase">
                         <a #claseDetalle ngbNavLink style="display:none;"></a>
                         <ng-template ngbNavContent>
-                            <app-clase-detalle [idClase]="idClase" (goBack)="active='navclases'"></app-clase-detalle>
+                            <app-clase-detalle [idClase]="idClase" (goBack)="setNav($event)"></app-clase-detalle>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem="navclasealumnos">
+                        <a #claseAlumnos ngbNavLink style="display:none;"></a>
+                        <ng-template ngbNavContent>
+                            <app-clase-alumnos (goBack)="setNav($event)"></app-clase-alumnos>
                         </ng-template>
                     </li>
                 </ul>

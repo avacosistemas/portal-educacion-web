@@ -48,6 +48,7 @@ export class UsuarioCalificacionesComponent implements OnInit {
 
   _setGrilla() {
     this.settings = {
+      noDataMessage: 'No hay registros',
       actions: false,
       attr: {
         class: 'datagrid',

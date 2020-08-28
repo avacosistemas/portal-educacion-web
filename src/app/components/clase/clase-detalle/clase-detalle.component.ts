@@ -10,6 +10,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Anotaciones } from '../../../entities/anotaciones';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AulaService } from "../../../services/aula.service";
 
 @Component({
   selector: 'app-clase-detalle',
@@ -26,12 +27,15 @@ export class ClaseDetalleComponent implements OnInit {
   userId = 0;
   userName: string;
   clase: Clase;
-  fg: FormGroup;
+  fg: FormGroup; // Chat
+  fge: FormGroup; // Encuesta
+  rate: 0;
 
   constructor(
     private route: ActivatedRoute,
     protected as: SeguridadService,
     protected als: AlumnoService,
+    protected aulaService: AulaService,
     protected ps: ProfesorService,
     private toastr: ToastrService,
     private headerService: HeaderService,
@@ -52,11 +56,15 @@ export class ClaseDetalleComponent implements OnInit {
     this.fg = this.fb.group({
       txtRespuesta: [null, [ Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
     });
+    this.fge = this.fb.group({
+      txtComentario: [null, [ Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
+    });
 
     this.loadData();
   }
 
   get txtRespuesta() { return this.fg.get('txtRespuesta'); }
+  get txtComentario() { return this.fge.get('txtComentario'); }
 
   menuSelected(menu: string) {
     this.headerService.setMenuSelected(menu);
@@ -78,10 +86,10 @@ export class ClaseDetalleComponent implements OnInit {
           this.clase = value.data;
         }
       );
-
-      this.obtenerChat();
-
     }
+
+    this.obtenerChat();
+
   }
 
   obtenerChat() {
@@ -116,21 +124,51 @@ export class ClaseDetalleComponent implements OnInit {
   enviarRespuesta($event: MouseEvent)
   {
     if (this.txtRespuesta.value) {
-      this.ps.sendAnotacion(this.userId, this.idClase, this.txtRespuesta.value).subscribe(
-        (value: any) => {
-          if (value.status === 'OK') {
-            this.toastr.success('El mensaje se guardó correctamente');
-            this.txtRespuesta.setValue('');
-            this.obtenerChat();
-          } else {
+      if (this.isAlumno) {
+        this.als.sendAnotacion(this.userId, this.idClase, this.txtRespuesta.value).subscribe(
+          (value: any) =>
+          {
+            if (value.status === 'OK')
+            {
+              this.toastr.success('El mensaje se guardó correctamente');
+              this.txtRespuesta.setValue('');
+              this.obtenerChat();
+            } else
+            {
+              this.toastr.error('No se pudo enviar la anotación');
+            }
+          },
+          (error) =>
+          {
             this.toastr.error('No se pudo enviar la anotación');
+            console.error(error);
           }
-        },
-        (error) => {
-          this.toastr.error('No se pudo enviar la anotación');
-          console.error(error);
-        }
-      );
+        );
+      }
+      else
+      {
+        // Mensaje del profesor
+        this.ps.sendAnotacion(this.userId, this.idClase, this.txtRespuesta.value).subscribe(
+          (value: any) =>
+          {
+            if (value.status === 'OK')
+            {
+              this.toastr.success('El mensaje se guardó correctamente');
+              this.txtRespuesta.setValue('');
+              this.obtenerChat();
+            } else
+            {
+              this.toastr.error('No se pudo enviar la anotación');
+            }
+          },
+          (error) =>
+          {
+            this.toastr.error('No se pudo enviar la anotación');
+            console.error(error);
+          }
+        );
+      }
+
     } else {
       this.toastr.error('Ingrese un comentario');
     }
@@ -138,4 +176,76 @@ export class ClaseDetalleComponent implements OnInit {
   }
 
 
+  listarAlumnos(e)
+  {
+
+  }
+
+  iniciarClase(e)
+  {
+    if (this.isAlumno) {
+      this.aulaService.iniciarClaseAlumno(this.idClase, this.userId).subscribe(
+        (value: any) =>
+        {
+          if (value.status == 'OK')
+          {
+            this.toastr.success('Clase iniciada\n' + value.data);
+          } else
+          {
+            this.toastr.error('No se pudo iniciar la clase');
+          }
+
+        },
+        error =>
+        {
+          this.toastr.error('Se produjo un error al iniciar la clase');
+        }
+      );
+
+    }
+    else
+    {
+      this.aulaService.iniciarClaseProfesor(this.idClase, this.userId).subscribe(
+        (value: any) =>
+        {
+          if (value.status == 'OK')
+          {
+            this.toastr.success('Clase iniciada\n' + value.data);
+          } else
+          {
+            this.toastr.error('No se pudo iniciar la clase');
+          }
+
+        },
+        error =>
+        {
+          this.toastr.error('Se produjo un error al iniciar la clase');
+        }
+      );
+    }
+
+
+  }
+
+  calificar(e)
+  {
+    e.preventDefault();
+    this.als.sendCalificacion(this.userId,this.idClase, this.rate, this.txtComentario.value).subscribe(
+      (value: any) =>
+      {
+        if (value.status == 'OK')
+        {
+          this.toastr.success('Gracias por calificar la clase');
+        } else
+        {
+          this.toastr.error('No se pudo calificar la clase');
+        }
+
+      },
+      error =>
+      {
+        this.toastr.error('Se produjo un error al calificar la clase');
+      }
+    );
+  }
 }

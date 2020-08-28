@@ -37,84 +37,113 @@
         </div>
     </div>
     <div class="row myRow">
-        <div class="col-md-6 myCol">
 
+        <div class="col-sm-6">
+            <div  class="col-sm-12" *ngIf="anotaciones.chat.length > 0">
+                <!-- Chat -->
+                <div class="small-chat-box">
 
-            <!-- ============== Chat ============== -->
-            <div class="small-chat-box">
-                <!--				<div class="container myContent">-->
-                <!--					<div class="chat-discussion">-->
-
-                <div class="chat-message left">
-                    <i class="fas fa-user-circle avatar-user"></i>
-                    <div class="message">
-                        <a class="message-author" href="#"> Miguel Carbonaro </a>
-                        <span class="message-date"> Lun Ene 26 2020 - 18:39:23 </span>
-                        <span class="message-content">
-									Buenas tardes, quería saber de contenido de la materia Historia contemporanea y puntualmente en que período esta enfocada la materia.
-								</span>
+                    <div *ngFor="let msg of anotaciones.chat" class="chat-message {{msg.align}}">
+                        <i class="{{msg.avatar}} avatar-user"></i>
+                        <div class="message">
+                            <a class="message-author" href="#"> {{msg.fromName}} </a>
+                            <span class="message-date"> {{msg.fechaHora}} </span>
+                            <span class="message-content">
+                                            {{msg.message}}
+                                        </span>
+                        </div>
                     </div>
                 </div>
-                <div class="chat-message right">
-                    <img class="message-avatar" src="{{profesor.foto}}" alt="">
-                    <div class="message">
-                        <a class="message-author" href="#"> {{profesor.nombre}} </a>
-                        <span class="message-date">  Mar Ene 27 2020 - 11:12:36 </span>
-                        <span class="message-content">
+                <!-- ==================== Form ===================== -->
+                <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fg" [ngClass]="{'hidden': !isAlumno}">
+                    <label for="txtRespuestaId"></label>
+                    <textarea formControlName="txtRespuesta" id="txtRespuestaId" class="form-control" rows="3"></textarea>
+                    <button class="btn btn-secondary btn-block mt-4" (click)="sendPregunta($event)">Agregar pregunta</button>
+                </form>
 
-							Historia contemporanea esta centrada en las 2 guerras mundiales, desdesde sus origenes, los hechos principales y la caida de Alemania.
-									<ul style="text-align: left">
-										<li>La batalla de inglaterra</li>
-										<li>La invación a la Unión Soviética</li>
-										<li>La Conferencia de Teherán</li>
-										<li>etc...</li>
-									</ul>
-							</span>
-                    </div>
-                </div>
-                <div class="chat-message right">
-                    <img class="message-avatar" src="{{profesor.foto}}" alt="">
-                    <div class="message">
-                        <a class="message-author" href="#"> {{profesor.nombre}} </a>
-                        <span class="message-date">  Mar Ene 27 2020 - 11:15:42 </span>
-                        <span class="message-content">
-							El contenido de la materia no desarrolla temas post guerra o las consecuencias.
-							</span>
-                    </div>
-                </div>
-                <div class="chat-message left">
-                    <i class="fas fa-user-circle avatar-user"></i>
-                    <div class="message">
-                        <a class="message-author" href="#"> Pablo Grossi </a>
-                        <span class="message-date">  Mie Feb 20 2020 - 11:12:36 </span>
-                        <span class="message-content">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. At est labore magni nisi odit quaerat quibusdam suscipit? Accusantium distinctio doloribus iste labore minima neque quis sapiente tempore voluptatem! Dolores, maiores?
-							</span>
-                    </div>
-                </div>
-                <div class="chat-message right">
-                    <img class="message-avatar" src="{{profesor.foto}}" alt="">
-                    <div class="message">
-                        <a class="message-author" href="#"> {{profesor.nombre}} </a>
-                        <span class="message-date">  Jue Feb 25 2020 - 11:12:36 </span>
-                        <span class="message-content">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eveniet ipsam molestiae odio veniam veritatis, vitae. Ab, aliquid architecto, autem ipsam, laboriosam nihil nobis porro quisquam ratione sequi soluta voluptatum!
-							</span>
-                    </div>
-                </div>
+            </div> <!-- End col -->
+        </div>
 
-                <!--					</div>-->
-                <div class="form-group">
-						<textarea class="form-control message-input mb-3"
-                                  name="message"
-                                  placeholder="Ingrese su consulta"></textarea>
-                    <button class="btn btn-block btn-secondary" (click)="enviarConsulta($event)">Enviar Consulta</button>
-                </div>
-                <!--				</div>-->
-            </div>
-            <!-- ============== End Chat ============== -->
 
-        </div> <!-- /Col -->
+
+<!--        <div class="col-md-6 myCol">-->
+
+
+<!--            &lt;!&ndash; ============== Chat ============== &ndash;&gt;-->
+<!--            <div class="small-chat-box">-->
+<!--                &lt;!&ndash;				<div class="container myContent">&ndash;&gt;-->
+<!--                &lt;!&ndash;					<div class="chat-discussion">&ndash;&gt;-->
+
+<!--                <div class="chat-message left">-->
+<!--                    <i class="fas fa-user-circle avatar-user"></i>-->
+<!--                    <div class="message">-->
+<!--                        <a class="message-author" href="#"> Miguel Carbonaro </a>-->
+<!--                        <span class="message-date"> Lun Ene 26 2020 - 18:39:23 </span>-->
+<!--                        <span class="message-content">-->
+<!--									Buenas tardes, quería saber de contenido de la materia Historia contemporanea y puntualmente en que período esta enfocada la materia.-->
+<!--								</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="chat-message right">-->
+<!--                    <img class="message-avatar" src="{{profesor.foto}}" alt="">-->
+<!--                    <div class="message">-->
+<!--                        <a class="message-author" href="#"> {{profesor.nombre}} </a>-->
+<!--                        <span class="message-date">  Mar Ene 27 2020 - 11:12:36 </span>-->
+<!--                        <span class="message-content">-->
+
+<!--							Historia contemporanea esta centrada en las 2 guerras mundiales, desdesde sus origenes, los hechos principales y la caida de Alemania.-->
+<!--									<ul style="text-align: left">-->
+<!--										<li>La batalla de inglaterra</li>-->
+<!--										<li>La invación a la Unión Soviética</li>-->
+<!--										<li>La Conferencia de Teherán</li>-->
+<!--										<li>etc...</li>-->
+<!--									</ul>-->
+<!--							</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="chat-message right">-->
+<!--                    <img class="message-avatar" src="{{profesor.foto}}" alt="">-->
+<!--                    <div class="message">-->
+<!--                        <a class="message-author" href="#"> {{profesor.nombre}} </a>-->
+<!--                        <span class="message-date">  Mar Ene 27 2020 - 11:15:42 </span>-->
+<!--                        <span class="message-content">-->
+<!--							El contenido de la materia no desarrolla temas post guerra o las consecuencias.-->
+<!--							</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="chat-message left">-->
+<!--                    <i class="fas fa-user-circle avatar-user"></i>-->
+<!--                    <div class="message">-->
+<!--                        <a class="message-author" href="#"> Pablo Grossi </a>-->
+<!--                        <span class="message-date">  Mie Feb 20 2020 - 11:12:36 </span>-->
+<!--                        <span class="message-content">-->
+<!--							Lorem ipsum dolor sit amet, consectetur adipisicing elit. At est labore magni nisi odit quaerat quibusdam suscipit? Accusantium distinctio doloribus iste labore minima neque quis sapiente tempore voluptatem! Dolores, maiores?-->
+<!--							</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="chat-message right">-->
+<!--                    <img class="message-avatar" src="{{profesor.foto}}" alt="">-->
+<!--                    <div class="message">-->
+<!--                        <a class="message-author" href="#"> {{profesor.nombre}} </a>-->
+<!--                        <span class="message-date">  Jue Feb 25 2020 - 11:12:36 </span>-->
+<!--                        <span class="message-content">-->
+<!--							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eveniet ipsam molestiae odio veniam veritatis, vitae. Ab, aliquid architecto, autem ipsam, laboriosam nihil nobis porro quisquam ratione sequi soluta voluptatum!-->
+<!--							</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash;					</div>&ndash;&gt;-->
+<!--                <div class="form-group">-->
+<!--						<textarea class="form-control message-input mb-3"-->
+<!--                                  name="message"-->
+<!--                                  placeholder="Ingrese su consulta"></textarea>-->
+<!--                    <button class="btn btn-block btn-secondary" (click)="enviarConsulta($event)">Enviar Consulta</button>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;				</div>&ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash; ============== End Chat ============== &ndash;&gt;-->
+
+<!--        </div> &lt;!&ndash; /Col &ndash;&gt;-->
 
         <div class="col-md-6 ">
             <div class="datepicker">

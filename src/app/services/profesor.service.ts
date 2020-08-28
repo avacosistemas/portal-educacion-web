@@ -18,7 +18,7 @@ export class ProfesorService
   _aFechas: any[] = [];
 
   constructor(
-    protected http: HttpClient
+    private http: HttpClient
   ) { }
 
   getCalificaciones(id: number) {
@@ -41,6 +41,11 @@ export class ProfesorService
   public setProfesor(profesor: any): Observable<any>
   {
     return this.http.put(this.controllerCliente +  'miperfil/' + profesor.id.toString(), profesor);
+  }
+
+  getClaseAlumnos(idProfesor: number, idClase: number)
+  {
+    return this.http.get(this.controllerCliente + idProfesor.toString() + '/alumnos/' + idClase.toString());
   }
 
   public setProfilePicture(fd: FormData) {
@@ -67,8 +72,8 @@ export class ProfesorService
     return this.http.get(this.controllerCliente + idProfesor.toString() + '/anotaciones/' + idClase.toString());
   }
 
-  public getPreguntas(id: number): Observable<any> {
-    return this.http.get<any>(this.controllerCliente + 'preguntas/' + id.toString());
+  public getPreguntas(idProfesor: number): Observable<any> {
+    return this.http.get<any>(this.controllerCliente + 'preguntas/' + idProfesor.toString());
   }
 
   public sendRespuesta(idProfesor: number, idPregunta: number, respuesta: string, )
@@ -94,12 +99,12 @@ export class ProfesorService
   private _getHorariosRandom(fecha: NgbDate, profesorId: number): string[]
   {
     // vamos a generar algunos rangos horarios de forma aleatoria
-    let idx = Number(fecha.year.toString() + fecha.month.toString() + fecha.day.toString());
-    if (this._aFechas[idx]) return this._aFechas[idx];
+    const idx = Number(fecha.year.toString() + fecha.month.toString() + fecha.day.toString());
+    if (this._aFechas[idx]) { return this._aFechas[idx]; }
 
     const maxItems = this.randomInt(2, 4);
-    let horarios: string[] = [];
-    let choosen: number[] = [];
+    const horarios: string[] = [];
+    const choosen: number[] = [];
 
     const hourMin = 8;
     const hourMax = 20;
@@ -110,8 +115,8 @@ export class ProfesorService
       let notDefined = true;
       while (notDefined)
       {
-        let startH = this.randomInt(hourMin, hourMax);
-        if (choosen.length == 0 && startH <= hourMax && startH >= hourMin)
+        const startH = this.randomInt(hourMin, hourMax);
+        if (choosen.length === 0 && startH <= hourMax && startH >= hourMin)
         {
 
           choosen.push(startH);
@@ -120,7 +125,7 @@ export class ProfesorService
         } else
         {
 
-          let tokensMax = choosen.length;
+          const tokensMax = choosen.length;
           let tokensPass = true;
 
           for (let k = 0; k < tokensMax; k++)
@@ -130,7 +135,7 @@ export class ProfesorService
               (startH <= hourMax && startH >= (choosen[k] + 2))
             ))
             {
-              if ( k == (tokensMax - 1))
+              if ( k === (tokensMax - 1))
               {
                 choosen.push(startH);
                 notDefined = false;

@@ -49,6 +49,7 @@ import { ClaseDetalleComponent } from './components/clase/clase-detalle/clase-de
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { RaitingGridComponent } from './components/usuario/usuario-perfil-clases/raiting-grid/raiting-grid.component';
 import { UsuarioCalificacionesComponent } from './components/usuario/usuario-calificaciones/usuario-calificaciones.component';
+import { ClaseAlumnosComponent } from './components/clase/clase-alumnos/clase-alumnos.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { UsuarioCalificacionesComponent } from './components/usuario/usuario-cal
     ClaseDetalleComponent,
     RaitingGridComponent,
     UsuarioCalificacionesComponent,
+    ClaseAlumnosComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <header class="card-header perfil-header">
+                    <h4>{{clase.materia}} - {{clase.fechaHora}}</h4>
+                </header>
+
+                <article class="card-body card-body-table">
+                    <ng2-smart-table [settings]="settings" [source]="clase.alumnos"></ng2-smart-table>
+                </article> <!-- End card Body -->
+            </div> <!-- End Card -->
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <button class="btn btn-danger btn-block mt-4" type="button" (click)="goBack.emit('navdetalleclase')">Volver</button>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+    </div> <!-- End Row -->
+</div> <!-- End container -->
+
+

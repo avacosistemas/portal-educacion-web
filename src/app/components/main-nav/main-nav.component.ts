@@ -49,7 +49,6 @@ export class MainNavComponent implements OnInit
 			|| this.router.url.indexOf('/usuario') >= 0
 			|| window.location.pathname.indexOf('/usuario') >= 0)
 		{
-
         document.body.classList.add('back-pattern-001');
 		}
 		else

@@ -62,6 +62,7 @@ export class PreguntasComponent implements OnInit {
 
   setGrilla() {
     this.settings = {
+      noDataMessage: 'No hay registros',
       actions: {
         custom: [
           {

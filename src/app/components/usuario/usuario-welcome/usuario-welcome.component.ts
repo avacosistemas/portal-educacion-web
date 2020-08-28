@@ -28,8 +28,22 @@ export class UsuarioWelcomeComponent implements OnInit {
   }
 
   loadData() {
-    if (this.as.getUser().tipoCliente == 'PROFESOR') {
-      // load profesor
+    if (this.as.isAlumno()) {
+      this.als.getAlumno(this.paramId).subscribe(
+        (value:any) => {
+          this.usuario.apellido = value.data.apellido;
+          this.usuario.nombre = value.data.nombre;
+          this.usuario.nombreApellido = value.data.nombreApellido;
+          this.usuario.username = value.data.username;
+          this.usuario.telefonoFijo = value.data.telefonoFijo;
+          this.usuario.telefonoMovil = value.data.telefonoMovil;
+          this.usuario.tipoIdentificacion = value.data.tipoIdentificacion;
+          this.usuario.numeroIdentificacion = value.data.numeroIdentificacion;
+          this.usuario.foto = value.data.foto;
+          this.usuario.institucion = value.data.institucion;
+        }
+      );
+    } else {
       this.ps.getProfesor(this.paramId).subscribe(
         (value:any) => {
           this.usuario.apellido = value.data.apellido;
@@ -45,22 +59,6 @@ export class UsuarioWelcomeComponent implements OnInit {
           // Propios del profesor
           this.usuario.calificacion = value.data.calificacion;
           this.usuario.descripcion = value.data.descripcion;
-        }
-      );
-    } else {
-      // load alumno
-      this.als.getAlumno(this.paramId).subscribe(
-        (value:any) => {
-          this.usuario.apellido = value.data.apellido;
-          this.usuario.nombre = value.data.nombre;
-          this.usuario.nombreApellido = value.data.nombreApellido;
-          this.usuario.username = value.data.username;
-          this.usuario.telefonoFijo = value.data.telefonoFijo;
-          this.usuario.telefonoMovil = value.data.telefonoMovil;
-          this.usuario.tipoIdentificacion = value.data.tipoIdentificacion;
-          this.usuario.numeroIdentificacion = value.data.numeroIdentificacion;
-          this.usuario.foto = value.data.foto;
-          this.usuario.institucion = value.data.institucion;
         }
       );
     }

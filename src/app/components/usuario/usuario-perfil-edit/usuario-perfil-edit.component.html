@@ -67,7 +67,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fas fa-fingerprint"></i> </span>
                         </div>
-                        <input id="txtDni" formControlName="dni" OnlyNumber="true" type="text"
+                        <input id="txtDni" formControlName="numeroIdentificacion" OnlyNumber="true" type="text"
                                class="form-control">
                     </div>
                     <app-field-error-display [displayError]="dni.touched && dni.errors?.required"
@@ -110,16 +110,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- ================== Picture ================== -->
-            <div class="form-row hidden">
-            <span>Foto de perfil</span>
-            <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input" #profilePictureFile (change)="selectFile($event)">
-                <label class="custom-file-label" id="lblProfilePictureFile" for="profilePictureFile">{{fileName}}</label>
-            </div>
-            </div>
-
             <!-- ================== eMail ================== -->
             <div class="form-row">
                 <div class="col">
@@ -148,7 +138,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fas fa-mobile-alt"></i> </span>
                         </div>
-                        <input id="txtCellphone" formControlName="telCel" type="text" class="form-control">
+                        <input id="txtCellphone" formControlName="telefonoMovil" type="text" class="form-control">
                     </div>
                     <app-field-error-display [displayError]="telCel.touched && telCel.errors?.required"
                                              errorMsg="* Debe completar el número del teléfono celular">
@@ -166,7 +156,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fas fa-phone-alt"></i> </span>
                         </div>
-                        <input id="txtPhone" formControlName="telFijo" type="text" class="form-control">
+                        <input id="txtPhone" formControlName="telefonoFijo" type="text" class="form-control">
                     </div>
                     <app-field-error-display
                             [displayError]="telFijo.touched && telFijo.value?.toString().length > 0 && telFijo.errors?.telefono"

@@ -67,4 +67,22 @@ export class AlumnoService {
     return this.http.get(this.controllerCliente + idAlumno.toString() + '/detalleclase/' + idClase.toString());
   }
 
+  public sendPregunta(idProfesor: number, idAlumno: number, mensaje: string) {
+    const body = {idProfesor: idProfesor, pregunta: mensaje};
+    return this.http.post(this.controllerCliente + '/preguntar/' + idAlumno.toString(), body );
+  }
+
+  public sendAnotacion(idAlumno: number, idClase: number, mensaje: string) {
+    const body = {comentario: mensaje};
+    return this.http.post(this.controllerCliente + idAlumno.toString() + '/anotaciones/' + idClase.toString(), body );
+  }
+
+  public sendCalificacion(idAlumno: number, idAula: number, calificacion: number, comentarios?: string) {
+    const body = {puntuacion: calificacion, comentarios: comentarios}
+    return this.http.post(this.controllerCliente + idAlumno.toString() + '/puntuacion/' + idAula.toString(), body);
+  }
+
+
+
+
 }

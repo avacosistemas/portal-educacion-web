@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SeguridadService } from "../../../services/seguridad.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Clase } from "../../../entities/clase";
 import { AlumnoService } from "../../../services/alumno.service";
 import { ProfesorService } from "../../../services/profesor.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ClaseEstados } from "../../../entities/clase-estado";
 import { RaitingGridComponent } from './raiting-grid/raiting-grid.component';
 declare var $;
@@ -33,7 +32,7 @@ export class UsuarioPerfilClasesComponent implements OnInit {
 
   ngOnInit(): void
   {
-    this._setGrilla();
+    this.setupGrilla();
     this.paramId = Number(this.route.snapshot.paramMap.get('id'));
     this.isAlumno = this.as.isAlumno();
     this.loadData();
@@ -101,8 +100,9 @@ export class UsuarioPerfilClasesComponent implements OnInit {
     }
   }
 
-  _setGrilla() {
+  setupGrilla() {
     this.settings = {
+      noDataMessage: 'No hay registros',
       actions: {
         custom: [
           {

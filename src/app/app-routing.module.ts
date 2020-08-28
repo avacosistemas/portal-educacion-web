@@ -17,6 +17,7 @@ import { UsuarioWelcomeComponent } from "./components/usuario/usuario-welcome/us
 import { UsuarioPerfilComponent } from "./components/usuario/usuario-perfil/usuario-perfil.component";
 import { PreguntasComponent } from './components/preguntas/preguntas.component';
 import { ClaseDetalleComponent } from "./components/clase/clase-detalle/clase-detalle.component";
+import { ClaseAlumnosComponent } from "./components/clase/clase-alumnos/clase-alumnos.component";
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'buscar/:id', component: ProfesorBuscarComponent, pathMatch: 'full'},
   {path: 'buscar', component: ProfesorBuscarComponent, pathMatch: 'full'},
   {path: 'clase/detalle/:id', component: ClaseDetalleComponent, pathMatch: 'full'},
+  {path: 'clase/:id/alumnos', component: ClaseAlumnosComponent, pathMatch: 'full'},
   {path: 'faq', component: FaqComponent, pathMatch: 'full'},
   {path: 'home', component: HomeComponent, pathMatch: 'full'},
   {path: 'legales/politica', component: PolicyComponent, pathMatch: 'full'},
