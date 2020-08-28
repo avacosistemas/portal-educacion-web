@@ -92,8 +92,17 @@ export class ProfesorService
     return Math.floor(min + (max - min) * Math.random());
   }
 
-  getHorarios(fecha: NgbDate, profesorId: number): Observable<string[]> {
-    return of(this._getHorariosRandom(fecha, profesorId));
+  public getMaterias(idProfesor: number)
+  {
+    return this.http.get(environment.apiService + 'materiasprofesor/' +idProfesor.toString())
+  }
+  public getHorarios(idProfesor: number, fecha: string)
+  {
+    return this.http.get(environment.apiService + 'catalogoHorario/profesor/' +idProfesor.toString() + '/fecha/' + fecha );
+  }
+
+  getHorariosMocked(fecha: NgbDate, idProfesor: number): Observable<string[]> {
+    return of(this._getHorariosRandom(fecha, idProfesor));
   }
 
   private _getHorariosRandom(fecha: NgbDate, profesorId: number): string[]
@@ -159,4 +168,5 @@ export class ProfesorService
 
     return horarios;
   }
+
 }

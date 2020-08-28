@@ -25,9 +25,7 @@
             <h4>¿Qué clase quieres tomar con {{profesor.nombre}}?</h4>
             <label for="cmbMateria">Materia </label>
             <select id="cmbMateria" class="form-control custom-select">
-                <option value="HistoriaArgentina">Historia Argentina</option>
-                <option value="Historia1900">Historia Contemporanea Europea</option>
-                <option value="HistoriaPueblos">Historia de los pueblos originarios</option>
+                <option *ngFor="let materia of materias" value="{{materia.id}}">{{materia.nombre}} - {{materia.nivelNombre}}</option>
             </select>
             <br>
             <br>
@@ -168,7 +166,7 @@
 
             <label for="cmbHorario">Horarios </label>
             <select id="cmbHorario" class="form-control custom-select">
-                <option *ngFor="let horario of horarios" value="val-{{horario}}">{{horario}}</option>
+                <option *ngFor="let horario of horariosClases" value="{{horario.id}}">{{horario.rangoHora}}</option>
             </select>
 
             <br>

@@ -10,6 +10,8 @@ import { Mensaje } from "../../../entities/mensaje";
 import { ToastrService } from "ngx-toastr";
 import { Anotaciones } from "../../../entities/anotaciones";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Materia } from "../../../entities/materia";
+import { Horario } from "../../../entities/horario";
 
 @Component({
   selector: 'app-profesor-schedule',
@@ -21,8 +23,10 @@ export class ProfesorScheduleComponent implements OnInit {
   profesor: Profesor;
   profesorIdParam: number;
   anotaciones = new Anotaciones();
+  materias: Materia[] = [];
 
   horarios: string[] = [];
+  horariosClases: Horario[] = [];
 
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate;
@@ -56,6 +60,7 @@ export class ProfesorScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.profesorIdParam = Number(this.route.snapshot.paramMap.get('id'));
     this.fg = this.fb.group({
       txtRespuesta: [null, [ Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
     });
@@ -66,7 +71,6 @@ export class ProfesorScheduleComponent implements OnInit {
   get txtRespuesta() { return this.fg.get('txtRespuesta'); }
 
   loadData() {
-    this.profesorIdParam = Number(this.route.snapshot.paramMap.get('id'));
     this.ps.getProfesor(this.profesorIdParam).subscribe(
       (value: any) => {
 
@@ -81,7 +85,31 @@ export class ProfesorScheduleComponent implements OnInit {
       }
     );
 
+    this.ps.getMaterias(this.profesorIdParam).subscribe(
+      (value: any) => {
+        if ( value.status == 'OK')
+        {
+          value.data.forEach( m => {
+            this.materias.push({
+              id: m.idMateria,
+              nombre: m.descMateria,
+              idNivel: m.idNivel,
+              nivelNombre: m.descNivel
+            });
+          });
+        } else {
+          this.toastr.error('Se produjo un error al recuperar las materias');
+          this._mockMaterias();
+        }
+      },
+      error => {
+        this.toastr.error('Se produjo un error al recuperar las materias');
+        this._mockMaterias();
+      }
+    );
+
   }
+
 
 
   loadPreguntas() {
@@ -170,7 +198,41 @@ export class ProfesorScheduleComponent implements OnInit {
       this.fromDate = date;
     }
 
-    this.ps.getHorarios(this.fromDate, this.profesorIdParam).subscribe(
+    if (!this.fromDate) return;
+
+    const cDate = this.fromDate.year.toString()
+      + this.fromDate.month.toString().padStart(2,'0') +
+      + this.fromDate.day.toString().padStart(2,'0');
+
+    this.ps.getHorarios(this.profesorIdParam, cDate).subscribe(
+      (value:any) => {
+        if ( value.status == 'OK') {
+          if (value.data?.length > 0) {
+            // Get horarios
+            this.horariosClases = [];
+            value.data.forEach(h => {
+              this.horariosClases.push({
+                id: h.id,
+                dia: h.dia,
+                hora: h.hora,
+                numeroDia: h.numeroDia,
+                rangoHora: h.rangoHora,
+              });
+            });
+
+          } else  {
+            this.toastr.info('No hay horarios para la fecha seleccionada. Intente con otra fecha');
+          }
+        } else {
+          this.toastr.warning('No se encontaron horarios disponibles Se produjo un error al obtner los horaios')
+        }
+      },
+      error => {
+        this.toastr.error('Se produjo un error al obtner los horaios')
+      }
+    );
+
+    this.ps.getHorariosMocked(this.fromDate, this.profesorIdParam).subscribe(
       data => {
         this.horarios = data;
       }
@@ -189,4 +251,13 @@ export class ProfesorScheduleComponent implements OnInit {
   isRange(date: NgbDate) {
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
   }
+
+  _mockMaterias(){
+    this.materias = [
+      { id: 1, nombre: 'Historia Argentina' },
+      { id: 2, nombre: 'Historia Contemporanea Europea'},
+      { id: 3, nombre: 'Historia de los pueblos originarios'},
+    ];
+  }
 }
+

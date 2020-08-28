@@ -27,3 +27,17 @@ Content-Type: {{content}}
 Authorization: {{token}}
 
 ###
+GET {{host}}{{apiService}}/materiasprofesor/2
+Accept: {{accept}}
+Cache-Control: {{cache}}
+Content-Type: {{content}}
+Authorization: {{token}}
+
+###
+GET {{host}}{{apiService}}/catalogoHorario/profesor/2/fecha/20200827
+Accept: {{accept}}
+Cache-Control: {{cache}}
+Content-Type: {{content}}
+Authorization: {{token}}
+
+###

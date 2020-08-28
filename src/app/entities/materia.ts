@@ -1,8 +1,9 @@
 export class Materia {
   id: number;
   nombre: string;
-  descripcion: string;
-  idNivel: number;
+  descripcion?: string;
+  idNivel?: number;
+  nivelNombre?: number;
 
   constructor() {
     this.id = 0;
