@@ -65,7 +65,7 @@ export class UsuarioPerfilComponent implements OnInit {
   loadData() {
     if (this.isAlumno) {
       // load profesor
-      this.ps.getPerfil(this.paramId).subscribe(
+      this.als.getPerfil(this.paramId).subscribe(
         (value: any) => {
           this.usuario = value.data;
           this.imgSrc = this.getImageSource();
@@ -73,7 +73,7 @@ export class UsuarioPerfilComponent implements OnInit {
       );
     } else {
       // load alumno
-      this.als.getPerfil(this.paramId).subscribe(
+      this.ps.getPerfil(this.paramId).subscribe(
         (value: any) => {
           this.usuario = value.data;
           this.imgSrc = this.getImageSource();
