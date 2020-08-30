@@ -9,7 +9,6 @@ import {
 // import 'rxjs/add/operator/do';
 
 import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { SeguridadService } from "../../../../../services/seguridad.service";
 

@@ -86,7 +86,8 @@ export class SeguridadService
         this._isLogged = false;
         if (ex.error?.status && ex.error?.status === 'CHANGE_PASSWORD_REQUIRED')
         {
-          this.router.navigate([ '/pwdchange' ]);
+          this.router.navigate([ `/pwdchange` ]);
+          this._setToken(ex.error.data.token);
         } else {
           console.error(ex);
           onCompleteCallback(this._isLogged);
