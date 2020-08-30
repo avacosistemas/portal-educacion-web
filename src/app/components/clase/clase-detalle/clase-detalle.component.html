@@ -96,12 +96,21 @@
                                 <!-- Form encuesta satisfacción -->
                                 <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fge">
                                     <label class="mt-4">Calificación</label>
-                                    <div class="rate">
+                                    <!-- <div class="rate">
                                         <ngb-rating [(rate)]="rate">
                                             <ng-template let-fill="fill" let-index="index">
                                                 <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
                                             </ng-template>
                                         </ngb-rating>
+                                    </div> -->
+                                    <div class="rate">
+                                        <ng-template #t let-fill="fill">
+                                          <span class="star" [class.full]="fill === 100">
+                                            <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                                          </span>
+                                        </ng-template>
+                    
+                                        <ngb-rating [(rate)]="rate" [starTemplate]="t" [max]="5"></ngb-rating>
                                     </div>
                                     <label for="txtComentarioId">Comentario de la calificación</label>
                                     <textarea formControlName="txtComentario" id="txtComentarioId" class="form-control" rows="3"></textarea>
