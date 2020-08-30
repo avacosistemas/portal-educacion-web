@@ -5,8 +5,6 @@ import { Pregunta } from "../../entities/pregunta";
 import { ToastrService } from "ngx-toastr";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-// import { PreguntasResponderComponent } from "./preguntas-responder/preguntas-responder.component";
-declare var $;
 
 @Component({
   selector: 'app-preguntas',
@@ -20,7 +18,7 @@ export class PreguntasComponent implements OnInit {
   userId = 0;
   isAlumno = false;
   preguntas: Pregunta[];
-  qId: number = 0;
+  qId = 0;
   respuesta: string;
   pregunta: string;
   fg: FormGroup;
@@ -42,7 +40,7 @@ export class PreguntasComponent implements OnInit {
     this.setGrilla();
     this.loadData();
     this.fg = this.fb.group({
-      txtRespuesta: [null,[Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
+      txtRespuesta: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
     });
   }
 
@@ -54,7 +52,7 @@ export class PreguntasComponent implements OnInit {
         this.preguntas = value.data;
       },
       error => {
-        this.toastr.error('Se produjo un error al tratar de recuperar las preguntas')
+        this.toastr.error('Se produjo un error al tratar de recuperar las preguntas');
         console.log(error);
       }
     );
@@ -86,7 +84,7 @@ export class PreguntasComponent implements OnInit {
       columns: {
         fechaPregunta: {
           title: 'Fecha / Hora',
-          width: '10%'
+          width: '15%'
         },
         pregunta: {
           title: 'Pregunta'

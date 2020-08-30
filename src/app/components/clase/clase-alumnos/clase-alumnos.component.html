@@ -3,11 +3,11 @@
         <div class="col-sm-12">
             <div class="card">
                 <header class="card-header perfil-header">
-                    <h4>{{clase.materia}} - {{clase.fechaHora}}</h4>
+                    <h4>Alumnos {{clase.idString}}</h4>
                 </header>
 
                 <article class="card-body card-body-table">
-                    <ng2-smart-table [settings]="settings" [source]="clase.alumnos"></ng2-smart-table>
+                    <ng2-smart-table [settings]="settings" [source]="claseAlumnos.alumnos"></ng2-smart-table>
                 </article> <!-- End card Body -->
             </div> <!-- End Card -->
 

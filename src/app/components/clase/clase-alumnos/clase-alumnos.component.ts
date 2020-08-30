@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SeguridadService } from '../../../services/seguridad.service';
-import { ActivatedRoute } from '@angular/router';
 import { ProfesorService } from '../../../services/profesor.service';
 import { ToastrService } from 'ngx-toastr';
 import { ClaseAlumnos } from '../../../entities/clase-alumnos';
 import { RaitingGridComponent } from '../../usuario/usuario-perfil-clases/raiting-grid/raiting-grid.component';
+import { Clase } from 'src/app/entities/clase';
 
 @Component({
   selector: 'app-clase-alumnos',
@@ -13,11 +13,10 @@ import { RaitingGridComponent } from '../../usuario/usuario-perfil-clases/raitin
 })
 export class ClaseAlumnosComponent implements OnInit {
   @Output() goBack = new EventEmitter();
-  @Input() idClase: number;
+  @Input() clase: Clase;
 
   settings: any;
-  paramId: number;
-  clase = new ClaseAlumnos();
+  claseAlumnos = new ClaseAlumnos();
   materiaHorario: '';
   materiaNombre: '';
   userId = 0;
@@ -26,22 +25,12 @@ export class ClaseAlumnosComponent implements OnInit {
     private seguridadService: SeguridadService,
     private profesorService: ProfesorService,
     private toastr: ToastrService,
-    private route: ActivatedRoute,
 
   ) {
     this.userId = this.seguridadService.getUser().id;
   }
 
   ngOnInit(): void {
-    const param = this.route.snapshot.paramMap.get('id');
-    if ( param ) {
-      this.paramId =  Number( param );
-    } else {
-      this.paramId = 0;
-    }
-
-    // el id de la clase puede venir por input
-    this.idClase = this.paramId;
     this.setupGrilla();
     this.loadData();
   }
@@ -58,7 +47,7 @@ export class ClaseAlumnosComponent implements OnInit {
           type: 'custom',
           renderComponent: RaitingGridComponent,
           valuePrepareFunction: (value, row, cell) => {
-            return this.clase.alumnos;
+            return this.claseAlumnos.alumnos;
           },
         },
       },
@@ -72,14 +61,15 @@ export class ClaseAlumnosComponent implements OnInit {
 
   loadData()
   {
-    this.profesorService.getClaseAlumnos(this.userId, this.idClase ).subscribe(
+    this.profesorService.getClaseAlumnos(this.userId, this.clase.id ).subscribe(
       (value: any) => {
         if (value.status === 'OK')
         {
-          this.clase.alumnos = value.data;
+          this.claseAlumnos.alumnos = value.data;
+          this.claseAlumnos.alumnos.map(a => a.disabled = true);
           if (value.data.lenght > 0) {
-            this.clase.fechaHora = value.data[0].fechaHora;
-            this.clase.materia = value.data[0].materia;
+            this.claseAlumnos.fechaHora = value.data[0].fechaHora;
+            this.claseAlumnos.materia = value.data[0].materia;
           }
         } else {
           this.toastr.error('Se produjo un error al buscar los alumnos');

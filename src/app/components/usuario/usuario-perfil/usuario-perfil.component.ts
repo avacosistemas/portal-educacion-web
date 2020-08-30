@@ -7,6 +7,7 @@ import { SeguridadService } from '../../../services/seguridad.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormsValidationService } from '../../../services/forms-validation.service';
 import { HeaderService } from 'src/app/services/header.service';
+import { Clase } from 'src/app/entities/clase';
 
 @Component({
   selector: 'app-usuario-perfil',
@@ -21,7 +22,7 @@ export class UsuarioPerfilComponent implements OnInit {
   active = 'navclases';
   isAlumno = false;
   cambiarPassword: boolean;
-  idClase: number;
+  clase: Clase;
   imgSrc: string;
 
   constructor(
@@ -83,9 +84,9 @@ export class UsuarioPerfilComponent implements OnInit {
     }
   }
 
-  goDetalleClase(id) {
+  goDetalleClase(clase: Clase) {
     this.active = 'navdetalleclase';
-    this.idClase = id;
+    this.clase = clase;
   }
 
   getImageSource() {

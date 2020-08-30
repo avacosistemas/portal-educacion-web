@@ -2,22 +2,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ProfesorBuscarComponent } from './components/profesor/profesor-buscar/profesor-buscar.component';
-import { LoginComponent } from "./components/auth/login/login.component";
+import { LoginComponent } from './components/auth/login/login.component';
 import { ProfesorScheduleComponent } from './components/profesor/profesor-schedule/profesor-schedule.component';
-import { AlumnoRegistroComponent } from "./components/alumno/alumno-registro/alumno-registro.component";
-import { FaqComponent } from "./components/faq/faq.component";
-import { PolicyComponent } from "./components/legal/policy/policy.component";
-import { TerminosComponent } from "./components/legal/terminos/terminos.component";
-import { AlumnoPerfilComponent } from "./components/alumno/alumno-perfil/alumno-perfil.component";
-import { ProfesorRegistroComponent } from "./components/profesor/profesor-registro/profesor-registro.component";
-import { ProfesorPerfilComponent } from "./components/profesor/profesor-perfil/profesor-perfil.component";
-import { PwdResetComponent } from "./components/auth/pwd-reset/pwd-reset.component";
-import { PwdChangeComponent } from "./components/auth/pwd-change/pwd-change.component";
-import { UsuarioWelcomeComponent } from "./components/usuario/usuario-welcome/usuario-welcome.component";
-import { UsuarioPerfilComponent } from "./components/usuario/usuario-perfil/usuario-perfil.component";
-import { PreguntasComponent } from './components/preguntas/preguntas.component';
-import { ClaseDetalleComponent } from "./components/clase/clase-detalle/clase-detalle.component";
-import { ClaseAlumnosComponent } from "./components/clase/clase-alumnos/clase-alumnos.component";
+import { AlumnoRegistroComponent } from './components/alumno/alumno-registro/alumno-registro.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { PolicyComponent } from './components/legal/policy/policy.component';
+import { TerminosComponent } from './components/legal/terminos/terminos.component';
+import { AlumnoPerfilComponent } from './components/alumno/alumno-perfil/alumno-perfil.component';
+import { ProfesorRegistroComponent } from './components/profesor/profesor-registro/profesor-registro.component';
+import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
+import { PwdResetComponent } from './components/auth/pwd-reset/pwd-reset.component';
+import { PwdChangeComponent } from './components/auth/pwd-change/pwd-change.component';
+import { UsuarioWelcomeComponent } from './components/usuario/usuario-welcome/usuario-welcome.component';
+import { UsuarioPerfilComponent } from './components/usuario/usuario-perfil/usuario-perfil.component';
+import { ClaseDetalleComponent } from './components/clase/clase-detalle/clase-detalle.component';
+import { ClaseAlumnosComponent } from './components/clase/clase-alumnos/clase-alumnos.component';
 
 
 const routes: Routes = [
@@ -34,7 +33,6 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, pathMatch: 'full'},
   {path: 'pwdreset', component: PwdResetComponent, pathMatch: 'full'},
   {path: 'pwdchange', component: PwdChangeComponent, pathMatch: 'full'},
-  {path: 'preguntas/:id', component: PreguntasComponent, pathMatch: 'full'},
   {path: 'profesor/registro', component: ProfesorRegistroComponent, pathMatch: 'full'},
   {path: 'profesor/agenda/:id', component: ProfesorScheduleComponent, pathMatch: 'full'},
   {path: 'profesor/:id', component: ProfesorPerfilComponent, pathMatch: 'full'},

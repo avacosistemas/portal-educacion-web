@@ -9,8 +9,8 @@ import { HeaderService } from '../../../services/header.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Anotaciones } from '../../../entities/anotaciones';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AulaService } from "../../../services/aula.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AulaService } from '../../../services/aula.service';
 
 @Component({
   selector: 'app-clase-detalle',
@@ -20,13 +20,13 @@ import { AulaService } from "../../../services/aula.service";
 export class ClaseDetalleComponent implements OnInit {
 
   @Output() goBack = new EventEmitter();
-  @Input() idClase: number;
+  @Input() clase: Clase;
 
   anotaciones = new Anotaciones();
   isAlumno = false;
   userId = 0;
   userName: string;
-  clase: Clase;
+  claseDetalle: Clase;
   fg: FormGroup; // Chat
   fge: FormGroup; // Encuesta
   rate: 0;
@@ -74,16 +74,16 @@ export class ClaseDetalleComponent implements OnInit {
   loadData() {
 
     if (this.isAlumno) {
-      this.als.getClase(this.userId, this.idClase).subscribe(
+      this.als.getClase(this.userId, this.clase.id).subscribe(
         (value: any) => {
-          this.clase = value.data;
+          this.claseDetalle = value.data;
         }
       );
     } else {
       // Datos de la Clase
-      this.ps.getClase(this.userId, this.idClase).subscribe(
+      this.ps.getClase(this.userId, this.clase.id).subscribe(
         (value: any) => {
-          this.clase = value.data;
+          this.claseDetalle = value.data;
         }
       );
     }
@@ -94,7 +94,7 @@ export class ClaseDetalleComponent implements OnInit {
 
   obtenerChat() {
     // Datos del Chat
-    this.ps.getAnotaciones(this.userId, this.idClase).subscribe(
+    this.ps.getAnotaciones(this.userId, this.clase.id).subscribe(
       (value: any) => {
         if (value.status === 'OK') {
           this.anotaciones.chat = [];
@@ -108,7 +108,7 @@ export class ClaseDetalleComponent implements OnInit {
                 align: (this.userName === m.nombre ? 'right' : 'left'),
                 avatar: (this.userName === m.nombre ? 'fas fa-user-circle' : 'far fa-user-circle'),
               }
-            )
+            );
           });
 
         } else {
@@ -125,7 +125,7 @@ export class ClaseDetalleComponent implements OnInit {
   {
     if (this.txtRespuesta.value) {
       if (this.isAlumno) {
-        this.als.sendAnotacion(this.userId, this.idClase, this.txtRespuesta.value).subscribe(
+        this.als.sendAnotacion(this.userId, this.clase.id, this.txtRespuesta.value).subscribe(
           (value: any) =>
           {
             if (value.status === 'OK')
@@ -148,7 +148,7 @@ export class ClaseDetalleComponent implements OnInit {
       else
       {
         // Mensaje del profesor
-        this.ps.sendAnotacion(this.userId, this.idClase, this.txtRespuesta.value).subscribe(
+        this.ps.sendAnotacion(this.userId, this.clase.id, this.txtRespuesta.value).subscribe(
           (value: any) =>
           {
             if (value.status === 'OK')
@@ -175,13 +175,27 @@ export class ClaseDetalleComponent implements OnInit {
 
   }
 
+  getIniciarClase(): boolean {
+    if (this.claseDetalle && this.claseDetalle.dia) {
+      const hoy = new Date();
+      const diaSeparado = this.claseDetalle.dia.split('/');
+      const fechaInicio = new Date(+diaSeparado[2], (+diaSeparado[1]) - 1, +diaSeparado[0], +this.claseDetalle.hora, 0, 0);
+      const fechaFin = new Date(+diaSeparado[2], (+diaSeparado[1]) - 1, +diaSeparado[0], (+this.claseDetalle.hora) + 1, 0, 0);
+
+      if (hoy <= fechaFin && hoy >= fechaInicio) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   iniciarClase(e)
   {
     if (this.isAlumno) {
-      this.aulaService.iniciarClaseAlumno(this.idClase, this.userId).subscribe(
+      this.aulaService.iniciarClaseAlumno(this.clase.id, this.userId).subscribe(
         (value: any) =>
         {
-          if (value.status == 'OK')
+          if (value.status === 'OK')
           {
             this.toastr.success('Clase iniciada\n' + value.data);
           } else
@@ -199,10 +213,10 @@ export class ClaseDetalleComponent implements OnInit {
     }
     else
     {
-      this.aulaService.iniciarClaseProfesor(this.idClase, this.userId).subscribe(
+      this.aulaService.iniciarClaseProfesor(this.clase.id, this.userId).subscribe(
         (value: any) =>
         {
-          if (value.status == 'OK')
+          if (value.status === 'OK')
           {
             this.toastr.success('Clase iniciada\n' + value.data);
           } else
@@ -224,10 +238,10 @@ export class ClaseDetalleComponent implements OnInit {
   calificar(e)
   {
     e.preventDefault();
-    this.als.sendCalificacion(this.userId,this.idClase, this.rate, this.txtComentario.value).subscribe(
+    this.als.sendCalificacion(this.userId, this.clase.id, this.rate, this.txtComentario.value).subscribe(
       (value: any) =>
       {
-        if (value.status == 'OK')
+        if (value.status === 'OK')
         {
           this.toastr.success('Gracias por calificar la clase');
         } else

@@ -15,12 +15,13 @@ declare var $;
 })
 export class UsuarioPerfilClasesComponent implements OnInit {
 
-  @Output() detalleClase = new EventEmitter();
+  @Output() detalleClase = new EventEmitter<Clase>();
   paramId: number;
   clases: Clase[] = [];
   isAlumno = false;
   estados = new ClaseEstados();
   settings: any;
+  instanciarGrilla: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,20 +47,12 @@ export class UsuarioPerfilClasesComponent implements OnInit {
       this.als.getClases(this.paramId).subscribe(
         (value: any) => {
           this.clases = [];
-          value.data.forEach( i =>
-            {
-              this.clases.push({
-                id: i.id,
-                calificacion: i.calificacion,
-                institucion: i.institucion,
-                materia: i.materia,
-                dia: i.dia,
-                hora: i.hora,
-                estado: i.estado,
-                profesor: i.profesor,
-              });
-            }
-          );
+          value.data.forEach( i => {
+            i.disabled = true;
+            i.estadoHtml = `<div data-toggle="tooltip" title="${i.estado}" class="btn ${this.returnClassEstado(i.estado)}"><i class="fas fa"></i></div>`;  
+          });
+          this.clases = value.data;
+          this.instanciarGrilla = true;
         }
       );
 
@@ -68,20 +61,13 @@ export class UsuarioPerfilClasesComponent implements OnInit {
       this.ps.getClases(this.paramId).subscribe(
         (value: any) => {
           this.clases = [];
-          value.data.forEach( i =>
-            {
-              this.clases.push({
-                id: i.id,
-                calificacion: i.calificacion,
-                institucion: i.institucion,
-                materia: i.materia,
-                dia: i.dia,
-                hora: i.hora,
-                estado: i.estado,
-                estadoHtml: `<div class="btn ${this.returnClassEstado(i.estado)}"><i class="fas fa"></i></div>`,
-              });
-            }
-          );
+          value.data.forEach( i => {
+              i.disabled = true;
+              i.estadoHtml = `<div data-toggle="tooltip" title="${i.estado}" class="btn ${this.returnClassEstado(i.estado)}"><i class="fas fa"></i></div>`;  
+          });
+          this.clases = value.data;
+          delete this.settings.columns.profesor;
+          this.instanciarGrilla = true;
         }
       );
     }
@@ -91,7 +77,7 @@ export class UsuarioPerfilClasesComponent implements OnInit {
     switch (estado) {
       case 'Pendiente':
         return 'btn-danger pendiente';
-      case 'Finalizado':
+      case 'Finalizada':
         return 'btn-success finalizado';
       case 'En Curso':
         return 'btn-warning encurso';
@@ -107,11 +93,11 @@ export class UsuarioPerfilClasesComponent implements OnInit {
         custom: [
           {
             name: 'detail',
-            title: '<a class="btn btn-primary primary-button detalle" href="#"><i class="fas fa-eye"></i></a>',
+            title: '<a class="btn btn-primary primary-button detalle" data-toggle="tooltip" title="Ver Detalle" href="#"><i class="fas fa-eye"></i></a>',
           },
           {
             name: 'ingresar',
-            title: '<a class="btn btn-primary ingresar" href="#"><i class="fas fa-arrow-circle-right"></i></a>',
+            title: '<a class="btn btn-primary ingresar" href="#" data-toggle="tooltip" title="Iniciar Clase"><i class="fas fa-arrow-circle-right"></i></a>',
           }
         ],
         add: false,
@@ -136,8 +122,8 @@ export class UsuarioPerfilClasesComponent implements OnInit {
           filter: true,
           editable: false
         },
-        profesion: {
-          title: 'Profesión',
+        profesor: {
+          title: 'Profesor',
           filter: true,
           editable: false
         },
@@ -177,7 +163,7 @@ export class UsuarioPerfilClasesComponent implements OnInit {
                   list: [
                     { value: 'Pendiente', title: 'Pendiente' },
                     { value: 'En Curso', title: 'En Curso' },
-                    { value: 'Finalizado', title: 'Finalizado' },
+                    { value: 'Finalizada', title: 'Finalizada' },
                   ]
                 }
               },
@@ -195,8 +181,7 @@ export class UsuarioPerfilClasesComponent implements OnInit {
   onCustomAction(event) {
     switch ( event.action) {
       case 'detail':
-        // this.router.navigate([`/clase/detalle/${event.data.id}`]);
-        this.detalleClase.emit(event.data.id);
+        this.detalleClase.emit(event.data);
         break;
     }
   }

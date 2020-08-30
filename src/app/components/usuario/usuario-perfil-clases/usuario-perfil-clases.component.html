@@ -7,7 +7,7 @@
                 <h4>Mis clases</h4>
             </header>
 
-            <article class="card-body card-body-table">
+            <article class="card-body card-body-table" *ngIf="instanciarGrilla">
                     <ng2-smart-table [settings]="settings" [source]="clases" (custom)="onCustomAction($event)"></ng2-smart-table>
             </article> <!-- End card Body -->
         </div> <!-- End Card -->

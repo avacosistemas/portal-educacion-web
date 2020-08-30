@@ -22,12 +22,14 @@
             </div>
             <!-- ================== Picture ================== -->
             <div class="info">
-                <div class="rate" *ngIf="usuario.calificacion">
-                    <ngb-rating [(rate)]="usuario.calificacion">
-                        <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
-                        </ng-template>
-                    </ngb-rating>
+                <div class="rate">
+                    <ng-template #t let-fill="fill">
+                      <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                      </span>
+                    </ng-template>
+
+                    <ngb-rating [(rate)]="usuario.calificacion" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
                 </div>
                 <h3>Bienvenido!!!</h3>
                 <h4>{{usuario.nombreApellido}}</h4>
@@ -56,6 +58,12 @@
                             <app-usuario-calificaciones></app-usuario-calificaciones>
                         </ng-template>
                     </li>
+                    <li ngbNavItem="navpreguntas">
+                        <a ngbNavLink><i class="fas fa-question"></i> Mis Preguntas</a>
+                        <ng-template ngbNavContent>
+                            <app-preguntas></app-preguntas>
+                        </ng-template>
+                    </li>
                     <li ngbNavItem="navpwd">
                         <a #chgPwd ngbNavLink style="display:none;"></a>
                         <ng-template ngbNavContent>
@@ -65,15 +73,15 @@
                     <li ngbNavItem="navdetalleclase">
                         <a #claseDetalle ngbNavLink style="display:none;"></a>
                         <ng-template ngbNavContent>
-                            <app-clase-detalle [idClase]="idClase" (goBack)="setNav($event)"></app-clase-detalle>
+                            <app-clase-detalle [clase]="clase" (goBack)="setNav($event)"></app-clase-detalle>
                         </ng-template>
                     </li>
                     <li ngbNavItem="navclasealumnos">
                         <a #claseAlumnos ngbNavLink style="display:none;"></a>
                         <ng-template ngbNavContent>
-                            <app-clase-alumnos (goBack)="setNav($event)"></app-clase-alumnos>
+                            <app-clase-alumnos [clase]="clase" (goBack)="setNav($event)"></app-clase-alumnos>
                         </ng-template>
-                    </li>
+                    </li>                  
                 </ul>
             </div>
         </div>

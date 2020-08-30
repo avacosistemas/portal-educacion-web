@@ -25,7 +25,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-university"></i></span>
                                         </div>
-                                        <input id="txtInstitucion" value="{{clase?.institucion}}" type="text" readonly class="form-control">
+                                        <input id="txtInstitucion" value="{{claseDetalle?.institucion}}" type="text" readonly class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"> <i class="fas fa-book"></i> </span>
                                         </div>
-                                        <input id="txtMateria" type="text" value="{{clase?.materia}}" readonly class="form-control">
+                                        <input id="txtMateria" type="text" value="{{claseDetalle?.materia}}" readonly class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"> <i class="fas fa-calendar"></i> </span>
                                         </div>
-                                        <input id="txtDia" value="{{clase?.dia}} {{clase?.hora}} Hs." type="text" readonly class="form-control">
+                                        <input id="txtDia" value="{{claseDetalle?.dia}} {{claseDetalle?.hora}} Hs." type="text" readonly class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -59,21 +59,25 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"> <i class="fas fa-battery-quarter"></i></span>
                                         </div>
-                                        <input id="txtEstado" value="{{clase?.estado}}" type="text" readonly class="form-control">
+                                        <input id="txtEstado" value="{{claseDetalle?.estado}}" type="text" readonly class="form-control">
                                     </div>
                                 </div>
 
-                                <div class="col" *ngIf="clase?.calificacion">
+                                <div class="col" *ngIf="claseDetalle?.calificacion">
                                     <label>Calificación</label>
                                     <div class="input-group mb-3 rate">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-chart-pie"></i></span>
                                         </div>
-                                        <ngb-rating [rate]="clase?.calificacion" [readonly]="true" class="form-control">
-                                            <ng-template let-fill="fill" let-index="index">
-                                                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                                        <div class="rate">
+                                            <ng-template #t let-fill="fill">
+                                              <span class="star" [class.full]="fill === 100">
+                                                <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                                              </span>
                                             </ng-template>
-                                        </ngb-rating>
+                        
+                                            <ngb-rating [(rate)]="claseDetalle.calificacion" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -84,7 +88,7 @@
                                 <button class="btn btn-secondary btn-block mt-4" type="button" (click)="goBack.emit('navclasealumnos')">Ver alumnos</button>
                             </div>
                             <div class="col">
-                                <button class="btn btn-primary btn-block mt-4" type="button" (click)="iniciarClase($event)">Iniciar Clase</button>
+                                <button class="btn btn-primary btn-block mt-4" type="button" [disabled]="!getIniciarClase()" (click)="iniciarClase($event)">Iniciar Clase</button>
                             </div>
                         </div>
                         <div class="row" *ngIf="isAlumno">
@@ -118,7 +122,7 @@
                             <div class="small-chat-box">
 
                                 <div *ngFor="let msg of anotaciones.chat" class="chat-message {{msg.align}}">
-                                    <i class="{{msg.avatar}} avatar-user"></i>
+                                    <!-- <i class="{{msg.avatar}} avatar-user"></i> -->
                                     <div class="message">
                                         <a class="message-author" href="#"> {{msg.fromName}} </a>
                                         <span class="message-date"> {{msg.fechaHora}} </span>

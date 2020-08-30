@@ -52,15 +52,19 @@
 							<div class="col-lg-6 product menu-category" *ngFor="let profesor of getProfesores">
 								<div class="card card-block m-t-2">
 									<div class="product-image m-y-1" [routerLink]="['/profesor/', profesor.id]" >
-										<img class="img-fluid" src="{{profesor.foto}}" alt="{{profesor.nombreApellido}" />
+										<img class="img-fluid" src="{{profesor.foto}}" alt="{{profesor.nombreApellido}}" />
 									</div>
 									<div class="profesor">
 										<h5>{{profesor.nombreApellido}}</h5>
                                         <button [routerLink]="['/profesor/agenda/', profesor.id]" class="btn btn-success">Ver clases</button>
 									</div>
 									<h6>{{profesor.materias}}</h6>
-									<div class="valor-curso">
+									<div class="valor-curso" *ngIf="profesor.valorHora">
 										Valor curso: $ <span>{{profesor.valorHora}}</span>
+									</div>
+									<!-- Vino sin costo-->
+									<div class="valor-curso" *ngIf="!profesor.valorHora">
+										Valor curso: <span>-</span>
 									</div>
 								</div>
 							</div>
