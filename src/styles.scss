@@ -79,21 +79,21 @@ table.table-clases {
 }
 
 // ========= Estados de las clases ==========
-.encurso { 
+.encurso {
 	margin-left: 20%;
 
 	i::before {
 		content: "\f110";
 	}
 }
-.pendiente { 
+.pendiente {
 	margin-left: 20%;
 
 	i::before {
 		content: "\f071";
 	}
 }
-.finalizado { 
+.finalizado {
 	margin-left: 20%;
 
 	i::before {
@@ -329,10 +329,24 @@ input {
 }
 
 .rate {
-    .star {font-size: 1.2rem; color: #b0c4de;}
+    .star {
+        position: relative;
+        display: inline-block;
+        font-size: 1.2rem;
+        color: #b0c4de;
+    }
+    .full {color: #4188a6;}
+    .half {
+        position: absolute;
+        display: inline-block;
+        overflow: hidden;
+        color: #4188a6;
+    }
+
     .filled {color: #6cae5c;}
     .bad {color: #deb0b0;}
     .filled.bad {color: #4188a6;}
+
 }
 
 .profile {
@@ -630,7 +644,7 @@ input {
     }
 }
 
-:host ::ng-deep ng2-smart-table { 
+:host ::ng-deep ng2-smart-table {
     ::ng-deep thead {
         background-color: #ddd !important;
 	}

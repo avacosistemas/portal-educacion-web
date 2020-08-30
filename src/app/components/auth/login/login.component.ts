@@ -3,6 +3,7 @@ import { SeguridadService } from '../../../services/seguridad.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { HeaderService } from "../../../services/header.service";
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent
   constructor(
     protected as: SeguridadService,
     protected router: Router,
+    private headerService: HeaderService,
     private fb: FormBuilder,
     private toastr: ToastrService,
   )
@@ -46,6 +48,7 @@ export class LoginComponent
       {
         if (status) {
           const userId = this.as.getUser().id;
+          this.headerService.setMenuSelected('navclases');
           this.router.navigate([ '/usuario/' + userId]);
         } else {
           this.toastr.error('Usuario o contraseña invalido');

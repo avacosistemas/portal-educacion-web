@@ -175,12 +175,6 @@ export class ClaseDetalleComponent implements OnInit {
 
   }
 
-
-  listarAlumnos(e)
-  {
-
-  }
-
   iniciarClase(e)
   {
     if (this.isAlumno) {

@@ -106,7 +106,6 @@ export class UsuarioPerfilEditComponent implements OnInit, OnChanges {
         );
       }
 
-
     } else {
       this.toastr.error('Por favor complete los datos requeridos.');
     }
