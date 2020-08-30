@@ -198,6 +198,8 @@ export class ClaseDetalleComponent implements OnInit {
           if (value.status === 'OK')
           {
             this.toastr.success('Clase iniciada\n' + value.data);
+            const win = window.open(value.urlJoin, '_blank');
+            win.focus();
           } else
           {
             this.toastr.error('No se pudo iniciar la clase');
@@ -219,6 +221,8 @@ export class ClaseDetalleComponent implements OnInit {
           if (value.status === 'OK')
           {
             this.toastr.success('Clase iniciada\n' + value.data);
+            const win = window.open(value.urlJoin, '_blank');
+            win.focus();
           } else
           {
             this.toastr.error('No se pudo iniciar la clase');
@@ -231,8 +235,6 @@ export class ClaseDetalleComponent implements OnInit {
         }
       );
     }
-
-
   }
 
   calificar(e)

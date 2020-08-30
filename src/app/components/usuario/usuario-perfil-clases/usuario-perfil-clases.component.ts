@@ -6,6 +6,8 @@ import { AlumnoService } from "../../../services/alumno.service";
 import { ProfesorService } from "../../../services/profesor.service";
 import { ClaseEstados } from "../../../entities/clase-estado";
 import { RaitingGridComponent } from './raiting-grid/raiting-grid.component';
+import { ToastrService } from 'ngx-toastr';
+import { AulaService } from 'src/app/services/aula.service';
 declare var $;
 
 @Component({
@@ -22,6 +24,7 @@ export class UsuarioPerfilClasesComponent implements OnInit {
   estados = new ClaseEstados();
   settings: any;
   instanciarGrilla: boolean;
+  userId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,10 +32,13 @@ export class UsuarioPerfilClasesComponent implements OnInit {
     protected as: SeguridadService,
     protected als: AlumnoService,
     protected ps: ProfesorService,
+    private toastr: ToastrService,
+    protected aulaService: AulaService,
   ) { }
 
   ngOnInit(): void
   {
+    this.userId = this.as.getUser().id;
     this.setupGrilla();
     this.paramId = Number(this.route.snapshot.paramMap.get('id'));
     this.isAlumno = this.as.isAlumno();
@@ -183,6 +189,57 @@ export class UsuarioPerfilClasesComponent implements OnInit {
       case 'detail':
         this.detalleClase.emit(event.data);
         break;
+      case 'detail':
+        this.iniciarClase(event.data);
+        break;
+    }
+  }
+
+  iniciarClase(e)
+  {
+    if (this.isAlumno) {
+      this.aulaService.iniciarClaseAlumno(e.id, this.userId).subscribe(
+        (value: any) =>
+        {
+          if (value.status === 'OK')
+          {
+            this.toastr.success('Clase iniciada\n' + value.data);
+            const win = window.open(value.urlJoin, '_blank');
+            win.focus();
+          } else
+          {
+            this.toastr.error('No se pudo iniciar la clase');
+          }
+
+        },
+        error =>
+        {
+          this.toastr.error('Se produjo un error al iniciar la clase');
+        }
+      );
+
+    }
+    else
+    {
+      this.aulaService.iniciarClaseProfesor(e.id, this.userId).subscribe(
+        (value: any) =>
+        {
+          if (value.status === 'OK')
+          {
+            this.toastr.success('Clase iniciada\n' + value.data);
+            const win = window.open(value.urlJoin, '_blank');
+            win.focus();
+          } else
+          {
+            this.toastr.error('No se pudo iniciar la clase');
+          }
+
+        },
+        error =>
+        {
+          this.toastr.error('Se produjo un error al iniciar la clase');
+        }
+      );
     }
   }
 
