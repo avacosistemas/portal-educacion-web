@@ -189,7 +189,7 @@ export class UsuarioPerfilClasesComponent implements OnInit {
       case 'detail':
         this.detalleClase.emit(event.data);
         break;
-      case 'detail':
+      case 'ingresar':
         this.iniciarClase(event.data);
         break;
     }
@@ -203,8 +203,8 @@ export class UsuarioPerfilClasesComponent implements OnInit {
         {
           if (value.status === 'OK')
           {
-            this.toastr.success('Clase iniciada\n' + value.data);
-            const win = window.open(value.urlJoin, '_blank');
+            this.toastr.success('Clase iniciada');
+            const win = window.open(value.data.urlJoin, '_blank');
             win.focus();
           } else
           {
@@ -226,8 +226,8 @@ export class UsuarioPerfilClasesComponent implements OnInit {
         {
           if (value.status === 'OK')
           {
-            this.toastr.success('Clase iniciada\n' + value.data);
-            const win = window.open(value.urlJoin, '_blank');
+            this.toastr.success('Clase iniciada');
+            const win = window.open(value.data.urlJoin, '_blank');
             win.focus();
           } else
           {

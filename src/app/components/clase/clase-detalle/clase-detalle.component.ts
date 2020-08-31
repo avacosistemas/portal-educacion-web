@@ -197,8 +197,8 @@ export class ClaseDetalleComponent implements OnInit {
         {
           if (value.status === 'OK')
           {
-            this.toastr.success('Clase iniciada\n' + value.data);
-            const win = window.open(value.urlJoin, '_blank');
+            this.toastr.success('Clase iniciada');
+            const win = window.open(value.data.urlJoin, '_blank');
             win.focus();
           } else
           {
@@ -220,8 +220,8 @@ export class ClaseDetalleComponent implements OnInit {
         {
           if (value.status === 'OK')
           {
-            this.toastr.success('Clase iniciada\n' + value.data);
-            const win = window.open(value.urlJoin, '_blank');
+            this.toastr.success('Clase iniciada');
+            const win = window.open(value.data.urlJoin, '_blank');
             win.focus();
           } else
           {

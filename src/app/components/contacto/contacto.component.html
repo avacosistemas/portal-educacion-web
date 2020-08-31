@@ -18,17 +18,21 @@
                         <input formControlName="name" type="text" placeholder="Nombre" class="form-control" id="nom">
                       </div>
                       <app-field-error-display
-                        [displayError]="nombre.touched && nombre.errors?.required"
-                        errorMsg="* Debe completar el nombre">
+                            [displayError]="nombre.touched && nombre.errors?.required"
+                            errorMsg="* Debe completar el nombre">
                       </app-field-error-display>
                       <app-field-error-display
-                        [displayError]="nombre.touched && nombre.errors?.minlength"
-                        errorMsg="* El nombre debe tener al menos 2 letras">
+                            [displayError]="nombre.touched && nombre.errors?.minlength"
+                            errorMsg="* El nombre debe tener al menos 2 letras">
                       </app-field-error-display>
                       <app-field-error-display
-                        [displayError]="nombre.touched && nombre.errors?.maxlength"
-                        errorMsg="* El nombre no puede tener más de 100 letras">
+                            [displayError]="nombre.touched && nombre.errors?.maxlength"
+                            errorMsg="* El nombre no puede tener más de 100 letras">
                       </app-field-error-display>
+                      <app-field-error-display
+                            [displayError]="nombre.touched && nombre.errors?.pattern"
+                            errorMsg="* El nombre debe contener solo letras">
+                    </app-field-error-display>     
                     </div>
                   </div>
 
@@ -79,6 +83,10 @@
                       <app-field-error-display
                               [displayError]="consulta.touched && consulta.errors?.required"
                               errorMsg="* Debe completar la consulta">
+                      </app-field-error-display>
+                      <app-field-error-display
+                              [displayError]="consulta.touched && consulta.errors?.maxlength"
+                              errorMsg="* El teléfono debe tener hasta 255 carácteres">
                       </app-field-error-display>
                     </div>
                   </div>

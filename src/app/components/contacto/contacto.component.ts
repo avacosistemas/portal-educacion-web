@@ -21,10 +21,10 @@ export class ContactoComponent {
   ) {
 
     this.fg = fb.group({
-      name: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      name: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100), Validators.pattern('^[a-zA-Z ]*$')]],
       telephone: [null, [Validators.required, Validators.minLength(10), this.fv.telefono()]],
       email: [null, [Validators.required, this.fv.correo()]],
-      message: new FormControl('', [Validators.required]),
+      message: new FormControl('', [ Validators.maxLength(255), Validators.required]),
     });
   }
   image = 'assets/propias/149545-OTYR7L-59.jpg';
