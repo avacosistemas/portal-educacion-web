@@ -23,7 +23,7 @@ export class PwdResetComponent implements OnInit {
   )
   {
     this.fg = fb.group({
-      usuario: new FormControl('',[Validators.required]),
+      usuario: new FormControl('', [Validators.required]),
     });
   }
 

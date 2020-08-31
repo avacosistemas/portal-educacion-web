@@ -86,6 +86,20 @@ export class SeguridadService
         this._isLogged = false;
         if (ex.error?.status && ex.error?.status === 'CHANGE_PASSWORD_REQUIRED')
         {
+          /** User temporal */
+          this._user = {
+            username: user,
+            id: 0,
+            tipoCliente: '',
+            email: '',
+            logged: false,
+            accountNoExpired: false,
+            accountNonExpired: false,
+            bloqueado: false,
+            accountNonLocked: false
+          };
+          this._setUser(this._user);
+
           this.router.navigate([ `/pwdchange` ]);
           this._setToken(ex.error.data.token);
         } else {
