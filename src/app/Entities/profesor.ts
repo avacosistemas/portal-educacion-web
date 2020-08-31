@@ -3,7 +3,7 @@ export class Profesor
 	id: number;
 	nombre: string;
 	apellido: string;
-	nombreApellido?: string;
+  nombreApellido?: string;
   username: string;
   tipoIdentificacion?: string;
   numeroIdentificacion?: string;
