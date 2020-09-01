@@ -20,23 +20,6 @@
             </div>
             <hr style="margin-top: 30px">
 
-        </div>
-        <div class="col-md-6 myCol">
-            <h4>¿Qué clase quieres tomar con {{profesor.nombre}}?</h4>
-            <label for="cmbMateria">Materia </label>
-            <select id="cmbMateria" class="form-control custom-select">
-                <option *ngFor="let materia of materias" value="{{materia.id}}">{{materia.nombre}} - {{materia.nivelNombre}}</option>
-            </select>
-            <br>
-            <br>
-
-            <h4>¿Cúando?</h4>
-
-        </div>
-    </div>
-    <div class="row myRow">
-
-        <div class="col-sm-6">
             <div  class="col-sm-12" *ngIf="anotaciones.chat.length > 0">
                 <!-- Chat -->
                 <div class="small-chat-box">
@@ -60,108 +43,27 @@
                 </form>
 
             </div> <!-- End col -->
+
+
         </div>
+        <div class="col-md-6 myCol">
+            <h4>¿Qué clase quieres tomar con {{profesor.nombre}}?</h4>
+            <label for="cmbMateria">Materia </label>
+            <select id="cmbMateria" class="form-control custom-select">
+                <option *ngFor="let materia of materias" value="{{materia.id}}">{{materia.nombre}} - {{materia.nivelNombre}}</option>
+            </select>
+            <br>
+            <br>
 
-
-
-<!--        <div class="col-md-6 myCol">-->
-
-
-<!--            &lt;!&ndash; ============== Chat ============== &ndash;&gt;-->
-<!--            <div class="small-chat-box">-->
-<!--                &lt;!&ndash;				<div class="container myContent">&ndash;&gt;-->
-<!--                &lt;!&ndash;					<div class="chat-discussion">&ndash;&gt;-->
-
-<!--                <div class="chat-message left">-->
-<!--                    <i class="fas fa-user-circle avatar-user"></i>-->
-<!--                    <div class="message">-->
-<!--                        <a class="message-author" href="#"> Miguel Carbonaro </a>-->
-<!--                        <span class="message-date"> Lun Ene 26 2020 - 18:39:23 </span>-->
-<!--                        <span class="message-content">-->
-<!--									Buenas tardes, quería saber de contenido de la materia Historia contemporanea y puntualmente en que período esta enfocada la materia.-->
-<!--								</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="chat-message right">-->
-<!--                    <img class="message-avatar" src="{{profesor.foto}}" alt="">-->
-<!--                    <div class="message">-->
-<!--                        <a class="message-author" href="#"> {{profesor.nombre}} </a>-->
-<!--                        <span class="message-date">  Mar Ene 27 2020 - 11:12:36 </span>-->
-<!--                        <span class="message-content">-->
-
-<!--							Historia contemporanea esta centrada en las 2 guerras mundiales, desdesde sus origenes, los hechos principales y la caida de Alemania.-->
-<!--									<ul style="text-align: left">-->
-<!--										<li>La batalla de inglaterra</li>-->
-<!--										<li>La invación a la Unión Soviética</li>-->
-<!--										<li>La Conferencia de Teherán</li>-->
-<!--										<li>etc...</li>-->
-<!--									</ul>-->
-<!--							</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="chat-message right">-->
-<!--                    <img class="message-avatar" src="{{profesor.foto}}" alt="">-->
-<!--                    <div class="message">-->
-<!--                        <a class="message-author" href="#"> {{profesor.nombre}} </a>-->
-<!--                        <span class="message-date">  Mar Ene 27 2020 - 11:15:42 </span>-->
-<!--                        <span class="message-content">-->
-<!--							El contenido de la materia no desarrolla temas post guerra o las consecuencias.-->
-<!--							</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="chat-message left">-->
-<!--                    <i class="fas fa-user-circle avatar-user"></i>-->
-<!--                    <div class="message">-->
-<!--                        <a class="message-author" href="#"> Pablo Grossi </a>-->
-<!--                        <span class="message-date">  Mie Feb 20 2020 - 11:12:36 </span>-->
-<!--                        <span class="message-content">-->
-<!--							Lorem ipsum dolor sit amet, consectetur adipisicing elit. At est labore magni nisi odit quaerat quibusdam suscipit? Accusantium distinctio doloribus iste labore minima neque quis sapiente tempore voluptatem! Dolores, maiores?-->
-<!--							</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="chat-message right">-->
-<!--                    <img class="message-avatar" src="{{profesor.foto}}" alt="">-->
-<!--                    <div class="message">-->
-<!--                        <a class="message-author" href="#"> {{profesor.nombre}} </a>-->
-<!--                        <span class="message-date">  Jue Feb 25 2020 - 11:12:36 </span>-->
-<!--                        <span class="message-content">-->
-<!--							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eveniet ipsam molestiae odio veniam veritatis, vitae. Ab, aliquid architecto, autem ipsam, laboriosam nihil nobis porro quisquam ratione sequi soluta voluptatum!-->
-<!--							</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash;					</div>&ndash;&gt;-->
-<!--                <div class="form-group">-->
-<!--						<textarea class="form-control message-input mb-3"-->
-<!--                                  name="message"-->
-<!--                                  placeholder="Ingrese su consulta"></textarea>-->
-<!--                    <button class="btn btn-block btn-secondary" (click)="enviarConsulta($event)">Enviar Consulta</button>-->
-<!--                </div>-->
-<!--                &lt;!&ndash;				</div>&ndash;&gt;-->
-<!--            </div>-->
-<!--            &lt;!&ndash; ============== End Chat ============== &ndash;&gt;-->
-
-<!--        </div> &lt;!&ndash; /Col &ndash;&gt;-->
-
-        <div class="col-md-6 ">
+            <h4>¿Cúando?</h4>
             <div class="datepicker">
                 <ngb-datepicker #dp
                                 (dateSelect)="onDateSelection($event)"
                                 [displayMonths]="2"
                                 [navigation]="'select'"
+                                [markDisabled]="disableDays"
                                 outsideDays="hidden">
                 </ngb-datepicker>
-                <!-- <ng-template #t let-date let-focused="focused">
-                    <span class="custom-day"
-                        [class.focused]="focused"
-
-                        [class.faded]="isHovered(date) || isInside(date)"
-                        (mouseenter)="hoveredDate = date"
-                        (mouseleave)="hoveredDate = null">
-                        {{ date.day }}
-                    </span>
-                </ng-template> -->
-
             </div>
 
             <label for="cmbHorario">Horarios </label>
@@ -173,7 +75,10 @@
             <br>
 
             <button class="btn btn-success" style="width: 100%;" disabled>Tomar Clase</button>
-        </div> <!-- /col -->
+        </div>
+
+
+
 
 
     </div> <!-- /Row -->

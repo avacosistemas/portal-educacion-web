@@ -9,7 +9,7 @@
 		<div class="row pasosIndex-box-responsive-diplay" style="padding-bottom">
 
 			<div class="col-md-4 animate-box pasosIndex-box-responsive" *ngFor="let nivel of nivelesEducativos">
-				<a href="#" routerLink="/buscar" class="item-grid text-center">
+				<a href="#" routerLink="/buscar/{{nivel.id}}" class="item-grid text-center">
 					<div class="image" style="background-image: url('{{nivel.image}}')"></div>
 					<div class="v-align">
 						<div class="v-align-middle cards">

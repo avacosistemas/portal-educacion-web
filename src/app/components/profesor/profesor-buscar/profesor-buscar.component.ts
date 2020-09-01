@@ -24,6 +24,7 @@ export class ProfesorBuscarComponent implements OnInit {
   orderId = 'RELEVANTE';
   materias: Materia[] = [];
   idParam: number;
+  nivelParam: number;
   nivelSeleccionado: string;
 
   constructor(
@@ -36,14 +37,15 @@ export class ProfesorBuscarComponent implements OnInit {
 
   ngOnInit(): void {
     this.idParam = Number(this.route.snapshot.paramMap.get('id'));
+    this.nivelParam = Number(this.route.snapshot.paramMap.get('nivel'));
+    this.selLevId = this.nivelParam || 1;
     this.selMatId = this.idParam || null;
     this.loadData();
-
   }
 
   selecciono(valor: number) {
     this.selMatId = valor;
-    this.materiaSeleccionada = this.materias.find(f => f.id === this.selMatId).descripcion;
+    this.materiaSeleccionada = this.materias.find(f => f.id === valor).descripcion;
     this.consultarCatalogo();
   }
 
@@ -65,15 +67,16 @@ export class ProfesorBuscarComponent implements OnInit {
       (value: any) =>
       {
         this.materias = [];
-        this.selMatId = null;
         value.data.forEach(materia =>
         {
+
           this.materias.push(
             {
               id: materia.id,
               descripcion: materia.descripcion,
               idNivel: materia.idNivel,
-              nombre: materia.descripcion
+              nombre: materia.descripcion,
+              selected: (materia.id === this.selMatId)
             }
           );
         });

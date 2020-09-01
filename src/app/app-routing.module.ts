@@ -22,7 +22,8 @@ import { ClaseAlumnosComponent } from './components/clase/clase-alumnos/clase-al
 const routes: Routes = [
   {path: 'alumno/nuevo', component: AlumnoRegistroComponent, pathMatch: 'full'},
   {path: 'alumno/:id', component: AlumnoPerfilComponent, pathMatch: 'full'},
-  {path: 'buscar/:id', component: ProfesorBuscarComponent, pathMatch: 'full'},
+  {path: 'buscar/:nivel/:id', component: ProfesorBuscarComponent, pathMatch: 'full'},
+  {path: 'buscar/:nivel', component: ProfesorBuscarComponent, pathMatch: 'full'},
   {path: 'buscar', component: ProfesorBuscarComponent, pathMatch: 'full'},
   {path: 'clase/detalle/:id', component: ClaseDetalleComponent, pathMatch: 'full'},
   {path: 'clase/:id/alumnos', component: ClaseAlumnosComponent, pathMatch: 'full'},

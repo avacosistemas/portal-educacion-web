@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Profesor } from 'src/app/entities/profesor';
 import { ProfesorService } from "../../../services/profesor.service";
 import { ActivatedRoute } from "@angular/router";
-import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
+import { NgbDateStruct, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { AlumnoService } from "../../../services/alumno.service";
 import { SeguridadService } from "../../../services/seguridad.service";
@@ -201,7 +201,7 @@ export class ProfesorScheduleComponent implements OnInit {
     if (!this.fromDate) return;
 
     const cDate = this.fromDate.year.toString()
-      + this.fromDate.month.toString().padStart(2,'0') +
+      + this.fromDate.month.toString().padStart(2,'0')
       + this.fromDate.day.toString().padStart(2,'0');
 
     this.ps.getHorarios(this.profesorIdParam, cDate).subscribe(
@@ -250,6 +250,12 @@ export class ProfesorScheduleComponent implements OnInit {
 
   isRange(date: NgbDate) {
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
+  }
+
+  disableDays(date: NgbDateStruct) {
+    const d = new Date(date.year, date.month - 1, date.day);
+    // return date.day==18 || d.getDay() === 0 || d.getDay() === 6;
+    return d.getDay() === 0 || d.getDay() === 6;
   }
 
   _mockMaterias(){

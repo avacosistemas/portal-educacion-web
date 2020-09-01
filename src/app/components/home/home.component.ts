@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
     $event.preventDefault();
     this.matModels.forEach(m => {
       if (m.nombre == this.materia ) {
-        this.router.navigate(['/buscar/' + m.id])
+        this.router.navigate(['/buscar/' + m.idNivel + '/' + m.id])
       }
     });
   }
