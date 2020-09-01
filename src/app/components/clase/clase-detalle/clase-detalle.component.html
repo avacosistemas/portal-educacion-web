@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col" *ngIf="claseDetalle?.calificacion">
+                                <div class="col" *ngIf="claseDetalle?.puntuacion">
                                     <label class="control-label">Calificación</label>
                                     <div class="input-group mb-3 rate">
                                         <div class="input-group-prepend">
@@ -76,13 +76,14 @@
                                               </span>
                                             </ng-template>
                         
-                                            <ngb-rating [(rate)]="claseDetalle.calificacion" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                                            <ngb-rating [(rate)]="rate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                         </form>
+
                         <div class="row">
                             <div class="col" *ngIf="!isAlumno">
                                 <button class="btn btn-secondary btn-block mt-4" type="button" (click)="goBack.emit('navclasealumnos')">Ver alumnos</button>
@@ -91,31 +92,24 @@
                                 <button class="btn btn-primary btn-block mt-4" type="button" [disabled]="!getIniciarClase()" (click)="iniciarClase($event)">Iniciar Clase</button>
                             </div>
                         </div>
+
                         <div class="row" *ngIf="isAlumno">
                             <div class="col-sm-12">
                                 <!-- Form encuesta satisfacción -->
                                 <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fge">
                                     <label class="mt-4">Calificación</label>
-                                    <!-- <div class="rate">
-                                        <ngb-rating [(rate)]="rate">
-                                            <ng-template let-fill="fill" let-index="index">
-                                                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
-                                            </ng-template>
-                                        </ngb-rating>
-                                    </div> -->
-                                    <div class="rate">
+                                      <div class="rate">
                                         <ng-template #t let-fill="fill">
                                           <span class="star" [class.full]="fill === 100">
                                             <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
                                           </span>
                                         </ng-template>
                     
-                                        <ngb-rating [(rate)]="rate" [starTemplate]="t" [max]="5"></ngb-rating>
+                                        <ngb-rating formControlName="calificacion" [(rate)]="rate" [starTemplate]="t" [readonly]="calificacion.value" [max]="5"></ngb-rating>
                                     </div>
                                     <label for="txtComentarioId">Comentario de la calificación</label>
-                                    <textarea formControlName="txtComentario" id="txtComentarioId" class="form-control" rows="3"></textarea>
-                                    <button class="btn btn-secondary btn-block mt-3" (click)="calificar($event)">Enviar calificación</button>
-                                    <!-- <button class="btn btn-secondary btn-block mt-4" (click)="enviarRespuesta($event)">Agregar respuesta</button> -->
+                                    <textarea formControlName="comentario" id="txtComentarioId" class="form-control" rows="3" [readOnly]="calificacion.value"></textarea>
+                                    <button class="btn btn-secondary btn-block mt-3" [disabled]="calificacion.value" (click)="calificar($event)">Enviar calificación</button>
                                 </form>
                             </div>
                         </div>
@@ -125,6 +119,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-sm-6">
                         <div  class="col-sm-12">
                             <!-- ==================== Chat ===================== -->

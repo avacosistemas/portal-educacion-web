@@ -37,6 +37,7 @@ export class ClaseAlumnosComponent implements OnInit {
 
   setupGrilla() {
     this.settings = {
+      noDataMessage: 'No hay registros',
       columns: {
         alumno: { title: 'Alumno', filter: true, editable: false},
         comentarios: { title: 'Comentarios', filter: true, editable: false},

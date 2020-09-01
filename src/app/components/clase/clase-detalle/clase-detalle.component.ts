@@ -29,7 +29,7 @@ export class ClaseDetalleComponent implements OnInit {
   claseDetalle: Clase;
   fg: FormGroup; // Chat
   fge: FormGroup; // Encuesta
-  rate: 0;
+  rate: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -57,14 +57,16 @@ export class ClaseDetalleComponent implements OnInit {
       txtRespuesta: [null, [ Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
     });
     this.fge = this.fb.group({
-      txtComentario: [null, [ Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
+      comentario: [null, [ Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
+      puntuacion: [0, [ Validators.required]]
     });
 
     this.loadData();
   }
 
   get txtRespuesta() { return this.fg.get('txtRespuesta'); }
-  get txtComentario() { return this.fge.get('txtComentario'); }
+  get txtComentario() { return this.fge.get('comentario'); }
+  get calificacion() { return this.fge.get('puntuacion'); }
 
   menuSelected(menu: string) {
     this.headerService.setMenuSelected(menu);
@@ -77,6 +79,8 @@ export class ClaseDetalleComponent implements OnInit {
       this.als.getClase(this.userId, this.clase.id).subscribe(
         (value: any) => {
           this.claseDetalle = value.data;
+          this.rate = this.claseDetalle.puntuacion;
+          this.fge.patchValue(this.claseDetalle);
         }
       );
     } else {
@@ -84,6 +88,7 @@ export class ClaseDetalleComponent implements OnInit {
       this.ps.getClase(this.userId, this.clase.id).subscribe(
         (value: any) => {
           this.claseDetalle = value.data;
+          this.rate = this.claseDetalle.puntuacion;
         }
       );
     }
