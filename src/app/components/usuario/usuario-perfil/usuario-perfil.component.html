@@ -6,7 +6,7 @@
                      onerror="this.src='/assets/icons/fa/fas-fa-user-circle-mod.svg'"
                      alt="{{usuario?.nombre}}, {{usuario?.apellido}}"
                      class="img-raised"/>
-                <div class="caption btn-floating-container" (click)="profilePictureFile.click()">
+                <div class="caption btn-floating-container" (click)="profilePictureFile.click()" *ngIf="active === 'navprofile'">
                     <p>
                         <a class="btn-floating btn-success"><i class="fas" [ngClass]="{ 'fa-plus': !usuario.foto, 'fa-pen': usuario.foto }"></i></a>
                     </p>
@@ -16,7 +16,7 @@
             <div class="form-row" style="display:none;">
                 <span>Foto de perfil</span>
                 <div class="custom-file mb-3">
-                    <input type="file" class="custom-file-input" #profilePictureFile (change)="selectFile($event)">
+                    <input type="file" class="custom-file-input" #profilePictureFile (change)="selectFile($event)" accept=".jpg">
                     <label class="custom-file-label" id="lblProfilePictureFile" for="profilePictureFile">{{fileName}}</label>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 </div>
                 <h3>Bienvenido!!!</h3>
                 <h4>{{usuario.nombreApellido}}</h4>
-                <span>{{isAlumno? 'Alumno' : 'Profesor'}}</span>
+                <span>{{isAlumno? 'Alumno' : usuario.titulo ? usuario.titulo : 'Profesor'}}</span>
                 <span *ngIf="usuario.descripcion">{{usuario.descripcion}}</span>
 
             </div>
@@ -43,7 +43,7 @@
                     <li ngbNavItem="navprofile" *ngIf="usuario">
                         <a ngbNavLink><i class="fas fa-user-circle"></i> Mi Perfil</a>
                         <ng-template ngbNavContent>
-                            <app-usuario-perfil-edit [usuario]="usuario" (cambiarPassword)="active='navpwd'"></app-usuario-perfil-edit>
+                            <app-usuario-perfil-edit [parentGroup]="usuarioForm" (cambiarPassword)="active='navpwd'"></app-usuario-perfil-edit>
                         </ng-template>
                     </li>
                     <li ngbNavItem="navclases">

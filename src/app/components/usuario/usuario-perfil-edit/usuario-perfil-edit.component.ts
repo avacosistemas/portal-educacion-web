@@ -14,18 +14,17 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './usuario-perfil-edit.component.html',
   styleUrls: ['./usuario-perfil-edit.component.scss']
 })
-export class UsuarioPerfilEditComponent implements OnInit, OnChanges {
+export class UsuarioPerfilEditComponent implements OnInit {
 
-  @Input() usuario: Usuario;
+  @Input() parentGroup: FormGroup;
+
   @Output() cambiarPassword = new EventEmitter();
-  fg: FormGroup;
   paramId: number;
   fileName = 'Seleccionar Archivo';
   isAlumno = false;
   fotoPerfil: File = null;
 
   constructor(
-    private fb: FormBuilder,
     private route: ActivatedRoute,
     private fv: FormsValidationService,
     public as: SeguridadService,
@@ -36,18 +35,7 @@ export class UsuarioPerfilEditComponent implements OnInit, OnChanges {
   ) {
     rateConfig.max = 5;
 
-    this.fg = this.fb.group({
-      nombre: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      apellido: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      numeroIdentificacion: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
-      username: [null],
-      institucion: [null],
-      email: [null, [Validators.required, this.fv.correo()]],
-      telefonoMovil: [null, [Validators.required, Validators.minLength(10), this.fv.telefono()]],
-      telefonoFijo: [null, [Validators.minLength(10), this.fv.telefono()]],
-      id: [],
-      foto: []
-    });
+
   }
 
   ngOnInit(): void
@@ -56,30 +44,12 @@ export class UsuarioPerfilEditComponent implements OnInit, OnChanges {
     this.isAlumno = this.as.isAlumno();
   }
 
-  ngOnChanges() {
-    this.fg.patchValue(this.usuario);
-  }
-
-  // ======================= Getters ==========================
-  get nombre() { return this.fg.get('nombre'); }
-  get apellido() { return this.fg.get('apellido'); }
-  get dni() { return this.fg.get('numeroIdentificacion'); }
-  get username() { return this.fg.get('username'); }
-  get institucion() { return this.fg.get('institucion'); }
-  get email() { return this.fg.get('email'); }
-  get telCel() { return this.fg.get('telefonoMovil'); }
-  get telFijo() { return this.fg.get('telefonoFijo'); }
-
   onSubmit() {
-    if (this.fg.valid) {
-
-      if (this.usuario.foto) {
-        this.fg.controls.foto.patchValue(this.usuario.foto);
-      }
+    if (this.parentGroup.valid) {
 
       if (this.isAlumno)
       {
-        this.alumnoService.setAlumno(this.usuario).subscribe(
+        this.alumnoService.setAlumno(this.parentGroup.value).subscribe(
           value => {
             if (value.status === 'OK') {
               this.toastr.success('Se guardó correctamente');
@@ -92,7 +62,7 @@ export class UsuarioPerfilEditComponent implements OnInit, OnChanges {
           }
         );
       } else {
-        this.profesorService.setProfesor(this.fg.value).subscribe(
+        this.profesorService.setProfesor(this.parentGroup.value).subscribe(
           value => {
             if (value.status === 'OK') {
               this.toastr.success('Se guardó correctamente');
@@ -109,6 +79,14 @@ export class UsuarioPerfilEditComponent implements OnInit, OnChanges {
     } else {
       this.toastr.error('Por favor complete los datos requeridos.');
     }
+  }
+
+  public get usuario(): any {
+    return this.parentGroup.controls;
+  }
+
+  getDisabled() {
+    return this.parentGroup.pristine || !this.parentGroup.valid;
   }
 
 }

@@ -19,7 +19,7 @@
 }
 .product-image {
     margin-bottom: 9px;
-    img { max-height: 300px; max-width: 300px;}
+    img { min-height: 250px; max-height: 250px; max-width: 300px;}
 }
 
 .card {

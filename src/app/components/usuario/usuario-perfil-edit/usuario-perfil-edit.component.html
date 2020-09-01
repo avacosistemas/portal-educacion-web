@@ -5,7 +5,7 @@
     <article class="card-body ">
 
         <!-- ==================== Form ===================== -->
-        <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fg">
+        <form class="needs-validation" autocomplete="off" novalidate [formGroup]="parentGroup">
             <div class="form-row">
                 <div class="col">
                     <label for="txtNombre" class="control-label">Nombre</label>
@@ -16,15 +16,19 @@
                         <input id="txtNombre" formControlName="nombre" type="text" class="form-control">
 
                     </div>
-                    <app-field-error-display [displayError]="nombre.touched && nombre.errors?.required"
+                    <app-field-error-display [displayError]="usuario.nombre?.touched && usuario.nombre.errors?.required"
                                              errorMsg="* Debe completar el nombre">
                     </app-field-error-display>
-                    <app-field-error-display [displayError]="nombre.touched && nombre.errors?.minlength"
+                    <app-field-error-display [displayError]="usuario.nombre?.touched && usuario.nombre.errors?.minlength"
                                              errorMsg="* El nombre debe tener al menos 2 letras">
                     </app-field-error-display>
-                    <app-field-error-display [displayError]="nombre.touched && nombre.errors?.maxlength"
+                    <app-field-error-display [displayError]="usuario.nombre?.touched && usuario.nombre.errors?.maxlength"
                                              errorMsg="* El nombre no puede tener más de 100 letras">
                     </app-field-error-display>
+                    <app-field-error-display
+                                            [displayError]="usuario.nombre?.touched && usuario.nombre.errors?.pattern"
+                                            errorMsg="* El nombre debe contener solo letras">
+                    </app-field-error-display>     
                 </div>
 
                 <div class="col">
@@ -35,16 +39,19 @@
                         </div>
                         <input id="txtApellido" formControlName="apellido" type="text" class="form-control">
                     </div>
-                    <app-field-error-display [displayError]="apellido.touched && apellido.errors?.required"
+                    <app-field-error-display [displayError]="usuario.apellido?.touched && usuario.apellido.errors?.required"
                                              errorMsg="* Debe completar el apellido">
                     </app-field-error-display>
-                    <app-field-error-display [displayError]="apellido.touched && apellido.errors?.minlength"
+                    <app-field-error-display [displayError]="usuario.apellido?.touched && usuario.apellido.errors?.minlength"
                                              errorMsg="* El apellido debe tener al menos 2 letras">
                     </app-field-error-display>
-                    <app-field-error-display [displayError]="apellido.touched && apellido.errors?.maxlength"
+                    <app-field-error-display [displayError]="usuario.apellido?.touched && usuario.apellido.errors?.maxlength"
                                              errorMsg="* El apellido no puede tener más de 100 letras">
                     </app-field-error-display>
-
+                    <app-field-error-display
+                                            [displayError]="usuario.apellido?.touched && usuario.apellido.errors?.pattern"
+                                            errorMsg="* El apellido debe contener solo letras">
+                    </app-field-error-display>   
                 </div>
 
             </div>
@@ -70,19 +77,54 @@
                         <input id="txtDni" formControlName="numeroIdentificacion" OnlyNumber="true" type="text"
                                class="form-control">
                     </div>
-                    <app-field-error-display [displayError]="dni.touched && dni.errors?.required"
+                    <app-field-error-display [displayError]="usuario.dni?.touched && usuario.dni.errors?.required"
                                              errorMsg="* Debe completar el DNI">
                     </app-field-error-display>
-                    <app-field-error-display [displayError]="dni.touched && dni.errors?.minlength"
+                    <app-field-error-display [displayError]="usuario.dni?.touched && usuario.dni.errors?.minlength"
                                              errorMsg="* El DNI debe tener entre 7 y 8 dígitos">
                     </app-field-error-display>
-                    <app-field-error-display [displayError]="dni.touched && dni.errors?.maxlength"
+                    <app-field-error-display [displayError]="usuario.dni?.touched && usuario.dni.errors?.maxlength"
                                              errorMsg="* El DNI debe tener entre 7 y 8 dígitos">
                     </app-field-error-display>
                 </div>
             </div>
 
+            <div class="form-row" *ngIf="!isAlumno">
+                <div class="col">
+                    <label for="txtTitulo" class="control-label">Título</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-building"></i></span>
+                        </div>
+                        <input id="txtTitulo" formControlName="titulo" type="text" class="form-control">
 
+                    </div>
+                    <app-field-error-display [displayError]="usuario.titulo?.touched && usuario.titulo.errors?.minlength"
+                                             errorMsg="* El título debe tener al menos 2 letras">
+                    </app-field-error-display>
+                    <app-field-error-display [displayError]="usuario.titulo?.touched && usuario.titulo.errors?.maxlength"
+                                             errorMsg="* El título no puede tener más de 100 letras">
+                    </app-field-error-display>
+                </div>
+
+                <div class="col">
+                    <label for="txtDescripcion">Descripción</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
+                        </div>
+                        <input id="txtDescripcion" formControlName="descripcion" type="text" class="form-control">
+                    <app-field-error-display [displayError]="usuario.descripcion?.touched && usuario.descripcion.errors?.minlength"
+                                             errorMsg="* El descripción debe tener al menos 2 letras">
+                    </app-field-error-display>
+                    <app-field-error-display [displayError]="usuario.descripcion?.touched && usuario.descripcion.errors?.maxlength"
+                                             errorMsg="* La descripción no puede tener más de 100 letras">
+                    </app-field-error-display>
+
+                </div>
+
+                </div>
+            </div>
 
             <!-- ================== Calificacion ================== -->
             <div class="form-row">
@@ -94,10 +136,10 @@
                         </div>
                         <input id="txtEmail" formControlName="email" type="email" class="form-control">
                     </div>
-                    <app-field-error-display [displayError]="email.touched && email.errors?.required"
+                    <app-field-error-display [displayError]="usuario.email?.touched && usuario.email.errors?.required"
                                              errorMsg="* Debe completar el email y este debe ser un correo valido">
                     </app-field-error-display>
-                    <app-field-error-display [displayError]="email.touched && email.errors?.correo"
+                    <app-field-error-display [displayError]="usuario.email?.touched && usuario.email.errors?.correo"
                                              errorMsg="* No parece ser una dirección de mail">
                     </app-field-error-display>
                     <small class="form-text text-muted">No comrpatiremos tu email con nadie.</small>
@@ -127,13 +169,13 @@
                         </div>
                         <input id="txtCellphone" formControlName="telefonoMovil" type="text" class="form-control">
                     </div>
-                    <app-field-error-display [displayError]="telCel.touched && telCel.errors?.required"
+                    <app-field-error-display [displayError]="usuario.telCel?.touched && usuario.telCel.errors?.required"
                                              errorMsg="* Debe completar el número del teléfono celular">
                     </app-field-error-display>
-                    <app-field-error-display [displayError]="telCel.touched && telCel.errors?.telefono"
+                    <app-field-error-display [displayError]="usuario.telCel?.touched && usuario.telCel.errors?.telefono"
                                              errorMsg="* Solo debe ingresar números y/o los signos + - para indicar país y región">
                     </app-field-error-display>
-                    <app-field-error-display [displayError]="telCel.touched && telCel.errors?.minlength"
+                    <app-field-error-display [displayError]="usuario.telCel?.touched && usuario.telCel.errors?.minlength"
                                              errorMsg="* El teléfono debe tener al menos 10 números">
                     </app-field-error-display>
                 </div>
@@ -146,11 +188,11 @@
                         <input id="txtPhone" formControlName="telefonoFijo" type="text" class="form-control">
                     </div>
                     <app-field-error-display
-                            [displayError]="telFijo.touched && telFijo.value?.toString().length > 0 && telFijo.errors?.telefono"
+                            [displayError]="usuario.telFijo?.touched && usuario.telFijo.value?.toString().length > 0 && usuario.telFijo.errors?.telefono"
                             errorMsg="* Solo debe ingresar números y/o los signos + - para indicar país y región">
                     </app-field-error-display>
                     <app-field-error-display
-                            [displayError]="telFijo.touched && telFijo.value?.toString().length > 0 && telFijo.errors?.minlength"
+                            [displayError]="usuario.telFijo?.touched && usuario.telFijo.value?.toString().length > 0 && usuario.telFijo.errors?.minlength"
                             errorMsg="* El teléfono debe tener al menos 10 números">
                     </app-field-error-display>
                 </div>
@@ -161,7 +203,7 @@
                     <button type="button" (click)="cambiarPassword.emit()" class="btn btn-secondary btn-block"> Cambiar contraseña </button>
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary btn-block" [disabled]="fg.pristine || !fg.valid" (click)="onSubmit()"> Guardar cambios </button>
+                    <button type="submit" class="btn btn-primary btn-block" [disabled]="getDisabled()" (click)="onSubmit()"> Guardar cambios </button>
                 </div>
             </div> <!-- form-group// -->
         </form>

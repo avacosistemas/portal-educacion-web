@@ -1,5 +1,3 @@
-import { Profesor } from "./profesor";
-
 export class Usuario
 {
 	id: number;
@@ -13,6 +11,7 @@ export class Usuario
   accountNonExpired: boolean;
   accountNonLocked: boolean;
   email: string;
+  titulo?: string;
 
   // Datos Profesor y Alumno
   apellido?: string;
@@ -22,7 +21,7 @@ export class Usuario
   numeroIdentificacion?: string;
   telefonoMovil?: string;
   telefonoFijo?: string;
-  foto?: string;
+  foto?: any[];
   institucion?: string;
   nombreArchivo?: string;
 

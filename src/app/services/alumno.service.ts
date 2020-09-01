@@ -78,7 +78,7 @@ export class AlumnoService {
   }
 
   public sendCalificacion(idAlumno: number, idAula: number, calificacion: number, comentarios?: string) {
-    const body = {puntuacion: calificacion, comentarios: comentarios}
+    const body = { puntuacion: calificacion, comentario: comentarios };
     return this.http.post(this.controllerCliente + idAlumno.toString() + '/puntuacion/' + idAula.toString(), body);
   }
 

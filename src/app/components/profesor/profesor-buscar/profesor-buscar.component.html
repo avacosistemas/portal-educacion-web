@@ -52,7 +52,10 @@
 							<div class="col-lg-6 product menu-category" *ngFor="let profesor of getProfesores">
 								<div class="card card-block m-t-2">
 									<div class="product-image m-y-1" [routerLink]="['/profesor/', profesor.id]" >
-										<img class="img-fluid" src="{{profesor.foto}}" alt="{{profesor.nombreApellido}}" />
+										<img class="img-fluid"
+											 onerror="this.src='/assets/icons/fa/fas-fa-user-circle-mod.svg'"
+											 src="data:image/jpg;base64,{{profesor.foto}}"
+											 alt="{{profesor.nombreApellido}}" />
 									</div>
 									<div class="profesor">
 										<h5>{{profesor.nombreApellido}}</h5>

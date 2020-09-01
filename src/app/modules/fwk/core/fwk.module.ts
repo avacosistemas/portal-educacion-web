@@ -8,6 +8,7 @@ import { JwkInterceptor } from './service/security/jwk-interceptor';
 import { RestrictionKeysDirective } from './directive/restriction-keys.directive';
 import { SanitizeHtmlPipe } from './directive/sanitize-html.pipe';
 import { FieldErrorDisplayComponent } from './components/field-error-display/field-error-display.component';
+import { FileComponent } from './components/file/file.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -20,7 +21,8 @@ import { FieldErrorDisplayComponent } from './components/field-error-display/fie
   declarations: [
                  RestrictionKeysDirective,
                  SanitizeHtmlPipe,
-                 FieldErrorDisplayComponent],
+                 FieldErrorDisplayComponent,
+                 FileComponent],
   exports: [SanitizeHtmlPipe,
             CommonModule,
             BrowserModule,
