@@ -76,6 +76,10 @@ export class ProfesorService
     return this.http.get<any>(this.controllerCliente + 'preguntas/' + idProfesor.toString());
   }
 
+  public getCatalogoConsultas(idProfesor: number): Observable<any> {
+    return this.http.get<any>(environment.apiService + 'catalogoConsultas/' + idProfesor.toString());
+  }
+
   public sendRespuesta(idProfesor: number, idPregunta: number, respuesta: string, )
   {
     const body = {respuesta: respuesta, idPreguntaRespuesta: idPregunta};

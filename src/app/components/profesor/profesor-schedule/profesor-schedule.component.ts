@@ -121,7 +121,7 @@ export class ProfesorScheduleComponent implements OnInit {
 
 
   loadPreguntas() {
-    this.ps.getPreguntas(this.profesorIdParam).subscribe(
+    this.ps.getCatalogoConsultas(this.profesorIdParam).subscribe(
       (value:any) => {
         if (value.status == 'OK') {
           this.anotaciones.chat = [];
