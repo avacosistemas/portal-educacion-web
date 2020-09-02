@@ -8,6 +8,7 @@ import { Materia } from '../../../entities/materia';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogoService } from 'src/app/services/catalogo.service';
 import { CatalogoProfesor } from 'src/app/entities/catalogoProfesor';
+import { valueReferenceToExpression } from "@angular/compiler-cli/src/ngtsc/annotations/src/util";
 
 @Component({
   selector: 'app-profesor-buscar',
@@ -44,8 +45,10 @@ export class ProfesorBuscarComponent implements OnInit {
   }
 
   selecciono(valor: number) {
-    this.selMatId = valor;
-    this.materiaSeleccionada = this.materias.find(f => f.id === valor).descripcion;
+    if ( valor > 0) {
+      this.materiaSeleccionada = this.materias.find(f => f.id === valor).descripcion;
+    }
+    this.selMatId = valor == 0 ? null : valor;
     this.consultarCatalogo();
   }
 
@@ -80,6 +83,7 @@ export class ProfesorBuscarComponent implements OnInit {
             }
           );
         });
+
         this.consultarCatalogo();
       } // end next
     ); // end susbscribe

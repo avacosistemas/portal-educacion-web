@@ -282,6 +282,16 @@ input {
 	box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.54), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
 }
 
+.avatar-user {
+    margin: 3px;
+}
+.right .avatar-user {
+    margin-left: 6px;
+}
+.left .avatar-user {
+    margin-right: 6px;
+}
+
 .perfil {
 	width: 100%;
 	// height: 100%;

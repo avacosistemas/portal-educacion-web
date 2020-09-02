@@ -22,7 +22,7 @@
             </div>
             <!-- ================== Picture ================== -->
             <div class="info">
-                <div class="rate">
+                <div class="rate" *ngIf="!isAlumno">
                     <ng-template #t let-fill="fill">
                       <span class="star" [class.full]="fill === 100">
                         <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
@@ -81,7 +81,7 @@
                         <ng-template ngbNavContent>
                             <app-clase-alumnos [clase]="clase" (goBack)="setNav($event)"></app-clase-alumnos>
                         </ng-template>
-                    </li>                  
+                    </li>
                 </ul>
             </div>
         </div>

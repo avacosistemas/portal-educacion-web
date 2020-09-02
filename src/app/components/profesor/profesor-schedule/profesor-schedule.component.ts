@@ -169,6 +169,7 @@ export class ProfesorScheduleComponent implements OnInit {
           if (value.status == 'OK') {
             this.toastr.success('Pregunta enviada correctamente');
             this.loadPreguntas();
+            this.txtRespuesta.setValue('');
           }
         },
         error => {
