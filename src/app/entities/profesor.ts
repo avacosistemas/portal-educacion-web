@@ -17,6 +17,7 @@ export class Profesor
   descripcion?: string;
   telefonoMovil: string;
   telefonoFijo?: string;
+  titulo?: string;
 
   constructor() {
     this.tipoIdentificacion = 'DNI';

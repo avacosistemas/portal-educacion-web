@@ -8,9 +8,7 @@ import { AlumnoRegistroComponent } from './components/alumno/alumno-registro/alu
 import { FaqComponent } from './components/faq/faq.component';
 import { PolicyComponent } from './components/legal/policy/policy.component';
 import { TerminosComponent } from './components/legal/terminos/terminos.component';
-import { AlumnoPerfilComponent } from './components/alumno/alumno-perfil/alumno-perfil.component';
 import { ProfesorRegistroComponent } from './components/profesor/profesor-registro/profesor-registro.component';
-import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
 import { PwdResetComponent } from './components/auth/pwd-reset/pwd-reset.component';
 import { PwdChangeComponent } from './components/auth/pwd-change/pwd-change.component';
 import { UsuarioWelcomeComponent } from './components/usuario/usuario-welcome/usuario-welcome.component';
@@ -21,7 +19,6 @@ import { ClaseAlumnosComponent } from './components/clase/clase-alumnos/clase-al
 
 const routes: Routes = [
   {path: 'alumno/nuevo', component: AlumnoRegistroComponent, pathMatch: 'full'},
-  {path: 'alumno/:id', component: AlumnoPerfilComponent, pathMatch: 'full'},
   {path: 'buscar/:nivel/:id', component: ProfesorBuscarComponent, pathMatch: 'full'},
   {path: 'buscar/:nivel', component: ProfesorBuscarComponent, pathMatch: 'full'},
   {path: 'buscar', component: ProfesorBuscarComponent, pathMatch: 'full'},
@@ -36,7 +33,6 @@ const routes: Routes = [
   {path: 'pwdchange', component: PwdChangeComponent, pathMatch: 'full'},
   {path: 'profesor/registro', component: ProfesorRegistroComponent, pathMatch: 'full'},
   {path: 'profesor/agenda/:id', component: ProfesorScheduleComponent, pathMatch: 'full'},
-  {path: 'profesor/:id', component: ProfesorPerfilComponent, pathMatch: 'full'},
   {path: 'usuario/:id', component: UsuarioPerfilComponent, pathMatch: 'full'},
   {path: 'welcome/:id', component: UsuarioWelcomeComponent, pathMatch: 'full'},
   {path: '', redirectTo: 'home', pathMatch: 'full'},

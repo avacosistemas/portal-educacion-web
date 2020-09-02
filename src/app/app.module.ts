@@ -25,7 +25,6 @@ import { AlumnoRegistroComponent } from './components/alumno/alumno-registro/alu
 import { FaqComponent } from './components/faq/faq.component';
 import { TerminosComponent } from './components/legal/terminos/terminos.component';
 import { PolicyComponent } from './components/legal/policy/policy.component';
-import { AlumnoPerfilComponent } from './components/alumno/alumno-perfil/alumno-perfil.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { IntercepterService } from './modules/fwk/core/service/intercepter/intercepter.service';
 import { FwkModule } from './modules/fwk/core/fwk.module';
@@ -33,7 +32,6 @@ import { ProfesorRegistroComponent } from './components/profesor/profesor-regist
 import { OnlyNumber } from "./directives/only-number.directive";
 import { TerminosDetalleComponent } from './components/legal/terminos/terminos-detalle/terminos-detalle.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
-import { ProfesorPerfilComponent } from './components/profesor/profesor-perfil/profesor-perfil.component';
 import { AlumnoListComponent } from './components/alumno/alumno-list/alumno-list.component';
 import { PwdChangeComponent } from './components/auth/pwd-change/pwd-change.component';
 import { PwdResetComponent } from './components/auth/pwd-reset/pwd-reset.component';
@@ -68,11 +66,9 @@ import { ClaseAlumnosComponent } from './components/clase/clase-alumnos/clase-al
     FaqComponent,
     TerminosComponent,
     PolicyComponent,
-    AlumnoPerfilComponent,
     ProfesorRegistroComponent,
     OnlyNumber,
     TerminosDetalleComponent,
-    ProfesorPerfilComponent,
     AlumnoListComponent,
     PwdChangeComponent,
     PwdResetComponent,

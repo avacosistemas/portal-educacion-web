@@ -12,6 +12,7 @@ import { Anotaciones } from "../../../entities/anotaciones";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Materia } from "../../../entities/materia";
 import { Horario } from "../../../entities/horario";
+import { RaitingGridComponent } from '../../usuario/usuario-perfil-clases/raiting-grid/raiting-grid.component';
 
 @Component({
   selector: 'app-profesor-schedule',
@@ -79,6 +80,13 @@ export class ProfesorScheduleComponent implements OnInit {
         }
 
         this.profesor = value.data;
+        if (this.as.isLogged()) {
+          this.profesor.titulo = 'Profesor';
+        }
+        else
+        {
+          this.profesor.titulo = this.profesor.titulo || 'Profesor';
+        }
 
         this.loadPreguntas();
 

@@ -4,7 +4,7 @@ export class NivelEducativo
 {
 	id: number;
 	image?: string;
-	nombre?: string;
+	nombre: string;
 	subtitulo?: string;
 	descripcion: string;
 	materias?: Materia[];

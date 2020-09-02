@@ -6,14 +6,15 @@
             </div>
             <div class="info">
                 <div class="rate">
-                    <ngb-rating [(rate)]="profesor.calificacion">
-                        <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
-                        </ng-template>
-                    </ngb-rating>
+                    <ng-template #t let-fill="fill">
+                      <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                      </span>
+                    </ng-template>
+                    <ngb-rating [(rate)]="profesor.calificacion" [readonly]="true" [starTemplate]="t" [max]="5"></ngb-rating>
                 </div>
                 <h3>{{profesor.nombre}}, {{profesor.apellido}}</h3>
-                <h4>{{profesor.materia}}</h4>
+                <h4>{{profesor.titulo ? profesor.titulo : 'Profesor'}}</h4>
 
                 <!--				<hr>-->
                 <span *ngIf="profesor.descripcion">{{profesor.descripcion}}</span>
@@ -36,7 +37,7 @@
                     </div>
                 </div>
                 <!-- ==================== Form ===================== -->
-                <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fg" [ngClass]="{'hidden': !isAlumno}">
+                <form class="needs-validation" autocomplete="off" novalidate [formGroup]="fg" [ngClass]="{'hideout': !isAlumno}">
                     <label for="txtRespuestaId"></label>
                     <textarea formControlName="txtRespuesta" id="txtRespuestaId" class="form-control" rows="3"></textarea>
                     <button class="btn btn-secondary btn-block mt-4" (click)="sendPregunta($event)">Agregar pregunta</button>
@@ -62,7 +63,7 @@
                                 [displayMonths]="2"
                                 [navigation]="'select'"
                                 [markDisabled]="disableDays"
-                                outsideDays="hidden">
+                                outsideDays="collapsed">
                 </ngb-datepicker>
             </div>
 

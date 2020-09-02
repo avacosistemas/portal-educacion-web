@@ -54,7 +54,7 @@ export class UsuarioPerfilComponent implements OnInit {
       id: [],
       foto: [],
       titulo: [null, [Validators.minLength(2), Validators.maxLength(100)]],
-      descripcion: [null, [Validators.minLength(2), Validators.maxLength(100)]],
+      descripcion: [null, [Validators.minLength(2), Validators.maxLength(200)]],
       calificacion: [0]
     });
   }

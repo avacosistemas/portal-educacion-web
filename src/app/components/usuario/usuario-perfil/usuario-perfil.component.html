@@ -33,7 +33,7 @@
                 </div>
                 <h3>Bienvenido!!!</h3>
                 <h4>{{usuario.nombreApellido}}</h4>
-                <span>{{isAlumno? 'Alumno' : usuario.titulo ? usuario.titulo : 'Profesor'}}</span>
+                <span>{{isAlumno? 'Alumno' : 'Profesor'}}</span>
                 <span *ngIf="usuario.descripcion">{{usuario.descripcion}}</span>
 
             </div>
