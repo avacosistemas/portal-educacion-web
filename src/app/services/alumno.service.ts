@@ -69,7 +69,7 @@ export class AlumnoService {
 
   public sendPregunta(idProfesor: number, idAlumno: number, mensaje: string) {
     const body = {idProfesor: idProfesor, pregunta: mensaje};
-    return this.http.post(this.controllerCliente + '/preguntar/' + idAlumno.toString(), body );
+    return this.http.post(this.controllerCliente + 'preguntar/' + idAlumno.toString(), body );
   }
 
   public sendAnotacion(idAlumno: number, idClase: number, mensaje: string) {
