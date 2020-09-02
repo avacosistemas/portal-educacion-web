@@ -82,11 +82,11 @@ export class UsuarioPerfilClasesComponent implements OnInit {
   returnClassEstado(estado: string) {
     switch (estado) {
       case 'Pendiente':
-        return 'btn-danger pendiente';
+        return 'btn-info pendiente';
       case 'Finalizada':
         return 'btn-success finalizado';
       case 'En Curso':
-        return 'btn-warning encurso';
+        return 'btn-danger encurso';
       default:
         break;
     }

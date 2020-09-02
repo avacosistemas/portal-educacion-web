@@ -31,10 +31,9 @@
 
                     <ngb-rating [(rate)]="usuario.calificacion" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
                 </div>
-                <h3>Bienvenido!!!</h3>
-                <h4>{{usuario.nombreApellido}}</h4>
+                <h3>Bienvenido, {{usuario.nombre}}!!!</h3>
                 <span>{{isAlumno? 'Alumno' : 'Profesor'}}</span>
-                <span *ngIf="usuario.descripcion">{{usuario.descripcion}}</span>
+                <!--span *ngIf="usuario.descripcion">{{usuario.descripcion}}</span-->
 
             </div>
             <hr style="margin-top: 30px">
