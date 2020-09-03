@@ -86,7 +86,7 @@
 
                         <div class="row">
                             <div class="col" *ngIf="!isAlumno">
-                                <button class="btn btn-secondary btn-block mt-4" type="button" (click)="goBack.emit('navclasealumnos')">Ver alumnos</button>
+                                <button class="btn btn-info btn-block mt-4" type="button" (click)="goBack.emit('navclasealumnos')">Ver alumnos</button>
                             </div>
                             <div class="col">
                                 <button class="btn btn-primary btn-block mt-4" type="button" [disabled]="!getIniciarClase()" (click)="iniciarClase($event)">Iniciar Clase</button>
@@ -123,7 +123,7 @@
                                             errorMsg="* Máximo 100 carácterres">
                                     </app-field-error-display>     
 
-                                    <button class="btn btn-secondary btn-block mt-3" [disabled]="disabledPuntuacion" (click)="calificar($event)">Enviar calificación</button>
+                                    <button class="btn btn-info btn-block mt-3" [disabled]="disabledPuntuacion" (click)="calificar($event)">Enviar calificación</button>
                                 </form>
                             </div>
                         </div>
