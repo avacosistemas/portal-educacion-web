@@ -2,6 +2,7 @@ export class Materia {
   id: number;
   nombre: string;
   descripcion?: string;
+  descripcionNivel?: string;
   idNivel?: number;
   nivelNombre?: number;
   selected?: boolean;

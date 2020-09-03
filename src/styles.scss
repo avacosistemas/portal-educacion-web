@@ -379,6 +379,18 @@ input {
 	}
 }
 
+.btn-cyan {
+    background-color: #00a4b6;
+    color: #efefef;
+    border-color: #0098a9;
+}
+.btn-cyan:hover {
+    color: #fff;
+    background-color: #0098a9;
+    border-color: #00a4b6;
+}
+
+
 .profile {
 	.avatar {
         display: flex;
@@ -393,6 +405,14 @@ input {
             position: relative;
             display: inline-block;
             margin: auto;
+		}
+	}
+	.avatar-catalogo {
+		img {
+			width: 150px;
+			height: 150px;
+			border: 8px solid #ddd;
+			border-radius: 50%;
 		}
 	}
 	.info {

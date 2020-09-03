@@ -57,8 +57,8 @@ export class ClaseDetalleComponent implements OnInit {
       txtRespuesta: [null, [ Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
     });
     this.fge = this.fb.group({
-      comentario: [null, [ Validators.required, Validators.minLength(4), Validators.maxLength(250)]],
-      puntuacion: [0, [ Validators.required]]
+      comentario: [null, [ Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      puntuacion: [null, [Validators.required]]
     });
 
     this.loadData();
@@ -245,11 +245,18 @@ export class ClaseDetalleComponent implements OnInit {
   calificar(e)
   {
     e.preventDefault();
+
+    if (!this.rate || this.fge.invalid) {
+      this.toastr.error('Complete los datos requeridos.');
+      return;
+    }
+
     this.als.sendCalificacion(this.userId, this.clase.id, this.rate, this.txtComentario.value).subscribe(
       (value: any) =>
       {
         if (value.status === 'OK')
         {
+          this.fge.controls.puntuacion.patchValue(this.rate);
           this.toastr.success('Gracias por calificar la clase');
         } else
         {

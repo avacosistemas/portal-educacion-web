@@ -107,8 +107,22 @@
                     
                                         <ngb-rating formControlName="calificacion" [(rate)]="rate" [starTemplate]="t" [readonly]="calificacion.value" [max]="5"></ngb-rating>
                                     </div>
+                                    <app-field-error-display
+                                            [displayError]="txtComentario.touched && calificacion.errors?.required"
+                                            errorMsg="* Ingrese una calificación">
+                                    </app-field-error-display>     
+
                                     <label for="txtComentarioId">Comentario de la calificación</label>
                                     <textarea formControlName="comentario" id="txtComentarioId" class="form-control" rows="3" [readOnly]="calificacion.value"></textarea>
+                                    <app-field-error-display
+                                            [displayError]="txtComentario.touched && txtComentario.errors?.minlength"
+                                            errorMsg="* Mínimo 2 carácteres">
+                                    </app-field-error-display>     
+                                    <app-field-error-display
+                                            [displayError]="txtComentario.touched && txtComentario.errors?.maxlength"
+                                            errorMsg="* Máximo 100 carácterres">
+                                    </app-field-error-display>     
+
                                     <button class="btn btn-secondary btn-block mt-3" [disabled]="calificacion.value" (click)="calificar($event)">Enviar calificación</button>
                                 </form>
                             </div>

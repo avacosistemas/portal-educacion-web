@@ -28,6 +28,7 @@ export class ProfesorScheduleComponent implements OnInit {
 
   horarios: string[] = [];
   horariosClases: Horario[] = [];
+  imgSrc: string | ArrayBuffer;
 
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate;
@@ -35,6 +36,7 @@ export class ProfesorScheduleComponent implements OnInit {
   fg: FormGroup;
   userIdLogged = 0;
   isAlumno = false;
+  cantidadComentarios = 3;
 
   constructor(
     protected ps: ProfesorService,
@@ -75,18 +77,19 @@ export class ProfesorScheduleComponent implements OnInit {
     this.ps.getProfesor(this.profesorIdParam).subscribe(
       (value: any) => {
 
-        if (value.data?.foto == null) {
-          value.data.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
+        this.profesor = value.data;
+        if (this.profesor.foto === null ) {
+            this.profesor.foto = '/assets/icons/fa/fas-fa-user-circle-mod.svg';
+        } else {
+          // debería venir una URL por cuestiones de performance
+          if (this.profesor.foto.length > 300)
+          {
+            // debería venir del data:image porque podría ser otro formato. asumir que siempre va a ser de este tipo es un error.
+            this.profesor.foto = `data:image/jpg;base64,${this.profesor.foto}`;
+          }
         }
 
-        this.profesor = value.data;
-        if (this.as.isLogged()) {
-          this.profesor.titulo = 'Profesor';
-        }
-        else
-        {
-          this.profesor.titulo = this.profesor.titulo || 'Profesor';
-        }
+        this.profesor.titulo = this.profesor.titulo || 'Profesor';
 
         this.loadPreguntas();
 
@@ -118,33 +121,36 @@ export class ProfesorScheduleComponent implements OnInit {
 
   }
 
-
+  mostrarMasPreguntas(e) {
+    if (this.cantidadComentarios === 3) {
+      this.cantidadComentarios = 999;
+    } else {
+      this.cantidadComentarios = 3;
+    }
+  }
 
   loadPreguntas() {
     this.ps.getCatalogoConsultas(this.profesorIdParam).subscribe(
-      (value:any) => {
-        if (value.status == 'OK') {
+      (value: any) => {
+        if (value.status === 'OK') {
           this.anotaciones.chat = [];
           value.data.forEach( q => {
             this.anotaciones.chat.push({
               message: q.pregunta,
               fechaHora: q.fechaPregunta,
               fromName: q.nombreAlumno,
-              avatar: 'far fa-user-circle',
-              align: 'right'
-            })
+              avatar: '<i class="far fa-user-circle avatar-user"></i>',
+              align: 'left'
+            });
             if (q.respuesta) {
               this.anotaciones.chat.push({
                 message: q.respuesta,
                 fechaHora: q.fechaRespuesta,
                 fromName: this.profesor.nombreApellido,
-                avatar: 'fas fa-user-circle',
-                align: 'left'
-              })
+                avatar:  `<img src="${this.profesor.foto}" alt="" class="avatar-user" />` ,
+                align: 'right'
+              });
             }
-
-            // avatar: (this.userName === m.nombre ? 'fas fa-user-circle' : 'far fa-user-circle'),
-
           });
 
         } else {
@@ -161,12 +167,16 @@ export class ProfesorScheduleComponent implements OnInit {
 
 
   sendPregunta(e) {
+    if (!this.txtRespuesta.value) {
+      this.toastr.warning('Debe ingresar una preguntar.');
+      return;
+    }
     e.preventDefault();
     if (this.userIdLogged > 0 && this.isAlumno)
     {
       this.als.sendPregunta(this.profesor.id, this.userIdLogged, this.txtRespuesta.value).subscribe(
-        (value:any) => {
-          if (value.status == 'OK') {
+        (value: any) => {
+          if (value.status === 'OK') {
             this.toastr.success('Pregunta enviada correctamente');
             this.loadPreguntas();
             this.txtRespuesta.setValue('');

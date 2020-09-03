@@ -114,7 +114,7 @@ export class UsuarioPerfilComponent implements OnInit {
 
   loadData() {
     if (this.isAlumno) {
-      // load profesor
+      // load alumno
       this.als.getPerfil(this.paramId).subscribe(
         (value: any) => {
           this.usuarioForm.patchValue(value.data);
@@ -122,7 +122,7 @@ export class UsuarioPerfilComponent implements OnInit {
         }
       );
     } else {
-      // load alumno
+      // load profesor
       this.ps.getPerfil(this.paramId).subscribe(
         (value: any) => {
           this.usuarioForm.patchValue(value.data);

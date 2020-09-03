@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
         : this.materias.filter(v =>
           v.toLowerCase().removeAccents().indexOf(term.toLowerCase().removeAccents()) > -1
         ).slice(0, 10))
-    );
+    )
 
 
   constructor(
@@ -80,22 +80,23 @@ export class HomeComponent implements OnInit {
 	public loadData() {
 
     this.ms.getMaterias().subscribe(
-      (data:any) => {
+      (data: any) => {
 
         this.matModels = [];
         this.materias = [];
 
         data.data.forEach(m =>
         {
-          if (!(this.materias.indexOf(m.descripcion) >= 0))
+          if (!(this.materias.indexOf(m.descripcionNivel) >= 0))
           {
-            this.materias.push(m.descripcion)
+            this.materias.push(m.descripcionNivel);
           }
           this.matModels.push({
             nombre: m.descripcion,
             id: m.id,
             idNivel: m.idNivel,
-            descripcion: m.descripcion
+            descripcion: m.descripcion,
+            descripcionNivel: m.descripcionNivel
           })
         });
 
@@ -109,20 +110,10 @@ export class HomeComponent implements OnInit {
   buscarMateria($event) {
     $event.preventDefault();
     this.matModels.forEach(m => {
-      if (m.nombre == this.materia ) {
+      if (m.descripcionNivel == this.materia ) {
         this.router.navigate(['/buscar/' + m.idNivel + '/' + m.id])
       }
     });
   }
-
-	// onSlide(slideEvent: NgbSlideEvent) {
-	// 	if (this.unpauseOnArrow && slideEvent.paused &&
-	// 		(slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
-	// 		this.togglePaused();
-	// 	}
-	// 	if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
-	// 		this.togglePaused();
-	// 	}
-	// }
 
 }
