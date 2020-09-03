@@ -52,7 +52,7 @@
                             <app-usuario-perfil-clases (detalleClase)="goDetalleClase($event)"></app-usuario-perfil-clases>
                         </ng-template>
                     </li>
-                    <li ngbNavItem="navcalificaciones">
+                    <li ngbNavItem="navcalificaciones" *ngIf="!isAlumno">
                         <a ngbNavLink><i class="fas fa-award"></i> Mis Calificaciones</a>
                         <ng-template ngbNavContent>
                             <app-usuario-calificaciones></app-usuario-calificaciones>
