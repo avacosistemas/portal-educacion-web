@@ -10,7 +10,7 @@
                 <div class="col-md-8">
                     <div class="info" style="text-align: left">
                         <h3>{{profesor.nombreApellido}}</h3>
-                        <h4>{{profesor.titulo ? profesor.titulo : 'Profesor'}}</h4>
+                        <h4>{{profesor.materias ? profesor.materias : 'Profesor'}}</h4>
                         <div class="rate">
                             <ng-template #t let-fill="fill">
                             <span class="star" [class.full]="fill === 100">
