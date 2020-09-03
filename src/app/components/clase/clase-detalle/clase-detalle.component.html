@@ -76,7 +76,7 @@
                                               </span>
                                             </ng-template>
                         
-                                            <ngb-rating [(rate)]="rate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                                            <ngb-rating [rate]="calificacion.value" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                           </span>
                                         </ng-template>
                     
-                                        <ngb-rating formControlName="calificacion" [(rate)]="rate" [starTemplate]="t" [readonly]="calificacion.value" [max]="5"></ngb-rating>
+                                        <ngb-rating formControlName="puntuacion" [starTemplate]="t" [readonly]="disabledPuntuacion" [max]="5"></ngb-rating>
                                     </div>
                                     <app-field-error-display
                                             [displayError]="txtComentario.touched && calificacion.errors?.required"
@@ -113,7 +113,7 @@
                                     </app-field-error-display>     
 
                                     <label for="txtComentarioId">Comentario de la calificación</label>
-                                    <textarea formControlName="comentario" id="txtComentarioId" class="form-control" rows="3" [readOnly]="calificacion.value"></textarea>
+                                    <textarea formControlName="comentario" id="txtComentarioId" class="form-control" rows="3" [readOnly]="disabledPuntuacion"></textarea>
                                     <app-field-error-display
                                             [displayError]="txtComentario.touched && txtComentario.errors?.minlength"
                                             errorMsg="* Mínimo 2 carácteres">
@@ -123,7 +123,7 @@
                                             errorMsg="* Máximo 100 carácterres">
                                     </app-field-error-display>     
 
-                                    <button class="btn btn-secondary btn-block mt-3" [disabled]="calificacion.value" (click)="calificar($event)">Enviar calificación</button>
+                                    <button class="btn btn-secondary btn-block mt-3" [disabled]="disabledPuntuacion" (click)="calificar($event)">Enviar calificación</button>
                                 </form>
                             </div>
                         </div>

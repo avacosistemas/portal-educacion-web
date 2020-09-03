@@ -29,7 +29,7 @@ export class ClaseDetalleComponent implements OnInit {
   claseDetalle: Clase;
   fg: FormGroup; // Chat
   fge: FormGroup; // Encuesta
-  rate: number;
+  disabledPuntuacion: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,7 +79,9 @@ export class ClaseDetalleComponent implements OnInit {
       this.als.getClase(this.userId, this.clase.id).subscribe(
         (value: any) => {
           this.claseDetalle = value.data;
-          this.rate = this.claseDetalle.puntuacion;
+          if (this.claseDetalle.puntuacion) {
+            this.disabledPuntuacion = true;
+          }
           this.fge.patchValue(this.claseDetalle);
         }
       );
@@ -88,7 +90,10 @@ export class ClaseDetalleComponent implements OnInit {
       this.ps.getClase(this.userId, this.clase.id).subscribe(
         (value: any) => {
           this.claseDetalle = value.data;
-          this.rate = this.claseDetalle.puntuacion;
+          if (this.claseDetalle.puntuacion) {
+            this.disabledPuntuacion = true;
+          }
+          this.fge.patchValue(this.claseDetalle);
         }
       );
     }
@@ -246,17 +251,17 @@ export class ClaseDetalleComponent implements OnInit {
   {
     e.preventDefault();
 
-    if (!this.rate || this.fge.invalid) {
+    if (this.fge.invalid) {
       this.toastr.error('Complete los datos requeridos.');
       return;
     }
 
-    this.als.sendCalificacion(this.userId, this.clase.id, this.rate, this.txtComentario.value).subscribe(
+    this.als.sendCalificacion(this.userId, this.clase.id, this.calificacion.value, this.txtComentario.value).subscribe(
       (value: any) =>
       {
         if (value.status === 'OK')
         {
-          this.fge.controls.puntuacion.patchValue(this.rate);
+          this.disabledPuntuacion = true;
           this.toastr.success('Gracias por calificar la clase');
         } else
         {

@@ -13,6 +13,7 @@ import { Calificaciones } from '../entities/calificaciones';
 export class ProfesorService
 {
   controller = environment.apiService + 'profesores/';
+  controllerCatalogo = environment.apiService + 'catalogoDocente/';
   controllerCliente = environment.apiServiceCliente + 'profesor/';
 
   _aFechas: any[] = [];
@@ -32,6 +33,11 @@ export class ProfesorService
   getProfesor(id: number): Observable<Profesor>
   {
     return this.http.get<Profesor>(this.controller + id.toString());
+  }
+
+  getProfesorCatalogo(id: number): Observable<Profesor>
+  {
+    return this.http.get<Profesor>(this.controllerCatalogo + id.toString());
   }
 
   public getPerfil(id: number): Observable<Profesor> {

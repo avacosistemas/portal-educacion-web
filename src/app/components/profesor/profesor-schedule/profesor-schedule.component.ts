@@ -74,7 +74,7 @@ export class ProfesorScheduleComponent implements OnInit {
   get txtRespuesta() { return this.fg.get('txtRespuesta'); }
 
   loadData() {
-    this.ps.getProfesor(this.profesorIdParam).subscribe(
+    this.ps.getProfesorCatalogo(this.profesorIdParam).subscribe(
       (value: any) => {
 
         this.profesor = value.data;

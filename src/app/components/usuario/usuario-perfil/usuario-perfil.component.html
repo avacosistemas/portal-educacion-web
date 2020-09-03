@@ -58,7 +58,7 @@
                             <app-usuario-calificaciones></app-usuario-calificaciones>
                         </ng-template>
                     </li>
-                    <li ngbNavItem="navpreguntas">
+                    <li ngbNavItem="navpreguntas" *ngIf="!isAlumno">
                         <a ngbNavLink><i class="fas fa-question"></i> Mis Preguntas</a>
                         <ng-template ngbNavContent>
                             <app-preguntas></app-preguntas>

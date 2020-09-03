@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
 
   public userId = 0;
+  isAlumno: boolean;
 
   constructor(
     public as: SeguridadService,
@@ -19,8 +20,8 @@ export class HeaderComponent {
   ) {
     if (this.as.getUser().id ) {
       this.userId = this.as.getUser().id;
+      this.isAlumno = this.as.isAlumno();
     }
-
   }
 
   menuSelected(menu: string) {
