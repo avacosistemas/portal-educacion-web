@@ -5,14 +5,12 @@ export class Materia {
   descripcionNivel?: string;
   idNivel?: number;
   nivelNombre?: number;
-  selected?: boolean;
 
   constructor() {
     this.id = 0;
     this.idNivel = 0;
     this.nombre = '';
     this.descripcion = '';
-    this.selected = false;
   }
 
 }

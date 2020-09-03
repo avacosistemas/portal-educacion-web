@@ -40,15 +40,15 @@ export class ProfesorBuscarComponent implements OnInit {
     this.idParam = Number(this.route.snapshot.paramMap.get('id'));
     this.nivelParam = Number(this.route.snapshot.paramMap.get('nivel'));
     this.selLevId = this.nivelParam || 1;
-    this.selMatId = this.idParam || null;
+    this.selMatId = this.idParam || 0;
     this.loadData();
   }
 
   selecciono(valor: number) {
+    this.selMatId = valor;
     if ( valor > 0) {
       this.materiaSeleccionada = this.materias.find(f => f.id === valor).descripcion;
     }
-    this.selMatId = valor == 0 ? null : valor;
     this.consultarCatalogo();
   }
 
@@ -70,6 +70,15 @@ export class ProfesorBuscarComponent implements OnInit {
       (value: any) =>
       {
         this.materias = [];
+        this.materias.push(
+          {
+            id: 0,
+            descripcion: 'Todas',
+            nombre: 'Todas',
+            idNivel: 0,
+          }
+        )
+
         value.data.forEach(materia =>
         {
 
@@ -79,7 +88,6 @@ export class ProfesorBuscarComponent implements OnInit {
               descripcion: materia.descripcion,
               idNivel: materia.idNivel,
               nombre: materia.descripcion,
-              selected: (materia.id === this.selMatId)
             }
           );
         });
