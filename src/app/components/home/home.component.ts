@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 	slides: Slide[] = [
 		{
 			image: '/assets/images/slider/O6V1FT0.jpg',
-			title: 'teachonline.com.ar',
+			title: 'Teachonline',
 			description: 'Te acercamos herramientas que cambian la forma en la que estudiás',
 			top: '33%',
 			left: ''
