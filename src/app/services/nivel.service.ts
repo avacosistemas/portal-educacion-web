@@ -66,9 +66,11 @@ export class NivelService
 			{
 				id: 1,
 				image: '/assets/images/niveles/primaria-primer-ciclo.jpg',
+//				image: '/assets/images/niveles/primaria-segundo-ciclo.jpg',
 				nombre: 'Educación Primaria',
-				subtitulo: 'Primer Ciclo',
+				subtitulo: 'Primer y Segundo Ciclo',
 				descripcion: 'Acompañamos a tu hijo en sus primeros pasos de primaria.',
+//				descripcion: 'Cada vez más conocimientos iniciales con un temario extendido',
 				materias: [
 					{id: 1, idNivel: 1, descripcion: '', nombre: 'Castellano'},
 					{id: 1, idNivel: 1, descripcion: '', nombre: 'Matemática'},
@@ -79,10 +81,10 @@ export class NivelService
 			},
 			{
 				id: 2,
-				image: '/assets/images/niveles/primaria-segundo-ciclo.jpg',
-				nombre: 'Educación Primaria',
-				subtitulo: 'Segundo Ciclo',
-				descripcion: 'Cada vez más conocimientos iniciales con un temario extendido',
+				image: '/assets/images/niveles/secundaria-inicial.jpg',
+				nombre: 'Educación Secundaria',
+				subtitulo: 'Ciclo Básico',
+				descripcion: 'Fortalecemos las bases de la educación secundaria básica.',
 				materias: [
 					{id: 1, idNivel: 1, descripcion: '', nombre: 'Castellano'},
 					{id: 1, idNivel: 1, descripcion: '', nombre: 'Matemática'},
@@ -96,10 +98,10 @@ export class NivelService
 			},
 			{
 				id: 3,
-				image: '/assets/images/niveles/secundaria-inicial.jpg',
+				image: '/assets/images/niveles/secundaria-orientado.jpg',
 				nombre: 'Educación Secundaria',
-				subtitulo: 'Ciclo Básico',
-				descripcion: 'Fortalecemos las bases de la educación secundaria básica.',
+				subtitulo: 'Ciclo Orientado',
+				descripcion: 'Acompañamos hacia el futuro de tu educación.',
 				materias: [
 					{id: 1, idNivel: 1, descripcion: '', nombre: 'Literatura'},
 					{id: 1, idNivel: 1, descripcion: '', nombre: 'Matemática'},
@@ -112,9 +114,9 @@ export class NivelService
 			},
 			{
 				id: 4,
-				image: '/assets/images/niveles/secundaria-orientado.jpg',
-				nombre: 'Educación Secundaria',
-				subtitulo: 'Ciclo Orientado',
+				image: '/assets/images/niveles/universidad.jpg',
+				nombre: 'Educación Superior',
+				subtitulo: 'Terciario o universitario',
 				descripcion: 'Acompañamos hacia el futuro de tu educación.',
 				materias: [
 					{id: 1, idNivel: 1, descripcion: '', nombre: 'Literatura'},
@@ -130,9 +132,9 @@ export class NivelService
 			},
 			{
 				id: 5,
-				image: '/assets/images/niveles/universidad.jpg',
-				nombre: 'Educación Superior',
-				subtitulo: 'Terciario o universitario',
+				image: '/assets/images/niveles/idiomas.jpg',
+				nombre: 'Idiomas',
+				subtitulo: 'Todos los niveles',
 				descripcion: 'Acompañamos hacia el futuro de tu educación.',
 				materias: [
 					{id: 1, idNivel: 1, descripcion: '', nombre: 'Matemática'},
