@@ -79,7 +79,7 @@ export class ClaseDetalleComponent implements OnInit {
       this.als.getClase(this.userId, this.clase.id).subscribe(
         (value: any) => {
           this.claseDetalle = value.data;
-          if (this.claseDetalle.puntuacion) {
+          if (this.claseDetalle.puntuacion || this.claseDetalle.estado !== 'Finalizada') {
             this.disabledPuntuacion = true;
           }
           this.fge.patchValue(this.claseDetalle);

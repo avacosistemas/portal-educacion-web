@@ -7,10 +7,10 @@
 
 	.profesor {
 		display: flex;
-		margin-top: 10px;
+		margin: 10px;
 
 		button {
-			margin: auto;
+			margin-left: auto;
 		}
 	}
 }
@@ -18,7 +18,8 @@
 	margin-bottom: 20px;
 }
 .product-image {
-    margin-bottom: 9px;
+	margin-bottom: 9px;
+	text-align: center;
     img { min-height: 250px; max-height: 250px; max-width: 300px;}
 }
 

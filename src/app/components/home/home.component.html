@@ -9,41 +9,44 @@
 	<ng-template ngbSlide *ngFor="let slide of slides">
 		<div class="picsum-img-wrapper" style="background-image: url('{{slide.image}}')"></div>
 		<div class="carousel-caption" style="top: {{slide.top}}; left: {{slide.left}}">
-			<h3>{{slide.title}}</h3>
-			<p>{{slide.description}}</p>
-			<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0 && slide.inPage">
-				<p><a pageScroll [href]="slide.href"><button class="btn">{{slide.buttonLink}}</button></a></p>
-			</span>
-			<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0 && !slide.inPage">
-				<p><a [routerLink]="slide.href"><button class="btn">{{slide.buttonLink}}</button></a></p>
-			</span>
+			<div class="content-slider">
+				<h3>{{slide.title}}</h3>
+				<p>{{slide.description}}</p>
+				<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0 && slide.inPage">
+					<p><a pageScroll [href]="slide.href"><button class="btn">{{slide.buttonLink}}</button></a></p>
+				</span>
+				<span *ngIf="slide.buttonLink != null && slide.buttonLink.length > 0 && !slide.inPage">
+					<p><a [routerLink]="slide.href"><button class="btn">{{slide.buttonLink}}</button></a></p>
+				</span>
+			</div>
 		</div>
 	</ng-template>
 
 	<ng-template ngbSlide>
 		<div class="picsum-img-wrapper" style="background-image: url('/assets/images/slider/63293.jpg')"></div>
 		<div class="carousel-caption" style="top: 33%;">
-			<h3>Buscar profesor</h3>
-			<p>Te acercamos a tu profesor particular de una forma fácil, rápida y segura.
-				<br>
-				<input id="txtBuscar"
-					   type="text"
-					   style=""
-					   class="form-control text-center"
-                       [ngbTypeahead]="search"
-                       [(ngModel)]="materia"
-					   placeholder="Materia que deseo aprender. Ej.: Matemáticas"/>
+			<div class="content-slider">
+				<h3>Buscar profesor</h3>
+				<p>Te acercamos a tu profesor particular de una forma fácil, rápida y segura.
+					<br>
+					<input id="txtBuscar"
+						type="text"
+						class="form-control text-center"
+						[ngbTypeahead]="search"
+						[(ngModel)]="materia"
+						placeholder="Materia que deseo aprender. Ej.: Matemáticas"/>
 
-				<a href="#" style="display: inline">
-					<button style="padding-top: 1px;
-							padding-bottom: 3px;
-							font-size: 20px;
-							border-bottom-right-radius: 4px;
-							border-top-right-radius: 4px;" (click)="buscarMateria($event)">
-						Buscar
-					</button>
-				</a>
-			</p>
+					<a href="#" style="display: inline">
+						<button style="padding-top: 1px;
+								padding-bottom: 3px;
+								font-size: 20px;
+								border-bottom-right-radius: 4px;
+								border-top-right-radius: 4px;" (click)="buscarMateria($event)">
+							Buscar
+						</button>
+					</a>
+				</p>
+			</div>
 		</div>
 	</ng-template>
 </ngb-carousel>

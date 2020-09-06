@@ -19,9 +19,31 @@
                     <!--li><a href="#">Cómo funciona</a></li-->
                     <li><a pageScroll href="#aboutus" [routerLink]="'/home'">Sobre Nosotros</a></li>
                     <li><a pageScroll href="#contacto" [routerLink]="'/home'">Contacto</a></li>
-                    <li><a href="#" routerLink="/login">
+                    <li>
+                        <a href="#" routerLink="/login" *ngIf="!this.as.isLogged()">
 						<span class="icon-lock" style="position: relative; top: 1px;">
-						</span> INGRESAR</a>
+                        </span> INGRESAR</a>
+                        
+                        <!-- <div class="button-perfil" *ngIf="this.as.isLogged()"
+                             style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 5px 8px 5px 8px;">
+                            <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
+                        </div> -->
+
+                        <a *ngIf="this.as.isLogged()" class="button-login-a" ngbDropdown
+                            style="display: block;color:white;font-weight: 500;font-size: 0.9em;cursor: pointer;">
+                         <div class="button-perfil" ngbDropdownToggle
+                              style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
+                             <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
+                         </div>
+             
+                         <div ngbDropdownMenu style="width: 100%;">
+                             <div ngbDropdownItem (click)="menuSelected('navprofile')"><i class="fas fa-user-circle"></i> Datos Personales</div>
+                             <div ngbDropdownItem (click)="menuSelected('navclases')"><i class="fas fa-chalkboard-teacher"></i> Mis Clases</div>
+                             <div *ngIf="!isAlumno" ngbDropdownItem (click)="menuSelected('navcalificaciones')"><i class="fas fa-award"></i> Mis Calificaciones</div>
+                             <div *ngIf="!isAlumno" ngbDropdownItem (click)="menuSelected('navpreguntas')"><i class="fas fa-question-circle"></i> Preguntas</div>
+                             <div ngbDropdownItem (click)="this.as.logout()" class="exit"><i class="fas fa-sign-out-alt"></i> Salir</div>
+                         </div>
+                        </a>
                     </li>
                 </ul>
             </nav>

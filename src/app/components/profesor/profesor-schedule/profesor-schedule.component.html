@@ -59,17 +59,17 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <button class="btn btn-cyan btn-block btn-secondary mt-3"
                             (click)="mostrarMasPreguntas($event)">
                             {{cantidadComentarios === 3 ? 'Ver más comentarios' : 'Ver menos comentarios'}}
                     </button>
-    
+
                 </div> <!-- End col -->
             </div>
         </div>
         <div class="col-md-6 myCol">
-            <h4>¿Qué clase quieres tomar con {{profesor.nombre}}?</h4>
+            <h4>¿Qué clase quieres tomar con {{profesor.nombreApellido}}?</h4>
             <label for="cmbMateria">Materia </label>
             <select id="cmbMateria" class="form-control custom-select">
                 <option *ngFor="let materia of materias" value="{{materia.id}}">{{materia.nombre}} - {{materia.nivelNombre}}</option>
@@ -81,7 +81,7 @@
             <div class="datepicker">
                 <ngb-datepicker #dp
                                 (dateSelect)="onDateSelection($event)"
-                                [displayMonths]="2"
+                                [displayMonths]="cantidadCalendarios"
                                 [navigation]="'select'"
                                 [markDisabled]="disableDays"
                                 outsideDays="collapsed">

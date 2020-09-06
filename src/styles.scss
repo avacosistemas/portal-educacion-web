@@ -212,6 +212,7 @@ input {
 
 .menutop-fix {
     padding-top: 100px !important;
+    margin-bottom: 100px;
 }
 .dropdown-menu {
     i {
@@ -526,6 +527,10 @@ input {
 	padding: 0 10px;
 }
 
+.carousel-indicators {
+	z-index: 1 !important;
+}
+
 .carousel-indicators li {
 	box-sizing: content-box;
 	flex: 0 1 auto;
@@ -625,9 +630,13 @@ input {
     }
 }
 @media screen and (max-width: 768px) {
-	#fh5co-footer {
-		padding: 3em 0;
-	}
+    #fh5co-footer {
+        padding: 0;
+        margin-top: 0;
+    }
+    .h768 {
+        display: none;
+    }
 }
 #fh5co-footer h2, #fh5co-footer h3, #fh5co-footer h4 {
 	color: #fff;
@@ -705,7 +714,8 @@ input {
 	}
 }
 .card-body-table {
-    padding: 0.25rem !important;
+	padding: 0.25rem !important;
+	overflow-x: auto;
 }
 .btn-floating-container {
     position: absolute;

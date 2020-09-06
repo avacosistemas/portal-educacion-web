@@ -8,12 +8,14 @@ import { ClaseEstados } from "../../../entities/clase-estado";
 import { RaitingGridComponent } from './raiting-grid/raiting-grid.component';
 import { ToastrService } from 'ngx-toastr';
 import { AulaService } from 'src/app/services/aula.service';
+import { DatePipe } from '@angular/common';
 declare var $;
 
 @Component({
   selector: 'app-usuario-perfil-clases',
   templateUrl: './usuario-perfil-clases.component.html',
-  styleUrls: ['./usuario-perfil-clases.component.scss']
+  styleUrls: ['./usuario-perfil-clases.component.scss'],
+  providers: [DatePipe]
 })
 export class UsuarioPerfilClasesComponent implements OnInit {
 
@@ -34,6 +36,7 @@ export class UsuarioPerfilClasesComponent implements OnInit {
     protected ps: ProfesorService,
     private toastr: ToastrService,
     protected aulaService: AulaService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void
@@ -92,6 +95,22 @@ export class UsuarioPerfilClasesComponent implements OnInit {
     }
   }
 
+  sortDate = (direction: any, a: string, b: string): number => {
+    const splitDateFirst = a.split('/');
+    const first = new Date(+splitDateFirst[2], +splitDateFirst[1] - 1, +splitDateFirst[0]);
+
+    const splitDateSecond = b.split('/');
+    const second = new Date(+splitDateSecond[2], +splitDateSecond[1] - 1, +splitDateSecond[0]);
+
+    if (first < second) {
+        return -1 * direction;
+    }
+    if (first > second) {
+        return direction;
+    }
+    return 0;
+  }
+
   setupGrilla() {
     this.settings = {
       noDataMessage: 'No hay registros',
@@ -141,7 +160,9 @@ export class UsuarioPerfilClasesComponent implements OnInit {
         dia: {
           title: 'Día',
           editable: false,
-          width: '10%'
+          width: '10%',
+          type: 'date',
+          compareFunction: this.sortDate
         },
         hora: {
           title: 'Hora',

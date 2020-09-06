@@ -13,6 +13,41 @@
 .picsum-img-wrapper:active { border: none; outline: none;}
 
 .carousel-caption {
+	@media (max-width:530px){
+
+		h1,.h1{
+			font-size:24px !important;
+		}
+		h3,.h3{
+			font-size:22px !important;
+		}
+		h4,.h4{
+			font-size:18px !important;
+		}
+		h5,.h5{
+			font-size:16px !important;
+		}
+		h6,.h6{
+			font-size:16px !important;
+		}
+		button {
+			margin-top: 5px;
+		}
+	}
+
+	::ng-deep ngb-highlight {
+		white-space: normal;
+		z-index: 9999;
+	}
+
+	::ng-deep ngb-typeahead-window {
+		overflow-y: auto;
+		max-height: 150px;
+	}
+
+	.content-slider {
+		padding: 10px;
+	}
 	// top: 15%;
 	// left: 6%;
 	// display: block;

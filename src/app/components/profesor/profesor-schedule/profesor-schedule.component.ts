@@ -37,6 +37,7 @@ export class ProfesorScheduleComponent implements OnInit {
   userIdLogged = 0;
   isAlumno = false;
   cantidadComentarios = 3;
+  cantidadCalendarios = 1;
 
   constructor(
     protected ps: ProfesorService,
@@ -60,6 +61,9 @@ export class ProfesorScheduleComponent implements OnInit {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
 
+    if (window.screen.width > 360) {
+      this.cantidadCalendarios = 2;
+    }
   }
 
   ngOnInit(): void {
