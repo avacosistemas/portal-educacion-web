@@ -61,7 +61,7 @@ export class ProfesorScheduleComponent implements OnInit {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
 
-    if (window.screen.width > 360) {
+    if (window.screen.width > 600) {
       this.cantidadCalendarios = 2;
     }
   }
