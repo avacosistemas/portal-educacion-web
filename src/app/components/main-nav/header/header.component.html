@@ -23,11 +23,6 @@
                         <a href="#" routerLink="/login" *ngIf="!this.as.isLogged()">
 						<span class="icon-lock" style="position: relative; top: 1px;">
                         </span> INGRESAR</a>
-                        
-                        <!-- <div class="button-perfil" *ngIf="this.as.isLogged()"
-                             style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 5px 8px 5px 8px;">
-                            <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
-                        </div> -->
 
                         <a *ngIf="this.as.isLogged()" class="button-login-a" ngbDropdown
                             style="display: block;color:white;font-weight: 500;font-size: 0.9em;cursor: pointer;">

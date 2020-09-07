@@ -52,9 +52,6 @@ body {
     overflow-y: auto;
 }
 
-.scrollbarVertical {
-    overflow-y: scroll;
-}
 .scrollbarBoth {
     overflow: scroll;
 }
@@ -737,4 +734,8 @@ input {
 		color: white;
     	padding: 8px;
 	}
+}
+
+html, body {
+	overflow-x: hidden;
 }
