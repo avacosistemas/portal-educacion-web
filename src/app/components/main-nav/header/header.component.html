@@ -14,30 +14,81 @@
             <nav class="custom-nav-menu" id="custom-nav-menu" style="display:none;">
                 <ul>
                     <li><a href="#">Inicio</a></li>
-                    <li><a href="#" routerLink="/buscar">Busco aprender</a></li>
-                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSciJBbA4NPkwEXKyt3NGsHkiQT1NqjKGRBV4D-bbjTIAkU53Q/viewform">Quiero enseñar</a></li>
-                    <!--li><a href="#">Cómo funciona</a></li-->
-                    <li><a pageScroll href="#aboutus" [routerLink]="'/home'">Sobre Nosotros</a></li>
-                    <li><a pageScroll href="#contacto" [routerLink]="'/home'">Contacto</a></li>
                     <li>
-                        <a href="#" routerLink="/login" *ngIf="!this.as.isLogged()">
-						<span class="icon-lock" style="position: relative; top: 1px;">
-                        </span> INGRESAR</a>
+                        <a href="#" routerLink="/buscar"
+                           onclick="document.getElementById('nav-btn').checked=false;">
+                           Busco aprender
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSciJBbA4NPkwEXKyt3NGsHkiQT1NqjKGRBV4D-bbjTIAkU53Q/viewform"
+                            onclick="document.getElementById('nav-btn').checked=false;">
+                            Quiero enseñar
+                        </a>
+                    </li>
+                    <li>
+                        <a pageScroll
+                            href="#aboutus"
+                            [routerLink]="'/home'"
+                            onclick="document.getElementById('nav-btn').checked=false;">
+                            Sobre Nosotros
+                        </a>
+                    </li>
+                    <li>
+                        <a pageScroll
+                            href="#contacto"
+                            [routerLink]="'/home'"
+                            onclick="document.getElementById('nav-btn').checked=false;">
+                            Contacto
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            routerLink="/login"
+                            onclick="document.getElementById('nav-btn').checked=false;"
+                            *ngIf="!this.as.isLogged()">
+						    <span class="icon-lock" style="position: relative; top: 1px;">
+                            </span> INGRESAR
+                        </a>
 
                         <a *ngIf="this.as.isLogged()" class="button-login-a" ngbDropdown
                             style="display: block;color:white;font-weight: 500;font-size: 0.9em;cursor: pointer;">
-                         <div class="button-perfil" ngbDropdownToggle
-                              style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
-                             <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
-                         </div>
-             
-                         <div ngbDropdownMenu style="width: 100%;">
-                             <div ngbDropdownItem (click)="menuSelected('navprofile')"><i class="fas fa-user-circle"></i> Datos Personales</div>
-                             <div ngbDropdownItem (click)="menuSelected('navclases')"><i class="fas fa-chalkboard-teacher"></i> Mis Clases</div>
-                             <div *ngIf="!isAlumno" ngbDropdownItem (click)="menuSelected('navcalificaciones')"><i class="fas fa-award"></i> Mis Calificaciones</div>
-                             <div *ngIf="!isAlumno" ngbDropdownItem (click)="menuSelected('navpreguntas')"><i class="fas fa-question-circle"></i> Preguntas</div>
-                             <div ngbDropdownItem (click)="this.as.logout()" class="exit"><i class="fas fa-sign-out-alt"></i> Salir</div>
-                         </div>
+
+                            <div class="button-perfil" ngbDropdownToggle
+                                style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
+                                <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
+                            </div>
+                
+                            <div ngbDropdownMenu style="width: 100%;">
+                                <div ngbDropdownItem
+                                    (click)="menuSelected('navprofile')"
+                                    onclick="document.getElementById('nav-btn').checked=false;">
+                                    <i class="fas fa-user-circle"></i> Datos Personales
+                                </div>
+                                <div ngbDropdownItem
+                                    (click)="menuSelected('navclases')"
+                                    onclick="document.getElementById('nav-btn').checked=false;">
+                                    <i class="fas fa-chalkboard-teacher"></i> Mis Clases
+                                </div>
+                                <div *ngIf="!isAlumno"
+                                    ngbDropdownItem
+                                    (click)="menuSelected('navcalificaciones')"
+                                    onclick="document.getElementById('nav-btn').checked=false;">
+                                    <i class="fas fa-award"></i> Mis Calificaciones
+                                </div>
+                                <div *ngIf="!isAlumno"
+                                    ngbDropdownItem
+                                    (click)="menuSelected('navpreguntas')"
+                                    onclick="document.getElementById('nav-btn').checked=false;">
+                                    <i class="fas fa-question-circle"></i> Preguntas
+                                </div>
+                                <div ngbDropdownItem
+                                    (click)="this.as.logout()"
+                                    class="exit"
+                                    onclick="document.getElementById('nav-btn').checked=false;">
+                                    <i class="fas fa-sign-out-alt"></i> Salir
+                                </div>
+                            </div>
                         </a>
                     </li>
                 </ul>
@@ -71,7 +122,6 @@
         <div class="custom-nav-list">
             <a href="#" routerLink="/buscar">Busco aprender</a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSciJBbA4NPkwEXKyt3NGsHkiQT1NqjKGRBV4D-bbjTIAkU53Q/viewform">Quiero enseñar</a>
-            <!--a href="#">Cómo funciona</a-->
             <a pageScroll href="#aboutus" [routerLink]="'/home'">Sobre Nosotros</a>
             <a pageScroll href="#contacto" [routerLink]="'/home'">Contacto</a>
         </div>
