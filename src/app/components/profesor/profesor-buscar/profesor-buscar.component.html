@@ -61,7 +61,8 @@
 										<h5>{{profesor.nombreApellido}}</h5>
                                         <button [routerLink]="['/profesor/agenda/', profesor.id]" class="btn btn-success">Ver clases</button>
 									</div>
-									<h6>{{profesor.materias}}</h6>
+									<h6 *ngIf="profesor.materias">{{profesor.materias}}</h6>
+									<h6 *ngIf="!profesor.materias">&nbsp;</h6>
 									<div class="valor-curso" *ngIf="profesor.valorHora">
 										Valor curso: $ <span>{{profesor.valorHora}}</span>
 									</div>

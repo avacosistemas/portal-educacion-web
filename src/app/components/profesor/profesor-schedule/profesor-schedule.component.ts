@@ -224,12 +224,12 @@ export class ProfesorScheduleComponent implements OnInit {
     if (!this.fromDate) return;
 
     const cDate = this.fromDate.year.toString()
-      + this.fromDate.month.toString().padStart(2,'0')
-      + this.fromDate.day.toString().padStart(2,'0');
+      + this.fromDate.month.toString().padStart(2, '0')
+      + this.fromDate.day.toString().padStart(2, '0');
 
     this.ps.getHorarios(this.profesorIdParam, cDate).subscribe(
-      (value:any) => {
-        if ( value.status == 'OK') {
+      (value: any) => {
+        if ( value.status === 'OK') {
           if (value.data?.length > 0) {
             // Get horarios
             this.horariosClases = [];
@@ -244,13 +244,16 @@ export class ProfesorScheduleComponent implements OnInit {
             });
 
           } else  {
+            this.horariosClases = [];
             this.toastr.info('No hay horarios para la fecha seleccionada. Intente con otra fecha');
           }
         } else {
+          this.horariosClases = [];
           this.toastr.warning('No se encontaron horarios disponibles Se produjo un error al obtner los horaios')
         }
       },
       error => {
+        this.horariosClases = [];
         this.toastr.error('Se produjo un error al obtner los horaios')
       }
     );
