@@ -47,7 +47,7 @@
                             routerLink="/login"
                             onclick="document.getElementById('nav-btn').checked=false;"
                             *ngIf="!this.as.isLogged()">
-						    <span class="icon-lock" style="position: relative; top: 1px;">
+						    <span style="position: relative; top: 1px;">
                             </span> INGRESAR
                         </a>
 
@@ -56,7 +56,7 @@
 
                             <div class="button-perfil" ngbDropdownToggle
                                 style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
-                                <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
+                                <span style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
                             </div>
                 
                             <div ngbDropdownMenu style="width: 100%;">
@@ -99,7 +99,7 @@
            style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;cursor: pointer;">
             <div class="button-perfil" ngbDropdownToggle
                  style="background: #29712b;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
-                <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
+                <span style="position: relative; top: 1px;"></span> <i class="fa fa-user"></i> {{this.as.getUser().nombreApellido}}
             </div>
 
             <div ngbDropdownMenu>
@@ -116,7 +116,7 @@
            style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;">
             <div class="button-login"
                  style="background: #001e56;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
-                <span class="icon-lock" style="position: relative; top: 1px;"></span> <i class="fa 	fas fa-lock"></i> INGRESAR
+                <span style="position: relative; top: 1px;"></span> <i class="fa 	fas fa-lock"></i> INGRESAR
             </div>
         </a>
         <div class="custom-nav-list">
