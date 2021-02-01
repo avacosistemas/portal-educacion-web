@@ -12,9 +12,9 @@ export const environment = {
   //publico de localhost
   //recaptchaKey: '6Ldqw74ZAAAAAPrTwwBfaQcsehEPggd0QpJMh6dd',
   //publico de www.teachonline.com.ar
-  //recaptchaKey: '6LdpJL0ZAAAAAO_vludMBF1k-27PZqUwcWe8atI4',
+  recaptchaKey: '6LdpJL0ZAAAAAO_vludMBF1k-27PZqUwcWe8atI4',
   //publico de portal.teachonline.com.ar
-  recaptchaKey: '6Lc5OccZAAAAAB3CDi71LUrchfMZktgohQ43Ick3',
+  //recaptchaKey: '6Lc5OccZAAAAAB3CDi71LUrchfMZktgohQ43Ick3',
 
   localAuth: false,
   security: true,
