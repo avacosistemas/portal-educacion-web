@@ -51,6 +51,14 @@
                             </span> INGRESAR
                         </a>
 
+                        <a href="#"
+                            routerLink="/alumno/nuevo"
+                            onclick="document.getElementById('nav-btn').checked=false;"
+                            *ngIf="!this.as.isLogged()">
+                            <span style="position: relative; top: 1px;">
+                            </span> REGISTRATE
+                        </a>
+
                         <a *ngIf="this.as.isLogged()" class="button-login-a" ngbDropdown
                             style="display: block;color:white;font-weight: 500;font-size: 0.9em;cursor: pointer;">
 
@@ -111,14 +119,22 @@
             </div>
         </a>
 
-
-        <a href="#" class="button-login-a" *ngIf="!this.as.isLogged()" routerLink="/login"
+        <a href="#" class="button-login-a" *ngIf="!this.as.isLogged()" routerLink="/alumno/nuevo"
            style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;">
             <div class="button-login"
                  style="background: #001e56;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
-                <span style="position: relative; top: 1px;"></span> <i class="fa 	fas fa-lock"></i> INGRESAR
+                <span style="position: relative; top: 1px;"></span> <i class="fa 	fas fa-file-signature"></i> REGISTRATE
             </div>
         </a>
+
+        <a href="#" class="button-login-a" *ngIf="!this.as.isLogged()" routerLink="/login"
+            style="float:right;position: initial;color:white;font-weight: 500;font-size: 0.9em;">
+            <div class="button-login"
+                style="background: #001e56;color: #f0f1f0 !important;display: inline-block;font-weight: 600;letter-spacing: 1px;padding: 13px 22px 13px 23px;">
+                <span style="position: relative; top: 1px;"></span> <i class="fa 	fas fa-sign-in-alt"></i> INGRESAR
+            </div>
+        </a>
+
         <div class="custom-nav-list">
             <a href="#" routerLink="/buscar">Busco aprender</a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSciJBbA4NPkwEXKyt3NGsHkiQT1NqjKGRBV4D-bbjTIAkU53Q/viewform">Quiero enseñar</a>

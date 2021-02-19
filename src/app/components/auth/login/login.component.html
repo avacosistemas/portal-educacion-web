@@ -69,25 +69,29 @@
                             </app-field-error-display>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="customControlInline">
                             <label class="custom-control-label" for="customControlInline">Recordarme</label>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="d-flex justify-content-center mt-3 login_container">
                         <button type="submit" name="button" class="btn login_btn boton-effect">Ingresar</button>
+                    </div>
+                    <div class="d-flex justify-content-center links">
+                        <a href="#" routerLink="/pwdreset">¿Olvidaste tu contraseña?</a>
                     </div>
                 </form>
             </div>
 
             <div class="mt-4">
-                <div class="d-flex justify-content-center links">
+                <div class="d-flex justify-content-center mt-3 login_container">
+                    <button type="button" onclick="" routerLink="/alumno/nuevo" name="button" class="btn login_btn boton-effect">¿Aún no sos alumno? ¡Registrate!</button>
+                </div>
+                <!-- <div class="d-flex justify-content-center links">
                     ¿Aún no sos alumno? <a href="#" class="ml-2" routerLink="/alumno/nuevo">Registrate</a>
-                </div>
-                <div class="d-flex justify-content-center links">
-                    <a href="#" routerLink="/pwdreset">¿Olvidaste tu contraseña?</a>
-                </div>
+                </div> -->
+                
             </div>
         </div>
     </div>
