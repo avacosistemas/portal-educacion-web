@@ -46,7 +46,7 @@ export class SeguridadService
           if (!this.jwt.isTokenExpired(data.token))
           {
 
-            this.http.get(environment.apiServiceAuth + 'cliente'
+            this.http.post(environment.apiServiceAuth + 'cliente'
               , {headers: {Authorization: 'Bearer ' + data.token }}
               ).subscribe(
               (value: any) => {
