@@ -39,6 +39,8 @@ export class SeguridadService
     this.http.post(environment.apiServiceAuth + 'auth', {username: user, password: pass}).subscribe(
       (data: any) =>
       {
+        console.log('Login');
+        console.log(data);
         if (data?.token)
         {
           if (!this.jwt.isTokenExpired(data.token))
