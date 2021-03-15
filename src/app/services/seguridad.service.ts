@@ -45,8 +45,9 @@ export class SeguridadService
         {
           if (!this.jwt.isTokenExpired(data.token))
           {
+            this._setToken(data.token);
 
-            this.http.post(environment.apiServiceAuth + 'cliente'
+            this.http.get(environment.apiServiceAuth + 'cliente'
               , {headers: {Authorization: 'Bearer ' + data.token }}
               ).subscribe(
               (value: any) => {
@@ -68,7 +69,6 @@ export class SeguridadService
 
                 this._tipoUser = (this._user.tipoCliente === 'ALUMNO') ? 2 : 1;
                 this._setUser(this._user);
-                this._setToken(data.token);
                 this._isLogged = true;
 
                 onCompleteCallback(this._isLogged);
