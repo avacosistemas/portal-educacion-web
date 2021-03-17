@@ -1,0 +1,18 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+
+        <div class="card">
+            <header class="card-header perfil-header">
+                <h4>Aulas Abiertas</h4>
+            </header>
+
+            <article class="card-body card-body-table" *ngIf="instanciarGrilla">
+                    <ng2-smart-table [settings]="settings" [source]="aulas" (custom)="onCustomAction($event)"></ng2-smart-table>
+            </article> <!-- End card Body -->
+        </div> <!-- End Card -->
+        </div>
+    </div> <!-- End Row -->
+
+</div> <!-- End container -->

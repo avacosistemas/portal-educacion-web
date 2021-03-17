@@ -78,6 +78,11 @@
                                     onclick="document.getElementById('nav-btn').checked=false;">
                                     <i class="fas fa-chalkboard-teacher"></i> Mis Clases
                                 </div>
+                                <div ngbDropdownItem
+                                    (click)="menuSelected('navaulas')"
+                                    onclick="document.getElementById('nav-btn').checked=false;">
+                                    <i class="fas fa-school"></i> Aulas Abiertas
+                                </div>
                                 <div *ngIf="!isAlumno"
                                     ngbDropdownItem
                                     (click)="menuSelected('navcalificaciones')"
@@ -113,6 +118,7 @@
             <div ngbDropdownMenu>
                 <div ngbDropdownItem (click)="menuSelected('navprofile')"><i class="fas fa-user-circle"></i> Datos Personales</div>
                 <div ngbDropdownItem (click)="menuSelected('navclases')"><i class="fas fa-chalkboard-teacher"></i> Mis Clases</div>
+                <div ngbDropdownItem (click)="menuSelected('navaulas')"><i class="fas fa-school"></i> Aulas Abiertas</div>
                 <div *ngIf="!isAlumno" ngbDropdownItem (click)="menuSelected('navcalificaciones')"><i class="fas fa-award"></i> Mis Calificaciones</div>
                 <div *ngIf="!isAlumno" ngbDropdownItem (click)="menuSelected('navpreguntas')"><i class="fas fa-question-circle"></i> Preguntas</div>
                 <div ngbDropdownItem (click)="this.as.logout()" class="exit"><i class="fas fa-sign-out-alt"></i> Salir</div>

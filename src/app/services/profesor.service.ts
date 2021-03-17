@@ -178,5 +178,8 @@ export class ProfesorService
 
     return horarios;
   }
-
+  public getAulas()
+  {
+    return this.http.get(this.controllerCliente + 'aulas');
+  }
 }

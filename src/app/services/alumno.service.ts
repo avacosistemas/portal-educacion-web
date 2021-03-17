@@ -81,7 +81,10 @@ export class AlumnoService {
     const body = { puntuacion: calificacion, comentario: comentarios };
     return this.http.post(this.controllerCliente + idAlumno.toString() + '/puntuacion/' + idAula.toString(), body);
   }
-
+  public getAulas()
+  {
+    return this.http.get(this.controllerCliente + 'aulas');
+  }
 
 
 

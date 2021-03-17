@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Profesor } from "../entities/profesor";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +18,11 @@ export class AulaService {
 
   public iniciarClaseAlumno(idAula: number, idAlumno: number) {
     const body = {idAula: idAula, idAlumno: idAlumno};
+    return this.http.post(this.controllerCliente + 'alumno/unirse/', body);
+  }
+
+  public unirse(idAula: number) {
+    const body = {idAula: idAula};
     return this.http.post(this.controllerCliente + 'alumno/unirse/', body);
   }
 
