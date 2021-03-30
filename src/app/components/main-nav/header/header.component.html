@@ -78,7 +78,8 @@
                                     onclick="document.getElementById('nav-btn').checked=false;">
                                     <i class="fas fa-chalkboard-teacher"></i> Mis Clases
                                 </div>
-                                <div ngbDropdownItem
+                                <div *ngIf="isAlumno"
+                                    ngbDropdownItem
                                     (click)="menuSelected('navaulas')"
                                     onclick="document.getElementById('nav-btn').checked=false;">
                                     <i class="fas fa-school"></i> Aulas Abiertas

@@ -156,9 +156,7 @@ export class UsuarioAulasAbiertasComponent implements OnInit {
       {
         if (value.status === 'OK')
         {
-          this.toastr.success('Se unio correctamente al aula');
-          const win = window.open(value.data.urlJoin, '_blank');
-          win.focus();
+          this.toastr.success('Se envío correctamente la solicitud');
         } else
         {
           this.toastr.error('No se pudo unirse al aula');

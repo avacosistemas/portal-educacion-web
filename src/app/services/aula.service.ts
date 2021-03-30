@@ -22,8 +22,8 @@ export class AulaService {
   }
 
   public unirse(idAula: number) {
-    const body = {idAula: idAula};
-    return this.http.post(this.controllerCliente + 'alumno/unirse/', body);
+    const body = {idAula};
+    return this.http.post(this.controllerCliente + 'alumno/solicitarunirse/', body);
   }
 
 }
