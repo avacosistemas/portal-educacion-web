@@ -28,6 +28,7 @@ export class UsuarioPerfilComponent implements OnInit {
   imgSrc: string | ArrayBuffer;
   maxSize = 20000;
   usuarioForm: FormGroup;
+  institucion: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -119,6 +120,7 @@ export class UsuarioPerfilComponent implements OnInit {
         (value: any) => {
           this.usuarioForm.patchValue(value.data);
           this.imgSrc = this.getImageSource();
+          this.institucion = value.data.institucion;
         }
       );
     } else {
