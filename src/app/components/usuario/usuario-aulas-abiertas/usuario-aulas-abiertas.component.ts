@@ -44,7 +44,7 @@ export class UsuarioAulasAbiertasComponent implements OnInit {
     if (this.isAlumno)
     {
       // get Alumno
-      this.als.getAulas()
+      this.als.getAulas(this.userId)
       .subscribe(
         (value: any) => {
           this.aulas = [];
@@ -53,18 +53,20 @@ export class UsuarioAulasAbiertasComponent implements OnInit {
         }
       );
 
-    } else {
-      // get profesor
-      this.ps.getAulas()
-      .subscribe(
-        (value: any) => {
-          this.aulas = [];
-          this.aulas = value.data;
-          delete this.settings.columns.profesor;
-          this.instanciarGrilla = true;
-        }
-      );
     }
+    
+    // else {
+    //   // get profesor
+    //   this.ps.getAulas()
+    //   .subscribe(
+    //     (value: any) => {
+    //       this.aulas = [];
+    //       this.aulas = value.data;
+    //       delete this.settings.columns.profesor;
+    //       this.instanciarGrilla = true;
+    //     }
+    //   );
+    // }
   }
 
   sortDate = (direction: any, a: string, b: string): number => {
@@ -150,7 +152,7 @@ export class UsuarioAulasAbiertasComponent implements OnInit {
 
   iniciarAula(e)
   {
-    this.aulaService.unirse(e.id)
+    this.aulaService.unirse(e.id, this.userId)
     .subscribe(
       (value: any) =>
       {
