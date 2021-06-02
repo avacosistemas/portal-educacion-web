@@ -27,7 +27,7 @@ export class ContactoComponent {
       message: new FormControl('', [ Validators.maxLength(255), Validators.required]),
     });
   }
-  image = 'assets/propias/149545-OTYR7L-59.jpg';
+  image = 'assets/propias/pizarron_2.jpg';
 
   sendQuestion() {
     if (this.fg.valid) {
