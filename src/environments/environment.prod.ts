@@ -1,7 +1,7 @@
 // import { PREFIX_DOMAIN_API } from "./environment";
 
 export const PREFIX_DOMAIN_API =  'https://api.teachonline.com.ar/';
-
+export const DOMAIN = 'https://teachonline.com.ar';
 export const environment = {
   production: true,
 

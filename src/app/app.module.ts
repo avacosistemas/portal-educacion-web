@@ -49,6 +49,8 @@ import { RaitingGridComponent } from './components/usuario/usuario-perfil-clases
 import { UsuarioCalificacionesComponent } from './components/usuario/usuario-calificaciones/usuario-calificaciones.component';
 import { ClaseAlumnosComponent } from './components/clase/clase-alumnos/clase-alumnos.component';
 import { UsuarioAulasAbiertasComponent } from './components/usuario/usuario-aulas-abiertas/usuario-aulas-abiertas.component';
+import { UpcnComponent } from './components/upcn/upcn.component';
+import { UpcnCallBackComponent } from './components/upcn-call-back/upcn-call-back.component';
 
 
 @NgModule({
@@ -86,6 +88,8 @@ import { UsuarioAulasAbiertasComponent } from './components/usuario/usuario-aula
     UsuarioCalificacionesComponent,
     ClaseAlumnosComponent,
     UsuarioAulasAbiertasComponent,
+    UpcnComponent,
+    UpcnCallBackComponent,
   ],
   imports: [
     BrowserModule,
