@@ -28,4 +28,6 @@ export class Usuario
   // Datos Profesor
   calificacion?: number;
   descripcion?: string;
+
+  sistemaExterno: string;
 }

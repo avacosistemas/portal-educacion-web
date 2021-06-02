@@ -23,6 +23,7 @@ export class UsuarioPerfilEditComponent implements OnInit {
   fileName = 'Seleccionar Archivo';
   isAlumno = false;
   fotoPerfil: File = null;
+  usuarioLogueado: Usuario;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +43,7 @@ export class UsuarioPerfilEditComponent implements OnInit {
   {
     this.paramId = Number(this.route.snapshot.paramMap.get('id'));
     this.isAlumno = this.as.isAlumno();
+    this.usuarioLogueado = this.as.getUser();
   }
 
   onSubmit() {

@@ -1,7 +1,8 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { HeaderService } from 'src/app/services/header.service';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 import { UpcnService } from 'src/app/services/upcn.service';
 import { Md5 } from 'ts-md5';
 
@@ -15,7 +16,9 @@ export class UpcnCallBackComponent implements OnInit {
   constructor(private upcnService: UpcnService,
               private activatedRoute: ActivatedRoute,
               protected router: Router,
-              private authService: AuthService) { }
+              private seguridadService: SeguridadService,
+              private headerService: HeaderService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     let state;
@@ -28,15 +31,17 @@ export class UpcnCallBackComponent implements OnInit {
     const stateStorage = localStorage.getItem('state');
 
     if (state === Md5.hashStr(stateStorage).toString()) {
-      this.upcnService.login(code, state).subscribe(data => {
-        if (data && data.token) {
-          this.authService.setToken(data.token);
-          this.authService.setLogged(true);
-          this.router.navigate(['/']);
-        } else {
-          this.authService.setLogged(false);
-        }
-      });
+      this.upcnService.login(code, state,
+        (status) =>
+        {
+          if (status) {
+            const userId = this.seguridadService.getUser().id;
+            this.headerService.setMenuSelected('navclases');
+            this.router.navigate([ '/usuario/' + userId]);
+          } else {
+            this.toastr.error('Usuario o contraseña invalido');
+          }
+        });
     } else {
       this.router.navigate(['/login']);
     }
