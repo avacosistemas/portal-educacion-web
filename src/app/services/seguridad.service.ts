@@ -39,49 +39,7 @@ export class SeguridadService
     this.http.post(environment.apiServiceAuth + 'auth', {username: user, password: pass}).subscribe(
       (data: any) =>
       {
-        console.log('Login');
-        console.log(data);
-        if (data?.token)
-        {
-          if (!this.jwt.isTokenExpired(data.token))
-          {
-            this._setToken(data.token);
-
-            this.http.get(environment.apiServiceAuth + 'cliente'
-              , {headers: {Authorization: 'Bearer ' + data.token }}
-              ).subscribe(
-              (value: any) => {
-
-                this._user = {
-                  username: value.username,
-                  bloqueado: value.bloqueado,
-                  password: null,
-                  id: value.id,
-                  accountNoExpired: value.accountNoExpired,
-                  accountNonExpired: value.accountNonExpired,
-                  accountNonLocked: value.accountNonLocked,
-                  email: value.email,
-                  intentosFallidosLogin: value.intentosFallidosLogin,
-                  logged: value.logged,
-                  tipoCliente: value.tipoCliente || 'ALUMNO',
-                  nombreApellido: value.nombreApellido
-                };
-
-                this._tipoUser = (this._user.tipoCliente === 'ALUMNO') ? 2 : 1;
-                this._setUser(this._user);
-                this._isLogged = true;
-
-                onCompleteCallback(this._isLogged);
-
-              },
-              error => {
-                console.error(error);
-                onCompleteCallback(this._isLogged);
-                // this.router.navigate(['/login']);
-              }
-            );
-          }
-        }
+        this.getUserWithToken(data, onCompleteCallback);
       },
       (ex: any) =>
       {
@@ -98,7 +56,8 @@ export class SeguridadService
             accountNoExpired: false,
             accountNonExpired: false,
             bloqueado: false,
-            accountNonLocked: false
+            accountNonLocked: false,
+            sistemaExterno: ''
           };
           this._setUser(this._user);
 
@@ -112,6 +71,52 @@ export class SeguridadService
       }
     );
 
+  }
+  getUserWithToken(data, onCompleteCallback) {
+    console.log('Login');
+    console.log(data);
+    if (data?.token)
+    {
+      if (!this.jwt.isTokenExpired(data.token))
+      {
+        this._setToken(data.token);
+
+        this.http.get(environment.apiServiceAuth + 'cliente'
+          , {headers: {Authorization: 'Bearer ' + data.token }}
+          ).subscribe(
+          (value: any) => {
+
+            this._user = {
+              username: value.username,
+              bloqueado: value.bloqueado,
+              password: null,
+              id: value.id,
+              accountNoExpired: value.accountNoExpired,
+              accountNonExpired: value.accountNonExpired,
+              accountNonLocked: value.accountNonLocked,
+              email: value.email,
+              intentosFallidosLogin: value.intentosFallidosLogin,
+              logged: value.logged,
+              tipoCliente: value.tipoCliente || 'ALUMNO',
+              nombreApellido: value.nombreApellido,
+              sistemaExterno: value.sistemaExterno
+            };
+
+            this._tipoUser = (this._user.tipoCliente === 'ALUMNO') ? 2 : 1;
+            this._setUser(this._user);
+            this._isLogged = true;
+
+            onCompleteCallback(this._isLogged);
+
+          },
+          error => {
+            console.error(error);
+            onCompleteCallback(this._isLogged);
+            // this.router.navigate(['/login']);
+          }
+        );
+      }
+    }
   }
 
   public getToken()

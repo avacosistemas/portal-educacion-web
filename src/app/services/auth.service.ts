@@ -55,6 +55,10 @@ export class AuthService
     return this._isLogged;
   }
 
+  setLogged(logueado: boolean) {
+    this._isLogged = logueado;
+  }
+
   public getToken() {
     let tk = localStorage.getItem( this.tokenKey );
     if (tk) this._token = tk;

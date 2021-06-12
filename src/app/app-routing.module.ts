@@ -15,6 +15,8 @@ import { UsuarioWelcomeComponent } from './components/usuario/usuario-welcome/us
 import { UsuarioPerfilComponent } from './components/usuario/usuario-perfil/usuario-perfil.component';
 import { ClaseDetalleComponent } from './components/clase/clase-detalle/clase-detalle.component';
 import { ClaseAlumnosComponent } from './components/clase/clase-alumnos/clase-alumnos.component';
+import { UpcnComponent } from './components/upcn/upcn.component';
+import { UpcnCallBackComponent } from './components/upcn-call-back/upcn-call-back.component';
 
 
 const routes: Routes = [
@@ -35,6 +37,8 @@ const routes: Routes = [
   {path: 'profesor/agenda/:id', component: ProfesorScheduleComponent, pathMatch: 'full'},
   {path: 'usuario/:id', component: UsuarioPerfilComponent, pathMatch: 'full'},
   {path: 'welcome/:id', component: UsuarioWelcomeComponent, pathMatch: 'full'},
+  {path: 'upcn', component: UpcnComponent, pathMatch: 'full'},
+  {path: 'upcnCallBack', component: UpcnCallBackComponent, pathMatch: 'full'},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: HomeComponent},
 ];

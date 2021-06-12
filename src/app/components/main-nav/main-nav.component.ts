@@ -59,7 +59,11 @@ export class MainNavComponent implements OnInit
 		if (this.router.url.indexOf('/login') >= 0
       || window.location.pathname.indexOf('/login') >= 0
       || (this.router.url.indexOf('/pwdreset') >= 0
-      || window.location.pathname.indexOf('/pwdreset') >= 0) )
+      || window.location.pathname.indexOf('/pwdreset') >= 0)
+	  || (this.router.url.indexOf('/upcn') >= 0
+      || window.location.pathname.indexOf('/upcn') >= 0 )
+	  || (this.router.url.indexOf('/upcnCallBack') >= 0
+      || window.location.pathname.indexOf('/upcnCallBack') >= 0))
 		{
 			if (this.as.isLogged())
 				this.as.logout();

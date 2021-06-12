@@ -7,7 +7,8 @@
 //export const PREFIX_DOMAIN_API =  'http://localhost:8080/';
 // ENTORNO PRODUCCION
 export const PREFIX_DOMAIN_API =  'https://api.teachonline.com.ar/';
-//export const PREFIX_DOMAIN_API =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/';
+export const DOMAIN = 'https://teachonline.com.ar';
+// export const PREFIX_DOMAIN_API =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/';
 
 export const environment = {
 
