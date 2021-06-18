@@ -7,6 +7,9 @@ import '../../extensions'
 import { MateriaService } from "../../services/materia.service";
 import { Materia } from "../../entities/materia";
 import { Router } from "@angular/router";
+import { DomSanitizer } from '@angular/platform-browser';
+import { ModalHome, ResponseModalHome } from 'src/app/entities/modalhome';
+import { ModalhomeService } from 'src/app/services/modalhome.service';
 
 
 @Component({
@@ -18,6 +21,7 @@ export class HomeComponent implements OnInit {
 	materia: string;
 	materias: string[] = [];
 	matModels: Materia[] = [];
+	modalContent: ResponseModalHome;
 
 	// ================ Carousel variables ================
 	paused = false;
@@ -70,11 +74,26 @@ export class HomeComponent implements OnInit {
     protected ms: MateriaService,
     protected ns: NivelService,
     protected router: Router,
+	private sanitizer: DomSanitizer,
+	private modalHomeService: ModalhomeService
   )	{}
 
 	ngOnInit(): void
 	{
 		this.loadData();
+		// modal
+
+		this.modalHomeService.getTodayModal().pipe(
+			map((x: ModalHome) => x.data)
+			).subscribe((modal:ResponseModalHome) => {
+		
+			if (modal && modal.value) {
+				this.modalContent = {
+					value: this.sanitizer.bypassSecurityTrustHtml(modal.value as string)
+				};
+				document.getElementById('openModalButton').click();
+			}
+		});
 	}
 
 	public loadData() {

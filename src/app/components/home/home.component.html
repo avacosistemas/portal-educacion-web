@@ -1,3 +1,26 @@
+<button id="openModalButton" style="display: none;" [hidden]="true" data-toggle="modal" data-target="#myModal">
+</button>
+<div id="myModal" class="modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+	<div class="modal-content" style="width: 600px; display: table-cell">
+	  <div class="modal-header">
+		<!-- <h4 class="modal-title"> {{ modalContent?.title }}</h4> -->
+		<button type="button" class="close" data-dismiss="modal">
+		  &times;
+		</button>
+	  </div>
+	  <div class="modal-body">
+		<div [innerHtml]="modalContent?.value">
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">
+			Cerrar
+		  </button>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
 <ngb-carousel *ngIf="slides"
               [showNavigationArrows]="true"
               [pauseOnHover]="true"
