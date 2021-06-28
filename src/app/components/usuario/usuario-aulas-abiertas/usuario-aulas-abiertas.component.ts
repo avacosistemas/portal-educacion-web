@@ -167,7 +167,7 @@ export class UsuarioAulasAbiertasComponent implements OnInit {
       },
       error =>
       {
-        this.toastr.error('Se produjo un error al unirse');
+        this.toastr.error(error.error.message);
       }
     );
   }
