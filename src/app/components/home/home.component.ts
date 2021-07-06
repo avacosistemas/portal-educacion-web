@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
 			map((x: ModalHome) => x.data)
 			).subscribe((modal:ResponseModalHome) => {
 		
-			if (modal && modal.value) {
+			if (modal && modal.value && modal.value.toString().trim() != '') {
 				this.modalContent = {
 					value: this.sanitizer.bypassSecurityTrustHtml(modal.value as string)
 				};
